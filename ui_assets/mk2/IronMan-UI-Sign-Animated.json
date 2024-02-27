@@ -1,0 +1,91 @@
+{"frames": {
+
+"Symbol 290000":
+{
+	"frame": {"x":0,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290001":
+{
+	"frame": {"x":115,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290002":
+{
+	"frame": {"x":230,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290003":
+{
+	"frame": {"x":345,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290004":
+{
+	"frame": {"x":460,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290005":
+{
+	"frame": {"x":575,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290006":
+{
+	"frame": {"x":690,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290007":
+{
+	"frame": {"x":805,"y":0,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290008":
+{
+	"frame": {"x":0,"y":78,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+},
+"Symbol 290009":
+{
+	"frame": {"x":115,"y":78,"w":115,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":78},
+	"sourceSize": {"w":115,"h":78}
+}},
+"meta": {
+	"app": "Adobe Flash CS6",
+	"version": "12.0.0.481",
+	"image": "IronMan-UI-Sign-Animated.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1"
+}
+}

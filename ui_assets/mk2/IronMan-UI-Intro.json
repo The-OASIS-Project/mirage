@@ -1,0 +1,572 @@
+{"frames": {
+
+"IronMan-UI-Intro/0000":
+{
+	"frame": {"x":0,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0001":
+{
+	"frame": {"x":1440,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0002":
+{
+	"frame": {"x":2880,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0003":
+{
+	"frame": {"x":4320,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0004":
+{
+	"frame": {"x":5760,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0005":
+{
+	"frame": {"x":7200,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0006":
+{
+	"frame": {"x":8640,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0007":
+{
+	"frame": {"x":10080,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0008":
+{
+	"frame": {"x":11520,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0009":
+{
+	"frame": {"x":12960,"y":0,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0010":
+{
+	"frame": {"x":0,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0011":
+{
+	"frame": {"x":1440,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0012":
+{
+	"frame": {"x":2880,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0013":
+{
+	"frame": {"x":4320,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0014":
+{
+	"frame": {"x":5760,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0015":
+{
+	"frame": {"x":7200,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0016":
+{
+	"frame": {"x":8640,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0017":
+{
+	"frame": {"x":10080,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0018":
+{
+	"frame": {"x":11520,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0019":
+{
+	"frame": {"x":12960,"y":1440,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0020":
+{
+	"frame": {"x":0,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0021":
+{
+	"frame": {"x":1440,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0022":
+{
+	"frame": {"x":2880,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0023":
+{
+	"frame": {"x":4320,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0024":
+{
+	"frame": {"x":5760,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0025":
+{
+	"frame": {"x":7200,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0026":
+{
+	"frame": {"x":8640,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0027":
+{
+	"frame": {"x":10080,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0028":
+{
+	"frame": {"x":11520,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0029":
+{
+	"frame": {"x":12960,"y":2880,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0030":
+{
+	"frame": {"x":0,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0031":
+{
+	"frame": {"x":1440,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0032":
+{
+	"frame": {"x":2880,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0033":
+{
+	"frame": {"x":4320,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0034":
+{
+	"frame": {"x":5760,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0035":
+{
+	"frame": {"x":7200,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0036":
+{
+	"frame": {"x":8640,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0037":
+{
+	"frame": {"x":10080,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0038":
+{
+	"frame": {"x":11520,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0039":
+{
+	"frame": {"x":12960,"y":4320,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0040":
+{
+	"frame": {"x":0,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0041":
+{
+	"frame": {"x":1440,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0042":
+{
+	"frame": {"x":2880,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0043":
+{
+	"frame": {"x":4320,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0044":
+{
+	"frame": {"x":5760,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0045":
+{
+	"frame": {"x":7200,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0046":
+{
+	"frame": {"x":8640,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0047":
+{
+	"frame": {"x":10080,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0048":
+{
+	"frame": {"x":11520,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0049":
+{
+	"frame": {"x":12960,"y":5760,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0050":
+{
+	"frame": {"x":0,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0051":
+{
+	"frame": {"x":1440,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0052":
+{
+	"frame": {"x":2880,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0053":
+{
+	"frame": {"x":4320,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0054":
+{
+	"frame": {"x":5760,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0055":
+{
+	"frame": {"x":7200,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0056":
+{
+	"frame": {"x":8640,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0057":
+{
+	"frame": {"x":10080,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0058":
+{
+	"frame": {"x":11520,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0059":
+{
+	"frame": {"x":12960,"y":7200,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0060":
+{
+	"frame": {"x":0,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0061":
+{
+	"frame": {"x":1440,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0062":
+{
+	"frame": {"x":2880,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0063":
+{
+	"frame": {"x":4320,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0064":
+{
+	"frame": {"x":5760,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0065":
+{
+	"frame": {"x":7200,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0066":
+{
+	"frame": {"x":8640,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0067":
+{
+	"frame": {"x":10080,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0068":
+{
+	"frame": {"x":11520,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Intro/0069":
+{
+	"frame": {"x":12960,"y":8640,"w":1440,"h":1440},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1440,"h":1440},
+	"sourceSize": {"w":1440,"h":1440}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "IronMan-UI-Intro.png",
+	"format": "RGBA8888",
+	"size": {"w":14400,"h":10080},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:651de3b44e6f7f17faa083400506db91:81a3c76c7998ba30c5cede85c96f1eea:8344e86910cc8fdfe3ce9a7d382f1c53$"
+}
+}

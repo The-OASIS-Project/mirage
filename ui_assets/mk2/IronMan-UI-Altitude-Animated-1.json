@@ -1,0 +1,2412 @@
+{"frames": {
+
+"IronMan-UI-Altitude-Animated/0000":
+{
+	"frame": {"x":3646,"y":1,"w":79,"h":1200},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1200},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0001":
+{
+	"frame": {"x":2512,"y":1189,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0002":
+{
+	"frame": {"x":1378,"y":3608,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0003":
+{
+	"frame": {"x":1459,"y":3609,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0004":
+{
+	"frame": {"x":1297,"y":2395,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0005":
+{
+	"frame": {"x":1702,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":130,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0006":
+{
+	"frame": {"x":2674,"y":4830,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0007":
+{
+	"frame": {"x":3646,"y":6067,"w":79,"h":1225},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1225},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0008":
+{
+	"frame": {"x":3403,"y":4844,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0009":
+{
+	"frame": {"x":1378,"y":2395,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0010":
+{
+	"frame": {"x":3970,"y":1,"w":79,"h":1201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1201},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0011":
+{
+	"frame": {"x":2593,"y":1189,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0012":
+{
+	"frame": {"x":1540,"y":3609,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0013":
+{
+	"frame": {"x":1621,"y":3609,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0014":
+{
+	"frame": {"x":1459,"y":2396,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0015":
+{
+	"frame": {"x":1,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":131,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0016":
+{
+	"frame": {"x":2755,"y":4830,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0017":
+{
+	"frame": {"x":2269,"y":6047,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0018":
+{
+	"frame": {"x":3484,"y":4845,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0019":
+{
+	"frame": {"x":1540,"y":2396,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0020":
+{
+	"frame": {"x":1,"y":1188,"w":79,"h":1201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1201},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0021":
+{
+	"frame": {"x":3484,"y":1202,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0022":
+{
+	"frame": {"x":1135,"y":4822,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0023":
+{
+	"frame": {"x":1702,"y":3610,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0024":
+{
+	"frame": {"x":1621,"y":2396,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0025":
+{
+	"frame": {"x":82,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":131,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0026":
+{
+	"frame": {"x":2836,"y":4830,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0027":
+{
+	"frame": {"x":2350,"y":6047,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0028":
+{
+	"frame": {"x":3565,"y":4845,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0029":
+{
+	"frame": {"x":1702,"y":2397,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0030":
+{
+	"frame": {"x":82,"y":1188,"w":79,"h":1201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1201},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0031":
+{
+	"frame": {"x":3565,"y":1202,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0032":
+{
+	"frame": {"x":1783,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0033":
+{
+	"frame": {"x":1216,"y":4823,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0034":
+{
+	"frame": {"x":1783,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0035":
+{
+	"frame": {"x":163,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":131,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0036":
+{
+	"frame": {"x":2917,"y":4842,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0037":
+{
+	"frame": {"x":2431,"y":6048,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0038":
+{
+	"frame": {"x":2998,"y":4842,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0039":
+{
+	"frame": {"x":1864,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0040":
+{
+	"frame": {"x":163,"y":1188,"w":79,"h":1201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1201},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0041":
+{
+	"frame": {"x":3646,"y":1203,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0042":
+{
+	"frame": {"x":1864,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0043":
+{
+	"frame": {"x":1945,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0044":
+{
+	"frame": {"x":325,"y":2392,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0045":
+{
+	"frame": {"x":1783,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":131,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0046":
+{
+	"frame": {"x":3079,"y":4842,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0047":
+{
+	"frame": {"x":2512,"y":6049,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0048":
+{
+	"frame": {"x":3160,"y":4842,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0049":
+{
+	"frame": {"x":406,"y":2392,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0050":
+{
+	"frame": {"x":244,"y":1188,"w":79,"h":1202},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1202},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0051":
+{
+	"frame": {"x":487,"y":2392,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0052":
+{
+	"frame": {"x":1297,"y":4824,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0053":
+{
+	"frame": {"x":2026,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0054":
+{
+	"frame": {"x":568,"y":2393,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0055":
+{
+	"frame": {"x":244,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":132,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0056":
+{
+	"frame": {"x":3646,"y":4846,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0057":
+{
+	"frame": {"x":3727,"y":6067,"w":79,"h":1225},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1225},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0058":
+{
+	"frame": {"x":3241,"y":4843,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0059":
+{
+	"frame": {"x":649,"y":2393,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0060":
+{
+	"frame": {"x":325,"y":1188,"w":79,"h":1202},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1202},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0061":
+{
+	"frame": {"x":730,"y":2393,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0062":
+{
+	"frame": {"x":1378,"y":4825,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":108,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0063":
+{
+	"frame": {"x":1459,"y":4826,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0064":
+{
+	"frame": {"x":811,"y":2393,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0065":
+{
+	"frame": {"x":325,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":132,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0066":
+{
+	"frame": {"x":3727,"y":4846,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0067":
+{
+	"frame": {"x":2593,"y":6049,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0068":
+{
+	"frame": {"x":2026,"y":4828,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0069":
+{
+	"frame": {"x":892,"y":2394,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0070":
+{
+	"frame": {"x":406,"y":1188,"w":79,"h":1202},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1202},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0071":
+{
+	"frame": {"x":973,"y":2394,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0072":
+{
+	"frame": {"x":2107,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0073":
+{
+	"frame": {"x":1540,"y":4826,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":116,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0074":
+{
+	"frame": {"x":1054,"y":2394,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":124,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0075":
+{
+	"frame": {"x":1864,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":132,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0076":
+{
+	"frame": {"x":3970,"y":4847,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0077":
+{
+	"frame": {"x":2674,"y":6050,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0078":
+{
+	"frame": {"x":2107,"y":4828,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0079":
+{
+	"frame": {"x":3727,"y":1203,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0080":
+{
+	"frame": {"x":487,"y":1188,"w":79,"h":1202},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1202},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0081":
+{
+	"frame": {"x":1135,"y":2394,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0082":
+{
+	"frame": {"x":2188,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0083":
+{
+	"frame": {"x":2269,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0084":
+{
+	"frame": {"x":3808,"y":1203,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0085":
+{
+	"frame": {"x":406,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":133,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0086":
+{
+	"frame": {"x":1,"y":6034,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0087":
+{
+	"frame": {"x":3808,"y":6067,"w":79,"h":1225},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1225},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0088":
+{
+	"frame": {"x":2188,"y":4828,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0089":
+{
+	"frame": {"x":3889,"y":1203,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0090":
+{
+	"frame": {"x":568,"y":1188,"w":79,"h":1203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1203},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0091":
+{
+	"frame": {"x":1216,"y":2395,"w":79,"h":1210},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1210},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0092":
+{
+	"frame": {"x":2350,"y":3611,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0093":
+{
+	"frame": {"x":2431,"y":3612,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0094":
+{
+	"frame": {"x":3970,"y":1204,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0095":
+{
+	"frame": {"x":487,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":133,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0096":
+{
+	"frame": {"x":82,"y":6035,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0097":
+{
+	"frame": {"x":3889,"y":6067,"w":79,"h":1225},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":109,"w":79,"h":1225},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0098":
+{
+	"frame": {"x":2269,"y":4828,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0099":
+{
+	"frame": {"x":1,"y":2391,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0100":
+{
+	"frame": {"x":649,"y":1188,"w":79,"h":1203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1203},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0101":
+{
+	"frame": {"x":1945,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0102":
+{
+	"frame": {"x":82,"y":3602,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0103":
+{
+	"frame": {"x":2512,"y":3613,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":117,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0104":
+{
+	"frame": {"x":82,"y":2391,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0105":
+{
+	"frame": {"x":568,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":133,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0106":
+{
+	"frame": {"x":163,"y":6035,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0107":
+{
+	"frame": {"x":2755,"y":6050,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0108":
+{
+	"frame": {"x":1621,"y":4826,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0109":
+{
+	"frame": {"x":163,"y":2391,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0110":
+{
+	"frame": {"x":730,"y":1188,"w":79,"h":1203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1203},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0111":
+{
+	"frame": {"x":2026,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0112":
+{
+	"frame": {"x":2593,"y":3613,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0113":
+{
+	"frame": {"x":2674,"y":3613,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0114":
+{
+	"frame": {"x":244,"y":2392,"w":79,"h":1209},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":125,"w":79,"h":1209},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0115":
+{
+	"frame": {"x":1945,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":133,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0116":
+{
+	"frame": {"x":244,"y":6036,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0117":
+{
+	"frame": {"x":2836,"y":6050,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0118":
+{
+	"frame": {"x":1702,"y":4827,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0119":
+{
+	"frame": {"x":2674,"y":1189,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0120":
+{
+	"frame": {"x":811,"y":1188,"w":79,"h":1203},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1203},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0121":
+{
+	"frame": {"x":2107,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0122":
+{
+	"frame": {"x":2755,"y":3613,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0123":
+{
+	"frame": {"x":2836,"y":3613,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0124":
+{
+	"frame": {"x":2755,"y":1189,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0125":
+{
+	"frame": {"x":649,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":134,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0126":
+{
+	"frame": {"x":568,"y":6038,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0127":
+{
+	"frame": {"x":2917,"y":6062,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0128":
+{
+	"frame": {"x":1783,"y":4828,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0129":
+{
+	"frame": {"x":2836,"y":1189,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0130":
+{
+	"frame": {"x":892,"y":1188,"w":79,"h":1204},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1204},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0131":
+{
+	"frame": {"x":2188,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0132":
+{
+	"frame": {"x":2917,"y":3625,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0133":
+{
+	"frame": {"x":2998,"y":3625,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0134":
+{
+	"frame": {"x":2917,"y":1201,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0135":
+{
+	"frame": {"x":730,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":134,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0136":
+{
+	"frame": {"x":649,"y":6038,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0137":
+{
+	"frame": {"x":2998,"y":6062,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":110,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0138":
+{
+	"frame": {"x":1864,"y":4828,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0139":
+{
+	"frame": {"x":2998,"y":1201,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0140":
+{
+	"frame": {"x":973,"y":1188,"w":79,"h":1204},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1204},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0141":
+{
+	"frame": {"x":2431,"y":2398,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0142":
+{
+	"frame": {"x":3079,"y":3625,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0143":
+{
+	"frame": {"x":3160,"y":3625,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":118,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0144":
+{
+	"frame": {"x":3079,"y":1201,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0145":
+{
+	"frame": {"x":2026,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":134,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0146":
+{
+	"frame": {"x":730,"y":6038,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0147":
+{
+	"frame": {"x":1783,"y":6046,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0148":
+{
+	"frame": {"x":3241,"y":3626,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0149":
+{
+	"frame": {"x":3160,"y":1201,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0150":
+{
+	"frame": {"x":1054,"y":1188,"w":79,"h":1204},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1204},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0151":
+{
+	"frame": {"x":2512,"y":2399,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0152":
+{
+	"frame": {"x":3322,"y":3627,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0153":
+{
+	"frame": {"x":3403,"y":3627,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0154":
+{
+	"frame": {"x":3241,"y":1202,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":126,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0155":
+{
+	"frame": {"x":2107,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":134,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0156":
+{
+	"frame": {"x":1135,"y":6040,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0157":
+{
+	"frame": {"x":1864,"y":6046,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0158":
+{
+	"frame": {"x":3484,"y":3628,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0159":
+{
+	"frame": {"x":1783,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0160":
+{
+	"frame": {"x":1135,"y":1188,"w":79,"h":1204},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1204},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0161":
+{
+	"frame": {"x":2593,"y":2399,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0162":
+{
+	"frame": {"x":3565,"y":3628,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0163":
+{
+	"frame": {"x":3646,"y":3629,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0164":
+{
+	"frame": {"x":1864,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0165":
+{
+	"frame": {"x":811,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":135,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0166":
+{
+	"frame": {"x":1216,"y":6041,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0167":
+{
+	"frame": {"x":1945,"y":6046,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":111,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0168":
+{
+	"frame": {"x":3727,"y":3629,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0169":
+{
+	"frame": {"x":1945,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0170":
+{
+	"frame": {"x":1216,"y":1188,"w":79,"h":1205},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1205},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0171":
+{
+	"frame": {"x":2674,"y":2399,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0172":
+{
+	"frame": {"x":163,"y":3602,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0173":
+{
+	"frame": {"x":3808,"y":3629,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0174":
+{
+	"frame": {"x":2026,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0175":
+{
+	"frame": {"x":892,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":135,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0176":
+{
+	"frame": {"x":1297,"y":6042,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0177":
+{
+	"frame": {"x":1378,"y":6043,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0178":
+{
+	"frame": {"x":3889,"y":3629,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":119,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0179":
+{
+	"frame": {"x":2107,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0180":
+{
+	"frame": {"x":1297,"y":1188,"w":79,"h":1205},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1205},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0181":
+{
+	"frame": {"x":3322,"y":2412,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0182":
+{
+	"frame": {"x":3970,"y":3630,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0183":
+{
+	"frame": {"x":244,"y":3603,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0184":
+{
+	"frame": {"x":2188,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":127,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0185":
+{
+	"frame": {"x":2269,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":135,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0186":
+{
+	"frame": {"x":2026,"y":6047,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0187":
+{
+	"frame": {"x":1459,"y":6044,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0188":
+{
+	"frame": {"x":325,"y":3604,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0189":
+{
+	"frame": {"x":2917,"y":1,"w":79,"h":1198},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1198},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0190":
+{
+	"frame": {"x":1378,"y":1188,"w":79,"h":1205},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1205},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0191":
+{
+	"frame": {"x":3403,"y":2412,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0192":
+{
+	"frame": {"x":1,"y":4817,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0193":
+{
+	"frame": {"x":406,"y":3604,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0194":
+{
+	"frame": {"x":973,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":128,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0195":
+{
+	"frame": {"x":2350,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":135,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0196":
+{
+	"frame": {"x":1540,"y":6044,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0197":
+{
+	"frame": {"x":1621,"y":6044,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0198":
+{
+	"frame": {"x":487,"y":3604,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0199":
+{
+	"frame": {"x":2998,"y":1,"w":79,"h":1198},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1198},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0200":
+{
+	"frame": {"x":1459,"y":1188,"w":79,"h":1206},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1206},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0201":
+{
+	"frame": {"x":3484,"y":2413,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0202":
+{
+	"frame": {"x":82,"y":4818,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0203":
+{
+	"frame": {"x":568,"y":3605,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0204":
+{
+	"frame": {"x":1054,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":128,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0205":
+{
+	"frame": {"x":1135,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":136,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0206":
+{
+	"frame": {"x":2107,"y":6047,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0207":
+{
+	"frame": {"x":1702,"y":6045,"w":79,"h":1222},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":112,"w":79,"h":1222},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0208":
+{
+	"frame": {"x":649,"y":3605,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0209":
+{
+	"frame": {"x":3079,"y":1,"w":79,"h":1198},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1198},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0210":
+{
+	"frame": {"x":1540,"y":1188,"w":79,"h":1206},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1206},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0211":
+{
+	"frame": {"x":730,"y":3605,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0212":
+{
+	"frame": {"x":811,"y":3605,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0213":
+{
+	"frame": {"x":892,"y":3606,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0214":
+{
+	"frame": {"x":1216,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":128,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0215":
+{
+	"frame": {"x":1297,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":136,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0216":
+{
+	"frame": {"x":2188,"y":6047,"w":79,"h":1223},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1223},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0217":
+{
+	"frame": {"x":811,"y":6038,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0218":
+{
+	"frame": {"x":973,"y":3606,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":120,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0219":
+{
+	"frame": {"x":3160,"y":1,"w":79,"h":1198},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1198},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0220":
+{
+	"frame": {"x":1621,"y":1188,"w":79,"h":1206},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1206},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0221":
+{
+	"frame": {"x":1054,"y":3606,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0222":
+{
+	"frame": {"x":163,"y":4818,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0223":
+{
+	"frame": {"x":3565,"y":2413,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0224":
+{
+	"frame": {"x":2431,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":128,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0225":
+{
+	"frame": {"x":2512,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":136,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0226":
+{
+	"frame": {"x":3079,"y":6062,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0227":
+{
+	"frame": {"x":892,"y":6039,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0228":
+{
+	"frame": {"x":3646,"y":2414,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0229":
+{
+	"frame": {"x":3241,"y":1,"w":79,"h":1199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1199},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0230":
+{
+	"frame": {"x":1702,"y":1189,"w":79,"h":1206},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1206},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0231":
+{
+	"frame": {"x":1135,"y":3606,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0232":
+{
+	"frame": {"x":244,"y":4819,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0233":
+{
+	"frame": {"x":3727,"y":2414,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0234":
+{
+	"frame": {"x":1378,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":129,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0235":
+{
+	"frame": {"x":2593,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":136,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0236":
+{
+	"frame": {"x":3160,"y":6062,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0237":
+{
+	"frame": {"x":973,"y":6039,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0238":
+{
+	"frame": {"x":3808,"y":2414,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0239":
+{
+	"frame": {"x":3322,"y":1,"w":79,"h":1199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1199},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0240":
+{
+	"frame": {"x":2188,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0241":
+{
+	"frame": {"x":1216,"y":3607,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0242":
+{
+	"frame": {"x":325,"y":4820,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0243":
+{
+	"frame": {"x":3889,"y":2414,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0244":
+{
+	"frame": {"x":1459,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":129,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0245":
+{
+	"frame": {"x":1945,"y":4828,"w":79,"h":1216},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1216},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0246":
+{
+	"frame": {"x":3241,"y":6063,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0247":
+{
+	"frame": {"x":1054,"y":6039,"w":79,"h":1221},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":113,"w":79,"h":1221},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0248":
+{
+	"frame": {"x":3970,"y":2415,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0249":
+{
+	"frame": {"x":3403,"y":1,"w":79,"h":1199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1199},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0250":
+{
+	"frame": {"x":2269,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0251":
+{
+	"frame": {"x":406,"y":4820,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0252":
+{
+	"frame": {"x":1297,"y":3608,"w":79,"h":1214},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1214},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0253":
+{
+	"frame": {"x":2755,"y":2399,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0254":
+{
+	"frame": {"x":2674,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":129,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0255":
+{
+	"frame": {"x":2350,"y":4828,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0256":
+{
+	"frame": {"x":3322,"y":6064,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0257":
+{
+	"frame": {"x":325,"y":6037,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0258":
+{
+	"frame": {"x":1,"y":3602,"w":79,"h":1213},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":121,"w":79,"h":1213},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0259":
+{
+	"frame": {"x":3484,"y":1,"w":79,"h":1199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1199},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0260":
+{
+	"frame": {"x":2350,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0261":
+{
+	"frame": {"x":487,"y":4820,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0262":
+{
+	"frame": {"x":568,"y":4821,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0263":
+{
+	"frame": {"x":2836,"y":2399,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0264":
+{
+	"frame": {"x":1540,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":130,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0265":
+{
+	"frame": {"x":2431,"y":4829,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0266":
+{
+	"frame": {"x":3970,"y":6069,"w":79,"h":1225},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1225},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0267":
+{
+	"frame": {"x":406,"y":6037,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0268":
+{
+	"frame": {"x":2917,"y":2411,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0269":
+{
+	"frame": {"x":3565,"y":1,"w":79,"h":1199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1199},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0270":
+{
+	"frame": {"x":2431,"y":1189,"w":79,"h":1207},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1207},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0271":
+{
+	"frame": {"x":649,"y":4821,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0272":
+{
+	"frame": {"x":730,"y":4821,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0273":
+{
+	"frame": {"x":2998,"y":2411,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0274":
+{
+	"frame": {"x":1621,"y":1,"w":79,"h":1185},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":130,"w":79,"h":1185},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0275":
+{
+	"frame": {"x":2512,"y":4830,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0276":
+{
+	"frame": {"x":3403,"y":6065,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0277":
+{
+	"frame": {"x":487,"y":6037,"w":79,"h":1220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1220},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0278":
+{
+	"frame": {"x":3079,"y":2411,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0279":
+{
+	"frame": {"x":3727,"y":1,"w":79,"h":1200},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1200},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0280":
+{
+	"frame": {"x":3322,"y":1202,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0281":
+{
+	"frame": {"x":811,"y":4821,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0282":
+{
+	"frame": {"x":892,"y":4822,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":114,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0283":
+{
+	"frame": {"x":3160,"y":2411,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0284":
+{
+	"frame": {"x":2755,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":130,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0285":
+{
+	"frame": {"x":2593,"y":4830,"w":79,"h":1217},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1217},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0286":
+{
+	"frame": {"x":3484,"y":6066,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0287":
+{
+	"frame": {"x":3808,"y":4846,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0288":
+{
+	"frame": {"x":3241,"y":2412,"w":79,"h":1212},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":122,"w":79,"h":1212},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0289":
+{
+	"frame": {"x":3808,"y":1,"w":79,"h":1200},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1200},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0290":
+{
+	"frame": {"x":3403,"y":1202,"w":79,"h":1208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1208},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0291":
+{
+	"frame": {"x":973,"y":4822,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0292":
+{
+	"frame": {"x":1054,"y":4822,"w":79,"h":1215},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1215},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0293":
+{
+	"frame": {"x":2269,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0294":
+{
+	"frame": {"x":2836,"y":1,"w":79,"h":1186},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":130,"w":79,"h":1186},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0295":
+{
+	"frame": {"x":3322,"y":4844,"w":79,"h":1218},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1218},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0296":
+{
+	"frame": {"x":3565,"y":6066,"w":79,"h":1224},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":107,"w":79,"h":1224},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0297":
+{
+	"frame": {"x":3889,"y":4846,"w":79,"h":1219},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":115,"w":79,"h":1219},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0298":
+{
+	"frame": {"x":2350,"y":2398,"w":79,"h":1211},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":123,"w":79,"h":1211},
+	"sourceSize": {"w":1440,"h":1440}
+},
+"IronMan-UI-Altitude-Animated/0299":
+{
+	"frame": {"x":3889,"y":1,"w":79,"h":1200},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":106,"w":79,"h":1200},
+	"sourceSize": {"w":1440,"h":1440}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "IronMan-UI-Altitude-Animated-1.png",
+	"format": "RGBA8888",
+	"size": {"w":4050,"h":7295},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d2517c234f54c2a53debd91fe9497da7:956f612dadb74979da51ba1abf3b257f:e9c6718d89fdd85988891048ff754067$"
+}
+}

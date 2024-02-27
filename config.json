@@ -1,0 +1,463 @@
+{
+   "Global": {
+      "Height": 1440,
+      "Width": 1440,
+      "Image Path": "ui_assets/mk2/",
+      "Font Path": "ui_assets/fonts/",
+      "Sound Path": "sound_assets/",
+      "Stereo Offset": -90,
+      "Wifi": "wlan0",
+      "Invert Compass": true,
+      "Stream Width": 800,
+      "Stream Height": 400,
+      "Stream Dest IP": "192.168.10.170",
+      "Armor dest_x": 70,
+      "Armor dest_y": 900,
+      "Armor dest_w": 450,
+      "Armor dest_h": 450,
+      "Armor notice dest_x": 220,
+      "Armor notice dest_y": 220,
+      "Armor notice dest_w": 1000,
+      "Armor notice dest_h": 1000,
+      "Armor notice timeout": 5
+   },
+   "Elements": [
+      {
+         "type": "intro",
+         "file": "IronMan-UI-Intro.json",
+         "dest_x": 0,
+         "dest_y": 0,
+         "angle": 0
+      },
+      {
+         "type": "special",
+         "name": "altitude",
+         "file": "IronMan-UI-Altitude-Animated-1.json",
+         "dest_x": 0,
+         "dest_y": 0,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "type": "special",
+         "name": "pitch",
+         "file": "IronMan-UI-Pitch-Animated-1.json",
+         "dest_x": 0,
+         "dest_y": 0,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "type": "static",
+         "file": "IronMan-UI-PitchBox.png",
+         "dest_x": 165,
+         "dest_y": 696,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
+         "string": "*PITCH*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 24,
+         "dest_x": 185,
+         "dest_y": 707,
+         "halign": "left",
+         "angle": 0,
+         "layer": 1
+      },
+      {
+         "type": "text",
+         "string": "*FPS*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 22,
+         "dest_x": 1440,
+         "dest_y": 0,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "special",
+         "name": "heading",
+         "file": "IronMan-UI-Heading-Animated-1.json",
+         "dest_x": 0,
+         "dest_y": 0,
+         "angle": 0,
+         "fixed": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
+         "string": "*COMPASS*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 30,
+         "dest_x": 720,
+         "dest_y": 35,
+         "halign": "center",
+         "angle": 0,
+         "fixed": 0,
+         "layer": 1
+      },
+      {
+         "type": "static",
+         "file": "IronMan-UI-CenterRect.png",
+         "dest_x": 431,
+         "dest_y": 635,
+         "angle": "opposite roll",
+         "fixed": 0,
+         "layer": 0
+      },
+      {
+         "type": "special",
+         "name": "map",
+         "width": 433,
+         "height": 437,
+         "dest_x": 928,
+         "dest_y": 923,
+         "angle": 0,
+         "layer": 1,
+         "enabled": 1
+      },
+      {
+         "name": "map",
+         "type": "static",
+         "file": "IronMan-UI-GPSMask.png",
+         "dest_x": 848,
+         "dest_y": 872,
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "name": "map",
+         "type": "text",
+         "string": "*LATLON*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 24,
+         "dest_x": 1150,
+         "dest_y": 1090,
+         "halign": "left",
+         "angle": 0,
+         "layer": 3
+      },
+      {
+         "type": "static",
+         "file": "IronMan-UI-CPUMEM-V3.png",
+         "dest_x": 928,
+         "dest_y": 770,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
+         "string": "*CPU*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1365,
+         "dest_y": 804,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "text",
+         "string": "*MEM*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1365,
+         "dest_y": 838,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "text",
+         "string": "*FAN*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1365,
+         "dest_y": 872,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "text",
+         "string": "*HELMTEMP*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1100,
+         "dest_y": 804,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "text",
+         "string": "*HELMHUM*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1100,
+         "dest_y": 838,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "record-ui",
+         "file": "IronMan-UI-ClockBox.png",
+         "file_r": "IronMan-UI-ClockBox-R.png",
+         "file_s": "IronMan-UI-ClockBox-S.png",
+         "file_rs": "IronMan-UI-ClockBox-RS.png",
+         "dest_x": 595,
+         "dest_y": 109,
+         "angle": 0,
+         "fixed": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
+         "string": "*SYSTIME*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 27,
+         "dest_x": 720,
+         "dest_y": 125,
+         "halign": "center",
+         "angle": 0,
+         "fixed": 0,
+         "layer": 1
+      },
+      {
+         "type": "special",
+         "name": "wifi",
+         "file": "IronMan-UI-Sign-Animated.json",
+         "dest_x": 1285,
+         "dest_y": 681,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "name": "info",
+         "type": "static",
+         "file": "IronMan-UI-InfoBox.png",
+         "dest_x": 165,
+         "dest_y": 895,
+         "angle": 0,
+         "layer": 0,
+         "hotkey": "i",
+         "enabled": 0
+      },
+      {
+         "name": "info",
+         "type": "text",
+         "string": "*LOG*",
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 16,
+         "dest_x": 210,
+         "dest_y": 1015,
+         "halign": "left",
+         "angle": 0,
+         "layer": 1,
+         "hotkey": "i",
+         "enabled": 0
+      },
+      {
+         "type": "special",
+         "name": "detect",
+         "file": "IronMan-UI-Reticle01Idle-Animated.json",
+         "angle": 0,
+         "font": "devgothic.ttf",
+         "color": "0x00, 0xF5, 0xFC, 0xFF",
+         "size": 30,
+         "layer": 0,
+         "center_x_offset": 210,
+         "center_y_offset": 150,
+         "text_x_offset": 450,
+         "text_y_offset": 350,
+         "hotkey": "d"
+      },
+      {
+         "name": "armor",
+         "type": "animated",
+         "file": "IronMan-UI-Pedestal-Animated-V2.json",
+         "dest_x": 180,
+         "dest_y": 1115,
+         "width": 230,
+         "angle": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
+         "string": "*ALERT*",
+         "font": "devgothic.ttf",
+         "color": "0xFF, 0x00, 0x00, 0xFF",
+         "size": 20,
+         "dest_x": 200,
+         "dest_y": 180,
+         "halign": "left",
+         "angle": 0,
+         "layer": 2
+      }
+   ],
+   "Components": [
+      {
+         "name": "Helmet",
+         "device": "helmet",
+         "base file": "FullBodyBlue/FullBody1.png",
+         "online file": "FullBodyGreen/FullBody1Green.png",
+         "warning file": "FullBodyYellow/FullBody1Yellow.png",
+         "offline file": "FullBodyRed/FullBody1Red.png"
+      },
+      {
+         "name": "Theigh (Left)",
+         "device": "thigh/left",
+         "base file": "FullBodyBlue/FullBody2.png",
+         "online file": "FullBodyGreen/FullBody2Green.png",
+         "warning file": "FullBodyYellow/FullBody2Yellow.png",
+         "offline file": "FullBodyRed/FullBody2Red.png"
+      },
+      {
+         "name": "Boot (Left)",
+         "device": "boot/left",
+         "base file": "FullBodyBlue/FullBody3.png",
+         "online file": "FullBodyGreen/FullBody3Green.png",
+         "warning file": "FullBodyYellow/FullBody3Yellow.png",
+         "offline file": "FullBodyRed/FullBody3Red.png"
+      },
+      {
+         "name": "Calf (Left)",
+         "device": "calf/left",
+         "base file": "FullBodyBlue/FullBody4.png",
+         "online file": "FullBodyGreen/FullBody4Green.png",
+         "warning file": "FullBodyYellow/FullBody4Yellow.png",
+         "offline file": "FullBodyRed/FullBody4Red.png"
+      },
+      {
+         "name": "Repulsor (Left)",
+         "device": "repulsor/left",
+         "base file": "FullBodyBlue/FullBody5.png",
+         "online file": "FullBodyGreen/FullBody5Green.png",
+         "warning file": "FullBodyYellow/FullBody5Yellow.png",
+         "offline file": "FullBodyRed/FullBody5Red.png",
+         "warning temp": 35.0,
+         "warning voltage": 3.2
+      },
+      {
+         "name": "Forearm (Left)",
+         "device": "forearm/left",
+         "base file": "FullBodyBlue/FullBody6.png",
+         "online file": "FullBodyGreen/FullBody6Green.png",
+         "warning file": "FullBodyYellow/FullBody6Yellow.png",
+         "offline file": "FullBodyRed/FullBody6Red.png"
+      },
+      {
+         "name": "Shoulder (Left)",
+         "device": "shoulder/left",
+         "base file": "FullBodyBlue/FullBody7.png",
+         "online file": "FullBodyGreen/FullBody7Green.png",
+         "warning file": "FullBodyYellow/FullBody7Yellow.png",
+         "offline file": "FullBodyRed/FullBody7Red.png"
+      },
+      {
+         "name": "Bicept (Left)",
+         "device": "bicept/left",
+         "base file": "FullBodyBlue/FullBody8.png",
+         "online file": "FullBodyGreen/FullBody8Green.png",
+         "warning file": "FullBodyYellow/FullBody8Yellow.png",
+         "offline file": "FullBodyRed/FullBody8Red.png"
+      },
+      {
+         "name": "Theigh (Right)",
+         "device": "thigh/right",
+         "base file": "FullBodyBlue/FullBody9.png",
+         "online file": "FullBodyGreen/FullBody9Green.png",
+         "warning file": "FullBodyYellow/FullBody9Yellow.png",
+         "offline file": "FullBodyRed/FullBody9Red.png"
+      },
+      {
+         "name": "Boot (Right)",
+         "device": "boot/right",
+         "base file": "FullBodyBlue/FullBody10.png",
+         "online file": "FullBodyGreen/FullBody10Green.png",
+         "warning file": "FullBodyYellow/FullBody10Yellow.png",
+         "offline file": "FullBodyRed/FullBody10Red.png"
+      },
+      {
+         "name": "Calf (Right)",
+         "device": "calf/right",
+         "base file": "FullBodyBlue/FullBody11.png",
+         "online file": "FullBodyGreen/FullBody11Green.png",
+         "warning file": "FullBodyYellow/FullBody11Yellow.png",
+         "offline file": "FullBodyRed/FullBody11Red.png"
+      },
+      {
+         "name": "Repulsor (Right)",
+         "device": "repulsor/right",
+         "base file": "FullBodyBlue/FullBody12.png",
+         "online file": "FullBodyGreen/FullBody12Green.png",
+         "warning file": "FullBodyYellow/FullBody12Yellow.png",
+         "offline file": "FullBodyRed/FullBody12Red.png",
+         "warning temp": 35.0,
+         "warning voltage": 3.2
+      },
+      {
+         "name": "Forearm (Right)",
+         "device": "forearm/right",
+         "base file": "FullBodyBlue/FullBody13.png",
+         "online file": "FullBodyGreen/FullBody13Green.png",
+         "warning file": "FullBodyYellow/FullBody13Yellow.png",
+         "offline file": "FullBodyRed/FullBody13Red.png"
+      },
+      {
+         "name": "Shoulder (Right)",
+         "device": "shoulder/right",
+         "base file": "FullBodyBlue/FullBody14.png",
+         "online file": "FullBodyGreen/FullBody14Green.png",
+         "warning file": "FullBodyYellow/FullBody14Yellow.png",
+         "offline file": "FullBodyRed/FullBody14Red.png"
+      },
+      {
+         "name": "Bicept (Right)",
+         "device": "bicept/right",
+         "base file": "FullBodyBlue/FullBody15.png",
+         "online file": "FullBodyGreen/FullBody15Green.png",
+         "warning file": "FullBodyYellow/FullBody15Yellow.png",
+         "offline file": "FullBodyRed/FullBody15Red.png"
+      },
+      {
+         "name": "Chest",
+         "device": "chest",
+         "base file": "FullBodyBlue/FullBody16.png",
+         "online file": "FullBodyGreen/FullBody16Green.png",
+         "warning file": "FullBodyYellow/FullBody16Yellow.png",
+         "offline file": "FullBodyRed/FullBody16Red.png"
+      },
+      {
+         "name": "Abs",
+         "device": "abs",
+         "base file": "FullBodyBlue/FullBody17.png",
+         "online file": "FullBodyGreen/FullBody17Green.png",
+         "warning file": "FullBodyYellow/FullBody17Yellow.png",
+         "offline file": "FullBodyRed/FullBody17Red.png"
+      },
+      {
+         "name": "Cod Piece",
+         "device": "codpiece",
+         "base file": "FullBodyBlue/FullBody18.png",
+         "online file": "FullBodyGreen/FullBody18Green.png",
+         "warning file": "FullBodyYellow/FullBody18Yellow.png",
+         "offline file": "FullBodyRed/FullBody18Red.png"
+      }
+   ]
+}
