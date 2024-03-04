@@ -1,3 +1,23 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * All contributions to this project are agreed to be licensed under the
+ * GPLv3 or any later version. Contributions are understood to be
+ * any modifications, enhancements, or additions to the project
+ * and become the property of the original author Kris Kersey.
+ */
+
 #ifndef DEFINES_H
 #define DEFINES_H
 
@@ -46,6 +66,12 @@
 
 #define DEFAULT_ARMOR_NOTICE_TIMEOUT      5
 #define DEFAULT_ARMOR_DEREGISTER_TIMEOUT  5
+
+#define TARGET_RECORDING_FPS                 30
+#define TARGET_RECORDING_FRAME_DURATION_US   (1000000 / TARGET_RECORDING_FPS)
+
+#define RECORD_AUDIO
+#define RECORD_PULSE_AUDIO_DEVICE   "combined.monitor"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -116,24 +142,38 @@ typedef enum {
 /* All of the Gstreamer pipelines. These should be defined per platform.
  *
  * Right now only NVIDIA is supported.
+ *
+ * FIXME: These are getting a bit out of hand, so I think I need to break these up into their components.
  */
 #define GST_CAM_PIPELINE   "nvarguscamerasrc exposurecompensation=-1 tnr-mode=2 sensor_id=0 ! " \
                            "video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! " \
                            "nvvidconv flip-method=0 ! " \
-                           "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink name=sinkL " \
+                           "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink processing-deadline=0 name=sinkL " \
                               "caps=\"video/x-raw,format=RGBA,pixel-aspect-ratio=1/1\" " \
                            "nvarguscamerasrc exposurecompensation=-1 tnr-mode=2 sensor_id=1 ! " \
                            "video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! " \
                            "nvvidconv flip-method=0 ! " \
-                           "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink name=sinkR " \
+                           "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink processing-deadline=0 name=sinkR " \
                               "caps=\"video/x-raw,format=RGBA,pixel-aspect-ratio=1/1\""
 
 #if defined(MKV_OUT) && defined(SOFTWARE_ENCODE)
 
+#ifndef RECORD_AUDIO
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 speed-preset=1 ! " \
                            "h264parse ! matroskamux ! filesink location=%s"
+#else
+// Untested
+#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 speed-preset=1 ! " \
+                         "h264parse ! queue ! mux. " \
+                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
+                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
+                         "matroskamux name=mux ! filesink location=%s"
+#endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
                               "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
@@ -145,12 +185,23 @@ typedef enum {
                               "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
 
 #elif defined(MKV_OUT) && !defined(SOFTWARE_ENCODE)
-
+#ifndef RECORD_AUDIO
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                            "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
                            "h264parse ! matroskamux ! filesink location=%s"
+#else
+#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
+                         "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
+                         "h264parse ! queue ! mux. " \
+                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
+                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
+                         "matroskamux name=mux ! filesink location=%s"
+#endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
                               "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
@@ -163,11 +214,22 @@ typedef enum {
 
 #elif !defined(MKV_OUT) && defined(SOFTWARE_ENCODE)
 
+#ifndef RECORD_AUDIO
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
-                           "nvvidconv ! video/x-raw, format=I420 ! " \
-                           "x264enc bitrate=16000 ! " \
+                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                           "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 ! " \
                            "h264parse ! qtmux ! filesink location=%s"
+#else
+// untested
+#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 ! " \
+                         "h264parse ! queue ! mux. " \
+                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
+                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
+                         "qtmux name=mux ! filesink location=%s"
+#endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
                               "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
@@ -180,11 +242,24 @@ typedef enum {
 
 #elif !defined(MKV_OUT) && !defined(SOFTWARE_ENCODE)
 
+#ifndef RECORD_AUDIO
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                            "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
                            "h264parse ! qtmux ! filesink location=%s"
+#else
+// untested
+#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
+                         "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
+                         "h264parse ! queue ! mux. " \
+                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
+                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
+                         "qtmux name=mux ! filesink location=%s"
+#endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
                               "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \

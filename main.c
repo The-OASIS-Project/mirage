@@ -1,3 +1,23 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * All contributions to this project are agreed to be licensed under the
+ * GPLv3 or any later version. Contributions are understood to be
+ * any modifications, enhancements, or additions to the project
+ * and become the property of the original author Kris Kersey.
+ */
+
 /* Threading Information */
 /* vid_out_thread    - Video output processing. Disk and/or streaming.
  * thread_handles[#] - NUM_AUDIO_THREADS number of audio threads.
@@ -61,6 +81,7 @@
 #include <glib-2.0/glib.h>
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
+#include <gst/app/gstappsrc.h>
 
 #include <mosquitto.h>
 
@@ -317,6 +338,28 @@ int checkShutdown(void)
 
 void set_recording_state(DestinationType state)
 {
+   char announce[35] = "";
+
+   switch (state) {
+      case DISABLED:
+         snprintf(announce, sizeof(announce), "Stopping recording and streaming.");
+         break;
+      case RECORD:
+         snprintf(announce, sizeof(announce), "Starting recording.");
+         break;
+      case STREAM:
+         snprintf(announce, sizeof(announce), "Starting streaming.");
+         break;
+      case RECORD_STREAM:
+         snprintf(announce, sizeof(announce), "Starting recording and streaming.");
+         break;
+      default:
+         snprintf(announce, sizeof(announce), "Unknown recording state requested.");
+         break;
+   }
+
+   mqttTextToSpeech(announce);
+
    this_vod.output = state;
 }
 
@@ -864,10 +907,18 @@ void *video_next_thread(void *arg)
 
    GstFlowReturn ret = -1;
    GstBuffer *buffer = NULL;
+   GstCaps *caps = NULL;
 
-   GstClock *sys_clock = NULL;
-   //GstClockTime current_time = 0;
-   guint64 count = 0;
+   /* A couple of the variables below were being optimized out even though they were setting
+    * used parameters. This "volatile" trick to prevent them from being optimized out is a new
+    * one for me but it works. */
+   GstClock *pipeline_clock = NULL;
+   volatile GstClockTime running_time;
+   GstClockTime base_time;
+   volatile guint64 count = 0;
+
+   struct timespec start_time, end_time;
+   long processing_time_us = 0L, delay_time_us = 0L;
 
    GstBus *bus = NULL;
 
@@ -887,19 +938,18 @@ void *video_next_thread(void *arg)
 
    printf("New recording: %s\n", this_vod.filename);
 
-   sys_clock = gst_system_clock_obtain();
-   /* I worked on two methods for timing. One uses the actual time. One fakes it to
-    * keep the the frame rate consistent.
-    * The actual time one is better and usually produces good playback but it's not as
-    * compatible with all players. I'll leave the other method here, just in case.
-    */
-   //current_time = gst_clock_get_time(sys_clock);
-
    if (this_vod.output == RECORD_STREAM) {
       g_snprintf(descr, 1024, GST_ENCSTR_PIPELINE, this_vod.filename,
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
    } else if (this_vod.output == RECORD) {
-      g_snprintf(descr, 1024, GST_ENC_PIPELINE, this_vod.filename);
+#ifndef RECORD_AUDIO
+      g_snprintf(descr, 1024, GST_ENC_PIPELINE, DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT,
+                 TARGET_RECORDING_FPS, this_vod.filename);
+#else
+      g_snprintf(descr, 1024, GST_ENC_PIPELINE, DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT,
+                 TARGET_RECORDING_FPS, RECORD_PULSE_AUDIO_DEVICE, this_vod.filename);
+#endif
+      printf("desc: %s\n", descr);
    } else if (this_vod.output == STREAM) {
       g_snprintf(descr, 1024, GST_STR_PIPELINE,
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
@@ -916,19 +966,46 @@ void *video_next_thread(void *arg)
       return NULL;
    }
 
+   bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
+
    /* get sink */
    srcEncode = gst_bin_get_by_name(GST_BIN(pipeline), "srcEncode");
 
    g_signal_connect (srcEncode, "need-data", G_CALLBACK (start_feed), NULL);
    g_signal_connect (srcEncode, "enough-data", G_CALLBACK (stop_feed), NULL);
 
+   /* set the caps on the source */
+   caps = gst_caps_new_simple ("video/x-raw",
+      "bpp", G_TYPE_INT, 32,
+      "depth", G_TYPE_INT, 32,
+      "width", G_TYPE_INT, DEFAULT_EYE_OUTPUT_WIDTH * 2,
+      "height", G_TYPE_INT, DEFAULT_EYE_OUTPUT_HEIGHT,
+      NULL);
+   gst_app_src_set_caps(GST_APP_SRC(srcEncode), caps);
+   gst_caps_unref(caps);
+
+   g_object_set(G_OBJECT(srcEncode),
+             "is-live", TRUE,
+             NULL);
+
    gst_element_set_state(pipeline, GST_STATE_PLAYING);
    this_vod.started = 1;
 
+   GstSegment my_segment;
+   gst_segment_init(&my_segment, GST_FORMAT_TIME);
+
+   pipeline_clock = gst_element_get_clock(pipeline);
+   if (pipeline_clock == NULL) {
+      SDL_Log("Error getting pipeline clock. This output cannot be recorded.\n");
+      this_vod.output = 0;
+   }
+
    while (this_vod.output) {
-      pthread_mutex_lock(&this_vod.p_mutex);
       if (feed_me) {
-         //printf("Creating new encoding buffer.\n");
+         pthread_mutex_lock(&this_vod.p_mutex);
+
+         clock_gettime(CLOCK_MONOTONIC, &start_time);
+
          if (this_vod.rgb_out_pixels[this_vod.buffer_num] != NULL) {
             buffer = gst_buffer_new_wrapped(this_vod.rgb_out_pixels[this_vod.buffer_num],
                                             this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
@@ -936,11 +1013,13 @@ void *video_next_thread(void *arg)
                printf("Failure to allocate new buffer for encoding.\n");
                break;
             }
-            buffer->pts = gst_clock_get_time(sys_clock);
-            buffer->duration = gst_util_uint64_scale(1, GST_SECOND, 30);
-            //current_time += buffer->duration;
-            //buffer->pts = current_time;
-            buffer->offset = count++;
+            GST_BUFFER_DURATION(buffer) = gst_util_uint64_scale(1, GST_SECOND, 30);
+            GST_BUFFER_OFFSET(buffer) =  count++;
+            base_time = gst_element_get_base_time(pipeline);
+            GstClockTime current_time = gst_clock_get_time(pipeline_clock);
+            running_time = current_time - base_time;
+            GST_BUFFER_PTS(buffer) = running_time;
+            //printf("%lu\n", buffer->pts);
 
             //printf("Feeding the buffer (%lu, %lu)...\n", buffer->offset, buffer->pts);
 
@@ -955,21 +1034,37 @@ void *video_next_thread(void *arg)
                break;
             }
          }
+         clock_gettime(CLOCK_MONOTONIC, &end_time);
+
+         pthread_mutex_unlock(&this_vod.p_mutex);
       }
-      pthread_mutex_unlock(&this_vod.p_mutex);
-      SDL_Delay(33);
+      // Calculate processing time in microseconds
+      processing_time_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_nsec - start_time.tv_nsec) / 1000L;
+
+      // Calculate how long to delay to maintain the target frame rate
+      delay_time_us = TARGET_RECORDING_FRAME_DURATION_US - processing_time_us;
+
+      // Apply the calculated delay, if positive
+      if (delay_time_us > 0) {
+         usleep(delay_time_us);
+      }
+   }
+   if (pipeline_clock != NULL) {
+      gst_object_unref(pipeline_clock);
    }
 
    /* Video */
    this_vod.started = 0;
    g_signal_emit_by_name(srcEncode, "end-of-stream", &ret);
-   bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
-   gst_bus_poll(bus, GST_MESSAGE_EOS, GST_CLOCK_TIME_NONE);
-
    gst_element_set_state((GstElement *) pipeline, GST_STATE_NULL);
+
+   //gst_bus_poll(bus, GST_MESSAGE_EOS, GST_CLOCK_TIME_NONE);
+   gst_object_unref (bus);
    gst_object_unref(pipeline);
 
    vid_out_thread = 0;
+
+   printf("Made it out.\n");
 
    return NULL;
 }
@@ -2586,7 +2681,7 @@ int main(int argc, char **argv)
 
             /* Is recording working? */
             if (((this_vod.output == RECORD) || (this_vod.output == RECORD_STREAM)) && 
-                this_vod.started && ((currTime - last_file_check) > 2000)) {
+                this_vod.started && ((currTime - last_file_check) > 5000)) {
                last_last_size = last_size;
                if (has_file_grown(this_vod.filename, &last_last_size)) {
                   printf("ERROR: %s: File size is not increasing. %ld ? %ld\n",
