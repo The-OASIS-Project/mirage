@@ -201,6 +201,10 @@ int parse_json_command(char *command_string)
          } else {
             fprintf(stderr, "Unrecognized audio command: %s\n", tmpstr);
          }
+      } else if (strcmp("viewing", tmpstr) == 0) {
+         json_object_object_get_ex(parsed_json, "datetime", &tmpobj);
+         tmpstr = json_object_get_string(tmpobj);
+         trigger_snapshot(tmpstr);
       }
 
       json_object_object_get_ex(parsed_json, "action", &tmpobj2);

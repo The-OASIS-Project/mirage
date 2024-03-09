@@ -97,6 +97,12 @@
                                      * 1 - Fixed.
                                      */
 
+#define SNAPSHOT_NOOVERLAY          /* When we capture a snapshot (for ML) do we include the overlay? */
+#define SNAPSHOT_WIDTH        512   /* Width for ML snapshot */
+#define SNAPSHOT_HEIGHT       512   /* Height for the ML snapshot */
+#define SNAPSHOT_QUALITY       90   /* Quality setting 0-100 for the JPG snapshot */
+
+
 enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicator, do we roll with
                                                             the angle measured or opposite it. */
 
@@ -131,13 +137,6 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 /* The colorspace of the output display. */
 #define RGB_OUT_SIZE 4
 #define PIXEL_FORMAT_OUT SDL_PIXELFORMAT_RGBA32
-
-typedef enum {
-   DISABLED=0,
-   RECORD=1,
-   STREAM=2,
-   RECORD_STREAM=4
-} DestinationType; /* Type of video output. */
 
 /* All of the Gstreamer pipelines. These should be defined per platform.
  *

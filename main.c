@@ -35,15 +35,16 @@
  */
 
 #define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <string.h>
+/* Std C */
 #include <ctype.h>
 #include <getopt.h>
+#include <math.h>
+#include <pthread.h>
 #include <semaphore.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 /* Serial Port */
 #include <termios.h>
@@ -61,47 +62,48 @@
 
 /* POSIX Message Queue */
 #include <fcntl.h>
-#include <sys/stat.h>
 #include <mqueue.h>
-
-/* X11 */
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
+#include <sys/stat.h>
 
 /* SDL2 */
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
-#include "SDL2/SDL_syswm.h"
-#include "SDL2/SDL_opengl.h"
 
+/* JSON */
 #include <json-c/json.h>
+
+/* CURL */
 #include <curl/curl.h>
 
+/* GStreamer */
 #include <glib-2.0/glib.h>
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
 #include <gst/app/gstappsrc.h>
 
+/* Mosquitto */
 #include <mosquitto.h>
 
+/* NVIDIA/CUDA */
 #include <cuda_runtime.h>
 //#include <nvbuf_utils.h>
 
 /* Local */
-#include "defines.h"
-#include "detect.h"
-#include "utils.h"
-#include "main.h"
-#include "frame_rate_tracker.h"
-#include "config_parser.h"
-#include "config_manager.h"
+#include "defines.h" /* Out of order due to dependencies */
 #include "audio.h"
 #include "armor.h"
-#include "devices.h"
 #include "command_processing.h"
-#include "mosquitto_comms.h"
+#include "config_manager.h"
+#include "config_parser.h"
 #include "curl_download.h"
+#include "detect.h"
+#include "devices.h"
+#include "frame_rate_tracker.h"
+#include "image_utils.h"
+#include "main.h"
+#include "mosquitto_comms.h"
+#include "utils.h"
 
 pthread_mutex_t v_mutex = PTHREAD_MUTEX_INITIALIZER;  /* Mutex for video buffer access. */
 GstMapInfo mapL[2], mapR[2];        /* Video memory maps. */
@@ -133,6 +135,10 @@ static struct mosquitto *mosq = NULL;     /* MQTT pointer */
 
 static int quit = 0;                      /* Global to sync exiting of threads. */
 static int detect_enabled = 0;            /* Is object detection enabled? */
+
+static int snapshot = 0;                  /* Take snapshot flag */
+static char snapshot_filename[256+29];    /* Filename to store the snapshot */
+
 
 /* Right now we only support one instance of each. These are their objects. */
 static motion this_motion;
@@ -334,6 +340,28 @@ int set_detect_enabled(int enable)
 int checkShutdown(void)
 {
    return quit;
+}
+
+/**
+ * Sets a flag to indicate a snapshot event and saves the triggering datetime.
+ *
+ * This function marks a snapshot event by setting a global flag and saves the provided datetime
+ * into a global buffer in a filename.
+ *
+ * @param datetime The datetime string when the snapshot is triggered, expected to be in the format
+ *                 "%Y%m%d_%H%M%S".
+ *
+ * FIXME: Add mutex protections in case of multiple calls. May even need queuing.
+ *
+ * Globals:
+ * - `snapshot`: An integer flag indicating a snapshot event.
+ * - `snapshot_filename`: A buffer storing the filename with datetime of the snapshot event.
+ */
+void trigger_snapshot(const char *datetime)
+{
+   snapshot = 1;
+   snprintf(snapshot_filename, sizeof(snapshot_filename), "%s/snapshot-%s.jpg",
+            record_path, datetime);
 }
 
 void set_recording_state(DestinationType state)
@@ -1222,19 +1250,67 @@ void renderStereo(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dest,
    }
 }
 
+/**
+ * Sends a text-to-speech command via MQTT, instructing a device to vocalize the provided text.
+ *
+ * Constructs a JSON-formatted MQTT command specifying the text to be converted to speech.
+ * This command is published to the MQTT topic "dawn". It checks for an initialized MQTT
+ * client (`mosq`) before publishing and reports any errors encountered during the process.
+ *
+ * @param text The text string to be vocalized by the text-to-speech device.
+ *
+ * Note:
+ * - The MQTT client (`mosq`) must be initialized and connected prior to calling this function.
+ * - Errors during publishing are reported with a descriptive message.
+ */
 void mqttTextToSpeech(const char *text) {
    char mqtt_command[1024] = "";
    int rc = 0;
 
-   snprintf(mqtt_command, 1024,
-           "{ \"device\": \"text to speech\", \"action\": \"play\", \"value\": \"%s\" }",
-           text);
+   // Construct the MQTT command with the provided text
+   snprintf(mqtt_command, sizeof(mqtt_command),
+            "{ \"device\": \"text to speech\", \"action\": \"play\", \"value\": \"%s\" }",
+            text);
 
    if (mosq == NULL) {
       fprintf(stderr, "MQTT not initialized.\n");
    } else {
       rc = mosquitto_publish(mosq, NULL, "dawn", strlen(mqtt_command), mqtt_command, 0, false);
-      if(rc != MOSQ_ERR_SUCCESS){
+      if (rc != MOSQ_ERR_SUCCESS) {
+         fprintf(stderr, "Error publishing: %s\n", mosquitto_strerror(rc));
+      }
+   }
+}
+
+/**
+ * Notifies the "dawn" process that a "viewing" command has completed, providing a snapshot
+ * filename for processing.
+ *
+ * Constructs and publishes a JSON-formatted message to the MQTT topic "dawn". This message
+ * indicates that a viewing command has been executed and includes the filename of the snapshot
+ * generated as a result. The function checks for an initialized MQTT client (`mosq`) before
+ * attempting to publish and reports errors if publishing fails.
+ *
+ * @param filename The filename of the snapshot generated by the viewing command.
+ *
+ * Note:
+ * - Ensure that the MQTT client (`mosq`) is initialized and connected before calling this function.
+ * - Failure to publish the message will result in an error printed to stderr with the failure reason.
+ */
+void mqttViewingSnapshot(const char *filename) {
+   char mqtt_command[1024] = "";
+   int rc = 0;
+
+   // Construct the MQTT command with the snapshot filename
+   snprintf(mqtt_command, sizeof(mqtt_command),
+      "{ \"device\": \"viewing\", \"action\": \"completed\", \"value\": \"%s\" }",
+      filename);
+
+   if (mosq == NULL) {
+      fprintf(stderr, "MQTT not initialized.\n");
+   } else {
+      rc = mosquitto_publish(mosq, NULL, "dawn", strlen(mqtt_command), mqtt_command, 0, false);
+      if (rc != MOSQ_ERR_SUCCESS) {
          fprintf(stderr, "Error publishing: %s\n", mosquitto_strerror(rc));
       }
    }
@@ -1802,7 +1878,7 @@ int main(int argc, char **argv)
 
       if (tracker.elapsedTime > 1.0) {
          averageFrameRate = calculateAverageFrameRate(&tracker);
-	 tracker.elapsedTime = 0.0;
+         tracker.elapsedTime = 0.0;
       }
 
 #ifdef FPS_STATS
@@ -1848,6 +1924,39 @@ int main(int argc, char **argv)
 
          SDL_UpdateTexture(textureR, NULL, mapR[buffer_num].data, this_hds->cam_input_width * 4);
          SDL_RenderCopy(renderer, textureR, &v_src_rect, &v_dst_rectR);
+
+#ifdef SNAPSHOT_NOOVERLAY
+         if (snapshot) {
+            void *snapshot_pixel = mapL[buffer_num].data;
+
+            ImageProcessParams params = {
+               .rgba_buffer = (unsigned char *) snapshot_pixel,
+               .orig_width = this_hds->cam_input_width,
+               .orig_height = this_hds->cam_input_height,
+               .filename = snapshot_filename,
+               .left_crop = this_hds->cam_crop_x,
+               .top_crop = 0,
+               .right_crop = this_hds->cam_crop_x,
+               .bottom_crop = 0,
+               .new_width = SNAPSHOT_WIDTH,
+               .new_height = SNAPSHOT_HEIGHT,
+               .format_params.quality = SNAPSHOT_QUALITY
+            };
+
+            /* FIXME: See how fast this happens. Do I need to spawn off a thread? */
+            int result = process_and_save_image(&params);
+            if (result != 0) {
+               fprintf(stderr, "Image processing failed with error code: %d\n", result);
+               fprintf(stderr, "\tfilename: %s, orig_width: %d, orig_height: %d\n",
+                       params.filename, params.orig_width, params.orig_height);
+            } else {
+               fprintf(stderr, "Successfully created snapshot!\n");
+               mqttViewingSnapshot(snapshot_filename);
+            }
+
+            snapshot = 0;
+         }
+#endif
 
 #ifdef DISPLAY_TIMING
          last_ts_cap = (unsigned long) ts_cap[buffer_num].tv_sec * 1000000000 + ts_cap[buffer_num].tv_nsec;
@@ -2672,6 +2781,47 @@ int main(int argc, char **argv)
          printf("Display latency: %lu ms, avg: %lu ms\n", (present_time - last_ts_cap) / 1000000,
                                                     ts_total / (unsigned long) ts_count);
          printf("ts_total: %lu ms, ts_count: %u\n", ts_total, ts_count);
+#endif
+
+#ifndef SNAPSHOT_NOOVERLAY
+         if (snapshot) {
+            void *snapshot_pixel =
+                malloc(this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
+            if (snapshot_pixel == NULL) {
+               printf("Unable to malloc rgb frame 0.\n");
+               return (2);
+            }
+
+            if (SDL_RenderReadPixels(renderer, NULL, PIXEL_FORMAT_OUT, snapshot_pixel,
+                                     this_hds->eye_output_width * 2 * RGB_OUT_SIZE) != 0 ) {
+               printf("SDL_RenderReadPixels() failed: %s\n", SDL_GetError());
+            } else {
+               ImageProcessParams params = {
+                  .rgba_buffer = (unsigned char *) snapshot_pixel,
+                  .orig_width = this_hds->eye_output_width * 2,
+                  .orig_height = this_hds->eye_output_height,
+                  .filename = snapshot_filename,
+                  .left_crop = 0,
+                  .top_crop = 0,
+                  .right_crop = 1440,
+                  .bottom_crop = 0,
+                  .new_width = 512,
+                  .new_height = 512,
+                  .format_params.quality = 90
+               };
+
+               int result = process_and_save_image(&params);
+               if (result != 0) {
+                  fprintf(stderr, "Image processing failed with error code: %d\n", result);
+               } else {
+                  fprintf(stderr, "Successfully created snapshot!\n");
+                  mqttViewingSnapshot(snapshot_filename);
+               }
+            }
+
+            free(snapshot_pixel);
+            snapshot = 0;
+         }
 #endif
 
          if (this_vod.output) {

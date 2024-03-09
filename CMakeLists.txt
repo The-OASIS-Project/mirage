@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(horizon)
 
 # Set source files
-set(SOURCE_FILES main.c utils.c detect.cpp frame_rate_tracker.c config_parser.c config_manager.c audio.c armor.c devices.c command_processing.c mosquitto_comms.c curl_download.c)
+set(SOURCE_FILES main.c utils.c detect.cpp frame_rate_tracker.c config_parser.c config_manager.c audio.c armor.c devices.c command_processing.c mosquitto_comms.c curl_download.c image_utils.c)
 
 # Set C compiler and flags
 set(CMAKE_C_COMPILER gcc)
@@ -55,6 +55,7 @@ set(LIBRARIES
   ${GSTREAMER_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${MOSQUITTO_LIBRARIES}
+  gd
   ${CUDA_LIBRARIES}
   SDL2_image
   SDL2_ttf

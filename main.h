@@ -26,22 +26,49 @@
 #include "config_parser.h"
 #include "devices.h"
 
-motion *get_motion_dev(void);
+// Device gets
 enviro *get_enviro_dev(void);
+motion *get_motion_dev(void);
 gps *get_gps_dev(void);
+
+// Element gets/set
 element *get_default_element(void);
-element *get_intro_element(void);
 element *get_first_element(void);
+element *get_intro_element(void);
 element *set_first_element(element *this_element);
-int *get_sfd(void);
+
+// Enable object detection overlay
 int set_detect_enabled(int enable);
+
+// Supported recoding and streaming states
+typedef enum {
+   DISABLED=0,
+   RECORD=1,
+   STREAM=2,
+   RECORD_STREAM=4
+} DestinationType;
+
+// Set recording state.
 void set_recording_state(DestinationType state);
+
+// Get SDL renderer for direct access.
 SDL_Renderer *get_sdl_renderer(void);
+
+// Get font from local cache.
 TTF_Font *get_local_font(char *font_name, int font_size);
+
+// The quit variable is stored in main.c, this gets its state.
 int checkShutdown(void);
+
+// Render a given texture to the given location in the stereo display.
 void renderStereo(SDL_Texture * tex, SDL_Rect * src, SDL_Rect * dest, SDL_Rect * dest2,
                   double angle);
+
+// Send the given text over mqtt to be send to audio.
 void mqttTextToSpeech(const char *text);
+
+// Trigger a one-time snapshot.
+void trigger_snapshot(const char *datetime);
 
 #endif // DEFINES_H
 
