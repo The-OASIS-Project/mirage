@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(horizon)
+project(mirage)
 
 # Set source files
 set(SOURCE_FILES main.c utils.c detect.cpp frame_rate_tracker.c config_parser.c config_manager.c audio.c armor.c devices.c command_processing.c mosquitto_comms.c curl_download.c image_utils.c)

@@ -1,5 +1,5 @@
-# HORIZON
-Holographic Overlay Reconnaissance Interface: Zeroed-in Optical Navigation (Heads-Up Display)
+# MIRAGE
+Multi-Input Reconnaissance and Guidance Environment (Heads-Up Display)
 
 After you've installed the OS on the Jetson, do this first.
 
@@ -34,6 +34,4 @@ sudo make install`
 
 VI. Update user permissions.
 Add groups to user: `dialout`
-
-mpv smplayer smplayer-l10n smplayer-themes
 
