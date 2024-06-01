@@ -341,6 +341,9 @@ int parse_json_config(char *filename)
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Stereo Offset") == 0) {
                   this_hds->stereo_offset = json_object_get_int(json_object_iter_peek_value(&itSub));
                   //printf("STEREO OFFSET: %d\n", this_hds->stereo_offset);
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Pitch Offset") == 0) {
+                  this_hds->pitch_offset = json_object_get_double(json_object_iter_peek_value(&itSub));
+                  //printf("PITCH OFFSET: %f\n", this_hds->pitch_offset);
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Image Path") == 0) {
                   if(set_image_path(json_object_get_string(json_object_iter_peek_value(&itSub)), MAX_FILENAME_LENGTH - 1) == NULL)
                   {

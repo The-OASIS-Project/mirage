@@ -6,6 +6,7 @@
       "Font Path": "ui_assets/fonts/",
       "Sound Path": "sound_assets/",
       "Stereo Offset": -90,
+      "Pitch Offset": 10.0,
       "Wifi": "wlan0",
       "Invert Compass": true,
       "Stream Width": 800,

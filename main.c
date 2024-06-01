@@ -103,6 +103,7 @@
 #include "image_utils.h"
 #include "main.h"
 #include "mosquitto_comms.h"
+#include "secrets.h"
 #include "utils.h"
 
 pthread_mutex_t v_mutex = PTHREAD_MUTEX_INITIALIZER;  /* Mutex for video buffer access. */
@@ -942,8 +943,9 @@ void *video_next_thread(void *arg)
     * one for me but it works. */
    GstClock *pipeline_clock = NULL;
    volatile GstClockTime running_time;
-   GstClockTime base_time;
+   volatile GstClockTime base_time;
    volatile guint64 count = 0;
+   volatile GstClockTime current_time;
 
    struct timespec start_time, end_time;
    long processing_time_us = 0L, delay_time_us = 0L;
@@ -964,12 +966,12 @@ void *video_next_thread(void *arg)
    snprintf(this_vod.filename, sizeof(this_vod.filename), "%s/ironman-vid-%s.mp4", record_path, datetime);
 #endif
 
-   printf("New recording: %s\n", this_vod.filename);
-
    if (this_vod.output == RECORD_STREAM) {
+      printf("New recording: %s\n", this_vod.filename);
       g_snprintf(descr, 1024, GST_ENCSTR_PIPELINE, this_vod.filename,
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
    } else if (this_vod.output == RECORD) {
+      printf("New recording: %s\n", this_vod.filename);
 #ifndef RECORD_AUDIO
       g_snprintf(descr, 1024, GST_ENC_PIPELINE, DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT,
                  TARGET_RECORDING_FPS, this_vod.filename);
@@ -980,7 +982,10 @@ void *video_next_thread(void *arg)
       printf("desc: %s\n", descr);
    } else if (this_vod.output == STREAM) {
       g_snprintf(descr, 1024, GST_STR_PIPELINE,
-                 this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
+                 DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT, TARGET_RECORDING_FPS,
+                 STREAM_WIDTH, STREAM_HEIGHT, STREAM_BITRATE,
+                 RECORD_PULSE_AUDIO_DEVICE,
+                 YOUTUBE_STREAM_KEY);
    } else {
       printf("Invalid destination passed.\n");
       return NULL;
@@ -1019,14 +1024,13 @@ void *video_next_thread(void *arg)
    gst_element_set_state(pipeline, GST_STATE_PLAYING);
    this_vod.started = 1;
 
-   GstSegment my_segment;
-   gst_segment_init(&my_segment, GST_FORMAT_TIME);
-
    pipeline_clock = gst_element_get_clock(pipeline);
    if (pipeline_clock == NULL) {
       SDL_Log("Error getting pipeline clock. This output cannot be recorded.\n");
       this_vod.output = 0;
    }
+
+   base_time = gst_element_get_base_time(pipeline);
 
    while (this_vod.output) {
       if (feed_me) {
@@ -1041,20 +1045,17 @@ void *video_next_thread(void *arg)
                printf("Failure to allocate new buffer for encoding.\n");
                break;
             }
-            GST_BUFFER_DURATION(buffer) = gst_util_uint64_scale(1, GST_SECOND, 30);
-            GST_BUFFER_OFFSET(buffer) =  count++;
-            base_time = gst_element_get_base_time(pipeline);
-            GstClockTime current_time = gst_clock_get_time(pipeline_clock);
+            current_time = gst_clock_get_time(pipeline_clock);
             running_time = current_time - base_time;
-            GST_BUFFER_PTS(buffer) = running_time;
-            //printf("%lu\n", buffer->pts);
 
-            //printf("Feeding the buffer (%lu, %lu)...\n", buffer->offset, buffer->pts);
+            GST_BUFFER_DURATION(buffer) = gst_util_uint64_scale(1, GST_SECOND, 30);
+            GST_BUFFER_OFFSET(buffer)   = count++;
+            GST_BUFFER_PTS(buffer)      = running_time;
+            GST_BUFFER_DTS(buffer)      = GST_CLOCK_TIME_NONE;
 
             /* get the preroll buffer from appsink */
-            g_signal_emit_by_name(srcEncode, "push-buffer", buffer, &ret);
+            ret = gst_app_src_push_buffer(GST_APP_SRC(srcEncode), buffer);
 
-            gst_buffer_unref(buffer);
             this_vod.rgb_out_pixels[this_vod.buffer_num] = NULL;
 
             if (ret != GST_FLOW_OK) {
@@ -1095,31 +1096,6 @@ void *video_next_thread(void *arg)
    printf("Made it out.\n");
 
    return NULL;
-}
-
-/* Read the Google API key from a file into memory. */
-int get_googleapikey(char *key)
-{
-   FILE *keyfile = fopen(GOOGLE_APIKEY_FILE, "r");
-   if (keyfile == NULL) {
-      printf("Unable to open Google key file.\n");
-
-      return 1;
-   }
-
-   if (fread(key, 1, 40, keyfile) == 0) {
-      printf("Error reading key file.\n");
-
-      return 1;
-   }
-
-   if (key[strlen(key) - 1] == '\n') {
-      key[strlen(key) - 1] = '\0';
-   }
-
-   fclose(keyfile);
-
-   return 0;
 }
 
 /* Search the font list to see if this font has already been created.
@@ -1379,8 +1355,7 @@ int main(int argc, char **argv)
    pthread_t command_proc_thread = 0;
 
    /* Google API Key */
-   int g_api_status = 1;
-   char api_key[41] = "";
+   int g_api_status = 0;
    struct curl_data this_data;
 
    SDL_Rect *src_rect = NULL;
@@ -1650,9 +1625,6 @@ int main(int argc, char **argv)
       this_detect[1][j].active = 0;
    }
 
-   /* Google API Key - Stored externally for security. */
-   g_api_status = get_googleapikey(api_key);
-
    intro_element.enabled = 0;
 
    if (parse_json_config(config_file) == FAILURE) {
@@ -1810,6 +1782,7 @@ int main(int argc, char **argv)
             case SDLK_r:
                if (!this_vod.output) {
                   this_vod.output = RECORD;
+                  last_file_check = currTime;
                   printf("Starting recording.\n");
                } else {
                   this_vod.output = 0;
@@ -1820,6 +1793,7 @@ int main(int argc, char **argv)
             case SDLK_s:
                if (!this_vod.output) {
                   this_vod.output = STREAM;
+                  last_file_check = currTime;
                   printf("Starting streaming.\n");
                } else {
                   this_vod.output = 0;
@@ -1830,6 +1804,7 @@ int main(int argc, char **argv)
             case SDLK_t:
                if (!this_vod.output) {
                   this_vod.output = RECORD_STREAM;
+                  last_file_check = currTime;
                   printf("Starting recording and streaming.\n");
                } else {
                   this_vod.output = 0;
@@ -2233,7 +2208,7 @@ int main(int argc, char **argv)
                      curr_element->surface = NULL;
                   }
 
-                  snprintf(render_text, MAX_TEXT_LENGTH, "%d", (int)this_motion.pitch);
+                  snprintf(render_text, MAX_TEXT_LENGTH, "%d", (int)this_motion.pitch + (int)this_hds->pitch_offset);
                } else if (strcmp("*COMPASS*", curr_element->text) == 0) {
                   if (curr_element->texture != NULL) {
                      SDL_DestroyTexture(curr_element->texture);
@@ -2391,13 +2366,13 @@ int main(int argc, char **argv)
                      }
 
                      if ((lat == 0) && (lon == 0)) {
-                        lat = 40.7831;
-                        lon = -73.9712;
+                        lat = DEFAULT_LATITUDE;
+                        lon = DEFAULT_LONGITUDE;
                      }
 
                      snprintf(this_data.url, 512, GOOGLE_MAPS_API, lat, lon,
                               curr_element->width, curr_element->height,
-                              lat, lon, api_key);
+                              lat, lon, GOOGLE_API_KEY);
                      //printf("%s", this_data.url);
 
                      if (map_thread_started == 0) {
@@ -2468,7 +2443,7 @@ int main(int argc, char **argv)
                   //printf("Displaying pitch: %d\n", (int) (-1 * this_motion.pitch));
                   curr_element->this_anim.current_frame =
                       curr_element->
-                      this_anim.frame_lookup[(int)round((this_motion.pitch + 90.0) * 2.0)];
+                      this_anim.frame_lookup[(int)round((this_motion.pitch + 90.0 + this_hds->pitch_offset) * 2.0)];
 
                   src_rect = malloc(sizeof(SDL_Rect));
                   src_rect->x = curr_element->this_anim.current_frame->source_x;
@@ -2834,10 +2809,12 @@ int main(int argc, char **argv)
                 this_vod.started && ((currTime - last_file_check) > 5000)) {
                last_last_size = last_size;
                if (has_file_grown(this_vod.filename, &last_last_size)) {
-                  printf("ERROR: %s: File size is not increasing. %ld ? %ld\n",
-                         this_vod.filename, last_last_size, last_size);
-                  active_alerts |= ALERT_RECORDING;
-                  mqttTextToSpeech("There is potentially and error with recording.");
+                  if (!(active_alerts & ALERT_RECORDING)) {
+                     printf("ERROR: %s: File size is not increasing. %ld ? %ld\n",
+                            this_vod.filename, last_last_size, last_size);
+                     active_alerts |= ALERT_RECORDING;
+                     mqttTextToSpeech("There is potentially and error with recording.");
+                  }
                } else {
                   active_alerts &= ~ALERT_RECORDING;
                   last_size = last_last_size;
@@ -2887,6 +2864,10 @@ int main(int argc, char **argv)
                   printf("Error creating video encoding thread.\n");
                   this_vod.output = 0;
                }
+            }
+         } else {
+            if (active_alerts & ALERT_RECORDING) {
+               active_alerts &= ~ALERT_RECORDING;
             }
          }
 

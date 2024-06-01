@@ -34,7 +34,7 @@
 #if 1
 #define DEFAULT_CAM_INPUT_WIDTH  1920
 #define DEFAULT_CAM_INPUT_HEIGHT 1080
-#define DEFAULT_CAM_INPUT_FPS    30
+#define DEFAULT_CAM_INPUT_FPS    60
 #ifndef ORIGINAL_RATIO
 #define DEFAULT_CAM_CROP_WIDTH   1080
 #define DEFAULT_CAM_CROP_X       420
@@ -63,6 +63,9 @@
 #define DEFAULT_EYE_OUTPUT_HEIGHT   1440
 
 #define DEFAULT_STREAM_DEST_IP      "192.168.10.195"
+#define STREAM_WIDTH                1920
+#define STREAM_HEIGHT                960
+#define STREAM_BITRATE              8000000
 
 #define DEFAULT_ARMOR_NOTICE_TIMEOUT      5
 #define DEFAULT_ARMOR_DEREGISTER_TIMEOUT  5
@@ -71,7 +74,19 @@
 #define TARGET_RECORDING_FRAME_DURATION_US   (1000000 / TARGET_RECORDING_FPS)
 
 #define RECORD_AUDIO
-#define RECORD_PULSE_AUDIO_DEVICE   "combined.monitor"
+#define RECORD_PULSE_AUDIO_DEVICE   "alsa_output.usb-KTMicro_TX_96Khz_USB_Audio_2022-08-08-0000-0000-0000--00.analog-stereo.monitor"
+
+// New York City, NY
+//#define DEFAULT_LATITUDE    40.7831
+//#define DEFAULT_LONGITUDE  -73.9712
+
+// Atlanta, GA
+#define DEFAULT_LATITUDE    33.7488
+#define DEFAULT_LONGITUDE  -84.3877
+
+// San Jose, CA
+//#define DEFAULT_LATITUDE    37.3292
+//#define DEFAULT_LONGITUDE  -121.8890
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -143,6 +158,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
  * Right now only NVIDIA is supported.
  *
  * FIXME: These are getting a bit out of hand, so I think I need to break these up into their components.
+ *        After my latest work getting YouTube streaming working... it's worse. Sorry.
  */
 #define GST_CAM_PIPELINE   "nvarguscamerasrc exposurecompensation=-1 tnr-mode=2 sensor_id=0 ! " \
                            "video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! " \
@@ -271,11 +287,26 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 
 #endif
 
-#define GST_STR_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
-                           "nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
-                           "nvv4l2h264enc bitrate=8000000 profile=2 preset-level=3 control-rate=0 ! " \
-                           "h264parse config-interval=30 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
+#ifndef RECORD_AUDIO
+#define GST_STR_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
+                         "nvv4l2h264enc bitrate=8000000 profile=2 preset-level=3 ! " \
+                         "h264parse ! mux. " \
+                         "hlssink2 name=mux playlist-root=http://%s/hls/ location=/var/www/html/hls/segment%%d.ts playlist-location=/var/www/html/hls/playlist.m3u8"
+#else
+#define GST_STR_PIPELINE "appsrc name=srcEncode ! " \
+                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
+                         "nvvidconv ! video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, format=NV12 ! " \
+                         "nvv4l2h264enc bitrate=%d control-rate=0 iframeinterval=120 profile=2 preset-level=3 ! " \
+                         "h264parse ! queue leaky=2 ! mux. " \
+                         "pulsesrc device=%s do-timestamp=true ! " \
+                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                         "audioconvert ! voaacenc bitrate=128000 ! " \
+                         "aacparse ! queue leaky=2 ! mux. " \
+                         "flvmux name=mux streamable=true latency=100000000 ! " \
+                         "rtmpsink location='rtmp://a.rtmp.youtube.com/live2/%s live=1'"
+#endif
 
 #endif // DEFINES_H
 

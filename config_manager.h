@@ -39,6 +39,8 @@ typedef struct _hud_display_settings {
 
    int stereo_offset;         /* Offset to adjust stereo perception of UI elements.
                                * This offsets to the left or right accordingly on each eye. */
+   double pitch_offset;       /* Often the helmet sensor isn't in line with the level of the
+                               * helmet. This adjusts that. */
 } hud_display_settings;
 
 hud_display_settings *get_hud_display_settings(void);
