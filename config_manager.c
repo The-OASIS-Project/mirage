@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <stdio.h>
@@ -24,6 +25,7 @@
 
 #include "defines.h"
 #include "config_manager.h"
+#include "logging.h"
 
 /* Default image and font paths. These are configurable in the config file. */
 static char IMAGE_PATH[MAX_FILENAME_LENGTH] = IMAGE_PATH_DEFAULT;
@@ -94,17 +96,17 @@ char *set_image_path(const char *path, int length)
 
    if (path == NULL)
    {
-      printf("%s: path is NULL\n", __func__);
+      LOG_ERROR("%s: path is NULL", __func__);
    }
 
    if (length <= 0)
    {
-      printf("%s: length is too short\n", __func__);
+      LOG_ERROR("%s: length is too short", __func__);
    }
 
    if (length >= MAX_FILENAME_LENGTH)
    {
-      printf("%s: length is too long\n", __func__);
+      LOG_ERROR("%s: length is too long", __func__);
    }
 
    return NULL;
@@ -125,17 +127,17 @@ char *set_sound_path(const char *path, int length)
 
    if (path == NULL)
    {
-      printf("%s: path is NULL\n", __func__);
+      LOG_ERROR("%s: path is NULL", __func__);
    }
 
    if (length <= 0)
    {
-      printf("%s: length is too short\n", __func__);
+      LOG_ERROR("%s: length is too short", __func__);
    }
 
    if (length >= MAX_FILENAME_LENGTH)
    {
-      printf("%s: length is too long\n", __func__);
+      LOG_ERROR("%s: length is too long", __func__);
    }
 
    return NULL;
@@ -156,17 +158,17 @@ char *set_font_path(const char *path, int length)
 
    if (path == NULL)
    {
-      printf("%s: path is NULL\n", __func__);
+      LOG_ERROR("%s: path is NULL", __func__);
    }
 
    if (length <= 0)
    {
-      printf("%s: length is too short\n", __func__);
+      LOG_ERROR("%s: length is too short", __func__);
    }
 
    if (length >= MAX_FILENAME_LENGTH)
    {
-      printf("%s: length is too long\n", __func__);
+      LOG_ERROR("%s: length is too long", __func__);
    }
 
    return NULL;
@@ -187,17 +189,17 @@ const char *set_wifi_dev_name(const char *name, int length)
 
    if (name == NULL)
    {
-      printf("%s: name is NULL\n", __func__);
+      LOG_ERROR("%s: name is NULL", __func__);
    }
 
    if (length <= 0)
    {
-      printf("%s: length is too short\n", __func__);
+      LOG_ERROR("%s: length is too short", __func__);
    }
 
    if (length >= MAX_WIFI_DEV_LENGTH)
    {
-      printf("%s: length is too long\n", __func__);
+      LOG_ERROR("%s: length is too long", __func__);
    }
 
    return NULL;

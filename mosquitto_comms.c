@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <stdio.h>
@@ -26,6 +27,7 @@
 #include "command_processing.h"
 #include "config_parser.h"
 #include "config_manager.h"
+#include "logging.h"
 
 /* Mosquitto STUFF */
 /* Callback called when the client receives a CONNACK message from the broker. */
@@ -45,19 +47,18 @@ void on_connect(struct mosquitto *mosq, void *obj, int reason_code)
       return;
    }
 
-   printf("Moquitto successfully connected. Subscribing to...");
+   LOG_INFO("Moquitto successfully connected. Subscribing to...");
    /* This works. I think I like the idea of a registration service better but... */
    while (this_element != NULL) {
-      printf(" %s\n", this_element->mqtt_device);
+      LOG_INFO(" %s\n", this_element->mqtt_device);
 	   rc = mosquitto_subscribe(mosq, NULL, this_element->mqtt_device, 1);
 	   if(rc != MOSQ_ERR_SUCCESS){
-		   fprintf(stderr, "Error subscribing: %s\n", mosquitto_strerror(rc));
+		   LOG_ERROR("Error subscribing: %s", mosquitto_strerror(rc));
 		   mosquitto_disconnect(mosq);
 	   }
 
       this_element = this_element->next;
    }
-   printf("\n");
 }
 
 /* Callback called when the broker sends a SUBACK in response to a SUBSCRIBE. */
@@ -72,7 +73,7 @@ void on_subscribe(struct mosquitto *mosq, void *obj, int mid, int qos_count, con
 		}
 	}
 	if(have_subscription == false){
-		fprintf(stderr, "Error: All subscriptions rejected.\n");
+		LOG_ERROR("Error: All subscriptions rejected.");
 		mosquitto_disconnect(mosq);
 	}
 }
@@ -80,7 +81,7 @@ void on_subscribe(struct mosquitto *mosq, void *obj, int mid, int qos_count, con
 /* Callback called when the client receives a message. */
 void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *msg)
 {
-	printf("%s %d %s\n", msg->topic, msg->qos, (char *)msg->payload);
+	LOG_INFO("%s %d %s", msg->topic, msg->qos, (char *)msg->payload);
 
    if (strcmp(msg->topic, "hud") != 0) {
       /* FIXME: Right now if it's not for "hud," I'm assuming it's from an armor component.

@@ -1,8 +1,43 @@
 cmake_minimum_required(VERSION 3.10)
 project(mirage)
 
+# Define the version number in the header file directly
+set(VERSION_NUMBER "1.0.0")
+
+# Try to get the current Git SHA
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_SHA
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+    RESULT_VARIABLE GIT_SHA_RESULT
+)
+
+# Check if the command was successful
+if(NOT GIT_SHA_RESULT EQUAL 0)
+    set(GIT_SHA "unknown")
+endif()
+
+# Pass the Git SHA to the compiler
+add_definitions(-DGIT_SHA=\"${GIT_SHA}\")
+
 # Set source files
-set(SOURCE_FILES main.c utils.c detect.cpp frame_rate_tracker.c config_parser.c config_manager.c audio.c armor.c devices.c command_processing.c mosquitto_comms.c curl_download.c image_utils.c)
+set(SOURCE_FILES
+    armor.c
+    audio.c
+    command_processing.c
+    config_parser.c
+    config_manager.c
+    curl_download.c
+    detect.cpp
+    devices.c
+    frame_rate_tracker.c
+    image_utils.c
+    logging.c
+    mirage.c
+    mosquitto_comms.c
+    utils.c)
 
 # Set C compiler and flags
 set(CMAKE_C_COMPILER gcc)

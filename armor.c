@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <time.h>
@@ -23,7 +24,8 @@
 #include "defines.h"
 #include "armor.h"
 #include "config_manager.h"
-#include "main.h"
+#include "logging.h"
+#include "mirage.h"
 
 static time_t armor_timeout = 0; /* This is the variable tracking when the timeout occurs. */
 static int armor_enabled = 1;    /* Variable to turn on/off displaying armor. */
@@ -73,7 +75,6 @@ void renderArmor(void)
 
       /* Warning states for armor components. */
       if ((this_element->warning_temp >= 0) && (this_element->last_temp >= 0)) {
-         //printf("Checking for temp %s.\n", this_element->mqtt_device);
          if (!(this_element->warn_state & WARN_OVER_TEMP) &&
              (this_element->last_temp > this_element->warning_temp)) {
             this_element->texture = this_element->texture_warning;
@@ -91,7 +92,6 @@ void renderArmor(void)
       }
 
       if ((this_element->warning_voltage >= 0) && (this_element->last_voltage >= 0)) {
-         //printf("Checking for voltage %s.\n", this_element->mqtt_device);
          if (!(this_element->warn_state & WARN_OVER_VOLT) &&
              (this_element->last_voltage < this_element->warning_voltage)) {
             this_element->texture = this_element->texture_warning;

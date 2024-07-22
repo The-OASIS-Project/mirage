@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 /* Threading Information */
@@ -101,10 +102,12 @@
 #include "devices.h"
 #include "frame_rate_tracker.h"
 #include "image_utils.h"
-#include "main.h"
+#include "logging.h"
+#include "mirage.h"
 #include "mosquitto_comms.h"
 #include "secrets.h"
 #include "utils.h"
+#include "version.h"
 
 pthread_mutex_t v_mutex = PTHREAD_MUTEX_INITIALIZER;  /* Mutex for video buffer access. */
 GstMapInfo mapL[2], mapR[2];        /* Video memory maps. */
@@ -401,81 +404,81 @@ void free_elements(element *start_element)
    if (start_element != NULL) {
       this_element = start_element;
    } else {
-      printf("Unable to free NULL elements!\n");
+      LOG_ERROR("Unable to free NULL elements!");
       return;
    }
 
    while (this_element != NULL) {
 #ifdef DEBUG_SHUTDOWN
-      printf("Freeing: %d.\n", this_element->type);
+      LOG_INFO("Freeing: %d.", this_element->type);
 #endif
 
       if (this_element->surface != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing surface.\n");
+         LOG_INFO("Freeing surface.");
 #endif
          SDL_FreeSurface(this_element->surface);
       }
 
       if (this_element->texture != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture.\n");
+         LOG_INFO("Freeing texture.");
 #endif
          SDL_DestroyTexture(this_element->texture);
       }
 
       if (this_element->texture_r != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (r).\n");
+         LOG_INFO("Freeing texture (r).");
 #endif
          SDL_DestroyTexture(this_element->texture_r);
       }
 
       if (this_element->texture_s != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (s).\n");
+         LOG_INFO("Freeing texture (s).");
 #endif
          SDL_DestroyTexture(this_element->texture_s);
       }
 
       if (this_element->texture_rs != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (rs).\n");
+         LOG_INFO("Freeing texture (rs).");
 #endif
          SDL_DestroyTexture(this_element->texture_rs);
       }
 
       if (this_element->texture_base != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (base).\n");
+         LOG_INFO("Freeing texture (base).");
 #endif
          SDL_DestroyTexture(this_element->texture_base);
       }
 
       if (this_element->texture_online != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (online).\n");
+         LOG_INFO("Freeing texture (online).");
 #endif
          SDL_DestroyTexture(this_element->texture_online);
       }
 
       if (this_element->texture_warning != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (warning).\n");
+         LOG_INFO("Freeing texture (warning).");
 #endif
          SDL_DestroyTexture(this_element->texture_warning);
       }
 
       if (this_element->texture_offline != NULL) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing texture (offline).\n");
+         LOG_INFO("Freeing texture (offline).");
 #endif
          SDL_DestroyTexture(this_element->texture_offline);
       }
 
       for (i = 0; i < this_element->this_anim.frame_count; i++) {
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing frame %d.\n", i);
+         LOG_INFO("Freeing frame %d.", i);
 #endif
          free(this_element->this_anim.frame_lookup[i]);
       }
@@ -483,7 +486,7 @@ void free_elements(element *start_element)
       if (this_element->next != NULL) {
          this_element = this_element->next;
 #ifdef DEBUG_SHUTDOWN
-         printf("Freeing element.\n");
+         LOG_INFO("Freeing element.");
 #endif
          free(this_element->prev);
       } else {
@@ -502,31 +505,31 @@ void dump_element_list(void)
    while (curr_element != NULL) {
       switch (curr_element->type) {
       case STATIC:
-         printf("Element[%d]:\n"
+         LOG_INFO("Element[%d]:\n"
                 "\ttype:\tSTATIC\n"
                 "\tfile:\t%s\n"
                 "\tdest_x:\t%d\n"
                 "\tdest_y:\t%d\n"
                 "\tangle:\t%f\n"
-                "\tlayer:\t%d\n",
+                "\tlayer:\t%d",
                 count,
                 curr_element->filename, curr_element->dest_x, curr_element->dest_y,
                 curr_element->angle, curr_element->layer);
          break;
       case ANIMATED:
-         printf("Element[%d]:\n"
+         LOG_INFO("Element[%d]:\n"
                 "\ttype:\tANIMATED\n"
                 "\tfile:\t%s\n"
                 "\tdest_x:\t%d\n"
                 "\tdest_y:\t%d\n"
                 "\tangle:\t%f\n"
-                "\tlayer:\t%d\n",
+                "\tlayer:\t%d",
                 count,
                 curr_element->filename, curr_element->dest_x, curr_element->dest_y,
                 curr_element->angle, curr_element->layer);
          break;
       case TEXT:
-         printf("Element[%d]:\n"
+         LOG_INFO("Element[%d]:\n"
                 "\ttype:\tTEXT\n"
                 "\tstring:\t%s\n"
                 "\tfont:\t%s\n"
@@ -535,31 +538,31 @@ void dump_element_list(void)
                 "\tdest_y:\t%d\n"
                 "\thalign:\t%s\n"
                 "\tangle:\t%f\n"
-                "\tlayer:\t%d\n",
+                "\tlayer:\t%d",
                 count,
                 curr_element->text, curr_element->font, curr_element->font_size,
                 curr_element->dest_x, curr_element->dest_y,
                 curr_element->halign, curr_element->angle, curr_element->layer);
          break;
       case SPECIAL:
-         printf("Element[%d]:\n"
+         LOG_INFO("Element[%d]:\n"
                 "\ttype:\tSPECIAL\n"
                 "\tname:\t%s\n"
                 "\tfile:\t%s\n"
                 "\tdest_x:\t%d\n"
                 "\tdest_y:\t%d\n"
                 "\tangle:\t%f\n"
-                "\tlayer:\t%d\n",
+                "\tlayer:\t%d",
                 count,
                 curr_element->special_name, curr_element->filename,
                 curr_element->dest_x, curr_element->dest_y,
                 curr_element->angle, curr_element->layer);
          break;
       case ANIMATED_DYNAMIC:
-         printf("Not implemented.\n");
+         LOG_INFO("Not implemented.");
          break;
       case ARMOR_COMPONENT:
-         printf("Not implemented.\n");
+         LOG_INFO("Not implemented.");
          break;
       }
 
@@ -681,7 +684,7 @@ int play_intro(int frames, int clear, int *finished)
          this_vod.rgb_out_pixels[!this_vod.buffer_num] =
              malloc(this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
          if (this_vod.rgb_out_pixels[!this_vod.buffer_num] == NULL) {
-            printf("Unable to malloc rgb frame 0.\n");
+            LOG_ERROR("Unable to malloc rgb frame 0.");
             return (2);
          }
 #ifdef ENCODE_TIMING
@@ -690,7 +693,7 @@ int play_intro(int frames, int clear, int *finished)
          if (SDL_RenderReadPixels(renderer, NULL, PIXEL_FORMAT_OUT,
                                   this_vod.rgb_out_pixels[!this_vod.buffer_num],
                                   this_hds->eye_output_width * 2 * RGB_OUT_SIZE) != 0) {
-            printf("SDL_RenderReadPixels() failed: %s\n", SDL_GetError());
+            LOG_ERROR("SDL_RenderReadPixels() failed: %s", SDL_GetError());
 #ifdef ENCODE_TIMING
          } else {
             stop = SDL_GetTicks();
@@ -701,7 +704,7 @@ int play_intro(int frames, int clear, int *finished)
                max_time = cur_time;
             if ((cur_time < min_time) || (min_time == 0))
                min_time = cur_time;
-            printf("SDL_RenderReadPixels(): %0.2f ms, min: %d, max: %d. weight: %d\n",
+            LOG_INFO("SDL_RenderReadPixels(): %0.2f ms, min: %d, max: %d. weight: %d",
                    avg_time, min_time, max_time, weight);
 #endif
          }
@@ -715,7 +718,7 @@ int play_intro(int frames, int clear, int *finished)
 
          if (vid_out_thread == 0) {
             if (pthread_create(&vid_out_thread, NULL, video_next_thread, NULL) != 0) {
-               printf("Error creating video output thread.\n");
+               LOG_ERROR("Error creating video output thread.");
                this_vod.output = 0;
             }
          }
@@ -803,11 +806,11 @@ void *video_processing_thread(void *arg)
       if (sampleL[!buffer_num] == NULL) {
          eosL = gst_app_sink_is_eos(GST_APP_SINK(sinkL));
          if (eosL) {
-            fprintf(stderr, "sinkL returned NULL. It is EOS.\n");
+            LOG_ERROR("sinkL returned NULL. It is EOS.");
             quit = 1;
             return NULL;
          } else {
-            fprintf(stderr, "sinkL returned NULL. It is NOT EOS!?!?\n");
+            LOG_ERROR("sinkL returned NULL. It is NOT EOS!?!?");
             continue;
          }
       }
@@ -815,11 +818,11 @@ void *video_processing_thread(void *arg)
       if (sampleR[!buffer_num] == NULL) {
          eosR = gst_app_sink_is_eos(GST_APP_SINK(sinkR));
          if (eosR) {
-            fprintf(stderr, "sinkR returned NULL. It is EOS.\n");
+            LOG_ERROR("sinkR returned NULL. It is EOS.");
             quit = 1;
             return NULL;
          } else {
-            fprintf(stderr, "sinkR returned NULL. It is NOT EOS!?!?\n");
+            LOG_ERROR("sinkR returned NULL. It is NOT EOS!?!?");
             continue;
          }
       }
@@ -841,8 +844,8 @@ void *video_processing_thread(void *arg)
             g_signal_emit_by_name(sinkR, "pull-sample", &sampleR[!buffer_num], NULL);
             bufferR[!buffer_num] = gst_sample_get_buffer(sampleR[!buffer_num]);
 #ifdef DEBUG_BUFFERS
-            printf("Catching up R buffer.\n");
-            printf("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d\n",
+            LOG_WARNING("Catching up R buffer.");
+            LOG_WARNING("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d",
                    bufferL[!buffer_num]->pts, bufferR[!buffer_num]->pts,
                    (long)bufferL[!buffer_num]->pts - (long)bufferR[!buffer_num]->pts,
                    (this_hds->cam_frame_duration) >
@@ -857,8 +860,8 @@ void *video_processing_thread(void *arg)
             g_signal_emit_by_name(sinkL, "pull-sample", &sampleL[!buffer_num], NULL);
             bufferL[!buffer_num] = gst_sample_get_buffer(sampleL[!buffer_num]);
 #ifdef DEBUG_BUFFERS
-            printf("Catching up L buffer.\n");
-            printf("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d\n",
+            LOG_WARNING("Catching up L buffer.");
+            LOG_WARNING("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d",
                    bufferL[!buffer_num]->pts, bufferR[!buffer_num]->pts,
                    (long)bufferL[!buffer_num]->pts - (long)bufferR[!buffer_num]->pts,
                    (this_hds->cam_frame_duration) >
@@ -878,7 +881,7 @@ void *video_processing_thread(void *arg)
 #endif
 
 #ifdef DEBUG_BUFFERS
-         printf("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d\n",
+         LOG_INFO("bufferL PTS: %lu, bufferR PTS: %lu, %10ld: %d, sync_comp: %d",
                 bufferL[!buffer_num]->pts, bufferR[!buffer_num]->pts,
                 (long)bufferL[!buffer_num]->pts - (long)bufferR[!buffer_num]->pts,
                 (this_hds->cam_frame_duration) >
@@ -967,11 +970,11 @@ void *video_next_thread(void *arg)
 #endif
 
    if (this_vod.output == RECORD_STREAM) {
-      printf("New recording: %s\n", this_vod.filename);
+      LOG_INFO("New recording: %s", this_vod.filename);
       g_snprintf(descr, 1024, GST_ENCSTR_PIPELINE, this_vod.filename,
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
    } else if (this_vod.output == RECORD) {
-      printf("New recording: %s\n", this_vod.filename);
+      LOG_INFO("New recording: %s", this_vod.filename);
 #ifndef RECORD_AUDIO
       g_snprintf(descr, 1024, GST_ENC_PIPELINE, DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT,
                  TARGET_RECORDING_FPS, this_vod.filename);
@@ -979,7 +982,7 @@ void *video_next_thread(void *arg)
       g_snprintf(descr, 1024, GST_ENC_PIPELINE, DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT,
                  TARGET_RECORDING_FPS, RECORD_PULSE_AUDIO_DEVICE, this_vod.filename);
 #endif
-      printf("desc: %s\n", descr);
+      LOG_INFO("desc: %s", descr);
    } else if (this_vod.output == STREAM) {
       g_snprintf(descr, 1024, GST_STR_PIPELINE,
                  DEFAULT_EYE_OUTPUT_WIDTH * 2, DEFAULT_EYE_OUTPUT_HEIGHT, TARGET_RECORDING_FPS,
@@ -987,7 +990,7 @@ void *video_next_thread(void *arg)
                  RECORD_PULSE_AUDIO_DEVICE,
                  YOUTUBE_STREAM_KEY);
    } else {
-      printf("Invalid destination passed.\n");
+      LOG_ERROR("Invalid destination passed.");
       return NULL;
    }
 
@@ -1042,7 +1045,7 @@ void *video_next_thread(void *arg)
             buffer = gst_buffer_new_wrapped(this_vod.rgb_out_pixels[this_vod.buffer_num],
                                             this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
             if (buffer == NULL) {
-               printf("Failure to allocate new buffer for encoding.\n");
+               LOG_ERROR("Failure to allocate new buffer for encoding.");
                break;
             }
             current_time = gst_clock_get_time(pipeline_clock);
@@ -1059,7 +1062,7 @@ void *video_next_thread(void *arg)
             this_vod.rgb_out_pixels[this_vod.buffer_num] = NULL;
 
             if (ret != GST_FLOW_OK) {
-               printf("GST_FLOW error while pushing buffer: %d\n", ret);
+               LOG_ERROR("GST_FLOW error while pushing buffer: %d", ret);
                break;
             }
          }
@@ -1092,8 +1095,6 @@ void *video_next_thread(void *arg)
    gst_object_unref(pipeline);
 
    vid_out_thread = 0;
-
-   printf("Made it out.\n");
 
    return NULL;
 }
@@ -1161,7 +1162,7 @@ void renderStereo(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dest,
    hud_display_settings *this_hds = get_hud_display_settings();
 
    if (dest == NULL) {
-      printf("ERROR: renderStereo() was passed a NULL dest value!\n");
+      LOG_ERROR("ERROR: renderStereo() was passed a NULL dest value!");
 
       return;
    }
@@ -1249,11 +1250,11 @@ void mqttTextToSpeech(const char *text) {
             text);
 
    if (mosq == NULL) {
-      fprintf(stderr, "MQTT not initialized.\n");
+      LOG_ERROR("MQTT not initialized.");
    } else {
       rc = mosquitto_publish(mosq, NULL, "dawn", strlen(mqtt_command), mqtt_command, 0, false);
       if (rc != MOSQ_ERR_SUCCESS) {
-         fprintf(stderr, "Error publishing: %s\n", mosquitto_strerror(rc));
+         LOG_ERROR("Error publishing: %s", mosquitto_strerror(rc));
       }
    }
 }
@@ -1283,11 +1284,11 @@ void mqttViewingSnapshot(const char *filename) {
       filename);
 
    if (mosq == NULL) {
-      fprintf(stderr, "MQTT not initialized.\n");
+      LOG_ERROR("MQTT not initialized.");
    } else {
       rc = mosquitto_publish(mosq, NULL, "dawn", strlen(mqtt_command), mqtt_command, 0, false);
       if (rc != MOSQ_ERR_SUCCESS) {
-         fprintf(stderr, "Error publishing: %s\n", mosquitto_strerror(rc));
+         LOG_ERROR("Error publishing: %s", mosquitto_strerror(rc));
       }
    }
 }
@@ -1302,6 +1303,7 @@ void display_help(int argc, char *argv[]) {
    printf("Options:\n");
    printf("  -f, --fullscreen       Run in fullscreen mode.\n");
    printf("  -h, --help             Display this help message and exit.\n");
+   printf("  -l, --logfile LOGFILE  Specify the log filename instead of stdout/stderr.");
    printf("  -p, --record_path PATH Specify the path for recordings.\n");
    printf("  -r, --record           Start recording on startup.\n");
    printf("  -s, --stream           Start streaming on startup.\n");
@@ -1444,6 +1446,7 @@ int main(int argc, char **argv)
     * Process Command Line
     * f  - fullscreen
     * h  - help text
+    * l  - log filename
     * p: - path for recordings
     * r  - record on startup
     * s  - stream on startup
@@ -1453,6 +1456,7 @@ int main(int argc, char **argv)
    static struct option long_options[] = {
       {"fullscreen", no_argument, NULL, 'f'},
       {"help", no_argument, NULL, 'h'},
+      {"logfile", required_argument, NULL, 'l'},
       {"record_path", required_argument, NULL, 'p'},
       {"record", no_argument, NULL, 'r'},
       {"stream", no_argument, NULL, 's'},
@@ -1463,10 +1467,14 @@ int main(int argc, char **argv)
    };
    int option_index = 0;
 
+   const char *log_filename = NULL;
+
+   printf("%s Version %s: %s\n", APP_NAME, VERSION_NUMBER, GIT_SHA);
+
    strcpy(record_path, ".");
 
    while (1) {
-      opt = getopt_long(argc, argv, "fhp:rstud:", long_options, &option_index);
+      opt = getopt_long(argc, argv, "fhp:rstud:l:", long_options, &option_index);
 
       if (opt == -1) {
          break;
@@ -1474,46 +1482,55 @@ int main(int argc, char **argv)
 
       switch (opt) {
       case 'f':
-         printf("Fullscreen mode.\n");
          fullscreen = 1;
          sdl_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
          break;
       case 'h':
          display_help(argc, argv);
          exit(EXIT_SUCCESS);
+      case 'l':
+         log_filename = optarg;
+         break;
       case 'p':
          snprintf(record_path, 256, "%s", optarg);
-         printf("Record Path: %s\n", record_path);
          break;
       case 'r':
-         printf("Recording.\n");
          if (!this_vod.output) {
             this_vod.output = RECORD;
          }
          break;
       case 's':
-         printf("Streaming.\n");
          if (!this_vod.output) {
             this_vod.output = STREAM;
          }
          break;
       case 't':
-         printf("Recording and Streaming.\n");
          if (!this_vod.output) {
             this_vod.output = RECORD_STREAM;
          }
          break;
       case 'u':
-         printf("USB enabled.\n");
          usb_enable = 1;
          break;
       case 'd':
          strncpy(usb_port, optarg, 24);
-         printf("USB port: %s\n", usb_port);
          break;
       default:
          display_help(argc, argv);
          exit(EXIT_FAILURE);
+      }
+   }
+
+   // Initialize logging
+   if (log_filename) {
+      if (init_logging(log_filename, LOG_TO_FILE) != 0) {
+         fprintf(stderr, "Failed to initialize logging to file: %s\n", log_filename);
+         return EXIT_FAILURE;
+      }
+   } else {
+      if (init_logging(NULL, LOG_TO_CONSOLE) != 0) {
+         fprintf(stderr, "Failed to initialize logging to console\n");
+         return EXIT_FAILURE;
       }
    }
 
@@ -1539,7 +1556,7 @@ int main(int argc, char **argv)
 
    /* If we don't get an argument, read from stdin. */
    if (!usb_enable) {
-      printf("No serial port reading from stdin.\n");
+      LOG_WARNING("No serial port reading from stdin.");
    }
 
    for (current_thread = 0; current_thread < NUM_AUDIO_THREADS; current_thread++) {
@@ -1573,7 +1590,7 @@ int main(int argc, char **argv)
 
       if (pthread_create
           (&thread_handles[current_thread], NULL, audio_thread, &audio_threads[current_thread])) {
-         fprintf(stderr, "Error creating thread [%d]\n", current_thread);
+         LOG_ERROR("Error creating thread [%d]", current_thread);
          exit(1);
       }
    }
@@ -1661,7 +1678,7 @@ int main(int argc, char **argv)
 
    mosq = mosquitto_new(NULL, true, NULL);
    if(mosq == NULL){
-      fprintf(stderr, "Error: Out of memory.\n");
+      LOG_ERROR("Error: Out of memory.");
       return 1;
    }
 
@@ -1674,14 +1691,14 @@ int main(int argc, char **argv)
    rc = mosquitto_connect(mosq, "127.0.0.1", 1883, 60);
    if(rc != MOSQ_ERR_SUCCESS){
       mosquitto_destroy(mosq);
-      fprintf(stderr, "Error: %s\n", mosquitto_strerror(rc));
+      LOG_ERROR("Error: %s", mosquitto_strerror(rc));
       return 1;
    }
 
    /* This is the main hud service. I have others based on external devices. */
    rc = mosquitto_subscribe(mosq, NULL, "hud", 1);
    if(rc != MOSQ_ERR_SUCCESS){
-      fprintf(stderr, "Error subscribing to \"hud\": %s\n", mosquitto_strerror(rc));
+      LOG_ERROR("Error subscribing to \"hud\": %s", mosquitto_strerror(rc));
    }
 
    /* Start processing MQTT events. */
@@ -1703,7 +1720,7 @@ int main(int argc, char **argv)
    if (detect_enabled) {
       if (init_detect(&oddataL.detect_obj, argc, argv, this_hds->cam_input_width, this_hds->cam_input_height))
       {
-         printf("Error initializing detect!!!\n");
+         LOG_ERROR("Error initializing detect!!!");
          detect_enabled = 0;
       } else {
          if (intro_element.enabled) {
@@ -1711,7 +1728,7 @@ int main(int argc, char **argv)
          }
          if (init_detect(&oddataR.detect_obj, argc, argv, this_hds->cam_input_width, this_hds->cam_input_height))
          {
-            printf("Error initializing detect!!!\n");
+            LOG_ERROR("Error initializing detect!!!");
             detect_enabled = 0;
          } else {
             //oddataL.detect_obj.v_mutex = &v_mutex;
@@ -1721,7 +1738,7 @@ int main(int argc, char **argv)
    }
 
    if (pthread_create(&video_proc_thread, NULL, video_processing_thread, NULL) != 0) {
-      printf("Error creating video processing thread.\n");
+      LOG_ERROR("Error creating video processing thread.");
       return (2);
    }
 
@@ -1736,7 +1753,7 @@ int main(int argc, char **argv)
    }
 
    if (pthread_create(&command_proc_thread, NULL, command_processing_thread, (void *) usb_port) != 0) {
-      printf("Error creating command processing thread.\n");
+      LOG_ERROR("Error creating command processing thread.");
       return (2);
    }
 
@@ -1757,10 +1774,10 @@ int main(int argc, char **argv)
                   if (event.key.keysym.sym == SDL_GetKeyFromName(curr_element->hotkey)) {
                      curr_element->enabled = !curr_element->enabled;
                      if (strncmp(curr_element->special_name, "detect", 6) == 0) {
-                        printf("Changing detect status.\n");
+                        LOG_INFO("Changing detect status.");
                         detect_enabled = !detect_enabled;
                      }
-                     printf("Changing status.\n");
+                     LOG_INFO("Changing status.");
                   }
                }
 
@@ -1783,42 +1800,42 @@ int main(int argc, char **argv)
                if (!this_vod.output) {
                   this_vod.output = RECORD;
                   last_file_check = currTime;
-                  printf("Starting recording.\n");
+                  LOG_INFO("Starting recording.");
                } else {
                   this_vod.output = 0;
                   last_size = last_last_size = -1;
-                  printf("Stopping recording.\n");
+                  LOG_INFO("Stopping recording.");
                }
                break;
             case SDLK_s:
                if (!this_vod.output) {
                   this_vod.output = STREAM;
                   last_file_check = currTime;
-                  printf("Starting streaming.\n");
+                  LOG_INFO("Starting streaming.");
                } else {
                   this_vod.output = 0;
                   last_size = last_last_size = -1;
-                  printf("Stopping streaming.\n");
+                  LOG_INFO("Stopping streaming.");
                }
                break;
             case SDLK_t:
                if (!this_vod.output) {
                   this_vod.output = RECORD_STREAM;
                   last_file_check = currTime;
-                  printf("Starting recording and streaming.\n");
+                  LOG_INFO("Starting recording and streaming.");
                } else {
                   this_vod.output = 0;
                   last_size = last_last_size = -1;
-                  printf("Stopping recording and streaming.\n");
+                  LOG_INFO("Stopping recording and streaming.");
                }
                break;
             case SDLK_LEFT:
                this_hds->stereo_offset -= 10;
-               printf("Stereo Offset: %d\n", this_hds->stereo_offset);
+               LOG_INFO("Stereo Offset: %d", this_hds->stereo_offset);
                break;
             case SDLK_RIGHT:
                this_hds->stereo_offset += 10;
-               printf("Stereo Offset: %d\n", this_hds->stereo_offset);
+               LOG_INFO("Stereo Offset: %d", this_hds->stereo_offset);
                break;
             case SDLK_ESCAPE:
             case SDLK_q:
@@ -1921,11 +1938,11 @@ int main(int argc, char **argv)
             /* FIXME: See how fast this happens. Do I need to spawn off a thread? */
             int result = process_and_save_image(&params);
             if (result != 0) {
-               fprintf(stderr, "Image processing failed with error code: %d\n", result);
-               fprintf(stderr, "\tfilename: %s, orig_width: %d, orig_height: %d\n",
+               LOG_ERROR("Image processing failed with error code: %d", result);
+               LOG_ERROR("\tfilename: %s, orig_width: %d, orig_height: %d",
                        params.filename, params.orig_width, params.orig_height);
             } else {
-               fprintf(stderr, "Successfully created snapshot!\n");
+               LOG_INFO("Successfully created snapshot!");
                mqttViewingSnapshot(snapshot_filename);
             }
 
@@ -2096,7 +2113,7 @@ int main(int argc, char **argv)
                } else if (strcmp("*CPU*", curr_element->text) == 0) {
                   if (cpu_thread_started == 0) {
                      if (pthread_create(&cpu_util_thread, NULL, cpu_utilization_thread, NULL) != 0) {
-                        printf("Error creating cpu utilization thread.\n");
+                        LOG_ERROR("Error creating cpu utilization thread.");
                         cpu_thread_started = 0;
                      } else {
                         cpu_thread_started = 1;
@@ -2160,7 +2177,7 @@ int main(int argc, char **argv)
                      fan_file = fopen(FAN_RPM_FILE, "r");
                      if (fan_file == NULL) {
                         snprintf(render_text, MAX_TEXT_LENGTH, "%03d", 0);
-                        printf("Unable to open fan file.\n");
+                        LOG_ERROR("Unable to open fan file.");
                         fan_present = 0;
                      } else {
                         if (fread(fanstr, 1, 5, fan_file) > 0) {
@@ -2171,7 +2188,7 @@ int main(int argc, char **argv)
                            }
                            snprintf(render_text, MAX_TEXT_LENGTH, "%03d", (int)fan_pct);
                         } else {
-                           printf("Opened but nothing read.\n");
+                           LOG_WARNING("Opened but nothing read.");
                            snprintf(render_text, MAX_TEXT_LENGTH, "%03d", 0);
                         }
 
@@ -2266,7 +2283,7 @@ int main(int argc, char **argv)
                               SDL_BlitSurface(tmpsfc, NULL, curr_element->surface, &tmprect);
                               SDL_FreeSurface(tmpsfc);
                            } else {
-                              fprintf(stderr, "Error creating log render, %d.\n", ii);
+                              LOG_ERROR("Error creating log render, %d.", ii);
                            }
                         }
                      }
@@ -2305,7 +2322,7 @@ int main(int argc, char **argv)
                          TTF_RenderText_Blended(curr_element->ttf_font, render_text,
                                                 curr_element->font_color);
                      if (curr_element->surface == NULL) {
-                        printf("Failure rendering \"%s\": %s\n", render_text, SDL_GetError());
+                        LOG_ERROR("Failure rendering \"%s\": %s", render_text, SDL_GetError());
                         return 1;
                      }
                      render_text[0] = '\0';
@@ -2383,7 +2400,7 @@ int main(int argc, char **argv)
                         this_data.data = NULL;
                         if (pthread_create
                             (&map_download_thread, NULL, image_download_thread, &this_data) != 0) {
-                           printf("Error creating map download thread.\n");
+                           LOG_ERROR("Error creating map download thread.");
                            map_thread_started = 0;
                         } else {
                            map_thread_started = 1;
@@ -2523,7 +2540,7 @@ int main(int argc, char **argv)
                   dst_rect_l.h = dst_rect_r.h = curr_element->this_anim.current_frame->source_h;
                } else if ((strcmp("detect", curr_element->special_name) == 0) && detect_enabled) {      /* Detect Box */
                   if (detect_texture == NULL) {
-                     printf("Loading animation source: %s\n", curr_element->this_anim.image);
+                     LOG_INFO("Loading animation source: %s", curr_element->this_anim.image);
                      detect_texture = IMG_LoadTexture(renderer, curr_element->this_anim.image);
                      if (!detect_texture) {
                         SDL_Log("Couldn't load %s: %s\n", curr_element->this_anim.image, SDL_GetError());
@@ -2630,7 +2647,7 @@ int main(int argc, char **argv)
                                                    this_detect_sorted[0][j].description,
                                                    curr_element->font_color);
                         if (curr_element->surface == NULL) {
-                           printf("Failed to render text \"%s\": %s\n",
+                           LOG_ERROR("Failed to render text \"%s\": %s",
                                   this_detect_sorted[0][j].description, SDL_GetError());
                            break;
                         }
@@ -2707,7 +2724,7 @@ int main(int argc, char **argv)
 
                break;
             default:
-               printf("Element type not handled yet.\n");
+               LOG_ERROR("Element type not handled yet.");
             }
 
             if (!curr_element->fixed) {
@@ -2753,9 +2770,9 @@ int main(int argc, char **argv)
          present_time = (unsigned long) display_time.tv_sec * 1000000000 + display_time.tv_nsec;
          ts_count++;
          ts_total += (present_time - last_ts_cap) / 1000000;
-         printf("Display latency: %lu ms, avg: %lu ms\n", (present_time - last_ts_cap) / 1000000,
+         LOG_INFO("Display latency: %lu ms, avg: %lu ms", (present_time - last_ts_cap) / 1000000,
                                                     ts_total / (unsigned long) ts_count);
-         printf("ts_total: %lu ms, ts_count: %u\n", ts_total, ts_count);
+         LOG_INFO("ts_total: %lu ms, ts_count: %u", ts_total, ts_count);
 #endif
 
 #ifndef SNAPSHOT_NOOVERLAY
@@ -2763,13 +2780,13 @@ int main(int argc, char **argv)
             void *snapshot_pixel =
                 malloc(this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
             if (snapshot_pixel == NULL) {
-               printf("Unable to malloc rgb frame 0.\n");
+               LOG_ERROR("Unable to malloc rgb frame 0.");
                return (2);
             }
 
             if (SDL_RenderReadPixels(renderer, NULL, PIXEL_FORMAT_OUT, snapshot_pixel,
                                      this_hds->eye_output_width * 2 * RGB_OUT_SIZE) != 0 ) {
-               printf("SDL_RenderReadPixels() failed: %s\n", SDL_GetError());
+               LOG_ERROR("SDL_RenderReadPixels() failed: %s", SDL_GetError());
             } else {
                ImageProcessParams params = {
                   .rgba_buffer = (unsigned char *) snapshot_pixel,
@@ -2787,9 +2804,9 @@ int main(int argc, char **argv)
 
                int result = process_and_save_image(&params);
                if (result != 0) {
-                  fprintf(stderr, "Image processing failed with error code: %d\n", result);
+                  LOG_ERROR("Image processing failed with error code: %d", result);
                } else {
-                  fprintf(stderr, "Successfully created snapshot!\n");
+                  LOG_INFO("Successfully created snapshot!");
                   mqttViewingSnapshot(snapshot_filename);
                }
             }
@@ -2810,7 +2827,7 @@ int main(int argc, char **argv)
                last_last_size = last_size;
                if (has_file_grown(this_vod.filename, &last_last_size)) {
                   if (!(active_alerts & ALERT_RECORDING)) {
-                     printf("ERROR: %s: File size is not increasing. %ld ? %ld\n",
+                     LOG_ERROR("ERROR: %s: File size is not increasing. %ld ? %ld",
                             this_vod.filename, last_last_size, last_size);
                      active_alerts |= ALERT_RECORDING;
                      mqttTextToSpeech("There is potentially and error with recording.");
@@ -2825,7 +2842,7 @@ int main(int argc, char **argv)
             this_vod.rgb_out_pixels[!this_vod.buffer_num] =
                 malloc(this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
             if (this_vod.rgb_out_pixels[!this_vod.buffer_num] == NULL) {
-               printf("Unable to malloc rgb frame 0.\n");
+               LOG_ERROR("Unable to malloc rgb frame 0.");
                return (2);
             }
 
@@ -2836,7 +2853,7 @@ int main(int argc, char **argv)
             if (SDL_RenderReadPixels(renderer, NULL, PIXEL_FORMAT_OUT,
                                      this_vod.rgb_out_pixels[!this_vod.buffer_num],
                                      this_hds->eye_output_width * 2 * RGB_OUT_SIZE) != 0 ) {
-               printf("SDL_RenderReadPixels() failed: %s\n", SDL_GetError());
+               LOG_ERROR("SDL_RenderReadPixels() failed: %s", SDL_GetError());
 #ifdef ENCODE_TIMING
             } else {
                stop = SDL_GetTicks();
@@ -2847,7 +2864,7 @@ int main(int argc, char **argv)
                   max_time = cur_time;
                if ((cur_time < min_time) || (min_time == 0))
                   min_time = cur_time;
-               printf("SDL_RenderReadPixels(): %0.2f ms, min: %d, max: %d. weight: %d\n",
+               LOG_INFO("SDL_RenderReadPixels(): %0.2f ms, min: %d, max: %d. weight: %d",
                       avg_time, min_time, max_time, weight);
 #endif
             }
@@ -2861,7 +2878,7 @@ int main(int argc, char **argv)
 
             if (vid_out_thread == 0) {
                if (pthread_create(&vid_out_thread, NULL, video_next_thread, NULL) != 0) {
-                  printf("Error creating video encoding thread.\n");
+                  LOG_ERROR("Error creating video encoding thread.");
                   this_vod.output = 0;
                }
             }
@@ -2884,29 +2901,29 @@ int main(int argc, char **argv)
 
    /* Close audio threads. */
 #ifdef DEBUG_SHUTDOWN
-   printf("Waiting on audio threads to stop.\n");
+   LOG_INFO("Waiting on audio threads to stop.");
 #endif
    for (int i = 0; i < NUM_AUDIO_THREADS; i++) {
       pthread_join(thread_handles[i], NULL);
    }
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Waiting on command processing thread to stop.\n");
+   LOG_INFO("Waiting on command processing thread to stop.");
 #endif
    pthread_join(command_proc_thread, NULL);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Freeing elements.\n");
+   LOG_INFO("Freeing elements.");
 #endif
    /* Free elements. */
    free_elements(first_element);
    free_elements(this_as->armor_elements);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Freeing fonts.\n");
+   LOG_INFO("Freeing fonts.");
 #endif
    /* Free fonts. */
    this_font = font_list;
@@ -2915,81 +2932,84 @@ int main(int argc, char **argv)
       this_font = this_font->next;
    }
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Waiting on MQTT disconnect.\n");
+   LOG_INFO("Waiting on MQTT disconnect.");
 #endif
    mosquitto_disconnect(mosq);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Waiting on MQTT loop stop.\n");
+   LOG_INFO("Waiting on MQTT loop stop.");
 #endif
    mosquitto_loop_stop(mosq, false);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Waiting on command processing to stop.\n");
+   LOG_INFO("Waiting on command processing to stop.");
 #endif
    pthread_join(command_proc_thread, NULL);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 
-   printf("Wainting on video processing to stop.\n");
+   LOG_INFO("Wainting on video processing to stop.");
 #endif
    pthread_join(video_proc_thread, NULL);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 #endif
    if (vid_out_thread != 0) {
 #ifdef DEBUG_SHUTDOWN
-      printf("Waiting on final video thread to stop.\n");
+      LOG_INFO("Waiting on final video thread to stop.");
 #endif
       pthread_join(vid_out_thread, NULL);
 #ifdef DEBUG_SHUTDOWN
-      printf("Done.\n");
+      LOG_INFO("Done.");
 #endif
    }
 
 #ifdef DEBUG_SHUTDOWN
-   printf("Waiting on SDL renderer and window destruction.\n");
+   LOG_INFO("Waiting on SDL renderer and window destruction.");
 #endif
    SDL_DestroyRenderer(renderer);
    SDL_DestroyWindow(window);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 #endif
 
 #ifdef DEBUG_SHUTDOWN
-   printf("Waiting on SDL libraries to quit.\n");
+   LOG_INFO("Waiting on SDL libraries to quit.");
 #endif
    TTF_Quit();
    IMG_Quit();
    SDL_Quit();
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 #endif
 
    if (detect_enabled)
    {
 #ifdef DEBUG_SHUTDOWN
-      printf("Waiting for detection to clean up.\n");
+      LOG_INFO("Waiting for detection to clean up.");
 #endif
       free_detect(&oddataL.detect_obj);
       free_detect(&oddataR.detect_obj);
 #ifdef DEBUG_SHUTDOWN
-      printf("Done.\n");
+      LOG_INFO("Done.");
 #endif
    }
 
 #ifdef DEBUG_SHUTDOWN
-   printf("Waiting for other library clean up.\n");
+   LOG_INFO("Waiting for other library clean up.");
 #endif
    mosquitto_lib_cleanup();
    curl_global_cleanup();
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 #endif
 
-   return (0);
+   // Close the log file properly
+   close_logging();
+
+   return (EXIT_SUCCESS);
 }

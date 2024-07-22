@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <stdio.h>
@@ -23,9 +24,10 @@
 
 #include "SDL2/SDL_image.h"
 
-#include "main.h"
+#include "mirage.h"
 #include "config_manager.h"
 #include "config_parser.h"
+#include "logging.h"
 
 /* Parse json animation files. */
 int parse_animated_json(element * curr_element)
@@ -47,7 +49,7 @@ int parse_animated_json(element * curr_element)
 
    config_file = fopen(curr_element->filename, "r");
    if (config_file == NULL) {
-      printf("Unable to open config file: %s\n", curr_element->filename);
+      LOG_ERROR("Unable to open config file: %s", curr_element->filename);
       return FAILURE;
    }
 
@@ -97,7 +99,7 @@ int parse_animated_json(element * curr_element)
          if (curr_element->this_anim.frame_count < MAX_FRAMES) {
             curr_element->this_anim.frame_lookup[curr_element->this_anim.frame_count] = this_frame;
          } else {
-            printf("Max frame count reached: %d\n", MAX_FRAMES);
+            LOG_WARNING("Max frame count reached: %d", MAX_FRAMES);
          }
          curr_element->this_anim.frame_count++;
 
@@ -293,7 +295,7 @@ int parse_json_config(char *filename)
 
    config_file = fopen(filename, "r");
    if (config_file == NULL) {
-      printf("Unable to open config file: %s\n", filename);
+      LOG_ERROR("Unable to open config file: %s", filename);
       return FAILURE;
    }
 
@@ -345,28 +347,30 @@ int parse_json_config(char *filename)
                   this_hds->pitch_offset = json_object_get_double(json_object_iter_peek_value(&itSub));
                   //printf("PITCH OFFSET: %f\n", this_hds->pitch_offset);
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Image Path") == 0) {
-                  if(set_image_path(json_object_get_string(json_object_iter_peek_value(&itSub)), MAX_FILENAME_LENGTH - 1) == NULL)
+                  if(set_image_path(json_object_get_string(json_object_iter_peek_value(&itSub)),
+                           MAX_FILENAME_LENGTH - 1) == NULL)
                   {
-                     printf("Error setting image path!\n");
+                     LOG_ERROR("Error setting image path!");
                   }
                   //printf("IMAGE PATH: %s\n", get_image_path);
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Font Path") == 0) {
-                  if (set_font_path(json_object_get_string(json_object_iter_peek_value(&itSub)), MAX_FILENAME_LENGTH - 1) == NULL)
+                  if (set_font_path(json_object_get_string(json_object_iter_peek_value(&itSub)),
+                           MAX_FILENAME_LENGTH - 1) == NULL)
                   {
-                     printf("Error setting font path!\n");
+                     LOG_ERROR("Error setting font path!");
                   }
                   //printf("FONT PATH: %s\n", get_font_path());
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Sound Path") == 0) {
                   if (set_sound_path(json_object_get_string(json_object_iter_peek_value(&itSub)), MAX_FILENAME_LENGTH - 1) == NULL)
                   {
-                     printf("Error setting sound path!\n");
+                     LOG_ERROR("Error setting sound path!");
                   }
                   //printf("SOUND PATH: %s\n", get_sound_path());
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Wifi") == 0) {
                   if (set_wifi_dev_name(json_object_get_string(json_object_iter_peek_value(&itSub)),
                                         MAX_WIFI_DEV_LENGTH - 1) == NULL)
                   {
-                     printf("Error settings Wifi device name!\n");
+                     LOG_ERROR("Error settings Wifi device name!");
                   }
                   //printf("Wifi: %s\n", get_wifi_dev_name());
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Invert Compass") == 0) {
@@ -460,7 +464,7 @@ int parse_json_config(char *filename)
                      //printf("Element[%d]: Type: %s\n", i, json_object_get_string(tmpobj3));
                      curr_element = malloc(sizeof(element));
                      if (curr_element == NULL) {
-                        printf("Cannot malloc new element!\n");
+                        LOG_ERROR("Cannot malloc new element!");
                         exit(1);
                      }
                      memcpy(curr_element, default_element, sizeof(element));
@@ -991,7 +995,7 @@ int parse_json_config(char *filename)
                for (i = 0; i < array_length; i++) {
                   curr_element = malloc(sizeof(element));
                   if (curr_element == NULL) {
-                     printf("Cannot malloc new element!\n");
+                     LOG_ERROR("Cannot malloc new element!");
                      exit(1);
                   }
                   memcpy(curr_element, default_element, sizeof(element));

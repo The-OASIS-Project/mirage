@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <stdio.h>
@@ -29,11 +30,12 @@
 #include <sys/select.h>
 
 #include "defines.h"
-#include "main.h"
-#include "audio.h"
 #include "armor.h"
-#include "config_manager.h"
+#include "audio.h"
 #include "command_processing.h"
+#include "config_manager.h"
+#include "logging.h"
+#include "mirage.h"
 
 static char raw_log[LOG_ROWS][LOG_LINE_LENGTH];
 static int next_log_row = 0;
@@ -199,7 +201,7 @@ int parse_json_command(char *command_string)
 
             process_audio_command(command, filename, start_percent);
          } else {
-            fprintf(stderr, "Unrecognized audio command: %s\n", tmpstr);
+            LOG_WARNING("Unrecognized audio command: %s", tmpstr);
          }
       } else if (strcmp("viewing", tmpstr) == 0) {
          json_object_object_get_ex(parsed_json, "datetime", &tmpobj);
@@ -218,7 +220,7 @@ int parse_json_command(char *command_string)
          }
 
          if (enabled > -1) {
-            printf("Going to enable or disable %s.\n", tmpstr);
+            LOG_INFO("Going to enable or disable %s.", tmpstr);
 
             /* Recording/Streaming */
             if (!strcmp(tmpstr, "record")) {
@@ -285,14 +287,14 @@ int parse_json_command(char *command_string)
          json_object_object_get_ex(parsed_json, "temp", &tmpobj);
          if (tmpobj != NULL) {
             armor_element->last_temp = json_object_get_double(tmpobj);
-            printf("Setting last_temp = %0.2f on %s.\n", armor_element->last_temp,
+            LOG_INFO("Setting last_temp = %0.2f on %s.", armor_element->last_temp,
                    armor_element->mqtt_device);
          }
 
          json_object_object_get_ex(parsed_json, "voltage", &tmpobj);
          if (tmpobj != NULL) {
             armor_element->last_voltage = json_object_get_double(tmpobj);
-            printf("Setting last_voltage = %0.2f on %s.\n", armor_element->last_voltage,
+            LOG_INFO("Setting last_voltage = %0.2f on %s.", armor_element->last_voltage,
                    armor_element->mqtt_device);
          }
       }
@@ -347,7 +349,7 @@ void *command_processing_thread(void *arg)
 
          return NULL;
       } else {
-         printf("Serial port opened successfully.\n");
+         LOG_INFO("Serial port opened successfully.");
       }
 
       /* Setup serial port. */
@@ -374,7 +376,7 @@ void *command_processing_thread(void *arg)
       SerialPortSettings.c_cc[VTIME] = 1;       /* Wait indefinetly   */
 
       if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
-         printf("\n  ERROR ! in Setting attributes: ");
+         LOG_ERROR("ERROR in setting attributes.");
       }
 
       tcflush(sfd, TCIFLUSH);
@@ -403,7 +405,7 @@ void *command_processing_thread(void *arg)
 
       retval = select(max_socket + 1, &set, NULL, NULL, &timeout);
       if (retval < 0) {
-         printf("Select error.\n");
+         LOG_ERROR("Select error.");
       } else if (retval == 0) {
          // This print it available for debugging but not necessary.
          //printf("USB/Serial Data Timeout.\n");
@@ -439,11 +441,11 @@ void *command_processing_thread(void *arg)
    }
 
 #ifdef DEBUG_SHUTDOWN
-   printf("Closing serial input.\n");
+   LOG_INFO("Closing serial input.");
 #endif
    close(sfd);
 #ifdef DEBUG_SHUTDOWN
-   printf("Done.\n");
+   LOG_INFO("Done.");
 #endif
 
    return NULL;

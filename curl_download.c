@@ -12,10 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * All contributions to this project are agreed to be licensed under the
- * GPLv3 or any later version. Contributions are understood to be
- * any modifications, enhancements, or additions to the project
- * and become the property of the original author Kris Kersey.
+ * By contributing to this project, you agree to license your contributions
+ * under the GPLv3 (or any later version) or any future licenses chosen by
+ * the project author(s). Contributions include any modifications,
+ * enhancements, or additions to the project. These contributions become
+ * part of the project and are adopted by the project author(s).
  */
 
 #include <stdio.h>
@@ -28,7 +29,8 @@
 #include "SDL2/SDL_image.h"
 
 #include "curl_download.h"
-#include "main.h"
+#include "logging.h"
+#include "mirage.h"
 
 /* CURL write function to save downloads to memory. */
 static size_t write_data(void *data, size_t size, size_t nmemb, void *userp)
@@ -38,7 +40,7 @@ static size_t write_data(void *data, size_t size, size_t nmemb, void *userp)
 
    char *ptr = realloc(mem->data, mem->size + realsize + 1);
    if (ptr == NULL) {
-      printf("Error allocating memory in curl callback.\n");
+      LOG_ERROR("Error allocating memory in curl callback.");
       return 0;
    }
    //printf("Downloading %lu bytes of data.\n", realsize);
@@ -77,7 +79,7 @@ void *image_download_thread(void *arg)
 
             ret = curl_easy_perform(curl);
             if (ret != CURLE_OK) {
-               printf("curl_easy_perform() failed: %s, url: \"%s\"\n", curl_easy_strerror(ret), this_data->url);
+               LOG_ERROR("curl_easy_perform() failed: %s, url: \"%s\"", curl_easy_strerror(ret), this_data->url);
             }
 
             curl_easy_cleanup(curl);
@@ -92,14 +94,14 @@ void *image_download_thread(void *arg)
          if (rwops != NULL) {
             this_data->image = IMG_LoadPNG_RW(rwops);
             if (this_data->image == NULL) {
-               printf("Unable to convert download to image.\n");
+               LOG_ERROR("Unable to convert download to image.");
             } else {
                this_data->updated = 1;
             }
 
             SDL_RWclose(rwops);
          } else {
-            printf("Unable to create SDL_RWFromMem().\n");
+            LOG_ERROR("Unable to create SDL_RWFromMem().");
          }
 
          free(this_data->data);

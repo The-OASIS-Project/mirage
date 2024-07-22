@@ -19,23 +19,10 @@
  * part of the project and are adopted by the project author(s).
  */
 
-#include <stdio.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#ifndef VERSION_H
+#define VERSION_H
 
-/* Check to see if the file has grown in size. Save new size to passed in value. */
-int has_file_grown(const char* filename, off_t *last_size) {
-   struct stat sb;
+#define APP_NAME "Mirage"
+#define VERSION_NUMBER "1.0.0"
 
-   if (stat(filename, &sb) == -1) {
-      perror("stat");
-      return -1;
-   }
-
-   if (sb.st_size > *last_size) {
-      *last_size = sb.st_size;
-      return 0;
-   }
-
-   return 1;
-}
+#endif // VERSION_H
