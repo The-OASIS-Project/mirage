@@ -39,6 +39,7 @@
 /* Std C */
 #include <ctype.h>
 #include <getopt.h>
+#include <limits.h>
 #include <math.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -117,7 +118,7 @@ struct timespec ts_cap[2];          /* Store the display latency. */
 int video_posted = 0;               /* Notify that the new video frames are ready. */
 int buffer_num = 0;                 /* Video is double buffered. This swaps between them. */
 
-static char record_path[256];       /* Where do we store recordings? */
+static char record_path[PATH_MAX];  /* Where do we store recordings? */
 
 /* Video Buffers */
 typedef struct _video_out_data {
@@ -127,7 +128,7 @@ typedef struct _video_out_data {
 
    void *rgb_out_pixels[2];
 
-   char filename[256+64];
+   char filename[PATH_MAX+64];
    int started;
    FILE *outfile;
 } video_out_data;
@@ -141,7 +142,7 @@ static int quit = 0;                      /* Global to sync exiting of threads. 
 static int detect_enabled = 0;            /* Is object detection enabled? */
 
 static int snapshot = 0;                  /* Take snapshot flag */
-static char snapshot_filename[256+29];    /* Filename to store the snapshot */
+static char snapshot_filename[PATH_MAX+29];  /* Filename to store the snapshot */
 
 
 /* Right now we only support one instance of each. These are their objects. */
@@ -1471,7 +1472,11 @@ int main(int argc, char **argv)
 
    printf("%s Version %s: %s\n", APP_NAME, VERSION_NUMBER, GIT_SHA);
 
-   strcpy(record_path, ".");
+   if (getcwd(record_path, sizeof(record_path)) == NULL) {
+      LOG_ERROR("getcwd() error!");
+
+      return EXIT_FAILURE;
+   }
 
    while (1) {
       opt = getopt_long(argc, argv, "fhp:rstud:l:", long_options, &option_index);
