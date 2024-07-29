@@ -23,14 +23,17 @@ Save and exit without rebooting
 
 V. Install Jetson Inference (for Object Detection)
 https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
-`git clone https://github.com/dusty-nv/jetson-inference
+
+```
+git clone https://github.com/dusty-nv/jetson-inference
 cd jetson-inference
 git submodule update --init
 mkdir build
 cd build
 cmake ..
 make -j8
-sudo make install`
+sudo make install
+```
 
 VI. Update user permissions.
 Add groups to user: `dialout`
