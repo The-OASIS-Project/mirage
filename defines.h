@@ -89,6 +89,9 @@
 //#define DEFAULT_LATITUDE    37.3292
 //#define DEFAULT_LONGITUDE  -121.8890
 
+// Default port for TCP socket helmet communications
+#define HELMET_PORT  3000
+
 #define SUCCESS 0
 #define FAILURE 1
 

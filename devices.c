@@ -103,7 +103,7 @@ int get_wifi_signal_level(void)
    int signal = -1;
    int level = 0;               /* 0-9 based on -30 to -90 dBm) */
 
-   fp = fopen("/proc/net/wireless", "r");
+   fp = fopen("/proc/net/dev", "r");
    if (fp == NULL) {
       LOG_ERROR("No wireless found.");
       return 0;

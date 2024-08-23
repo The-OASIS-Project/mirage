@@ -36,6 +36,9 @@
 #include "logging.h"
 #include "mirage.h"
 
+thread_info audio_threads[NUM_AUDIO_THREADS];
+mqd_t qd_clients[NUM_AUDIO_THREADS];
+
 /* This is my old audio threading code. This is a single instance. We start multiple of them.
  * TODO: Read this and see if it's still good.
  */

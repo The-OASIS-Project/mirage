@@ -73,10 +73,8 @@ include_directories(${GLIB_INCLUDE_DIRS})
 pkg_check_modules(MOSQUITTO REQUIRED libmosquitto)
 include_directories(${MOSQUITTO_INCLUDE_DIRS})
 
-#pkg_check_modules(CUDA REQUIRED cuda-11.4 cudart-11.4)
-#include_directories(${CUDA_INCLUDE_DIRS})
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(CUDA REQUIRED cuda-11.4 cudart-11.4)
+pkg_check_modules(CUDA REQUIRED cuda-12.2 cudart-12.2)
 include_directories(${CUDA_INCLUDE_DIRS})
 link_directories(${CUDA_LIBRARY_DIRS})
 

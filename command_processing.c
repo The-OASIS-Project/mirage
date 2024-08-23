@@ -19,6 +19,7 @@
  * part of the project and are adopted by the project author(s).
  */
 
+#include <errno.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -26,6 +27,7 @@
 #include <json-c/json.h>
 
 /* Serial Port */
+#include <sys/ioctl.h>
 #include <termios.h>
 #include <sys/select.h>
 
@@ -37,6 +39,8 @@
 #include "logging.h"
 #include "mirage.h"
 
+#include <arpa/inet.h>
+
 static char raw_log[LOG_ROWS][LOG_LINE_LENGTH];
 static int next_log_row = 0;
 
@@ -45,7 +49,7 @@ char (*get_raw_log(void))[LOG_LINE_LENGTH] {
 }
 
 /* Parse the JSON "commands" that come over serial/USB or MQTT. */
-int parse_json_command(char *command_string)
+int parse_json_command(char *command_string, char *topic)
 {
    armor_settings *this_as = get_armor_settings();
    element *armor_element = this_as->armor_elements;
@@ -276,8 +280,8 @@ int parse_json_command(char *command_string)
 
       /* Let's see if this device is from armor. */
       while (armor_element != NULL) {
-         if (!strcmp(armor_element->mqtt_device, tmpstr)) {
-            //printf("Found the item: %s : %s\n", armo_element->mqtt_device, tmpstr);
+         if (!strcmp(armor_element->mqtt_device, topic)) {
+            //printf("Found the item: %s : %s\n", armor_element->mqtt_device, topic);
             break;
          }
          armor_element = armor_element->next;
@@ -320,7 +324,7 @@ void log_command(char *command)
  *
  * TODO: This was kind of a quick fix. I think I can do better.
  */
-void *command_processing_thread(void *arg)
+void *serial_command_processing_thread(void *arg)
 {
    int sfd = 0;                 /* Socket file descriptor for command processing. */
    fd_set set;
@@ -369,10 +373,12 @@ void *command_processing_thread(void *arg)
       SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);    /* Disable XON/XOFF flow control both i/p and o/p */
       SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG);    /* Non Cannonical mode */
 
-      SerialPortSettings.c_oflag &= ~OPOST;     /*No Output Processing */
+      SerialPortSettings.c_oflag &= ~OPOST;     /* No Output Processing */
+
+      SerialPortSettings.c_cflag &= ~HUPCL;     /* Disable hangup (drop DTR) on close */
 
       /* Setting Time outs */
-      SerialPortSettings.c_cc[VMIN] = 10;       /* Read at least 10 characters */
+      SerialPortSettings.c_cc[VMIN] = 0;        /* Read at least 0 characters */
       SerialPortSettings.c_cc[VTIME] = 1;       /* Wait indefinetly   */
 
       if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
@@ -386,56 +392,67 @@ void *command_processing_thread(void *arg)
       int retval = 0;
       int max_socket = 0;
       int this_socket = -1;
+      int bytes_available = 0;
 
-      /* This should usually be the helmet we're communicating with directly.
-       * At this point we should be connected to it. */
-      registerArmor("helmet");
+#if 0
+      if (strcmp(usb_port, "") == 0) {
+         /* This should usually be the helmet we're communicating with directly.
+          * At this point we should be connected to it. */
+         registerArmor("helmet");
+      }
+#endif
 
       timeout.tv_sec = 1;
       timeout.tv_usec = 0;
       FD_ZERO(&set);
       FD_SET(sfd, &set);
-      //FD_SET(sockfd, &set);
 
       if (sfd > max_socket)
          max_socket = sfd;
 
-      //if (sockfd > max_socket)
-      //   max_socket = sockfd;
-
       retval = select(max_socket + 1, &set, NULL, NULL, &timeout);
       if (retval < 0) {
          LOG_ERROR("Select error.");
+         continue; // break;
       } else if (retval == 0) {
-         // This print it available for debugging but not necessary.
-         //printf("USB/Serial Data Timeout.\n");
+         LOG_ERROR("USB/Serial Data Timeout.\n");
+         continue;
       } else {
          if (FD_ISSET(sfd, &set)) {
             this_socket = sfd;
-            //} else if (FD_ISSET(sockfd, &set)) {
-            //   this_socket = sockfd;
          }
          if (this_socket != -1) {
-            retval = read(this_socket, &sread_buf, MAX_FILENAME_LENGTH);
-            sread_buf[retval] = '\0';
-            //printf("%s", sread_buf);
+            // Check how many bytes are available to read
+            if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
+               LOG_ERROR("ioctl error.");
+               continue;
+            }
 
-            //printf( "retval: %d\n", retval );
+            LOG_ERROR("Serial buffer size: %d", bytes_available);
+
+            retval = read(sfd, sread_buf, MAX_FILENAME_LENGTH - 1);
+            if (retval < 0) {
+               LOG_ERROR("Read error.");
+               // Handle read error - possibly close and reopen the port
+               continue; // break;
+            } else if (retval == 0) {
+               // No data read, possibly a disconnect
+               continue;
+            }
+            sread_buf[retval] = '\0';
             for (int j = 0; j < retval; j++) {
                if (sread_buf[j] == '\n') {
-                  //command_buffer[command_length] = '\0';
                   log_command(command_buffer);
-                  parse_json_command(command_buffer);
+                  parse_json_command(command_buffer, "helmet");
                   command_buffer[0] = '\0';
                   command_length = 0;
                } else if (sread_buf[j] == '\r') {
                   // Do nothing.
                } else {
-                  command_buffer[command_length++]
-                      = sread_buf[j];
+                  command_buffer[command_length++] = sread_buf[j];
                }
+               this_socket = -1;
             }
-            this_socket = -1;
          }
       }
    }
@@ -447,6 +464,91 @@ void *command_processing_thread(void *arg)
 #ifdef DEBUG_SHUTDOWN
    LOG_INFO("Done.");
 #endif
+
+   return NULL;
+}
+
+void *socket_command_processing_thread(void *arg)
+{
+   int server_fd, new_socket;
+   struct sockaddr_in address;
+   int opt = 1;
+   int addrlen = sizeof(address);
+   char buffer[MAX_FILENAME_LENGTH] = {0};
+   struct timeval timeout;
+   timeout.tv_sec = 5;  // Set timeout to 5 seconds
+   timeout.tv_usec = 0; // 0 microseconds
+
+   // Creating socket file descriptor
+   if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+      LOG_ERROR("Socket creation failed.");
+      return NULL;
+   }
+
+   // Attaching socket to the port
+   if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+      LOG_ERROR("Setsockopt failed.");
+      close(server_fd);
+      return NULL;
+   }
+
+   address.sin_family = AF_INET;
+   address.sin_addr.s_addr = INADDR_ANY;
+   address.sin_port = htons(HELMET_PORT);
+
+   // Binding the socket to the network address and port
+   if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+      LOG_ERROR("Socket bind failed.");
+      close(server_fd);
+      return NULL;
+   }
+
+   // Start listening for incoming connections
+   if (listen(server_fd, 3) < 0) {
+      LOG_ERROR("Listen failed.");
+      close(server_fd);
+      return NULL;
+   }
+
+   LOG_INFO("Server is listening on port %d\n", HELMET_PORT);
+
+   while (!checkShutdown()) {
+      // Accept incoming connections
+      if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+          LOG_WARNING("Accept failed.");
+          continue;
+      }
+
+      // Set the receive timeout for the new socket
+      if (setsockopt(new_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout)) < 0) {
+         LOG_ERROR("Setting socket receive timeout failed.");
+         close(new_socket);
+         continue;
+      }
+
+      while (!checkShutdown()) {
+         // Read data from the socket
+         int bytes_read = read(new_socket, buffer, sizeof(buffer) - 1);
+         if (bytes_read > 0) {
+            buffer[bytes_read] = '\0'; // Null-terminate the received string
+            registerArmor("helmet");
+            parse_json_command(buffer, "helmet");
+         } else if (bytes_read == 0) {
+            LOG_INFO("Client disconnected.");
+            break;
+         } else if (bytes_read < 0 && errno == EWOULDBLOCK) {
+            LOG_WARNING("Socket receive timed out.");
+            break; // Timeout occurred, exit the loop
+         } else {
+            LOG_ERROR("Socket read failed.");
+            break;
+         }
+      }
+
+      close(new_socket); // Close the connection after processing
+   }
+
+   close(server_fd);
 
    return NULL;
 }

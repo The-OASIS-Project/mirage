@@ -165,6 +165,11 @@ static gps this_gps = {
    .satellites = 0
 };
 
+/* Audio */
+extern thread_info audio_threads[NUM_AUDIO_THREADS];
+mqd_t qd_server;
+extern mqd_t qd_clients[NUM_AUDIO_THREADS];
+
 /* ALERTS */
 typedef enum {
    ALERT_NONE        = 0,
@@ -1693,7 +1698,7 @@ int main(int argc, char **argv)
    mosquitto_message_callback_set(mosq, on_message);
 
    /* Connect to local MQTT server. */
-   rc = mosquitto_connect(mosq, "127.0.0.1", 1883, 60);
+   rc = mosquitto_connect(mosq, "192.168.10.1", 1883, 60);
    if(rc != MOSQ_ERR_SUCCESS){
       mosquitto_destroy(mosq);
       LOG_ERROR("Error: %s", mosquitto_strerror(rc));
@@ -1755,11 +1760,16 @@ int main(int argc, char **argv)
 
    if (!usb_enable) {
       strcpy(usb_port, "");
-   }
 
-   if (pthread_create(&command_proc_thread, NULL, command_processing_thread, (void *) usb_port) != 0) {
-      LOG_ERROR("Error creating command processing thread.");
-      return (2);
+      if (pthread_create(&command_proc_thread, NULL, socket_command_processing_thread, NULL) != 0) {
+         LOG_ERROR("Error creating command processing thread.");
+         return (2);
+      }
+   } else {
+      if (pthread_create(&command_proc_thread, NULL, serial_command_processing_thread, (void *) usb_port) != 0) {
+         LOG_ERROR("Error creating command processing thread.");
+         return (2);
+      }
    }
 
    mqttTextToSpeech("Your hud is now online boss.");
@@ -2462,7 +2472,7 @@ int main(int argc, char **argv)
                   dst_rect_l.w = dst_rect_r.w = curr_element->dst_rect.w;
                   dst_rect_l.h = dst_rect_r.h = curr_element->dst_rect.h;
 #else
-                  //printf("Displaying pitch: %d\n", (int) (-1 * this_motion.pitch));
+                  //printf("Displaying pitch: %d\n", (int) (this_motion.pitch));
                   curr_element->this_anim.current_frame =
                       curr_element->
                       this_anim.frame_lookup[(int)round((this_motion.pitch + 90.0 + this_hds->pitch_offset) * 2.0)];
@@ -2508,6 +2518,14 @@ int main(int argc, char **argv)
 
                } else if (strcmp("altitude", curr_element->special_name) == 0) {        /* ALTITUDE */
                   //printf("Displaying altitude: %d\n", (int) this_gps.altitude);
+		  // FIXME: The following two filters need to be rewritten or mutexed.
+		  if ((int)this_gps.altitude >= curr_element->this_anim.frame_count) {
+                     this_gps.altitude = curr_element->this_anim.frame_count - 1;
+		  }
+		  if ((int)this_gps.altitude < 0) {
+                     this_gps.altitude = 0;
+		  }
+		  // Altitude is currently rendered in multiples of 10.
                   curr_element->this_anim.current_frame =
                       curr_element->this_anim.frame_lookup[(int)this_gps.altitude / 10];
 

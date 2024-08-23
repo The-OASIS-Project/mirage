@@ -81,7 +81,7 @@ void on_subscribe(struct mosquitto *mosq, void *obj, int mid, int qos_count, con
 /* Callback called when the client receives a message. */
 void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *msg)
 {
-	LOG_INFO("%s %d %s", msg->topic, msg->qos, (char *)msg->payload);
+   LOG_INFO("%s %d %s", msg->topic, msg->qos, (char *)msg->payload);
 
    if (strcmp(msg->topic, "hud") != 0) {
       /* FIXME: Right now if it's not for "hud," I'm assuming it's from an armor component.
@@ -90,7 +90,7 @@ void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_messag
       registerArmor(msg->topic);
    }
 
-   parse_json_command((char *)msg->payload);
+   parse_json_command((char *)msg->payload, (char *)msg->topic);
 }
 /* End Mosquitto Stuff */
 
