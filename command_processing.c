@@ -41,6 +41,8 @@
 
 #include <arpa/inet.h>
 
+#define SERVER_TIMEOUT 10
+
 static char raw_log[LOG_ROWS][LOG_LINE_LENGTH];
 static int next_log_row = 0;
 
@@ -475,9 +477,6 @@ void *socket_command_processing_thread(void *arg)
    int opt = 1;
    int addrlen = sizeof(address);
    char buffer[MAX_FILENAME_LENGTH] = {0};
-   struct timeval timeout;
-   timeout.tv_sec = 5;  // Set timeout to 5 seconds
-   timeout.tv_usec = 0; // 0 microseconds
 
    // Creating socket file descriptor
    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -513,42 +512,71 @@ void *socket_command_processing_thread(void *arg)
    LOG_INFO("Server is listening on port %d\n", HELMET_PORT);
 
    while (!checkShutdown()) {
-      // Accept incoming connections
-      if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-          LOG_WARNING("Accept failed.");
-          continue;
-      }
+      fd_set readfds;
+      struct timeval reconnect_timeout;
+      int activity;
 
-      // Set the receive timeout for the new socket
-      if (setsockopt(new_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout)) < 0) {
-         LOG_ERROR("Setting socket receive timeout failed.");
-         close(new_socket);
+      FD_ZERO(&readfds);
+      FD_SET(server_fd, &readfds);
+
+      // Set timeout
+      reconnect_timeout.tv_sec = SERVER_TIMEOUT;
+      reconnect_timeout.tv_usec = 0;
+
+      activity = select(server_fd + 1, &readfds, NULL, NULL, &reconnect_timeout);
+
+      if (activity < 0 && errno != EINTR) {
+         LOG_ERROR("Select error.");
          continue;
       }
 
-      while (!checkShutdown()) {
-         // Read data from the socket
-         int bytes_read = read(new_socket, buffer, sizeof(buffer) - 1);
-         if (bytes_read > 0) {
-            buffer[bytes_read] = '\0'; // Null-terminate the received string
-            registerArmor("helmet");
-            parse_json_command(buffer, "helmet");
-         } else if (bytes_read == 0) {
-            LOG_INFO("Client disconnected.");
-            break;
-         } else if (bytes_read < 0 && errno == EWOULDBLOCK) {
-            LOG_WARNING("Socket receive timed out.");
-            break; // Timeout occurred, exit the loop
-         } else {
-            LOG_ERROR("Socket read failed.");
-            break;
-         }
-      }
+      if (activity > 0 && FD_ISSET(server_fd, &readfds)) {
+         struct timeval read_timeout;
 
-      close(new_socket); // Close the connection after processing
+         new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
+         if (new_socket < 0) {
+            LOG_ERROR("Accept failed.");
+            continue;
+         }
+
+         LOG_INFO("Accepted new connection.");
+
+         // Set timeout
+         read_timeout.tv_sec = SERVER_TIMEOUT;
+         read_timeout.tv_usec = 0;
+
+         // Set the receive timeout for the new socket
+         if (setsockopt(new_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&read_timeout, sizeof(read_timeout)) < 0) {
+            LOG_ERROR("Setting socket receive timeout failed.");
+            close(new_socket);
+            continue;
+         }
+
+         while (!checkShutdown()) {
+            int bytes_read = read(new_socket, buffer, sizeof(buffer) - 1);
+            if (bytes_read > 0) {
+               buffer[bytes_read] = '\0'; // Null-terminate the received string
+               registerArmor("helmet");
+               parse_json_command(buffer, "helmet");
+            } else if (bytes_read == 0) {
+               LOG_INFO("Client disconnected.");
+               break;
+            } else if (bytes_read < 0 && errno == EWOULDBLOCK) {
+               LOG_WARNING("Socket receive timed out.");
+               break; // Timeout occurred
+            } else if (bytes_read < 0) {
+               LOG_ERROR("Socket read failed with error: %s", strerror(errno));
+               break;
+            }
+         }
+
+         close(new_socket);
+         LOG_INFO("Closed connection socket, ready for new connections.");
+      }
    }
 
    close(server_fd);
+   LOG_INFO("Server socket closed.");
 
    return NULL;
 }
