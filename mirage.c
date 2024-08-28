@@ -164,6 +164,10 @@ static gps this_gps = {
    .altitude = 0.0,
    .satellites = 0
 };
+#define AI_NAME_MAX_LENGTH 32
+#define AI_STATE_MAX_LENGTH 18   /* This is actually defined by the states in DAWN. */
+static char aiName[AI_NAME_MAX_LENGTH] = "";
+static char aiState[AI_STATE_MAX_LENGTH] = "";
 
 /* Audio */
 extern thread_info audio_threads[NUM_AUDIO_THREADS];
@@ -230,6 +234,9 @@ element default_element =
    .texture_r = NULL,
    .texture_s = NULL,
    .texture_rs = NULL,
+   .texture_l = NULL,
+   .texture_w = NULL,
+   .texture_p = NULL,
 
    .texture_base = NULL,
    .texture_online = NULL,
@@ -374,6 +381,12 @@ void trigger_snapshot(const char *datetime)
             record_path, datetime);
 }
 
+void process_ai_state(const char *newAIName, const char *newAIState) {
+   LOG_INFO("New AI state recieved: %s, %s", newAIName, newAIState);
+   snprintf(aiName, AI_NAME_MAX_LENGTH, "%s", newAIName);
+   snprintf(aiState, AI_STATE_MAX_LENGTH, "%s", newAIState);
+}
+
 void set_recording_state(DestinationType state)
 {
    char announce[35] = "";
@@ -452,6 +465,27 @@ void free_elements(element *start_element)
          LOG_INFO("Freeing texture (rs).");
 #endif
          SDL_DestroyTexture(this_element->texture_rs);
+      }
+
+      if (this_element->texture_l != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (l).");
+#endif
+         SDL_DestroyTexture(this_element->texture_l);
+      }
+
+      if (this_element->texture_w != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (w).");
+#endif
+         SDL_DestroyTexture(this_element->texture_w);
+      }
+
+      if (this_element->texture_p != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (p).");
+#endif
+         SDL_DestroyTexture(this_element->texture_p);
       }
 
       if (this_element->texture_base != NULL) {
@@ -2125,6 +2159,18 @@ int main(int argc, char **argv)
                   ltime = localtime(&stime);
                   snprintf(render_text, MAX_TEXT_LENGTH, "%02d:%02d:%02d",
                            ltime->tm_hour, ltime->tm_min, ltime->tm_sec);
+
+               } else if (strcmp("*AINAME*", curr_element->text) == 0) {
+                  if (curr_element->texture != NULL) {
+                     SDL_DestroyTexture(curr_element->texture);
+                     curr_element->texture = NULL;
+                  }
+                  if (curr_element->surface != NULL) {
+                     SDL_FreeSurface(curr_element->surface);
+                     curr_element->surface = NULL;
+                  }
+
+                  snprintf(render_text, MAX_TEXT_LENGTH, "%s", aiName);
                } else if (strcmp("*CPU*", curr_element->text) == 0) {
                   if (cpu_thread_started == 0) {
                      if (pthread_create(&cpu_util_thread, NULL, cpu_utilization_thread, NULL) != 0) {
@@ -2755,12 +2801,25 @@ int main(int argc, char **argv)
                dst_rect_r.x += this_hds->stereo_offset;
             }
 
+            /* If this element has a texture_[rs(rs)]] element, change it based on the vod state. */
             if (this_vod.started && (this_vod.output == RECORD_STREAM) && curr_element->texture_rs) {
                this_texture = curr_element->texture_rs;
             } else if (this_vod.started && (this_vod.output == RECORD) && curr_element->texture_r) {
                this_texture = curr_element->texture_r;
             } else if (this_vod.started && (this_vod.output == STREAM) && curr_element->texture_s) {
                this_texture = curr_element->texture_s;
+            } else
+            /* If this element has a texture_[lwp] element, change it based on the ai state. */
+            if (curr_element->texture_l && strcmp("SILENCE", aiState) == 0) {
+               this_texture = curr_element->texture_l;
+            } else if (curr_element->texture_w && strcmp("WAKEWORD_LISTEN", aiState) == 0) {
+               this_texture = curr_element->texture_w;
+            } else if (curr_element->texture_l && strcmp("COMMAND_RECORDING", aiState) == 0) {
+               this_texture = curr_element->texture_l;
+            } else if (curr_element->texture_p && strcmp("PROCESS_COMMAND", aiState) == 0) {
+               this_texture = curr_element->texture_p;
+            } else if (curr_element->texture_p && strcmp("VISION_AI_READY", aiState) == 0) {
+               this_texture = curr_element->texture_p;
             } else {
                this_texture = curr_element->texture;
             }

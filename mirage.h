@@ -41,6 +41,9 @@ element *set_first_element(element *this_element);
 // Enable object detection overlay
 int set_detect_enabled(int enable);
 
+// Set the new AI info.
+void process_ai_state(const char *newAIName, const char *newAIState);
+
 // Supported recoding and streaming states
 typedef enum {
    DISABLED=0,

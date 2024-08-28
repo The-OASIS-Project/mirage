@@ -213,6 +213,17 @@ int parse_json_command(char *command_string, char *topic)
          json_object_object_get_ex(parsed_json, "datetime", &tmpobj);
          tmpstr = json_object_get_string(tmpobj);
          trigger_snapshot(tmpstr);
+      } else if (strcmp("ai", tmpstr) == 0) {
+         const char *aiName = NULL;
+         const char *aiState = NULL;
+
+         json_object_object_get_ex(parsed_json, "name", &tmpobj);
+         aiName = json_object_get_string(tmpobj);
+
+         json_object_object_get_ex(parsed_json, "state", &tmpobj);
+         aiState = json_object_get_string(tmpobj);
+
+         process_ai_state(aiName, aiState);
       }
 
       json_object_object_get_ex(parsed_json, "action", &tmpobj2);
@@ -293,15 +304,15 @@ int parse_json_command(char *command_string, char *topic)
          json_object_object_get_ex(parsed_json, "temp", &tmpobj);
          if (tmpobj != NULL) {
             armor_element->last_temp = json_object_get_double(tmpobj);
-            LOG_INFO("Setting last_temp = %0.2f on %s.", armor_element->last_temp,
-                   armor_element->mqtt_device);
+            //LOG_INFO("Setting last_temp = %0.2f on %s.", armor_element->last_temp,
+            //       armor_element->mqtt_device);
          }
 
          json_object_object_get_ex(parsed_json, "voltage", &tmpobj);
          if (tmpobj != NULL) {
             armor_element->last_voltage = json_object_get_double(tmpobj);
-            LOG_INFO("Setting last_voltage = %0.2f on %s.", armor_element->last_voltage,
-                   armor_element->mqtt_device);
+            //LOG_INFO("Setting last_voltage = %0.2f on %s.", armor_element->last_voltage,
+            //       armor_element->mqtt_device);
          }
       }
    }
@@ -396,14 +407,6 @@ void *serial_command_processing_thread(void *arg)
       int this_socket = -1;
       int bytes_available = 0;
 
-#if 0
-      if (strcmp(usb_port, "") == 0) {
-         /* This should usually be the helmet we're communicating with directly.
-          * At this point we should be connected to it. */
-         registerArmor("helmet");
-      }
-#endif
-
       timeout.tv_sec = 1;
       timeout.tv_usec = 0;
       FD_ZERO(&set);
@@ -430,8 +433,6 @@ void *serial_command_processing_thread(void *arg)
                continue;
             }
 
-            LOG_ERROR("Serial buffer size: %d", bytes_available);
-
             retval = read(sfd, sread_buf, MAX_FILENAME_LENGTH - 1);
             if (retval < 0) {
                LOG_ERROR("Read error.");
@@ -445,6 +446,7 @@ void *serial_command_processing_thread(void *arg)
             for (int j = 0; j < retval; j++) {
                if (sread_buf[j] == '\n') {
                   log_command(command_buffer);
+                  registerArmor("helmet");
                   parse_json_command(command_buffer, "helmet");
                   command_buffer[0] = '\0';
                   command_length = 0;
