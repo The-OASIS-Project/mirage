@@ -382,7 +382,6 @@ void trigger_snapshot(const char *datetime)
 }
 
 void process_ai_state(const char *newAIName, const char *newAIState) {
-   LOG_INFO("New AI state recieved: %s, %s", newAIName, newAIState);
    snprintf(aiName, AI_NAME_MAX_LENGTH, "%s", newAIName);
    snprintf(aiState, AI_STATE_MAX_LENGTH, "%s", newAIState);
 }
@@ -1343,7 +1342,7 @@ void display_help(int argc, char *argv[]) {
    printf("Options:\n");
    printf("  -f, --fullscreen       Run in fullscreen mode.\n");
    printf("  -h, --help             Display this help message and exit.\n");
-   printf("  -l, --logfile LOGFILE  Specify the log filename instead of stdout/stderr.");
+   printf("  -l, --logfile LOGFILE  Specify the log filename instead of stdout/stderr.\n");
    printf("  -p, --record_path PATH Specify the path for recordings.\n");
    printf("  -r, --record           Start recording on startup.\n");
    printf("  -s, --stream           Start streaming on startup.\n");
