@@ -666,6 +666,110 @@ int parse_json_config(char *filename)
                         curr_element->dst_rect.x = curr_element->dest_x;
                         curr_element->dst_rect.y = curr_element->dest_y;
                      } else
+                     /* AI Status Graphic */
+                     if (strcmp("ai-ui", json_object_get_string(tmpobj3)) == 0) {
+                        curr_element->type = STATIC;
+
+                        /* No AI detected. */
+                        json_object_object_get_ex(tmpobj2, "file", &tmpobj3);
+                        //printf("file: %s\n", json_object_get_string(tmpobj3));
+                        snprintf(curr_element->filename, MAX_FILENAME_LENGTH * 2,
+                                 "%s/%s", image_path, json_object_get_string(tmpobj3));
+
+                        /* AI Listening */
+                        json_object_object_get_ex(tmpobj2, "file_l", &tmpobj3);
+                        //printf("file_l: %s\n", json_object_get_string(tmpobj3));
+                        snprintf(curr_element->filename_l, MAX_FILENAME_LENGTH * 2,
+                                 "%s/%s", image_path, json_object_get_string(tmpobj3));
+
+                        /* AI Heard Wakeword */
+                        json_object_object_get_ex(tmpobj2, "file_w", &tmpobj3);
+                        //printf("file_w: %s\n", json_object_get_string(tmpobj3));
+                        snprintf(curr_element->filename_w, MAX_FILENAME_LENGTH * 2,
+                                 "%s/%s", image_path, json_object_get_string(tmpobj3));
+
+                        /* AI Processing */
+                        json_object_object_get_ex(tmpobj2, "file_p", &tmpobj3);
+                        //printf("file_p: %s\n", json_object_get_string(tmpobj3));
+                        snprintf(curr_element->filename_p, MAX_FILENAME_LENGTH * 2,
+                                 "%s/%s", image_path, json_object_get_string(tmpobj3));
+
+                        json_object_object_get_ex(tmpobj2, "dest_x", &tmpobj3);
+                        //printf("dest_x: %d\n", json_object_get_int(tmpobj3));
+                        curr_element->dest_x = json_object_get_int(tmpobj3);
+
+                        json_object_object_get_ex(tmpobj2, "dest_y", &tmpobj3);
+                        //printf("dest_y: %d\n", json_object_get_int(tmpobj3));
+                        curr_element->dest_y = json_object_get_int(tmpobj3);
+
+                        json_object_object_get_ex(tmpobj2, "angle", &tmpobj3);
+                        //printf("angle: %s\n", json_object_get_string(tmpobj3));
+                        if (strcmp(json_object_get_string(tmpobj3), "roll") == 0) {
+                           curr_element->angle = ANGLE_ROLL;
+                        } else if (strcmp(json_object_get_string(tmpobj3), "opposite roll") == 0) {
+                           curr_element->angle = ANGLE_OPPOSITE_ROLL;
+                        } else {
+                           curr_element->angle = json_object_get_double(tmpobj3);
+                        }
+
+                        if (json_object_object_get_ex(tmpobj2, "fixed", &tmpobj3)) {
+                           //printf("fixed: %d\n", json_object_get_int(tmpobj3));
+                           curr_element->fixed = json_object_get_int(tmpobj3);
+                        } else {
+                           curr_element->fixed = FIXED_DEFAULT;
+                        }
+
+                        json_object_object_get_ex(tmpobj2, "layer", &tmpobj3);
+                        //printf("layer: %d\n", json_object_get_int(tmpobj3));
+                        curr_element->layer = json_object_get_int(tmpobj3);
+
+                        if (json_object_object_get_ex(tmpobj2, "enabled", &tmpobj3)) {
+                           //printf("enabled: %d\n", json_object_get_int(tmpobj3));
+                           curr_element->enabled = json_object_get_int(tmpobj3);
+                        }
+
+                        if (json_object_object_get_ex(tmpobj2, "hotkey", &tmpobj3)) {
+                           tmpstr_ptr = json_object_get_string(tmpobj3);
+                           if (tmpstr_ptr != NULL) {
+                              //printf("hotkey: %s\n", tmpstr_ptr);
+                              strcpy(tmpstr, json_object_get_string(tmpobj3));
+                              strncpy(curr_element->hotkey, tmpstr_ptr, 2);
+                           }
+                        }
+                        //printf("Loading static element: %s\n", curr_element->filename);
+                        curr_element->texture = IMG_LoadTexture(renderer, curr_element->filename);
+                        if (!curr_element->texture) {
+                           SDL_Log("Couldn't load %s: %s\n", curr_element->filename,
+                                   SDL_GetError());
+                           return FAILURE;
+                        }
+                        //printf("Loading static element (r): %s\n", curr_element->filename_l);
+                        curr_element->texture_l = IMG_LoadTexture(renderer, curr_element->filename_l);
+                        if (!curr_element->texture_l) {
+                           SDL_Log("Couldn't load %s: %s\n", curr_element->filename_l,
+                                   SDL_GetError());
+                           return FAILURE;
+                        }
+                        //printf("Loading static element (s): %s\n", curr_element->filename_w);
+                        curr_element->texture_w = IMG_LoadTexture(renderer, curr_element->filename_w);
+                        if (!curr_element->texture_w) {
+                           SDL_Log("Couldn't load %s: %s\n", curr_element->filename_w,
+                                   SDL_GetError());
+                           return FAILURE;
+                        }
+                        //printf("Loading static element (rs): %s\n", curr_element->filename_p);
+                        curr_element->texture_p = IMG_LoadTexture(renderer, curr_element->filename_p);
+                        if (!curr_element->texture_p) {
+                           SDL_Log("Couldn't load %s: %s\n", curr_element->filename_p,
+                                   SDL_GetError());
+                           return FAILURE;
+                        }
+
+                        SDL_QueryTexture(curr_element->texture, NULL, NULL,
+                                         &curr_element->dst_rect.w, &curr_element->dst_rect.h);
+                        curr_element->dst_rect.x = curr_element->dest_x;
+                        curr_element->dst_rect.y = curr_element->dest_y;
+                     } else
                      /* ANIMATED */
                      if (strcmp("animated", json_object_get_string(tmpobj3)) == 0) {
                         curr_element->type = ANIMATED;

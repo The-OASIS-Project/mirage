@@ -92,6 +92,9 @@ typedef struct _element {
    char filename_r[MAX_FILENAME_LENGTH * 2];    /* Recording filename to graphic. */
    char filename_s[MAX_FILENAME_LENGTH * 2];    /* Streaming filename to graphic. */
    char filename_rs[MAX_FILENAME_LENGTH * 2];   /* Recording and streaming to graphic. */
+   char filename_l[MAX_FILENAME_LENGTH * 2];    /* AI listening filename graphic. */
+   char filename_w[MAX_FILENAME_LENGTH * 2];    /* AI wakework filename graphic. */
+   char filename_p[MAX_FILENAME_LENGTH * 2];    /* AI processing filename graphic. */
 
    char filename_online[MAX_FILENAME_LENGTH * 2];    /* Filename of online armor graphic. */
    char filename_warning[MAX_FILENAME_LENGTH * 2];   /* Filename of warning armor graphic. */
@@ -127,6 +130,9 @@ typedef struct _element {
    SDL_Texture *texture_r;
    SDL_Texture *texture_s;
    SDL_Texture *texture_rs;
+   SDL_Texture *texture_l;
+   SDL_Texture *texture_w;
+   SDL_Texture *texture_p;
 
    SDL_Texture *texture_base;
    SDL_Texture *texture_online;

@@ -164,6 +164,15 @@ static gps this_gps = {
    .altitude = 0.0,
    .satellites = 0
 };
+#define AI_NAME_MAX_LENGTH 32
+#define AI_STATE_MAX_LENGTH 18   /* This is actually defined by the states in DAWN. */
+static char aiName[AI_NAME_MAX_LENGTH] = "";
+static char aiState[AI_STATE_MAX_LENGTH] = "";
+
+/* Audio */
+extern thread_info audio_threads[NUM_AUDIO_THREADS];
+mqd_t qd_server;
+extern mqd_t qd_clients[NUM_AUDIO_THREADS];
 
 /* ALERTS */
 typedef enum {
@@ -225,6 +234,9 @@ element default_element =
    .texture_r = NULL,
    .texture_s = NULL,
    .texture_rs = NULL,
+   .texture_l = NULL,
+   .texture_w = NULL,
+   .texture_p = NULL,
 
    .texture_base = NULL,
    .texture_online = NULL,
@@ -369,6 +381,11 @@ void trigger_snapshot(const char *datetime)
             record_path, datetime);
 }
 
+void process_ai_state(const char *newAIName, const char *newAIState) {
+   snprintf(aiName, AI_NAME_MAX_LENGTH, "%s", newAIName);
+   snprintf(aiState, AI_STATE_MAX_LENGTH, "%s", newAIState);
+}
+
 void set_recording_state(DestinationType state)
 {
    char announce[35] = "";
@@ -447,6 +464,27 @@ void free_elements(element *start_element)
          LOG_INFO("Freeing texture (rs).");
 #endif
          SDL_DestroyTexture(this_element->texture_rs);
+      }
+
+      if (this_element->texture_l != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (l).");
+#endif
+         SDL_DestroyTexture(this_element->texture_l);
+      }
+
+      if (this_element->texture_w != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (w).");
+#endif
+         SDL_DestroyTexture(this_element->texture_w);
+      }
+
+      if (this_element->texture_p != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing texture (p).");
+#endif
+         SDL_DestroyTexture(this_element->texture_p);
       }
 
       if (this_element->texture_base != NULL) {
@@ -1304,7 +1342,7 @@ void display_help(int argc, char *argv[]) {
    printf("Options:\n");
    printf("  -f, --fullscreen       Run in fullscreen mode.\n");
    printf("  -h, --help             Display this help message and exit.\n");
-   printf("  -l, --logfile LOGFILE  Specify the log filename instead of stdout/stderr.");
+   printf("  -l, --logfile LOGFILE  Specify the log filename instead of stdout/stderr.\n");
    printf("  -p, --record_path PATH Specify the path for recordings.\n");
    printf("  -r, --record           Start recording on startup.\n");
    printf("  -s, --stream           Start streaming on startup.\n");
@@ -1693,7 +1731,7 @@ int main(int argc, char **argv)
    mosquitto_message_callback_set(mosq, on_message);
 
    /* Connect to local MQTT server. */
-   rc = mosquitto_connect(mosq, "127.0.0.1", 1883, 60);
+   rc = mosquitto_connect(mosq, "192.168.10.1", 1883, 60);
    if(rc != MOSQ_ERR_SUCCESS){
       mosquitto_destroy(mosq);
       LOG_ERROR("Error: %s", mosquitto_strerror(rc));
@@ -1755,11 +1793,16 @@ int main(int argc, char **argv)
 
    if (!usb_enable) {
       strcpy(usb_port, "");
-   }
 
-   if (pthread_create(&command_proc_thread, NULL, command_processing_thread, (void *) usb_port) != 0) {
-      LOG_ERROR("Error creating command processing thread.");
-      return (2);
+      if (pthread_create(&command_proc_thread, NULL, socket_command_processing_thread, NULL) != 0) {
+         LOG_ERROR("Error creating command processing thread.");
+         return (2);
+      }
+   } else {
+      if (pthread_create(&command_proc_thread, NULL, serial_command_processing_thread, (void *) usb_port) != 0) {
+         LOG_ERROR("Error creating command processing thread.");
+         return (2);
+      }
    }
 
    mqttTextToSpeech("Your hud is now online boss.");
@@ -2115,6 +2158,18 @@ int main(int argc, char **argv)
                   ltime = localtime(&stime);
                   snprintf(render_text, MAX_TEXT_LENGTH, "%02d:%02d:%02d",
                            ltime->tm_hour, ltime->tm_min, ltime->tm_sec);
+
+               } else if (strcmp("*AINAME*", curr_element->text) == 0) {
+                  if (curr_element->texture != NULL) {
+                     SDL_DestroyTexture(curr_element->texture);
+                     curr_element->texture = NULL;
+                  }
+                  if (curr_element->surface != NULL) {
+                     SDL_FreeSurface(curr_element->surface);
+                     curr_element->surface = NULL;
+                  }
+
+                  snprintf(render_text, MAX_TEXT_LENGTH, "%s", aiName);
                } else if (strcmp("*CPU*", curr_element->text) == 0) {
                   if (cpu_thread_started == 0) {
                      if (pthread_create(&cpu_util_thread, NULL, cpu_utilization_thread, NULL) != 0) {
@@ -2462,7 +2517,7 @@ int main(int argc, char **argv)
                   dst_rect_l.w = dst_rect_r.w = curr_element->dst_rect.w;
                   dst_rect_l.h = dst_rect_r.h = curr_element->dst_rect.h;
 #else
-                  //printf("Displaying pitch: %d\n", (int) (-1 * this_motion.pitch));
+                  //printf("Displaying pitch: %d\n", (int) (this_motion.pitch));
                   curr_element->this_anim.current_frame =
                       curr_element->
                       this_anim.frame_lookup[(int)round((this_motion.pitch + 90.0 + this_hds->pitch_offset) * 2.0)];
@@ -2508,6 +2563,14 @@ int main(int argc, char **argv)
 
                } else if (strcmp("altitude", curr_element->special_name) == 0) {        /* ALTITUDE */
                   //printf("Displaying altitude: %d\n", (int) this_gps.altitude);
+		  // FIXME: The following two filters need to be rewritten or mutexed.
+		  if ((int)this_gps.altitude >= curr_element->this_anim.frame_count) {
+                     this_gps.altitude = curr_element->this_anim.frame_count - 1;
+		  }
+		  if ((int)this_gps.altitude < 0) {
+                     this_gps.altitude = 0;
+		  }
+		  // Altitude is currently rendered in multiples of 10.
                   curr_element->this_anim.current_frame =
                       curr_element->this_anim.frame_lookup[(int)this_gps.altitude / 10];
 
@@ -2737,12 +2800,25 @@ int main(int argc, char **argv)
                dst_rect_r.x += this_hds->stereo_offset;
             }
 
+            /* If this element has a texture_[rs(rs)]] element, change it based on the vod state. */
             if (this_vod.started && (this_vod.output == RECORD_STREAM) && curr_element->texture_rs) {
                this_texture = curr_element->texture_rs;
             } else if (this_vod.started && (this_vod.output == RECORD) && curr_element->texture_r) {
                this_texture = curr_element->texture_r;
             } else if (this_vod.started && (this_vod.output == STREAM) && curr_element->texture_s) {
                this_texture = curr_element->texture_s;
+            } else
+            /* If this element has a texture_[lwp] element, change it based on the ai state. */
+            if (curr_element->texture_l && strcmp("SILENCE", aiState) == 0) {
+               this_texture = curr_element->texture_l;
+            } else if (curr_element->texture_w && strcmp("WAKEWORD_LISTEN", aiState) == 0) {
+               this_texture = curr_element->texture_w;
+            } else if (curr_element->texture_l && strcmp("COMMAND_RECORDING", aiState) == 0) {
+               this_texture = curr_element->texture_l;
+            } else if (curr_element->texture_p && strcmp("PROCESS_COMMAND", aiState) == 0) {
+               this_texture = curr_element->texture_p;
+            } else if (curr_element->texture_p && strcmp("VISION_AI_READY", aiState) == 0) {
+               this_texture = curr_element->texture_p;
             } else {
                this_texture = curr_element->texture;
             }

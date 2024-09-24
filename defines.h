@@ -82,12 +82,15 @@
 //#define DEFAULT_LONGITUDE  -73.9712
 
 // Atlanta, GA
-#define DEFAULT_LATITUDE    33.7488
-#define DEFAULT_LONGITUDE  -84.3877
+#define DEFAULT_LATITUDE    33.7615
+#define DEFAULT_LONGITUDE  -84.3836
 
 // San Jose, CA
 //#define DEFAULT_LATITUDE    37.3292
 //#define DEFAULT_LONGITUDE  -121.8890
+
+// Default port for TCP socket helmet communications
+#define HELMET_PORT  3000
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -133,12 +136,9 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 
 #define USB_PORT              "/dev/ttyACM0"       /* Default USB port. */
 
-//#define FAN_RPM_FILE          "/sys/devices/generic_pwm_tachometer/hwmon/hwmon1/rpm"       /* Old? */
-//#define FAN_RPM_FILE          "/sys/devices/platform/39c0000.tachometer/hwmon/hwmon2/rpm"  /* Xavier NX */
-#define FAN_RPM_FILE          "/sys/class/hwmon/hwmon0/rpm"
+//#define FAN_RPM_FILE          "/sys/class/hwmon/hwmon0/rpm"
+#define FAN_RPM_FILE          "/sys/class/hwmon/hwmon2/rpm"
 #define FAN_MAX_RPM           6000
-
-#define FAN_PWM_FILE          "/sys/devices/platform/pwm-fan/hwmon/hwmon3/pwm1"
 
 /* Defines for sound server. */
 #define SERVER_QUEUE_NAME   "/stark-sound-server"

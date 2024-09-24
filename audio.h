@@ -55,8 +55,6 @@ typedef struct _thread_info {
    char client_queue_name[MAX_FILENAME_LENGTH];
    mqd_t qd_server, qd_client;
 } thread_info;
-thread_info audio_threads[NUM_AUDIO_THREADS];
-mqd_t qd_server, qd_clients[NUM_AUDIO_THREADS];
 
 /* MQUEUE messages for audio commands handed to threads. */
 typedef struct _audio_msg {

@@ -6,7 +6,7 @@
       "Font Path": "ui_assets/fonts/",
       "Sound Path": "sound_assets/",
       "Stereo Offset": -90,
-      "Pitch Offset": 10.0,
+      "Pitch Offset": 0.0,
       "Wifi": "wlan0",
       "Invert Compass": true,
       "Stream Width": 800,
@@ -227,6 +227,30 @@
       },
       {
          "type": "text",
+         "string": "*AINAME*",
+         "font": "devgothic.ttf",
+         "color": "0x75, 0xCE, 0xFA, 0xFF",
+         "size": 34,
+         "dest_x": 1415,
+         "dest_y": 200,
+         "halign": "right",
+         "angle": 0,
+         "layer": 2
+      },
+      {
+         "type": "ai-ui",
+         "file": "AI-grey.png",
+         "file_l": "AI-green.png",
+         "file_w": "AI-purple.png",
+         "file_p": "AI-red.png",
+         "dest_x": 1352,
+         "dest_y": 160,
+         "angle": 0,
+         "fixed": 0,
+         "layer": 0
+      },
+      {
+         "type": "text",
          "string": "*SYSTIME*",
          "font": "devgothic.ttf",
          "color": "0x00, 0xF5, 0xFC, 0xFF",
@@ -321,7 +345,7 @@
          "offline file": "FullBodyRed/FullBody1Red.png"
       },
       {
-         "name": "Theigh (Left)",
+         "name": "Thigh (Left)",
          "device": "thigh/left",
          "base file": "FullBodyBlue/FullBody2.png",
          "online file": "FullBodyGreen/FullBody2Green.png",
@@ -379,7 +403,7 @@
          "offline file": "FullBodyRed/FullBody8Red.png"
       },
       {
-         "name": "Theigh (Right)",
+         "name": "Thigh (Right)",
          "device": "thigh/right",
          "base file": "FullBodyBlue/FullBody9.png",
          "online file": "FullBodyGreen/FullBody9Green.png",
