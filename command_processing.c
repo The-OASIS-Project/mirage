@@ -428,6 +428,7 @@ void *serial_command_processing_thread(void *arg)
          }
          if (this_socket != -1) {
             // Check how many bytes are available to read
+            // TODO: Reset this on error to recover.
             if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
                LOG_ERROR("ioctl error.");
                continue;

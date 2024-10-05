@@ -724,7 +724,7 @@ int play_intro(int frames, int clear, int *finished)
              malloc(this_hds->eye_output_width * 2 * RGB_OUT_SIZE * this_hds->eye_output_height);
          if (this_vod.rgb_out_pixels[!this_vod.buffer_num] == NULL) {
             LOG_ERROR("Unable to malloc rgb frame 0.");
-            return (2);
+            return 2;
          }
 #ifdef ENCODE_TIMING
          start = SDL_GetTicks();
@@ -1332,6 +1332,82 @@ void mqttViewingSnapshot(const char *filename) {
    }
 }
 
+/**
+ * @brief Computes the scaled window size while maintaining the original aspect ratio.
+ *
+ * This function calculates the appropriate window width and height based on the current desktop
+ * resolution and the native resolution of the application. It ensures that the window size fits
+ * within the desktop dimensions without distorting the original aspect ratio.
+ *
+ * This function was created to make sure full screen is actually full screen.
+ *
+ * @param desktop_width  The width of the desktop display in pixels.
+ * @param desktop_height The height of the desktop display in pixels.
+ * @param native_width   The native width of the application window in pixels.
+ * @param native_height  The native height of the application window in pixels.
+ * @param window_width   Pointer to an integer where the computed window width will be stored.
+ * @param window_height  Pointer to an integer where the computed window height will be stored.
+ *
+ * @return
+ * - `0` on successful computation.
+ * - `1` if an error occurs (e.g., invalid parameters).
+ *
+ * @note
+ * - The function compares the aspect ratios of the desktop and native resolutions to determine
+ *   whether to scale based on width or height.
+ * - It ensures that the resulting window size does not exceed the desktop resolution.
+ *
+ * @warning
+ * - Both `window_width` and `window_height` must be valid, non-null pointers.
+ * - Ensure that `native_width` and `native_height` are greater than zero to avoid division by zero.
+ *
+ * @example
+ * @code
+ * int desktopW = 1920;
+ * int desktopH = 1080;
+ * int nativeW = 2880;
+ * int nativeH = 1440;
+ * int scaledW, scaledH;
+ *
+ * if (computeScaledWindowSize(desktopW, desktopH, nativeW, nativeH, &scaledW, &scaledH) == 0) {
+ *     // Proceed with using scaledW and scaledH
+ * } else {
+ *     // Handle the error
+ * }
+ * @endcode
+ */
+int computeScaledWindowSize(int desktop_width, int desktop_height,
+                            int native_width, int native_height,
+                            int* window_width, int* window_height) {
+   // Validate pointer parameters
+   if (window_width == NULL || window_height == NULL) {
+      fprintf(stderr, "Error: window_width and window_height pointers must not be NULL.\n");
+      return 1;
+   }
+
+   // Validate native dimensions
+   if (desktop_width <= 0 || desktop_height <= 0 || native_width <= 0 || native_height <= 0) {
+      fprintf(stderr, "Error: All passed widths and heights must be greater than zero.\n");
+      return 1;
+   }
+
+   // Calculate aspect ratios
+   float native_aspect = (float)native_width / (float)native_height;
+   float desktop_aspect = (float)desktop_width / (float)desktop_height;
+
+   if (desktop_aspect > native_aspect) {
+      // Desktop is wider than native aspect ratio
+      *window_height = desktop_height;
+      *window_width = (int)(desktop_height * native_aspect);
+   } else {
+      // Desktop is taller or equal to native aspect ratio
+      *window_width = desktop_width;
+      *window_height = (int)(desktop_width / native_aspect);
+   }
+
+   return 0; // Success
+}
+
 void display_help(int argc, char *argv[]) {
    if (argc > 0) {
       printf("Usage: %s [options]\n", argv[0]);
@@ -1360,6 +1436,12 @@ int main(int argc, char **argv)
 
    /* Graphics */
    SDL_Window *window = NULL;
+   SDL_DisplayMode desktop_mode;
+   int desktop_width = 0, desktop_height = 0;
+   int window_width = this_hds->eye_output_width * 2;
+   int window_height = this_hds->eye_output_height;
+   int native_width = this_hds->eye_output_width * 2;
+   int native_height = this_hds->eye_output_height;
    Uint32 sdl_flags = 0;
    int curr_fps = 0;
    SDL_Event event;
@@ -1479,7 +1561,7 @@ int main(int argc, char **argv)
    char (*raw_log)[LOG_LINE_LENGTH] = get_raw_log();
    /* End Variable Inits */
 
-   sdl_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
+   sdl_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALLOW_HIGHDPI;
 
    /*
     * Process Command Line
@@ -1510,6 +1592,11 @@ int main(int argc, char **argv)
 
    printf("%s Version %s: %s\n", APP_NAME, VERSION_NUMBER, GIT_SHA);
 
+   if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+      SDL_Log("SDL_Init(SDL_INIT_VIDEO) failed: %s\n", SDL_GetError());
+      return (2);
+   }
+
    if (getcwd(record_path, sizeof(record_path)) == NULL) {
       LOG_ERROR("getcwd() error!");
 
@@ -1527,6 +1614,22 @@ int main(int argc, char **argv)
       case 'f':
          fullscreen = 1;
          sdl_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+
+         if (SDL_GetDesktopDisplayMode(0, &desktop_mode) != 0) {
+            fprintf(stderr, "SDL_GetDesktopDisplayMode failed: %s\n", SDL_GetError());
+            SDL_Quit();
+            exit(EXIT_FAILURE);
+         }
+
+         desktop_width = desktop_mode.w;
+         desktop_height = desktop_mode.h;
+
+         if (computeScaledWindowSize(desktop_width, desktop_height, native_width, native_height,
+                                     &window_width, &window_height) == 1) {
+            fprintf(stderr, "computeScaledWindowSize() failed!\n");
+            exit(EXIT_FAILURE);
+         }
+
          break;
       case 'h':
          display_help(argc, argv);
@@ -1643,11 +1746,6 @@ int main(int argc, char **argv)
    process_audio_command(SOUND_PLAY, STARTUP_SOUND, 0.0);
 #endif
 
-   if (SDL_Init(SDL_INIT_VIDEO) == -1) {
-      SDL_Log("SDL_Init(SDL_INIT_VIDEO) failed: %s\n", SDL_GetError());
-      return (2);
-   }
-
    if (IMG_Init(IMG_INIT_PNG) < 0) {
       SDL_Log("Error initializing SDL_image: %s\n", IMG_GetError());
       return (2);
@@ -1659,7 +1757,8 @@ int main(int argc, char **argv)
    }
 
    if ((window =
-        SDL_CreateWindow(argv[0], 0, 0, this_hds->eye_output_width * 2, this_hds->eye_output_height, sdl_flags)) == NULL) {
+        SDL_CreateWindow(argv[0], SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                         window_width, window_height, sdl_flags)) == NULL) {
       SDL_Log("SDL_CreateWindow() failed: %s\n", SDL_GetError());
       return (2);
    }
@@ -1672,6 +1771,11 @@ int main(int argc, char **argv)
 #endif
       SDL_Log("SDL_CreateRenderer() failed: %s\n", SDL_GetError());
       return (2);
+   }
+
+   // Set the logical size to your native resolution
+   if (SDL_RenderSetLogicalSize(renderer, this_hds->eye_output_width * 2, this_hds->eye_output_height) != 0) {
+      SDL_Log("Could not set logical size: %s", SDL_GetError());
    }
 
    /* Video Setup */
@@ -1731,7 +1835,8 @@ int main(int argc, char **argv)
    mosquitto_message_callback_set(mosq, on_message);
 
    /* Connect to local MQTT server. */
-   rc = mosquitto_connect(mosq, "192.168.10.1", 1883, 60);
+   //rc = mosquitto_connect(mosq, "192.168.10.1", 1883, 60);
+   rc = mosquitto_connect(mosq, "127.0.0.1", 1883, 60);
    if(rc != MOSQ_ERR_SUCCESS){
       mosquitto_destroy(mosq);
       LOG_ERROR("Error: %s", mosquitto_strerror(rc));

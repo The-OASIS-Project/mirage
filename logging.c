@@ -43,7 +43,7 @@ static const char *get_filename(const char *path) {
 }
 
 // Fixed width for the preamble
-#define PREAMBLE_WIDTH 30
+#define PREAMBLE_WIDTH 35
 
 // Utility function to remove newlines from a string
 static void remove_newlines(char *str) {

@@ -108,7 +108,7 @@
 #define FONT_PATH_DEFAULT     "ui_assets/fonts/"
 #define SOUND_PATH_DEFAULT    "sound_assets/"
 
-#define DEFAULT_WIFI_DEV_NAME "wlan0"
+#define DEFAULT_WIFI_DEV_NAME "wlP1p1s0"
 
 #define FIXED_DEFAULT         0     /* Are elements fixed in place or do they move
                                      * when adjusted by default?
@@ -161,12 +161,12 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
  * FIXME: These are getting a bit out of hand, so I think I need to break these up into their components.
  *        After my latest work getting YouTube streaming working... it's worse. Sorry.
  */
-#define GST_CAM_PIPELINE   "nvarguscamerasrc exposurecompensation=-1 tnr-mode=2 sensor_id=0 ! " \
+#define GST_CAM_PIPELINE   "nvarguscamerasrc exposurecompensation=-2 tnr-mode=0 sensor_id=0 ! " \
                            "video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! " \
                            "nvvidconv flip-method=0 ! " \
                            "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink processing-deadline=0 name=sinkL " \
                               "caps=\"video/x-raw,format=RGBA,pixel-aspect-ratio=1/1\" " \
-                           "nvarguscamerasrc exposurecompensation=-1 tnr-mode=2 sensor_id=1 ! " \
+                           "nvarguscamerasrc exposurecompensation=-2 tnr-mode=0 sensor_id=1 ! " \
                            "video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! " \
                            "nvvidconv flip-method=0 ! " \
                            "video/x-raw, format=(string)RGBA ! queue max-size-time=%lu leaky=2 ! appsink processing-deadline=0 name=sinkR " \
