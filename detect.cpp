@@ -4,12 +4,15 @@
 #include <unistd.h>
 #include <semaphore.h>
 
+#ifdef USE_JETSON_INFERENCE
 #include <detectNet.h>
+#endif
 #include "detect.h"
 
 /* Initialize detection struct. */
 int init_detect(detect_net * new_detect, int argc, char **argv, int width, int height)
 {
+#ifdef USE_JETSON_INFERENCE
    detectNet *net = NULL;
 
    /* Create detectNet Instance */
@@ -36,6 +39,9 @@ int init_detect(detect_net * new_detect, int argc, char **argv, int width, int h
    new_detect->l_height = height;
 
    return 0;
+#else
+   return 1;
+#endif
 }
 
 /* Detect objects in the given image. */
@@ -45,6 +51,7 @@ int init_detect(detect_net * new_detect, int argc, char **argv, int width, int h
  */
 int detect_image(detect_net * new_detect, void *image, detect * my_detects, int max_detections)
 {
+#ifdef USE_JETSON_INFERENCE
    int n = 0;
    int a = 0;
    detectNet *net = (detectNet *) new_detect->detectNet_net;
@@ -91,11 +98,15 @@ int detect_image(detect_net * new_detect, void *image, detect * my_detects, int 
    //cudaMemcpy(image, new_detect->d_image, new_detect->l_width * new_detect->l_height * sizeof(uchar4), cudaMemcpyDeviceToHost);
 
    return numDetections;
+#else
+   return 0;
+#endif
 }
 
 /* Clean up detection struct. */
 void free_detect(detect_net * new_detect)
 {
+#ifdef USE_JETSON_INFERENCE
    detectNet *net = (detectNet *) new_detect->detectNet_net;
 
    cudaFree(new_detect->d_image);
@@ -105,4 +116,5 @@ void free_detect(detect_net * new_detect)
    new_detect->l_height = 0;
 
    SAFE_DELETE(net);
+#endif
 }

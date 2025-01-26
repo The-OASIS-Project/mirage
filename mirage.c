@@ -91,8 +91,10 @@
 #include <mosquitto.h>
 
 /* NVIDIA/CUDA */
+#ifdef USE_CUDA
 #include <cuda_runtime.h>
 //#include <nvbuf_utils.h>
+#endif
 
 #include <GL/glew.h>
 #include <stdbool.h>
@@ -2293,7 +2295,7 @@ int main(int argc, char **argv)
       pthread_mutex_lock(&v_mutex);
       if (video_posted) {
          if (detect_enabled) {
-#ifdef OD_PROPER_WAIT
+#if defined(OD_PROPER_WAIT) && defined(USE_CUDA)
             oddataL.pix_data = mapL[buffer_num].data;
             oddataL.eye = 0;
             cudaMemcpy(oddataL.detect_obj.d_image, oddataL.pix_data,
