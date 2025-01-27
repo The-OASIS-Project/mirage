@@ -146,12 +146,13 @@ typedef struct _video_out_data {
 } video_out_data;
 video_out_data this_vod;
 
-pthread_t vid_out_thread;                    /* Video output thread ID. */
+pthread_t vid_out_thread;                    /* Video output thread ID */
 static int single_cam = 0;                   /* Single Camera Mode Enable */
+static int cam1_id = -1, cam2_id = -1;       /* Camera IDs for CSI or USB */
 
 static struct mosquitto *mosq = NULL;        /* MQTT pointer */
 
-static int quit = 0;                         /* Global to sync exiting of threads. */
+static int quit = 0;                         /* Global to sync exiting of threads */
 static int detect_enabled = 0;               /* Is object detection enabled? */
 
 static int snapshot = 0;                     /* Take snapshot flag */
@@ -810,40 +811,48 @@ void *object_detection_thread(void *arg)
  * For USB cameras, /dev/video0 is used for left and /dev/video2 for right.
  */
 static void build_pipeline_string(char* descr, size_t descr_size, const char* cam_type,
-                         const hud_display_settings* this_hds) {
-    char left_pipeline[GSTREAMER_PIPELINE_LENGTH/2];
-    char right_pipeline[GSTREAMER_PIPELINE_LENGTH/2];
-    bool is_csi = (cam_type == NULL) || (strncmp(cam_type, "csi", 3) == 0);
+                                  const hud_display_settings* this_hds) {
+   char left_pipeline[GSTREAMER_PIPELINE_LENGTH/2];
+   char right_pipeline[GSTREAMER_PIPELINE_LENGTH/2];
+   bool is_csi = (cam_type == NULL) || (strncmp(cam_type, "csi", 3) == 0);
 
-    if (is_csi) {
-        g_snprintf(left_pipeline, sizeof(left_pipeline), GST_CAM_PIPELINE_CSI_INPUT GST_CAM_PIPELINE_OUTPUT,
-                   0, this_hds->cam_input_width, this_hds->cam_input_height,
-                   this_hds->cam_input_fps, this_hds->cam_frame_duration,
-                   single_cam ? "" : "L");
+   if (is_csi) {
+      if (cam1_id == -1) {
+         cam1_id = DEFAULT_CSI_CAM1;
+         cam2_id = DEFAULT_CSI_CAM2;
+      }
+      g_snprintf(left_pipeline, sizeof(left_pipeline), GST_CAM_PIPELINE_CSI_INPUT GST_CAM_PIPELINE_OUTPUT,
+                 cam1_id, this_hds->cam_input_width, this_hds->cam_input_height,
+                 this_hds->cam_input_fps, this_hds->cam_frame_duration,
+                 single_cam ? "" : "L");
 
-        if (!single_cam) {
-            g_snprintf(right_pipeline, sizeof(right_pipeline), GST_CAM_PIPELINE_CSI_INPUT GST_CAM_PIPELINE_OUTPUT,
-                       1, this_hds->cam_input_width, this_hds->cam_input_height,
-                       this_hds->cam_input_fps, this_hds->cam_frame_duration, "R");
-        }
-    } else {
-        g_snprintf(left_pipeline, sizeof(left_pipeline), GST_CAM_PIPELINE_USB_INPUT GST_CAM_PIPELINE_OUTPUT,
-                   0, this_hds->cam_input_width, this_hds->cam_input_height,
-                   this_hds->cam_input_fps, this_hds->cam_frame_duration,
-                   single_cam ? "" : "L");
+      if (!single_cam) {
+         g_snprintf(right_pipeline, sizeof(right_pipeline), GST_CAM_PIPELINE_CSI_INPUT GST_CAM_PIPELINE_OUTPUT,
+                    cam2_id, this_hds->cam_input_width, this_hds->cam_input_height,
+                    this_hds->cam_input_fps, this_hds->cam_frame_duration, "R");
+      }
+   } else {
+      if (cam1_id == -1) {
+         cam1_id = DEFAULT_USB_CAM1;
+         cam2_id = DEFAULT_USB_CAM2;
+      }
+      g_snprintf(left_pipeline, sizeof(left_pipeline), GST_CAM_PIPELINE_USB_INPUT GST_CAM_PIPELINE_OUTPUT,
+                 cam1_id, this_hds->cam_input_width, this_hds->cam_input_height,
+                 this_hds->cam_input_fps, this_hds->cam_frame_duration,
+                 single_cam ? "" : "L");
 
-        if (!single_cam) {
-            g_snprintf(right_pipeline, sizeof(right_pipeline), GST_CAM_PIPELINE_USB_INPUT GST_CAM_PIPELINE_OUTPUT,
-                       2, this_hds->cam_input_width, this_hds->cam_input_height,
-                       this_hds->cam_input_fps, this_hds->cam_frame_duration, "R");
-        }
-    }
+      if (!single_cam) {
+         g_snprintf(right_pipeline, sizeof(right_pipeline), GST_CAM_PIPELINE_USB_INPUT GST_CAM_PIPELINE_OUTPUT,
+                    cam2_id, this_hds->cam_input_width, this_hds->cam_input_height,
+                    this_hds->cam_input_fps, this_hds->cam_frame_duration, "R");
+      }
+   }
 
-    if (single_cam) {
-        g_snprintf(descr, descr_size, "%s", left_pipeline);
-    } else {
-        g_snprintf(descr, descr_size, "%s %s", left_pipeline, right_pipeline);
-    }
+   if (single_cam) {
+      g_snprintf(descr, descr_size, "%s", left_pipeline);
+   } else {
+      g_snprintf(descr, descr_size, "%s %s", left_pipeline, right_pipeline);
+   }
 }
 
 /* Video input handling thread.
@@ -1840,17 +1849,47 @@ int main(int argc, char **argv)
          log_filename = optarg;
          break;
       case 'n':
-         switch (atoi(optarg)) {
-            case 1:
-               single_cam = 1;
-               break;
-            case 2:
-               single_cam = 0;
-               break;
-            default:
-               fprintf(stderr, "camcount (number of cameras) must be 1 or 2!\n");
-               return EXIT_FAILURE;
+         char *token = NULL;
+         int values[3] = {-1, -1, -1}; // Store camcount and optional camera IDs
+         int index = 0;
+
+         // Create a copy of optarg since strtok modifies the string
+         char *optarg_copy = strdup(optarg);
+         if (!optarg_copy) {
+            fprintf(stderr, "Memory allocation failed!\n");
+            return EXIT_FAILURE;
          }
+
+         // Parse comma-separated values
+         token = strtok(optarg_copy, ",");
+         while (token && index < 3) {
+            values[index] = atoi(token);
+            token = strtok(NULL, ",");
+            index++;
+         }
+
+         // Validate camera count
+         if (values[0] != 1 && values[0] != 2) {
+            fprintf(stderr, "camcount (number of cameras) must be 1 or 2!\n");
+            free(optarg_copy);
+            return EXIT_FAILURE;
+         }
+
+         single_cam = (values[0] == 1);
+
+         // Handle camera IDs if provided
+         if (values[0] == 2) {
+            if (index > 1) {
+               cam1_id = values[1]; // First camera ID
+            }
+            if (index > 2) {
+               cam2_id = values[2]; // Second camera ID
+            }
+         } else if (values[0] == 1 && index > 1) {
+            cam1_id = values[1]; // Single camera ID
+         }
+
+         free(optarg_copy);
          break;
       case 'p':
          snprintf(record_path, 256, "%s", optarg);

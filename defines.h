@@ -162,6 +162,10 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
  *        After my latest work getting YouTube streaming working... it's worse. Sorry.
  */
 #define GSTREAMER_PIPELINE_LENGTH   1024
+#define DEFAULT_CSI_CAM1            0
+#define DEFAULT_CSI_CAM2            1
+#define DEFAULT_USB_CAM1            0
+#define DEFAULT_USB_CAM2            2
 
 // Common output pipeline portion
 #define GST_CAM_PIPELINE_OUTPUT \
@@ -185,7 +189,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #else
 // Input pipeline for Raspberry Pi Camera Module (CSI)
 #define GST_CAM_PIPELINE_CSI_INPUT \
-    "libcamerasrc camera-number=%d ! " \
+    "libcamerasrc name=cam%d ! " \
     "video/x-raw, width=%d, height=%d, framerate=(fraction)%d/1 ! " \
     "videoconvert ! "
 
