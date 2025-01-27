@@ -170,6 +170,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
     "appsink processing-deadline=0 name=sink%s " \
     "caps=\"video/x-raw,format=RGBA,pixel-aspect-ratio=1/1\""
 
+#ifdef PLATFORM_JETSON
 // Input pipeline portions for CSI cameras
 #define GST_CAM_PIPELINE_CSI_INPUT \
     "nvarguscamerasrc exposurecompensation=-2 tnr-mode=0 sensor_id=%d ! " \
@@ -181,6 +182,19 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
     "v4l2src device=/dev/video%d ! " \
     "image/jpeg, width=%d, height=%d, framerate=%d/1, format=MJPG ! " \
     "jpegdec ! nvvidconv ! "
+#else
+// Input pipeline for Raspberry Pi Camera Module (CSI)
+#define GST_CAM_PIPELINE_CSI_INPUT \
+    "libcamerasrc camera-number=%d ! " \
+    "video/x-raw, width=%d, height=%d, framerate=(fraction)%d/1 ! " \
+    "videoconvert ! "
+
+// Input pipeline for USB cameras
+#define GST_CAM_PIPELINE_USB_INPUT \
+    "v4l2src device=/dev/video%d ! " \
+    "image/jpeg, width=%d, height=%d, framerate=%d/1, format=MJPG ! " \
+    "jpegdec ! videoconvert ! "
+#endif
 
 
 #if defined(MKV_OUT) && defined(SOFTWARE_ENCODE)

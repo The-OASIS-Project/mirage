@@ -6,6 +6,10 @@ option(USE_JETSON_INFERENCE "Enable Jetson Inference support" OFF)
 option(USE_CUDA "Enable CUDA support" OFF)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type: Debug or Release")
 
+# Platform selection
+set(PLATFORM "AUTO" CACHE STRING "Choose platform: AUTO, JETSON, RPI")
+set_property(CACHE PLATFORM PROPERTY STRINGS AUTO JETSON RPI)
+
 # If the policy exists in your CMake version, set it to NEW
 if(POLICY CMP0072)
     cmake_policy(SET CMP0072 NEW)
@@ -25,6 +29,29 @@ if(NOT GIT_SHA_RESULT EQUAL 0)
     set(GIT_SHA "unknown")
 endif()
 add_definitions(-DGIT_SHA=\"${GIT_SHA}\")
+
+# Platform detection
+if(PLATFORM STREQUAL "AUTO")
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+        if(EXISTS "/etc/nv_tegra_release")
+            set(PLATFORM "JETSON")
+            file(READ "/etc/nv_tegra_release" JETSON_MODEL)
+            message(STATUS "Detected Jetson: ${JETSON_MODEL}")
+        endif()
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "armv")
+        if(EXISTS "/sys/firmware/devicetree/base/model")
+            file(READ "/sys/firmware/devicetree/base/model" RPI_MODEL)
+            if(RPI_MODEL MATCHES "Raspberry Pi")
+                set(PLATFORM "RPI")
+                message(STATUS "Detected RPi: ${RPI_MODEL}")
+            endif()
+        endif()
+    endif()
+endif()
+
+# Platform definitions
+add_definitions(-DPLATFORM_${PLATFORM})
+message(STATUS "Building for platform: ${PLATFORM}")
 
 # Set source files
 set(SOURCE_FILES
