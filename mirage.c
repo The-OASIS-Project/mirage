@@ -1691,19 +1691,7 @@ int main(int argc, char **argv)
 
    /* Video */
    SDL_Texture *textureL = NULL, *textureR = NULL;
-#ifndef ORIGINAL_RATIO
-   SDL_Rect v_src_rect = { this_hds->cam_crop_x, 0, this_hds->cam_crop_width, this_hds->cam_input_height };
-   SDL_Rect v_dst_rectL = { 0, 0, this_hds->eye_output_width, this_hds->eye_output_height };
-   SDL_Rect v_dst_rectR = { this_hds->eye_output_width, 0, this_hds->eye_output_width, this_hds->eye_output_height };
-#else
-   double input_ratio = (double) this_hds->cam_input_height / this_hds->cam_input_width;
-   SDL_Rect v_src_rect = { 0, 0, this_hds->cam_input_width, this_hds->cam_input_height };
-   SDL_Rect v_dst_rectL = { 0, (this_hds->eye_output_height-(this_hds->eye_output_height*input_ratio))/2,
-                            this_hds->eye_output_width, this_hds->eye_output_height*input_ratio };
-   SDL_Rect v_dst_rectR = { this_hds->eye_output_width,
-                            (this_hds->eye_output_height-(this_hds->eye_output_height*input_ratio))/2,
-                            this_hds->eye_output_width, this_hds->eye_output_height*input_ratio };
-#endif
+
 #ifdef DISPLAY_TIMING
    unsigned long last_ts_cap = 0, present_time = 0, ts_total = 0;
    unsigned int ts_count = 0;
@@ -2051,16 +2039,6 @@ int main(int argc, char **argv)
       return EXIT_FAILURE;
    }
 
-   // Set the logical size to your native resolution
-   if (SDL_RenderSetLogicalSize(renderer, this_hds->eye_output_width * 2, this_hds->eye_output_height) != 0) {
-      SDL_Log("Could not set logical size: %s", SDL_GetError());
-   }
-
-   /* Video Setup */
-   if (fullscreen) {
-      SDL_ShowCursor(0);
-   }
-
    /* Init detect array */
    for (int j = 0; j < MAX_DETECT; j++) {
       this_detect[0][j].active = 0;
@@ -2073,6 +2051,31 @@ int main(int argc, char **argv)
       LOG_ERROR("Failed to parse config file. Exiting.");
       return EXIT_FAILURE;
    }
+
+   // Set the logical size to your native resolution
+   if (SDL_RenderSetLogicalSize(renderer, this_hds->eye_output_width * 2, this_hds->eye_output_height) != 0) {
+      SDL_Log("Could not set logical size: %s", SDL_GetError());
+   }
+
+   /* Video Setup */
+   if (fullscreen) {
+      SDL_ShowCursor(0);
+   }
+
+#ifndef ORIGINAL_RATIO
+   SDL_Rect v_src_rect = { this_hds->cam_crop_x, 0, this_hds->cam_crop_width, this_hds->cam_input_height };
+   SDL_Rect v_dst_rectL = { 0, 0, this_hds->eye_output_width, this_hds->eye_output_height };
+   SDL_Rect v_dst_rectR = { this_hds->eye_output_width, 0, this_hds->eye_output_width, this_hds->eye_output_height };
+#else
+   double input_ratio = (double) this_hds->cam_input_height / this_hds->cam_input_width;
+   SDL_Rect v_src_rect = { 0, 0, this_hds->cam_input_width, this_hds->cam_input_height };
+   SDL_Rect v_dst_rectL = { 0, (this_hds->eye_output_height-(this_hds->eye_output_height*input_ratio))/2,
+                            this_hds->eye_output_width, this_hds->eye_output_height*input_ratio };
+   SDL_Rect v_dst_rectR = { this_hds->eye_output_width,
+                            (this_hds->eye_output_height-(this_hds->eye_output_height*input_ratio))/2,
+                            this_hds->eye_output_width, this_hds->eye_output_height*input_ratio };
+#endif
+
 
    textureL =
        SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STATIC,
@@ -2631,7 +2634,18 @@ int main(int argc, char **argv)
                      curr_element->surface = NULL;
                   }
 
-                  snprintf(render_text, MAX_TEXT_LENGTH, "%03.0f", this_enviro.temp);
+                  snprintf(render_text, MAX_TEXT_LENGTH, "%03.0f C", this_enviro.temp);
+               } else if (strcmp("*HELMTEMP_F*", curr_element->text) == 0) {
+                  if (curr_element->texture != NULL) {
+                     SDL_DestroyTexture(curr_element->texture);
+                     curr_element->texture = NULL;
+                  }
+                  if (curr_element->surface != NULL) {
+                     SDL_FreeSurface(curr_element->surface);
+                     curr_element->surface = NULL;
+                  }
+
+                  snprintf(render_text, MAX_TEXT_LENGTH, "%03.0f F", this_enviro.temp * 9/5 + 32.0);
                } else if (strcmp("*HELMHUM*", curr_element->text) == 0) {
                   if (curr_element->texture != NULL) {
                      SDL_DestroyTexture(curr_element->texture);

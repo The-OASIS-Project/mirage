@@ -1,0 +1,7216 @@
+{
+    "frames": {
+        "IronMan-UI-Pitch-Animated/0000": {
+            "frame": {
+                "x": 900,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0001": {
+            "frame": {
+                "x": 2140,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0002": {
+            "frame": {
+                "x": 94,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0003": {
+            "frame": {
+                "x": 2232,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0004": {
+            "frame": {
+                "x": 930,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0005": {
+            "frame": {
+                "x": 2512,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0006": {
+            "frame": {
+                "x": 2170,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0007": {
+            "frame": {
+                "x": 94,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0008": {
+            "frame": {
+                "x": 2232,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0009": {
+            "frame": {
+                "x": 962,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0010": {
+            "frame": {
+                "x": 992,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0011": {
+            "frame": {
+                "x": 1768,
+                "y": 609,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0012": {
+            "frame": {
+                "x": 342,
+                "y": 611,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0013": {
+            "frame": {
+                "x": 2264,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0014": {
+            "frame": {
+                "x": 1024,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0015": {
+            "frame": {
+                "x": 1054,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0016": {
+            "frame": {
+                "x": 1798,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0017": {
+            "frame": {
+                "x": 372,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0018": {
+            "frame": {
+                "x": 2264,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0019": {
+            "frame": {
+                "x": 1086,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0020": {
+            "frame": {
+                "x": 1116,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0021": {
+            "frame": {
+                "x": 1798,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0022": {
+            "frame": {
+                "x": 372,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0023": {
+            "frame": {
+                "x": 2294,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0024": {
+            "frame": {
+                "x": 1148,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0025": {
+            "frame": {
+                "x": 1178,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0026": {
+            "frame": {
+                "x": 1830,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0027": {
+            "frame": {
+                "x": 124,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0028": {
+            "frame": {
+                "x": 2450,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0029": {
+            "frame": {
+                "x": 1210,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0030": {
+            "frame": {
+                "x": 2542,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0031": {
+            "frame": {
+                "x": 2170,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0032": {
+            "frame": {
+                "x": 404,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0033": {
+            "frame": {
+                "x": 2450,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0034": {
+            "frame": {
+                "x": 2574,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0035": {
+            "frame": {
+                "x": 1240,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0036": {
+            "frame": {
+                "x": 1830,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0037": {
+            "frame": {
+                "x": 124,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0038": {
+            "frame": {
+                "x": 2480,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0039": {
+            "frame": {
+                "x": 2604,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0040": {
+            "frame": {
+                "x": 2636,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 67,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0041": {
+            "frame": {
+                "x": 1860,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0042": {
+            "frame": {
+                "x": 404,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0043": {
+            "frame": {
+                "x": 2480,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0044": {
+            "frame": {
+                "x": 2666,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0045": {
+            "frame": {
+                "x": 2698,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 67,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0046": {
+            "frame": {
+                "x": 1860,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0047": {
+            "frame": {
+                "x": 434,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0048": {
+            "frame": {
+                "x": 2728,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0049": {
+            "frame": {
+                "x": 2760,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0050": {
+            "frame": {
+                "x": 3658,
+                "y": 1210,
+                "w": 30,
+                "h": 603
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 603
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0051": {
+            "frame": {
+                "x": 1892,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0052": {
+            "frame": {
+                "x": 156,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0053": {
+            "frame": {
+                "x": 2512,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0054": {
+            "frame": {
+                "x": 1272,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0055": {
+            "frame": {
+                "x": 3658,
+                "y": 606,
+                "w": 30,
+                "h": 603
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 603
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0056": {
+            "frame": {
+                "x": 1892,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0057": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0058": {
+            "frame": {
+                "x": 2294,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0059": {
+            "frame": {
+                "x": 62,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0060": {
+            "frame": {
+                "x": 94,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0061": {
+            "frame": {
+                "x": 1922,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0062": {
+            "frame": {
+                "x": 156,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0063": {
+            "frame": {
+                "x": 2512,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0064": {
+            "frame": {
+                "x": 1302,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0065": {
+            "frame": {
+                "x": 2790,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 67,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0066": {
+            "frame": {
+                "x": 1922,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0067": {
+            "frame": {
+                "x": 434,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0068": {
+            "frame": {
+                "x": 2542,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0069": {
+            "frame": {
+                "x": 1334,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0070": {
+            "frame": {
+                "x": 3070,
+                "y": 1212,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0071": {
+            "frame": {
+                "x": 1488,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0072": {
+            "frame": {
+                "x": 466,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0073": {
+            "frame": {
+                "x": 2728,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0074": {
+            "frame": {
+                "x": 1364,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0075": {
+            "frame": {
+                "x": 3100,
+                "y": 1212,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0076": {
+            "frame": {
+                "x": 1488,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0077": {
+            "frame": {
+                "x": 466,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0078": {
+            "frame": {
+                "x": 2542,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 59,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0079": {
+            "frame": {
+                "x": 124,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0080": {
+            "frame": {
+                "x": 3070,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0081": {
+            "frame": {
+                "x": 1520,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0082": {
+            "frame": {
+                "x": 496,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0083": {
+            "frame": {
+                "x": 2760,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0084": {
+            "frame": {
+                "x": 156,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 63,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0085": {
+            "frame": {
+                "x": 3100,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0086": {
+            "frame": {
+                "x": 1148,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0087": {
+            "frame": {
+                "x": 496,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0088": {
+            "frame": {
+                "x": 2760,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0089": {
+            "frame": {
+                "x": 1396,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0090": {
+            "frame": {
+                "x": 3224,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0091": {
+            "frame": {
+                "x": 1148,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0092": {
+            "frame": {
+                "x": 528,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0093": {
+            "frame": {
+                "x": 2790,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0094": {
+            "frame": {
+                "x": 1426,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0095": {
+            "frame": {
+                "x": 3224,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0096": {
+            "frame": {
+                "x": 1520,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0097": {
+            "frame": {
+                "x": 528,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0098": {
+            "frame": {
+                "x": 2790,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0099": {
+            "frame": {
+                "x": 1458,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0100": {
+            "frame": {
+                "x": 1488,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 68,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0101": {
+            "frame": {
+                "x": 1178,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0102": {
+            "frame": {
+                "x": 186,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 55,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0103": {
+            "frame": {
+                "x": 2326,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0104": {
+            "frame": {
+                "x": 0,
+                "y": 1222,
+                "w": 30,
+                "h": 592
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 592
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0105": {
+            "frame": {
+                "x": 3256,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0106": {
+            "frame": {
+                "x": 1178,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0107": {
+            "frame": {
+                "x": 558,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0108": {
+            "frame": {
+                "x": 2822,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0109": {
+            "frame": {
+                "x": 186,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0110": {
+            "frame": {
+                "x": 3256,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0111": {
+            "frame": {
+                "x": 1210,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0112": {
+            "frame": {
+                "x": 776,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0113": {
+            "frame": {
+                "x": 2822,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0114": {
+            "frame": {
+                "x": 1520,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0115": {
+            "frame": {
+                "x": 3286,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0116": {
+            "frame": {
+                "x": 1210,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0117": {
+            "frame": {
+                "x": 558,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0118": {
+            "frame": {
+                "x": 2852,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0119": {
+            "frame": {
+                "x": 1550,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0120": {
+            "frame": {
+                "x": 3286,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0121": {
+            "frame": {
+                "x": 1240,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0122": {
+            "frame": {
+                "x": 776,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0123": {
+            "frame": {
+                "x": 2852,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0124": {
+            "frame": {
+                "x": 218,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0125": {
+            "frame": {
+                "x": 3132,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0126": {
+            "frame": {
+                "x": 806,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0127": {
+            "frame": {
+                "x": 806,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0128": {
+            "frame": {
+                "x": 2884,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0129": {
+            "frame": {
+                "x": 248,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0130": {
+            "frame": {
+                "x": 3162,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0131": {
+            "frame": {
+                "x": 838,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0132": {
+            "frame": {
+                "x": 838,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0133": {
+            "frame": {
+                "x": 3194,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0134": {
+            "frame": {
+                "x": 280,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0135": {
+            "frame": {
+                "x": 3318,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0136": {
+            "frame": {
+                "x": 1240,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0137": {
+            "frame": {
+                "x": 868,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0138": {
+            "frame": {
+                "x": 3224,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0139": {
+            "frame": {
+                "x": 1582,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0140": {
+            "frame": {
+                "x": 3318,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0141": {
+            "frame": {
+                "x": 1272,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0142": {
+            "frame": {
+                "x": 868,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0143": {
+            "frame": {
+                "x": 3256,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0144": {
+            "frame": {
+                "x": 1612,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0145": {
+            "frame": {
+                "x": 3286,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0146": {
+            "frame": {
+                "x": 900,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0147": {
+            "frame": {
+                "x": 900,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0148": {
+            "frame": {
+                "x": 3318,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0149": {
+            "frame": {
+                "x": 1644,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0150": {
+            "frame": {
+                "x": 3348,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0151": {
+            "frame": {
+                "x": 930,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0152": {
+            "frame": {
+                "x": 930,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0153": {
+            "frame": {
+                "x": 3380,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0154": {
+            "frame": {
+                "x": 1674,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0155": {
+            "frame": {
+                "x": 3410,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0156": {
+            "frame": {
+                "x": 1272,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0157": {
+            "frame": {
+                "x": 1302,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0158": {
+            "frame": {
+                "x": 3348,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0159": {
+            "frame": {
+                "x": 1706,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0160": {
+            "frame": {
+                "x": 3442,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0161": {
+            "frame": {
+                "x": 1302,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0162": {
+            "frame": {
+                "x": 1334,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0163": {
+            "frame": {
+                "x": 3348,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0164": {
+            "frame": {
+                "x": 2822,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0165": {
+            "frame": {
+                "x": 3472,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0166": {
+            "frame": {
+                "x": 962,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0167": {
+            "frame": {
+                "x": 1334,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0168": {
+            "frame": {
+                "x": 3504,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0169": {
+            "frame": {
+                "x": 1736,
+                "y": 1218,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0170": {
+            "frame": {
+                "x": 3534,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0171": {
+            "frame": {
+                "x": 962,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0172": {
+            "frame": {
+                "x": 992,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0173": {
+            "frame": {
+                "x": 2884,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0174": {
+            "frame": {
+                "x": 310,
+                "y": 1222,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0175": {
+            "frame": {
+                "x": 3566,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0176": {
+            "frame": {
+                "x": 992,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0177": {
+            "frame": {
+                "x": 1364,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0178": {
+            "frame": {
+                "x": 3596,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0179": {
+            "frame": {
+                "x": 1768,
+                "y": 1217,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0180": {
+            "frame": {
+                "x": 3628,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0181": {
+            "frame": {
+                "x": 1024,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0182": {
+            "frame": {
+                "x": 1364,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0183": {
+            "frame": {
+                "x": 3380,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0184": {
+            "frame": {
+                "x": 342,
+                "y": 1221,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0185": {
+            "frame": {
+                "x": 2914,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0186": {
+            "frame": {
+                "x": 1024,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0187": {
+            "frame": {
+                "x": 1396,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0188": {
+            "frame": {
+                "x": 3380,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0189": {
+            "frame": {
+                "x": 372,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0190": {
+            "frame": {
+                "x": 3658,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0191": {
+            "frame": {
+                "x": 1054,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0192": {
+            "frame": {
+                "x": 1396,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0193": {
+            "frame": {
+                "x": 3410,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0194": {
+            "frame": {
+                "x": 2852,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0195": {
+            "frame": {
+                "x": 3690,
+                "y": 0,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0196": {
+            "frame": {
+                "x": 1054,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0197": {
+            "frame": {
+                "x": 1426,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0198": {
+            "frame": {
+                "x": 3410,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0199": {
+            "frame": {
+                "x": 2884,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0200": {
+            "frame": {
+                "x": 3132,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0201": {
+            "frame": {
+                "x": 1086,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0202": {
+            "frame": {
+                "x": 1426,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0203": {
+            "frame": {
+                "x": 3442,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0204": {
+            "frame": {
+                "x": 1798,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0205": {
+            "frame": {
+                "x": 2914,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0206": {
+            "frame": {
+                "x": 590,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0207": {
+            "frame": {
+                "x": 1458,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0208": {
+            "frame": {
+                "x": 3442,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0209": {
+            "frame": {
+                "x": 1830,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0210": {
+            "frame": {
+                "x": 2946,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0211": {
+            "frame": {
+                "x": 590,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0212": {
+            "frame": {
+                "x": 1550,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0213": {
+            "frame": {
+                "x": 3472,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0214": {
+            "frame": {
+                "x": 1860,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0215": {
+            "frame": {
+                "x": 3162,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0216": {
+            "frame": {
+                "x": 1086,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0217": {
+            "frame": {
+                "x": 1550,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0218": {
+            "frame": {
+                "x": 3132,
+                "y": 1212,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0219": {
+            "frame": {
+                "x": 2914,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0220": {
+            "frame": {
+                "x": 3194,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0221": {
+            "frame": {
+                "x": 1116,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0222": {
+            "frame": {
+                "x": 1954,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0223": {
+            "frame": {
+                "x": 3162,
+                "y": 1212,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0224": {
+            "frame": {
+                "x": 2946,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0225": {
+            "frame": {
+                "x": 2946,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0226": {
+            "frame": {
+                "x": 620,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0227": {
+            "frame": {
+                "x": 1582,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0228": {
+            "frame": {
+                "x": 3472,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0229": {
+            "frame": {
+                "x": 1892,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0230": {
+            "frame": {
+                "x": 2976,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0231": {
+            "frame": {
+                "x": 620,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0232": {
+            "frame": {
+                "x": 1458,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 56,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0233": {
+            "frame": {
+                "x": 3504,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0234": {
+            "frame": {
+                "x": 404,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0235": {
+            "frame": {
+                "x": 2976,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0236": {
+            "frame": {
+                "x": 1116,
+                "y": 610,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0237": {
+            "frame": {
+                "x": 1582,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0238": {
+            "frame": {
+                "x": 3194,
+                "y": 1212,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0239": {
+            "frame": {
+                "x": 1922,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0240": {
+            "frame": {
+                "x": 3008,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0241": {
+            "frame": {
+                "x": 652,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0242": {
+            "frame": {
+                "x": 1612,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0243": {
+            "frame": {
+                "x": 3534,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0244": {
+            "frame": {
+                "x": 1954,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0245": {
+            "frame": {
+                "x": 3008,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0246": {
+            "frame": {
+                "x": 652,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0247": {
+            "frame": {
+                "x": 1612,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0248": {
+            "frame": {
+                "x": 3534,
+                "y": 1210,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0249": {
+            "frame": {
+                "x": 1984,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0250": {
+            "frame": {
+                "x": 3038,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0251": {
+            "frame": {
+                "x": 682,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0252": {
+            "frame": {
+                "x": 1644,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0253": {
+            "frame": {
+                "x": 3628,
+                "y": 1210,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0254": {
+            "frame": {
+                "x": 3690,
+                "y": 1196,
+                "w": 30,
+                "h": 587
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 587
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0255": {
+            "frame": {
+                "x": 2728,
+                "y": 1212,
+                "w": 30,
+                "h": 602
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 602
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0256": {
+            "frame": {
+                "x": 2202,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0257": {
+            "frame": {
+                "x": 2202,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0258": {
+            "frame": {
+                "x": 3566,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0259": {
+            "frame": {
+                "x": 2976,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0260": {
+            "frame": {
+                "x": 3038,
+                "y": 606,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0261": {
+            "frame": {
+                "x": 682,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0262": {
+            "frame": {
+                "x": 1644,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0263": {
+            "frame": {
+                "x": 3566,
+                "y": 1210,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0264": {
+            "frame": {
+                "x": 3008,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0265": {
+            "frame": {
+                "x": 3070,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0266": {
+            "frame": {
+                "x": 714,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0267": {
+            "frame": {
+                "x": 1954,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0268": {
+            "frame": {
+                "x": 3596,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0269": {
+            "frame": {
+                "x": 2016,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0270": {
+            "frame": {
+                "x": 3100,
+                "y": 0,
+                "w": 30,
+                "h": 605
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 605
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0271": {
+            "frame": {
+                "x": 714,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0272": {
+            "frame": {
+                "x": 1984,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0273": {
+            "frame": {
+                "x": 3596,
+                "y": 1210,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0274": {
+            "frame": {
+                "x": 2046,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0275": {
+            "frame": {
+                "x": 2574,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0276": {
+            "frame": {
+                "x": 744,
+                "y": 0,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0277": {
+            "frame": {
+                "x": 1984,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0278": {
+            "frame": {
+                "x": 3038,
+                "y": 1212,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0279": {
+            "frame": {
+                "x": 3690,
+                "y": 606,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0280": {
+            "frame": {
+                "x": 2574,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0281": {
+            "frame": {
+                "x": 186,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0282": {
+            "frame": {
+                "x": 1674,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0283": {
+            "frame": {
+                "x": 3628,
+                "y": 606,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0284": {
+            "frame": {
+                "x": 434,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0285": {
+            "frame": {
+                "x": 2604,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0286": {
+            "frame": {
+                "x": 218,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0287": {
+            "frame": {
+                "x": 1674,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0288": {
+            "frame": {
+                "x": 2078,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0289": {
+            "frame": {
+                "x": 466,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0290": {
+            "frame": {
+                "x": 2604,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0291": {
+            "frame": {
+                "x": 218,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0292": {
+            "frame": {
+                "x": 1706,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0293": {
+            "frame": {
+                "x": 496,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0294": {
+            "frame": {
+                "x": 528,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0295": {
+            "frame": {
+                "x": 2636,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0296": {
+            "frame": {
+                "x": 248,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0297": {
+            "frame": {
+                "x": 1706,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0298": {
+            "frame": {
+                "x": 558,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0299": {
+            "frame": {
+                "x": 2108,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0300": {
+            "frame": {
+                "x": 2636,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0301": {
+            "frame": {
+                "x": 248,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0302": {
+            "frame": {
+                "x": 1736,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0303": {
+            "frame": {
+                "x": 2140,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0304": {
+            "frame": {
+                "x": 2170,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0305": {
+            "frame": {
+                "x": 2666,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0306": {
+            "frame": {
+                "x": 744,
+                "y": 610,
+                "w": 30,
+                "h": 609
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 609
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0307": {
+            "frame": {
+                "x": 1736,
+                "y": 609,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0308": {
+            "frame": {
+                "x": 590,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0309": {
+            "frame": {
+                "x": 2202,
+                "y": 1216,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0310": {
+            "frame": {
+                "x": 2666,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0311": {
+            "frame": {
+                "x": 280,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0312": {
+            "frame": {
+                "x": 2016,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0313": {
+            "frame": {
+                "x": 2232,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0314": {
+            "frame": {
+                "x": 620,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0315": {
+            "frame": {
+                "x": 2698,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0316": {
+            "frame": {
+                "x": 280,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0317": {
+            "frame": {
+                "x": 2016,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0318": {
+            "frame": {
+                "x": 2264,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0319": {
+            "frame": {
+                "x": 2294,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0320": {
+            "frame": {
+                "x": 2698,
+                "y": 607,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0321": {
+            "frame": {
+                "x": 310,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0322": {
+            "frame": {
+                "x": 2046,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0323": {
+            "frame": {
+                "x": 652,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 61,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0324": {
+            "frame": {
+                "x": 682,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0325": {
+            "frame": {
+                "x": 2326,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0326": {
+            "frame": {
+                "x": 310,
+                "y": 611,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0327": {
+            "frame": {
+                "x": 1768,
+                "y": 0,
+                "w": 30,
+                "h": 608
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 57,
+                "w": 30,
+                "h": 608
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0328": {
+            "frame": {
+                "x": 3504,
+                "y": 1211,
+                "w": 30,
+                "h": 604
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 60,
+                "w": 30,
+                "h": 604
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0329": {
+            "frame": {
+                "x": 32,
+                "y": 1222,
+                "w": 30,
+                "h": 591
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 64,
+                "w": 30,
+                "h": 591
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0330": {
+            "frame": {
+                "x": 2356,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0331": {
+            "frame": {
+                "x": 0,
+                "y": 612,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0332": {
+            "frame": {
+                "x": 2046,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0333": {
+            "frame": {
+                "x": 2326,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0334": {
+            "frame": {
+                "x": 714,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0335": {
+            "frame": {
+                "x": 2356,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0336": {
+            "frame": {
+                "x": 342,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0337": {
+            "frame": {
+                "x": 2078,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0338": {
+            "frame": {
+                "x": 2356,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0339": {
+            "frame": {
+                "x": 744,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 65,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0340": {
+            "frame": {
+                "x": 2388,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0341": {
+            "frame": {
+                "x": 32,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0342": {
+            "frame": {
+                "x": 2078,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0343": {
+            "frame": {
+                "x": 2388,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0344": {
+            "frame": {
+                "x": 2418,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0345": {
+            "frame": {
+                "x": 2388,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0346": {
+            "frame": {
+                "x": 32,
+                "y": 612,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0347": {
+            "frame": {
+                "x": 2108,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0348": {
+            "frame": {
+                "x": 776,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0349": {
+            "frame": {
+                "x": 2450,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0350": {
+            "frame": {
+                "x": 2418,
+                "y": 0,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0351": {
+            "frame": {
+                "x": 62,
+                "y": 0,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0352": {
+            "frame": {
+                "x": 2108,
+                "y": 608,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0353": {
+            "frame": {
+                "x": 806,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0354": {
+            "frame": {
+                "x": 2480,
+                "y": 1214,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0355": {
+            "frame": {
+                "x": 2418,
+                "y": 608,
+                "w": 30,
+                "h": 606
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 606
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0356": {
+            "frame": {
+                "x": 62,
+                "y": 612,
+                "w": 30,
+                "h": 610
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 54,
+                "w": 30,
+                "h": 610
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0357": {
+            "frame": {
+                "x": 2140,
+                "y": 0,
+                "w": 30,
+                "h": 607
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 58,
+                "w": 30,
+                "h": 607
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0358": {
+            "frame": {
+                "x": 838,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 62,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        },
+        "IronMan-UI-Pitch-Animated/0359": {
+            "frame": {
+                "x": 868,
+                "y": 1220,
+                "w": 30,
+                "h": 590
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 46,
+                "y": 66,
+                "w": 30,
+                "h": 590
+            },
+            "sourceSize": {
+                "w": 720,
+                "h": 720
+            }
+        }
+    },
+    "meta": {
+        "app": "https://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "IronMan-UI-Pitch-Animated-1.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 7440,
+            "h": 3631
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:5e3a222bf8a27e593582dde78f9bdb40:94eaa9e634bd36f72f5fd261c27c68de:4c6190c97f43719830958c12239b7354$"
+    }
+}

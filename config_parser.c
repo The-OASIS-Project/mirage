@@ -340,6 +340,21 @@ int parse_json_config(char *filename)
                   if (this_ss->stream_width == -1) {
                      this_ss->stream_width = this_hds->eye_output_width * 2;
                   }
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Camera Height") == 0) {
+                  this_hds->cam_input_height = json_object_get_int(json_object_iter_peek_value(&itSub));
+                  //printf("Camera Height: %d\n", this_hds->cam_input_height);
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Camera Width") == 0) {
+                  this_hds->cam_input_width = json_object_get_int(json_object_iter_peek_value(&itSub));
+                  //printf("Camera Width: %d\n", this_hds->cam_input_width);
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Camera FPS") == 0) {
+                  this_hds->cam_input_fps = json_object_get_int(json_object_iter_peek_value(&itSub));
+                  //printf("Camera FPS: %d\n", this_hds->cam_input_fps);
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Camera Crop X") == 0) {
+                  this_hds->cam_crop_x = json_object_get_int(json_object_iter_peek_value(&itSub));
+                  //printf("Camera Crop X: %d\n", this_hds->cam_crop_x);
+               } else if (strcmp(json_object_iter_peek_name(&itSub), "Camera Crop Width") == 0) {
+                  this_hds->cam_crop_width = json_object_get_int(json_object_iter_peek_value(&itSub));
+                  //printf("Camera Crop Width: %d\n", this_hds->cam_crop_width);
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Stereo Offset") == 0) {
                   this_hds->stereo_offset = json_object_get_int(json_object_iter_peek_value(&itSub));
                   //printf("STEREO OFFSET: %d\n", this_hds->stereo_offset);

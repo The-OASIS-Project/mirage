@@ -1,0 +1,215 @@
+{
+    "frames": {
+        "Symbol 300000": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300001": {
+            "frame": {
+                "x": 58,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300002": {
+            "frame": {
+                "x": 115,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300003": {
+            "frame": {
+                "x": 172,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300004": {
+            "frame": {
+                "x": 230,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300005": {
+            "frame": {
+                "x": 288,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300006": {
+            "frame": {
+                "x": 345,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300007": {
+            "frame": {
+                "x": 402,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300008": {
+            "frame": {
+                "x": 0,
+                "y": 39,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        },
+        "Symbol 300009": {
+            "frame": {
+                "x": 58,
+                "y": 39,
+                "w": 58,
+                "h": 39
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 58,
+                "h": 39
+            },
+            "sourceSize": {
+                "w": 58,
+                "h": 39
+            }
+        }
+    },
+    "meta": {
+        "app": "Adobe Flash CS6",
+        "version": "12.0.0.481",
+        "image": "IronMan-UI-Batt-Animated.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1024,
+            "h": 1024
+        },
+        "scale": "1"
+    }
+}

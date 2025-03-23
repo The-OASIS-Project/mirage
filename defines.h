@@ -28,7 +28,7 @@
 //#define DISPLAY_TIMING
 //#define OD_PROPER_WAIT
 //#define FPS_STATS
-#define REFRESH_SYNC
+//#define REFRESH_SYNC
 //#define ORIGINAL_RATIO
 
 /* This is per eye/display. */
@@ -95,8 +95,9 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-#define MAX_FILENAME_LENGTH   1024  /* Generic max filename supported. */
-#define MAX_WIFI_DEV_LENGTH   10    /* Max length for a wifi device name. */
+#define MAX_FILENAME_LENGTH      1024  /* Generic max filename supported. */
+#define MAX_SERIAL_BUFFER_LENGTH 1024  /* Size of the serial buffer. */
+#define MAX_WIFI_DEV_LENGTH      10    /* Max length for a wifi device name. */
 
 /* These setup local log buffering from USB input. */
 #define LOG_ROWS              20
@@ -164,7 +165,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #define GSTREAMER_PIPELINE_LENGTH   1024
 #define DEFAULT_CSI_CAM1            0
 #define DEFAULT_CSI_CAM2            1
-#define DEFAULT_USB_CAM1            0
+#define DEFAULT_USB_CAM1            1
 #define DEFAULT_USB_CAM2            2
 
 // Common output pipeline portion

@@ -92,11 +92,20 @@ int parse_json_command(char *command_string, char *topic)
          /* Only look for "Orientation" style for now. */
          if (strcmp("Orientation", tmpstr) == 0) {
             json_object_object_get_ex(parsed_json, "heading", &tmpobj);
+
+            // Get the sensor heading value
+            double raw_heading = json_object_get_double(tmpobj);
+
+            // If we get a negative value, convert from -180 to +180 range to 0 to 360 range
+            if (raw_heading < 0) {
+               raw_heading += 360.0;
+            }
+
+            // Apply inversion if needed
             if (get_inv_compass()) {
-               this_motion->heading =
-                   360.0 + ((0.0 - 360.0) / (360.0 - 0.0)) * (json_object_get_double(tmpobj) - 0.0);
+               this_motion->heading = 360.0 - raw_heading;
             } else {
-               this_motion->heading = json_object_get_double(tmpobj);
+               this_motion->heading = raw_heading;
             }
 
             json_object_object_get_ex(parsed_json, "pitch", &tmpobj);
@@ -118,6 +127,12 @@ int parse_json_command(char *command_string, char *topic)
          } else {
             this_enviro->humidity = 0.0;
          }
+
+         // Need to add for new environmental screen: tvoc_ppb, eco2_ppm, co2_ppm, co2_quality, co2_eco2_diff,
+         //                                           co2_source_analysis, air_quality, air_quality_description, dew_point
+         // Example: {"device":"Enviro","temp":22.41512,"humidity":34.46708,"tvoc_ppb":67,"eco2_ppm":491,
+         //           "co2_ppm":530,"co2_quality":"Excellent","co2_eco2_diff":39,"co2_source_analysis":"Mixed sources",
+         //           "air_quality":80,"air_quality_description":"Good","dew_point":5.969073}
 
          //printf("Enviro: temp: %f, humidity: %f\n", this_enviro->temp, this_enviro->humidity);
       } else if (strcmp("GPS", tmpstr) == 0) {
@@ -341,14 +356,13 @@ void *serial_command_processing_thread(void *arg)
 {
    int sfd = 0;                 /* Socket file descriptor for command processing. */
    fd_set set;
-   //int sockfd = -1;
    struct timeval timeout;
-   char sread_buf[MAX_FILENAME_LENGTH];
+   char sread_buf[MAX_SERIAL_BUFFER_LENGTH];
    char *usb_port = (char *)arg;
    struct termios SerialPortSettings;
 
    /* command buffering */
-   char command_buffer[MAX_FILENAME_LENGTH];
+   char command_buffer[MAX_SERIAL_BUFFER_LENGTH];
    int command_length = 0;
 
    command_buffer[0] = '\0';
@@ -358,53 +372,66 @@ void *serial_command_processing_thread(void *arg)
    /* Read from serial input. */
    if (strcmp(usb_port, "") == 0) {
       sfd = fileno(stdin);
+      LOG_INFO("Using stdin for commands instead of serial port");
    } else {
       /* Open the serial port. */
-      sfd = open(usb_port, O_RDWR | O_NOCTTY | O_NDELAY);
+      sfd = open(usb_port, O_RDWR | O_NOCTTY);
       if (sfd == -1) {
-         perror("Unable to open serial port: ");
-
+         LOG_ERROR("Unable to open serial port %s: %s", usb_port, strerror(errno));
          return NULL;
       } else {
-         LOG_INFO("Serial port opened successfully.");
+         LOG_INFO("Serial port %s opened successfully.", usb_port);
       }
 
-      /* Setup serial port. */
+      /* Setup serial port */
       tcgetattr(sfd, &SerialPortSettings);
-      cfsetispeed(&SerialPortSettings, B115200);        /* Set Read  Speed as 115200 */
+      cfsetispeed(&SerialPortSettings, B115200);        /* Set Read Speed as 115200 */
       cfsetospeed(&SerialPortSettings, B115200);        /* Set Write Speed as 115200 */
 
       /* 8N1 Mode */
-      SerialPortSettings.c_cflag &= ~PARENB;    /* Disables the Parity Enable bit(PARENB),So No Parity */
-      SerialPortSettings.c_cflag &= ~CSTOPB;    /* CSTOPB = 2 Stop bits,here it is cleared so 1 Stop bit */
-      SerialPortSettings.c_cflag &= ~CSIZE;     /* Clears the mask for setting the data size */
-      SerialPortSettings.c_cflag |= CS8;        /* Set the data bits = 8 */
+      SerialPortSettings.c_cflag &= ~PARENB;    /* Disables Parity */
+      SerialPortSettings.c_cflag &= ~CSTOPB;    /* 1 Stop bit */
+      SerialPortSettings.c_cflag &= ~CSIZE;     /* Clear size bits */
+      SerialPortSettings.c_cflag |= CS8;        /* 8 data bits */
 
-      SerialPortSettings.c_cflag &= ~CRTSCTS;   /* No Hardware flow Control */
-      SerialPortSettings.c_cflag |= CREAD | CLOCAL;     /* Enable receiver,Ignore Modem Control lines */
-
-      SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);    /* Disable XON/XOFF flow control both i/p and o/p */
-      SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG);    /* Non Cannonical mode */
-
-      SerialPortSettings.c_oflag &= ~OPOST;     /* No Output Processing */
-
+      /* Flow control and modem settings */
+      SerialPortSettings.c_cflag |= CRTSCTS;    /* Enable hardware flow Control */
+      SerialPortSettings.c_cflag |= CREAD | CLOCAL; /* Enable receiver, Ignore modem control lines */
       SerialPortSettings.c_cflag &= ~HUPCL;     /* Disable hangup (drop DTR) on close */
 
-      /* Setting Time outs */
-      SerialPortSettings.c_cc[VMIN] = 0;        /* Read at least 0 characters */
-      SerialPortSettings.c_cc[VTIME] = 1;       /* Wait indefinetly   */
+      /* Input settings */
+      SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY); /* Disable software flow control */
+      SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG); /* Non-canonical mode */
+
+      /* Output settings */
+      SerialPortSettings.c_oflag &= ~OPOST;     /* No output processing */
+
+      /* Setting read timeouts - match minicom */
+      SerialPortSettings.c_cc[VMIN] = 1;        /* Wait for at least 1 character */
+      SerialPortSettings.c_cc[VTIME] = 5;       /* Wait up to 0.5 seconds */
 
       if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
-         LOG_ERROR("ERROR in setting attributes.");
+         LOG_ERROR("ERROR in setting attributes: %s", strerror(errno));
+         close(sfd);
+         return NULL;
       }
 
-      tcflush(sfd, TCIFLUSH);
+      tcflush(sfd, TCIOFLUSH);  /* Flush both input and output buffers */
+
+#if 0
+      /* Explicitly control DTR/RTS lines to prevent ESP32 reset */
+      int flags;
+      flags = TIOCM_DTR;
+      ioctl(sfd, TIOCMBIC, &flags);  /* Clear DTR */
+      flags = TIOCM_RTS;
+      ioctl(sfd, TIOCMBIC, &flags);  /* Clear RTS */
+      sleep(1);  /* Give device time to stabilize */
+#endif
    }
 
    while (!checkShutdown()) {
       int retval = 0;
       int max_socket = 0;
-      int this_socket = -1;
       int bytes_available = 0;
 
       timeout.tv_sec = 1;
@@ -418,50 +445,124 @@ void *serial_command_processing_thread(void *arg)
       retval = select(max_socket + 1, &set, NULL, NULL, &timeout);
       if (retval < 0) {
          if (errno == EBADF) {
-            LOG_ERROR("Select error: FD closed, exiting thread.");
-            break;  // Break out of the while loop
+            LOG_ERROR("Select error: FD closed (%s), attempting to reopen", strerror(errno));
+            close(sfd);
+
+            /* Wait a moment before reopening */
+            sleep(1);
+
+            /* Only try to reopen if we're using a real serial port, not stdin */
+            if (strcmp(usb_port, "") != 0) {
+               sfd = open(usb_port, O_RDWR | O_NOCTTY);
+               if (sfd == -1) {
+                  LOG_ERROR("Failed to reopen serial port: %s", strerror(errno));
+                  sleep(5);  /* Longer delay before retry */
+                  continue;
+               }
+
+               /* Re-configure the port after reopening */
+               if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
+                  LOG_ERROR("ERROR in setting attributes after reopen: %s", strerror(errno));
+                  close(sfd);
+                  sleep(5);
+                  continue;
+               }
+               tcflush(sfd, TCIOFLUSH);
+            } else {
+               /* If using stdin, we're in trouble if it closes */
+               LOG_ERROR("stdin closed, exiting thread");
+               break;
+            }
+            continue;
          }
-         LOG_ERROR("Select error (other).");
+         LOG_ERROR("Select error: %s", strerror(errno));
          continue;
       } else if (retval == 0) {
-         LOG_ERROR("USB/Serial Data Timeout.\n");
+         /* This is normal, just a timeout */
          continue;
-      } else {
-         if (FD_ISSET(sfd, &set)) {
-            this_socket = sfd;
-         }
-         if (this_socket != -1) {
-            // Check how many bytes are available to read
-            // TODO: Reset this on error to recover.
-            if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
-               LOG_ERROR("ioctl error.");
-               continue;
-            }
+      }
 
-            retval = read(sfd, sread_buf, MAX_FILENAME_LENGTH - 1);
-            if (retval < 0) {
-               LOG_ERROR("Read error.");
-               // Handle read error - possibly close and reopen the port
-               continue; // break;
-            } else if (retval == 0) {
-               // No data read, possibly a disconnect
-               continue;
+      if (!FD_ISSET(sfd, &set)) {
+         continue;  /* No data available on our file descriptor */
+      }
+
+      /* Check bytes available */
+      if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
+         LOG_ERROR("ioctl error: %s", strerror(errno));
+         /* Reset on ioctl error rather than trying to continue */
+         close(sfd);
+         sleep(1);
+
+         if (strcmp(usb_port, "") != 0) {
+            sfd = open(usb_port, O_RDWR | O_NOCTTY);
+            if (sfd != -1) {
+               tcsetattr(sfd, TCSANOW, &SerialPortSettings);
+               tcflush(sfd, TCIOFLUSH);
             }
-            sread_buf[retval] = '\0';
-            for (int j = 0; j < retval; j++) {
-               if (sread_buf[j] == '\n') {
-                  log_command(command_buffer);
-                  registerArmor("helmet");
-                  parse_json_command(command_buffer, "helmet");
-                  command_buffer[0] = '\0';
-                  command_length = 0;
-               } else if (sread_buf[j] == '\r') {
-                  // Do nothing.
-               } else {
-                  command_buffer[command_length++] = sread_buf[j];
+         } else {
+            LOG_ERROR("Cannot recover from ioctl error on stdin");
+            break;
+         }
+         continue;
+      }
+
+      if (bytes_available == 0) {
+         LOG_WARNING("Device reports 0 bytes available but select indicates ready - possible hangup");
+         continue;
+      }
+
+      /* Read available data, limiting to buffer size */
+      retval = read(sfd, sread_buf, bytes_available < (MAX_SERIAL_BUFFER_LENGTH - 1) ?
+                           bytes_available : (MAX_SERIAL_BUFFER_LENGTH - 1));
+
+      if (retval < 0) {
+         LOG_ERROR("Read error: %s", strerror(errno));
+
+         /* On serious errors, try to recover the port */
+         if (errno == EIO || errno == ENXIO || errno == ENODEV) {
+            LOG_WARNING("Serious I/O error, trying to reset connection");
+            close(sfd);
+            sleep(2);
+
+            if (strcmp(usb_port, "") != 0) {
+               sfd = open(usb_port, O_RDWR | O_NOCTTY);
+               if (sfd != -1) {
+                  tcsetattr(sfd, TCSANOW, &SerialPortSettings);
+                  tcflush(sfd, TCIOFLUSH);
                }
-               this_socket = -1;
+            } else {
+               LOG_ERROR("Cannot recover from read error on stdin");
+               break;
             }
+         }
+         continue;
+      } else if (retval == 0) {
+         LOG_WARNING("Zero bytes read despite having bytes available - possible disconnection");
+         continue;
+      }
+
+      sread_buf[retval] = '\0';
+
+      /* Process each received character */
+      for (int j = 0; j < retval; j++) {
+         if (sread_buf[j] == '\n') {
+            command_buffer[command_length] = '\0';  /* Ensure null termination */
+            if (command_length > 0) {  /* Only process non-empty commands */
+               LOG_INFO("Received command: %s", command_buffer);
+               log_command(command_buffer);
+               registerArmor("helmet");
+               parse_json_command(command_buffer, "helmet");
+            }
+            command_buffer[0] = '\0';
+            command_length = 0;
+         } else if (sread_buf[j] == '\r') {
+            /* Ignore carriage returns */
+         } else if (command_length < MAX_SERIAL_BUFFER_LENGTH - 2) {  /* Leave room for null terminator */
+            command_buffer[command_length++] = sread_buf[j];
+         } else {
+            LOG_WARNING("Command buffer overflow, discarding data");
+            command_buffer[0] = '\0';
+            command_length = 0;
          }
       }
    }
@@ -483,7 +584,7 @@ void *socket_command_processing_thread(void *arg)
    struct sockaddr_in address;
    int opt = 1;
    int addrlen = sizeof(address);
-   char buffer[MAX_FILENAME_LENGTH] = {0};
+   char buffer[MAX_SERIAL_BUFFER_LENGTH] = {0};
 
    // Creating socket file descriptor
    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {

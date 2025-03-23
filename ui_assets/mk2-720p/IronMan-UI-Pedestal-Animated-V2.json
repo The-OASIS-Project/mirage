@@ -1,0 +1,1215 @@
+{
+    "frames": {
+        "pedestal0000": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 368,
+                "h": 412
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0001": {
+            "frame": {
+                "x": 368,
+                "y": 0,
+                "w": 368,
+                "h": 408
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 4,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0002": {
+            "frame": {
+                "x": 736,
+                "y": 0,
+                "w": 368,
+                "h": 404
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 9,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0003": {
+            "frame": {
+                "x": 1104,
+                "y": 0,
+                "w": 368,
+                "h": 400
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 13,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0004": {
+            "frame": {
+                "x": 1472,
+                "y": 0,
+                "w": 368,
+                "h": 396
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 17,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0005": {
+            "frame": {
+                "x": 1840,
+                "y": 0,
+                "w": 368,
+                "h": 392
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 20,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0006": {
+            "frame": {
+                "x": 2208,
+                "y": 0,
+                "w": 368,
+                "h": 388
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 24,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0007": {
+            "frame": {
+                "x": 2576,
+                "y": 0,
+                "w": 368,
+                "h": 384
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 28,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0008": {
+            "frame": {
+                "x": 2944,
+                "y": 0,
+                "w": 368,
+                "h": 382
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 31,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0009": {
+            "frame": {
+                "x": 3312,
+                "y": 0,
+                "w": 368,
+                "h": 378
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 34,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0010": {
+            "frame": {
+                "x": 3680,
+                "y": 0,
+                "w": 368,
+                "h": 375
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 38,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0011": {
+            "frame": {
+                "x": 0,
+                "y": 412,
+                "w": 368,
+                "h": 372
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 40,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0012": {
+            "frame": {
+                "x": 368,
+                "y": 412,
+                "w": 368,
+                "h": 370
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 43,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0013": {
+            "frame": {
+                "x": 736,
+                "y": 412,
+                "w": 368,
+                "h": 367
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 46,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0014": {
+            "frame": {
+                "x": 1104,
+                "y": 412,
+                "w": 368,
+                "h": 364
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 48,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0015": {
+            "frame": {
+                "x": 1472,
+                "y": 412,
+                "w": 368,
+                "h": 362
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 50,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0016": {
+            "frame": {
+                "x": 1840,
+                "y": 412,
+                "w": 368,
+                "h": 360
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 52,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0017": {
+            "frame": {
+                "x": 2208,
+                "y": 412,
+                "w": 368,
+                "h": 358
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 54,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0018": {
+            "frame": {
+                "x": 2576,
+                "y": 412,
+                "w": 368,
+                "h": 356
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 56,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0019": {
+            "frame": {
+                "x": 2944,
+                "y": 412,
+                "w": 368,
+                "h": 355
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 58,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0020": {
+            "frame": {
+                "x": 3312,
+                "y": 412,
+                "w": 368,
+                "h": 354
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 59,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0021": {
+            "frame": {
+                "x": 3680,
+                "y": 412,
+                "w": 368,
+                "h": 352
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 60,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0022": {
+            "frame": {
+                "x": 0,
+                "y": 785,
+                "w": 368,
+                "h": 351
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 62,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0023": {
+            "frame": {
+                "x": 368,
+                "y": 785,
+                "w": 368,
+                "h": 350
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 62,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0024": {
+            "frame": {
+                "x": 736,
+                "y": 785,
+                "w": 368,
+                "h": 349
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0025": {
+            "frame": {
+                "x": 1104,
+                "y": 785,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0026": {
+            "frame": {
+                "x": 1472,
+                "y": 785,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0027": {
+            "frame": {
+                "x": 1840,
+                "y": 785,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 65,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0028": {
+            "frame": {
+                "x": 2208,
+                "y": 785,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 65,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0029": {
+            "frame": {
+                "x": 2576,
+                "y": 785,
+                "w": 368,
+                "h": 347
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 66,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0030": {
+            "frame": {
+                "x": 2944,
+                "y": 785,
+                "w": 368,
+                "h": 412
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0031": {
+            "frame": {
+                "x": 3312,
+                "y": 785,
+                "w": 368,
+                "h": 408
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 4,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0032": {
+            "frame": {
+                "x": 3680,
+                "y": 785,
+                "w": 368,
+                "h": 404
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 9,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0033": {
+            "frame": {
+                "x": 0,
+                "y": 1198,
+                "w": 368,
+                "h": 400
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 13,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0034": {
+            "frame": {
+                "x": 368,
+                "y": 1198,
+                "w": 368,
+                "h": 396
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 17,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0035": {
+            "frame": {
+                "x": 736,
+                "y": 1198,
+                "w": 368,
+                "h": 392
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 20,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0036": {
+            "frame": {
+                "x": 1104,
+                "y": 1198,
+                "w": 368,
+                "h": 388
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 24,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0037": {
+            "frame": {
+                "x": 1472,
+                "y": 1198,
+                "w": 368,
+                "h": 384
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 28,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0038": {
+            "frame": {
+                "x": 1840,
+                "y": 1198,
+                "w": 368,
+                "h": 382
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 31,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0039": {
+            "frame": {
+                "x": 2208,
+                "y": 1198,
+                "w": 368,
+                "h": 378
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 34,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0040": {
+            "frame": {
+                "x": 2576,
+                "y": 1198,
+                "w": 368,
+                "h": 375
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 38,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0041": {
+            "frame": {
+                "x": 2944,
+                "y": 1198,
+                "w": 368,
+                "h": 372
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 40,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0042": {
+            "frame": {
+                "x": 3312,
+                "y": 1198,
+                "w": 368,
+                "h": 370
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 43,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0043": {
+            "frame": {
+                "x": 3680,
+                "y": 1198,
+                "w": 368,
+                "h": 367
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 46,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0044": {
+            "frame": {
+                "x": 0,
+                "y": 1597,
+                "w": 368,
+                "h": 364
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 48,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0045": {
+            "frame": {
+                "x": 368,
+                "y": 1597,
+                "w": 368,
+                "h": 362
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 50,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0046": {
+            "frame": {
+                "x": 736,
+                "y": 1597,
+                "w": 368,
+                "h": 360
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 52,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0047": {
+            "frame": {
+                "x": 1104,
+                "y": 1597,
+                "w": 368,
+                "h": 358
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 54,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0048": {
+            "frame": {
+                "x": 1472,
+                "y": 1597,
+                "w": 368,
+                "h": 356
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 56,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0049": {
+            "frame": {
+                "x": 1840,
+                "y": 1597,
+                "w": 368,
+                "h": 355
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 58,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0050": {
+            "frame": {
+                "x": 2208,
+                "y": 1597,
+                "w": 368,
+                "h": 354
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 59,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0051": {
+            "frame": {
+                "x": 2576,
+                "y": 1597,
+                "w": 368,
+                "h": 352
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 60,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0052": {
+            "frame": {
+                "x": 2944,
+                "y": 1597,
+                "w": 368,
+                "h": 351
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 62,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0053": {
+            "frame": {
+                "x": 3312,
+                "y": 1597,
+                "w": 368,
+                "h": 350
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 62,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0054": {
+            "frame": {
+                "x": 3680,
+                "y": 1597,
+                "w": 368,
+                "h": 349
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0055": {
+            "frame": {
+                "x": 0,
+                "y": 1962,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0056": {
+            "frame": {
+                "x": 368,
+                "y": 1962,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 64,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0057": {
+            "frame": {
+                "x": 736,
+                "y": 1962,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 65,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0058": {
+            "frame": {
+                "x": 1104,
+                "y": 1962,
+                "w": 368,
+                "h": 348
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 65,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        },
+        "pedestal0059": {
+            "frame": {
+                "x": 1472,
+                "y": 1962,
+                "w": 368,
+                "h": 347
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 66,
+                "w": 368,
+                "h": 412
+            },
+            "sourceSize": {
+                "w": 368,
+                "h": 412
+            }
+        }
+    },
+    "meta": {
+        "app": "Adobe Animate",
+        "version": "23.0.1.70",
+        "image": "IronMan-UI-Pedestal-Animated-V2.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 8192,
+            "h": 8192
+        },
+        "scale": "1"
+    }
+}
