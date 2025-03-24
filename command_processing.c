@@ -400,11 +400,11 @@ void *serial_command_processing_thread(void *arg)
       SerialPortSettings.c_cflag &= ~HUPCL;     /* Disable hangup (drop DTR) on close */
 
       /* Input settings */
-      SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY); /* Disable software flow control */
-      SerialPortSettings.c_iflag &= ~(ICANON | ECHO | ECHOE | ISIG); /* Non-canonical mode */
+      SerialPortSettings.c_lflag &= ~(ISIG | ICANON | IEXTEN | ECHO | ECHOE | ECHOK); /* Set raw mode */
+      SerialPortSettings.c_iflag = IGNBRK;  /* Only enable ignore break, disable everything else */
 
       /* Output settings */
-      SerialPortSettings.c_oflag &= ~OPOST;     /* No output processing */
+      SerialPortSettings.c_oflag &= ~(OPOST | ONLCR);  /* Disable all output processing */
 
       /* Setting read timeouts - match minicom */
       SerialPortSettings.c_cc[VMIN] = 1;        /* Wait for at least 1 character */
@@ -417,6 +417,9 @@ void *serial_command_processing_thread(void *arg)
       }
 
       tcflush(sfd, TCIOFLUSH);  /* Flush both input and output buffers */
+
+      /* Wait a moment for settings to take effect */
+      usleep(100000);  /* 100ms delay */
 
 #if 0
       /* Explicitly control DTR/RTS lines to prevent ESP32 reset */

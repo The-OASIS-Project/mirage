@@ -6007,8 +6007,8 @@
         "image": "IronMan-UI-Altitude-Animated-1.png",
         "format": "RGBA8888",
         "size": {
-            "w": 2274,
-            "h": 4096
+            "w": 4050,
+            "h": 7295
         },
         "scale": "1",
         "smartupdate": "$TexturePacker:SmartUpdate:d2517c234f54c2a53debd91fe9497da7:956f612dadb74979da51ba1abf3b257f:e9c6718d89fdd85988891048ff754067$"

@@ -96,7 +96,7 @@
 #define FAILURE 1
 
 #define MAX_FILENAME_LENGTH      1024  /* Generic max filename supported. */
-#define MAX_SERIAL_BUFFER_LENGTH 1024  /* Size of the serial buffer. */
+#define MAX_SERIAL_BUFFER_LENGTH 4096  /* Size of the serial buffer. */
 #define MAX_WIFI_DEV_LENGTH      10    /* Max length for a wifi device name. */
 
 /* These setup local log buffering from USB input. */
