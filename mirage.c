@@ -2052,6 +2052,11 @@ int main(int argc, char **argv)
       return EXIT_FAILURE;
    }
 
+   /* Now that we've parsed the config, set the window size to requested. */
+   window_width = this_hds->eye_output_width * 2;
+   window_height = this_hds->eye_output_height;
+   SDL_SetWindowSize(window, window_width, window_height);
+
    // Set the logical size to your native resolution
    if (SDL_RenderSetLogicalSize(renderer, this_hds->eye_output_width * 2, this_hds->eye_output_height) != 0) {
       SDL_Log("Could not set logical size: %s", SDL_GetError());

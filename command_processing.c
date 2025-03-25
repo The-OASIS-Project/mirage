@@ -551,7 +551,7 @@ void *serial_command_processing_thread(void *arg)
          if (sread_buf[j] == '\n') {
             command_buffer[command_length] = '\0';  /* Ensure null termination */
             if (command_length > 0) {  /* Only process non-empty commands */
-               LOG_INFO("Received command: %s", command_buffer);
+               //LOG_INFO("Received command: %s", command_buffer);
                log_command(command_buffer);
                registerArmor("helmet");
                parse_json_command(command_buffer, "helmet");

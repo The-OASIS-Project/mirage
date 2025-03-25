@@ -4,7 +4,7 @@
       "Width": 720,
       "Camera Height": 720,
       "Camera Width": 1280,
-      "Camera FPS": 30,
+      "Camera FPS": 60,
       "Camera Crop X": 280,
       "Camera Crop Width": 720,
       "Image Path": "ui_assets/mk2-720p/",
