@@ -1097,7 +1097,8 @@ void *video_next_thread(void *arg)
 
    if (this_vod.output == RECORD_STREAM) {
       LOG_INFO("New recording: %s", this_vod.filename);
-      g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_ENCSTR_PIPELINE, this_vod.filename,
+      g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_ENCSTR_PIPELINE, local_window_width, local_window_height,
+                 TARGET_RECORDING_FPS, this_vod.filename,
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
    } else if (this_vod.output == RECORD) {
       LOG_INFO("New recording: %s", this_vod.filename);

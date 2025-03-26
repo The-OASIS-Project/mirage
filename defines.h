@@ -165,7 +165,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #define GSTREAMER_PIPELINE_LENGTH   1024
 #define DEFAULT_CSI_CAM1            0
 #define DEFAULT_CSI_CAM2            1
-#define DEFAULT_USB_CAM1            1
+#define DEFAULT_USB_CAM1            0
 #define DEFAULT_USB_CAM2            2
 
 // Common output pipeline portion
@@ -208,7 +208,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
                            "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 speed-preset=1 ! " \
-                           "h264parse ! matroskamux ! filesink location=%s"
+                           "h264parse ! matroskamux name=mux ! filesink location=%s"
 #else
 // Untested
 #define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
@@ -222,10 +222,10 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                               "tee name=split ! nvvidconv ! video/x-raw, format=I420 ! " \
                               "x264enc bitrate=16000 profile=4 preset-level=4 speed-preset=1 ! " \
-                              "h264parse ! matroskamux ! filesink location=%s " \
+                              "h264parse ! matroskamux name=mux ! filesink location=%s " \
                               "split. ! nvvidconv ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
                               "x264enc bitrate=8000 speed-preset=1 ! " \
                               "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
@@ -236,7 +236,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
                            "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                            "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                           "h264parse ! matroskamux ! filesink location=%s"
+                           "h264parse ! matroskamux name=mux ! filesink location=%s"
 #else
 #define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
                          "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
@@ -250,10 +250,10 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                               "tee name=split ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                               "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                              "h264parse ! matroskamux ! filesink location=%s " \
+                              "h264parse ! matroskamux name=mux ! filesink location=%s " \
                               "split. ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
                               "nvv4l2h264enc bitrate=8000000 profile=4 preset-level=4 ! " \
                               "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
@@ -264,7 +264,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
                            "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 ! " \
-                           "h264parse ! qtmux ! filesink location=%s"
+                           "h264parse ! qtmux name=mux ! filesink location=%s"
 #else
 // untested
 #define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
@@ -278,10 +278,10 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                               "tee name=split ! nvvidconv ! video/x-raw, format=I420 ! " \
                               "x264enc bitrate=16000 speed-preset=1 ! " \
-                              "h264parse ! qtmux ! filesink location=%s " \
+                              "h264parse ! qtmux name=mux ! filesink location=%s " \
                               "split. ! nvvidconv ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
                               "x264enc bitrate=8000 speed-preset=1 ! " \
                               "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
@@ -293,7 +293,7 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
                            "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                            "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                            "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                           "h264parse ! qtmux ! filesink location=%s"
+                           "h264parse ! qtmux name=mux ! filesink location=%s"
 #else
 // untested
 #define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
@@ -308,10 +308,10 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #endif
 
 #define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)2880, height=(int)1440, format=(string)RGBA, framerate=(fraction)30/1 ! " \
+                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
                               "tee name=split ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
                               "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                              "h264parse ! qtmux ! filesink location=%s " \
+                              "h264parse ! qtmux name=mux ! filesink location=%s " \
                               "split. ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
                               "nvv4l2h264enc bitrate=8000000 profile=4 preset-level=4 ! " \
                               "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
