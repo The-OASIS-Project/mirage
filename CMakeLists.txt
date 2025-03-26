@@ -32,20 +32,25 @@ add_definitions(-DGIT_SHA=\"${GIT_SHA}\")
 
 # Platform detection
 if(PLATFORM STREQUAL "AUTO")
-    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-        if(EXISTS "/etc/nv_tegra_release")
-            set(PLATFORM "JETSON")
-            file(READ "/etc/nv_tegra_release" JETSON_MODEL)
-            message(STATUS "Detected Jetson: ${JETSON_MODEL}")
+    # Check if it's a Jetson board first
+    if(EXISTS "/etc/nv_tegra_release")
+        set(PLATFORM "JETSON")
+        file(READ "/etc/nv_tegra_release" JETSON_MODEL)
+        message(STATUS "Detected Jetson: ${JETSON_MODEL}")
+    # Then check if it's a Raspberry Pi (both ARM and ARM64)
+    elseif(EXISTS "/sys/firmware/devicetree/base/model")
+        file(READ "/sys/firmware/devicetree/base/model" RPI_MODEL)
+        if(RPI_MODEL MATCHES "Raspberry Pi")
+            set(PLATFORM "RPI")
+            message(STATUS "Detected RPi: ${RPI_MODEL}")
         endif()
+    # Default platform detection based on processor architecture
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+        message(STATUS "Detected generic ARM64 platform")
+        # Default platform for ARM64 if needed
     elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "armv")
-        if(EXISTS "/sys/firmware/devicetree/base/model")
-            file(READ "/sys/firmware/devicetree/base/model" RPI_MODEL)
-            if(RPI_MODEL MATCHES "Raspberry Pi")
-                set(PLATFORM "RPI")
-                message(STATUS "Detected RPi: ${RPI_MODEL}")
-            endif()
-        endif()
+        message(STATUS "Detected generic ARM platform")
+        # Default platform for ARM if needed
     endif()
 endif()
 

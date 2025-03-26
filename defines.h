@@ -168,6 +168,12 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
 #define DEFAULT_USB_CAM1            0
 #define DEFAULT_USB_CAM2            2
 
+/*
+ * GStreamer Pipeline Components
+ * Organized by function for easier maintenance
+ */
+
+/* === INPUT COMPONENTS === */
 // Common output pipeline portion
 #define GST_CAM_PIPELINE_OUTPUT \
     "video/x-raw, format=(string)RGBA ! " \
@@ -201,142 +207,149 @@ enum { ANGLE_ROLL = 1000, ANGLE_OPPOSITE_ROLL = 1001 };  /* For the roll indicat
     "jpegdec ! videoconvert ! "
 #endif
 
+#define GST_PIPE_INPUT      "appsrc name=srcEncode ! " \
+                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! "
 
-#if defined(MKV_OUT) && defined(SOFTWARE_ENCODE)
+/* === VIDEO PROCESSING COMPONENTS === */
+#ifdef PLATFORM_JETSON
+    #ifdef SOFTWARE_ENCODE
+        /* Jetson software encoding paths */
+        #define GST_PIPE_VIDEO_MAIN    "nvvidconv ! video/x-raw, format=I420 ! " \
+                                      "x264enc bitrate=16000 speed-preset=1 ! "
 
-#ifndef RECORD_AUDIO
-#define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                           "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 speed-preset=1 ! " \
-                           "h264parse ! matroskamux name=mux ! filesink location=%s"
+        #define GST_PIPE_VIDEO_STREAM  "nvvidconv ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
+                                      "x264enc bitrate=8000 speed-preset=1 ! "
+
+        #define GST_PIPE_VIDEO_HLS     "nvvidconv ! video/x-raw, format=I420 ! " \
+                                      "x264enc bitrate=8000 tune=zerolatency ! "
+
+        #define GST_PIPE_VIDEO_YOUTUBE "nvvidconv ! video/x-raw, width=(int)%d, height=(int)%d, format=I420 ! " \
+                                      "x264enc bitrate=%d tune=zerolatency ! "
+    #else
+        /* Jetson hardware encoding paths */
+        #define GST_PIPE_VIDEO_MAIN    "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
+                                      "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! "
+
+        #define GST_PIPE_VIDEO_STREAM  "nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
+                                      "nvv4l2h264enc bitrate=8000000 profile=4 preset-level=4 ! "
+
+        #define GST_PIPE_VIDEO_HLS     "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
+                                      "nvv4l2h264enc bitrate=8000000 profile=2 preset-level=3 ! "
+
+        #define GST_PIPE_VIDEO_YOUTUBE "nvvidconv ! video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, format=NV12 ! " \
+                                      "nvv4l2h264enc bitrate=%d control-rate=0 iframeinterval=120 profile=2 preset-level=3 ! "
+    #endif
+#elif defined(PLATFORM_RPI)
+    #ifdef SOFTWARE_ENCODE
+        /* Software encoding not supported on Raspberry Pi */
+        #error "Software encoding is not supported on Raspberry Pi platform. Please undefine SOFTWARE_ENCODE."
+    #else
+        /* Pi hardware encoding paths */
+        #define GST_PIPE_VIDEO_MAIN    "videoconvert ! video/x-raw, format=I420 ! " \
+                                      "avenc_h264_omx bitrate=16000000 profile=100 ! "
+        #define GST_PIPE_VIDEO_STREAM  "videoconvert ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
+                                      "avenc_h264_omx bitrate=8000000 profile=100 ! "
+        #define GST_PIPE_VIDEO_HLS     "videoconvert ! video/x-raw, format=I420 ! " \
+                                      "avenc_h264_omx bitrate=8000000 profile=100 ! "
+        #define GST_PIPE_VIDEO_YOUTUBE "videoconvert ! video/x-raw, width=(int)%d, height=(int)%d, format=I420 ! " \
+                                      "avenc_h264_omx bitrate=%d profile=100 ! "
+    #endif
 #else
-// Untested
-#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 speed-preset=1 ! " \
-                         "h264parse ! queue ! mux. " \
-                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
-                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
-                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
-                         "matroskamux name=mux ! filesink location=%s"
+    /* Default to software encoding for other platforms */
+    #define GST_PIPE_VIDEO_MAIN    "videoconvert ! video/x-raw, format=I420 ! " \
+                                  "x264enc bitrate=16000 speed-preset=1 ! "
+
+    #define GST_PIPE_VIDEO_STREAM  "videoconvert ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
+                                  "x264enc bitrate=8000 speed-preset=1 ! "
+
+    #define GST_PIPE_VIDEO_HLS     "videoconvert ! video/x-raw, format=I420 ! " \
+                                  "x264enc bitrate=8000 tune=zerolatency ! "
+
+    #define GST_PIPE_VIDEO_YOUTUBE "videoconvert ! video/x-raw, width=(int)%d, height=(int)%d, format=I420 ! " \
+                                  "x264enc bitrate=%d tune=zerolatency ! "
 #endif
 
-#define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                              "tee name=split ! nvvidconv ! video/x-raw, format=I420 ! " \
-                              "x264enc bitrate=16000 profile=4 preset-level=4 speed-preset=1 ! " \
-                              "h264parse ! matroskamux name=mux ! filesink location=%s " \
-                              "split. ! nvvidconv ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
-                              "x264enc bitrate=8000 speed-preset=1 ! " \
-                              "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
+/* === PARSER COMPONENTS === */
+#define GST_PIPE_PARSE          "h264parse ! "
+#define GST_PIPE_PARSE_CONFIG   "h264parse config-interval=1 ! "
 
-#elif defined(MKV_OUT) && !defined(SOFTWARE_ENCODE)
-#ifndef RECORD_AUDIO
-#define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                           "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                           "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                           "h264parse ! matroskamux name=mux ! filesink location=%s"
+/* === AUDIO COMPONENTS === */
+#define GST_PIPE_AUDIO          "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
+                               "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                               "audioconvert ! voaacenc bitrate=128000 ! queue ! mux."
+
+#define GST_PIPE_AUDIO_YOUTUBE  "pulsesrc device=%s do-timestamp=true ! " \
+                               "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
+                               "audioconvert ! voaacenc bitrate=128000 ! " \
+                               "aacparse ! queue leaky=2 ! mux."
+
+/* === MUXER COMPONENTS === */
+#ifdef MKV_OUT
+    #define GST_PIPE_MUXER      "matroskamux name=mux"
 #else
-#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                         "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                         "h264parse ! queue ! mux. " \
-                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
-                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
-                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
-                         "matroskamux name=mux ! filesink location=%s"
+    #define GST_PIPE_MUXER      "qtmux name=mux"
 #endif
 
-#define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                              "tee name=split ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                              "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                              "h264parse ! matroskamux name=mux ! filesink location=%s " \
-                              "split. ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
-                              "nvv4l2h264enc bitrate=8000000 profile=4 preset-level=4 ! " \
-                              "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
+/* === OUTPUT COMPONENTS === */
+#define GST_PIPE_FILE_OUT       " ! filesink location=%s"
+#define GST_PIPE_UDP_OUT        " ! rtph264pay ! udpsink host=%s port=5000 sync=false"
+#define GST_PIPE_HLS_OUT        "mux. hlssink2 name=mux playlist-root=http://%s/hls/ " \
+                               "location=/var/www/html/hls/segment%%d.ts " \
+                               "playlist-location=/var/www/html/hls/playlist.m3u8"
+#define GST_PIPE_RTMP_OUT       "flvmux name=mux streamable=true latency=100000000 " \
+                               "! rtmpsink location='rtmp://a.rtmp.youtube.com/live2/%s live=1'"
 
-#elif !defined(MKV_OUT) && defined(SOFTWARE_ENCODE)
+/* === UTILITY COMPONENTS === */
+#define GST_PIPE_TEE            "tee name=split ! "
+#define GST_PIPE_TEE_BRANCH     "split. ! "
+#define GST_PIPE_QUEUE          "queue ! mux."
+#define GST_PIPE_QUEUE_LEAKY    "queue leaky=2 ! mux."
 
-#ifndef RECORD_AUDIO
-#define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                           "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 ! " \
-                           "h264parse ! qtmux name=mux ! filesink location=%s"
+/* === COMPLETE PIPELINE DEFINITIONS === */
+
+/* Recording pipeline */
+#ifdef RECORD_AUDIO
+#define GST_ENC_PIPELINE        GST_PIPE_INPUT \
+                               GST_PIPE_VIDEO_MAIN \
+                               GST_PIPE_PARSE \
+                               GST_PIPE_QUEUE " " \
+                               GST_PIPE_AUDIO " " \
+                               GST_PIPE_MUXER \
+                               GST_PIPE_FILE_OUT
+
 #else
-// untested
-#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw, format=I420 ! x264enc bitrate=16000 ! " \
-                         "h264parse ! queue ! mux. " \
-                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
-                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
-                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
-                         "qtmux name=mux ! filesink location=%s"
+#define GST_ENC_PIPELINE        GST_PIPE_INPUT \
+                               GST_PIPE_VIDEO_MAIN \
+                               GST_PIPE_PARSE \
+                               GST_PIPE_MUXER \
+                               GST_PIPE_FILE_OUT
 #endif
 
-#define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                              "tee name=split ! nvvidconv ! video/x-raw, format=I420 ! " \
-                              "x264enc bitrate=16000 speed-preset=1 ! " \
-                              "h264parse ! qtmux name=mux ! filesink location=%s " \
-                              "split. ! nvvidconv ! video/x-raw, format=I420, width=(int)%d, height=(int)%d ! " \
-                              "x264enc bitrate=8000 speed-preset=1 ! " \
-                              "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
+/* Recording + Streaming pipeline */
+#define GST_ENCSTR_PIPELINE     GST_PIPE_INPUT \
+                               GST_PIPE_TEE \
+                               GST_PIPE_VIDEO_MAIN \
+                               GST_PIPE_PARSE \
+                               GST_PIPE_MUXER \
+                               GST_PIPE_FILE_OUT " " \
+                               GST_PIPE_TEE_BRANCH \
+                               GST_PIPE_VIDEO_STREAM \
+                               GST_PIPE_PARSE_CONFIG \
+                               GST_PIPE_UDP_OUT
 
-#elif !defined(MKV_OUT) && !defined(SOFTWARE_ENCODE)
-
-#ifndef RECORD_AUDIO
-#define GST_ENC_PIPELINE   "appsrc name=srcEncode ! " \
-                           "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                           "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                           "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                           "h264parse ! qtmux name=mux ! filesink location=%s"
+/* Streaming-only pipeline */
+#ifdef RECORD_AUDIO
+#define GST_STR_PIPELINE        GST_PIPE_INPUT \
+                               GST_PIPE_VIDEO_YOUTUBE \
+                               GST_PIPE_PARSE \
+                               GST_PIPE_QUEUE_LEAKY " " \
+                               GST_PIPE_AUDIO_YOUTUBE " " \
+                               GST_PIPE_RTMP_OUT
 #else
-// untested
-#define GST_ENC_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                         "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                         "h264parse ! queue ! mux. " \
-                         "pulsesrc device=%s do-timestamp=true provide-clock=true ! " \
-                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
-                         "audioconvert ! voaacenc bitrate=128000 ! queue ! mux. " \
-                         "qtmux name=mux ! filesink location=%s"
-#endif
-
-#define GST_ENCSTR_PIPELINE   "appsrc name=srcEncode ! " \
-                              "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                              "tee name=split ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                              "nvv4l2h264enc bitrate=16000000 profile=4 preset-level=4 ! " \
-                              "h264parse ! qtmux name=mux ! filesink location=%s " \
-                              "split. ! nvvidconv ! video/x-raw(memory:NVMM), format=NV12, width=(int)%d, height=(int)%d ! " \
-                              "nvv4l2h264enc bitrate=8000000 profile=4 preset-level=4 ! " \
-                              "h264parse config-interval=1 ! rtph264pay ! udpsink host=%s port=5000 sync=false"
-
-#endif
-
-#ifndef RECORD_AUDIO
-#define GST_STR_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw(memory:NVMM), format=NV12 ! " \
-                         "nvv4l2h264enc bitrate=8000000 profile=2 preset-level=3 ! " \
-                         "h264parse ! mux. " \
-                         "hlssink2 name=mux playlist-root=http://%s/hls/ location=/var/www/html/hls/segment%%d.ts playlist-location=/var/www/html/hls/playlist.m3u8"
-#else
-#define GST_STR_PIPELINE "appsrc name=srcEncode ! " \
-                         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)RGBA, framerate=(fraction)%d/1 ! " \
-                         "nvvidconv ! video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, format=NV12 ! " \
-                         "nvv4l2h264enc bitrate=%d control-rate=0 iframeinterval=120 profile=2 preset-level=3 ! " \
-                         "h264parse ! queue leaky=2 ! mux. " \
-                         "pulsesrc device=%s do-timestamp=true ! " \
-                         "audio/x-raw, format=(string)S16LE, rate=(int)44100, channels=(int)2 ! " \
-                         "audioconvert ! voaacenc bitrate=128000 ! " \
-                         "aacparse ! queue leaky=2 ! mux. " \
-                         "flvmux name=mux streamable=true latency=100000000 ! " \
-                         "rtmpsink location='rtmp://a.rtmp.youtube.com/live2/%s live=1'"
+#define GST_STR_PIPELINE        GST_PIPE_INPUT \
+                               GST_PIPE_VIDEO_YOUTUBE \
+                               GST_PIPE_PARSE \
+                               GST_PIPE_RTMP_OUT
 #endif
 
 #endif // DEFINES_H

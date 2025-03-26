@@ -1102,20 +1102,27 @@ void *video_next_thread(void *arg)
                  this_ss->stream_width, this_ss->stream_height, this_ss->stream_dest_ip);
    } else if (this_vod.output == RECORD) {
       LOG_INFO("New recording: %s", this_vod.filename);
-#ifndef RECORD_AUDIO
-      g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_ENC_PIPELINE, local_window_width, local_window_height,
-                 TARGET_RECORDING_FPS, this_vod.filename);
-#else
+#ifdef RECORD_AUDIO
       g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_ENC_PIPELINE, local_window_width, local_window_height,
                  TARGET_RECORDING_FPS, RECORD_PULSE_AUDIO_DEVICE, this_vod.filename);
+#else
+      g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_ENC_PIPELINE, local_window_width, local_window_height,
+                 TARGET_RECORDING_FPS, this_vod.filename);
 #endif
       LOG_INFO("desc: %s", descr);
    } else if (this_vod.output == STREAM) {
+#ifdef RECORD_AUDIO
       g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_STR_PIPELINE,
                  local_window_width, local_window_height, TARGET_RECORDING_FPS,
                  STREAM_WIDTH, STREAM_HEIGHT, STREAM_BITRATE,
                  RECORD_PULSE_AUDIO_DEVICE,
                  YOUTUBE_STREAM_KEY);
+#else
+      g_snprintf(descr, GSTREAMER_PIPELINE_LENGTH, GST_STR_PIPELINE,
+                 local_window_width, local_window_height, TARGET_RECORDING_FPS,
+                 STREAM_WIDTH, STREAM_HEIGHT, STREAM_BITRATE,
+                 YOUTUBE_STREAM_KEY);
+#endif
    } else {
       LOG_ERROR("Invalid destination passed.");
       return NULL;
