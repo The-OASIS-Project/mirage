@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 #include <json-c/json.h>
 
@@ -347,238 +348,346 @@ void log_command(char *command)
    }
 }
 
-/* It turns out processing this along with the frame rate doesn't cut it.
- * This function processes input from USB/serial.
+/**
+ * Opens and configures a serial port for communication
  *
- * TODO: This was kind of a quick fix. I think I can do better.
+ * @param port_name The name of the serial port to open
+ * @param baud_rate The baud rate to configure
+ * @param fd Pointer to store the resulting file descriptor
+ * @return 0 on success, -1 on failure
  */
-void *serial_command_processing_thread(void *arg)
-{
-   int sfd = 0;                 /* Socket file descriptor for command processing. */
-   fd_set set;
-   struct timeval timeout;
-   char sread_buf[MAX_SERIAL_BUFFER_LENGTH];
-   char *usb_port = (char *)arg;
-   struct termios SerialPortSettings;
+int serial_port_connect(const char *port_name, speed_t baud_rate, int *fd) {
+    struct termios SerialPortSettings;
 
-   /* command buffering */
-   char command_buffer[MAX_SERIAL_BUFFER_LENGTH];
-   int command_length = 0;
+    if (strcmp(port_name, "") == 0) {
+        *fd = fileno(stdin);
+        LOG_INFO("Using stdin for commands instead of serial port");
+        return 0;
+    }
 
-   command_buffer[0] = '\0';
+    // Open the serial port
+    *fd = open(port_name, O_RDWR | O_NOCTTY);
+    if (*fd == -1) {
+        LOG_ERROR("Unable to open serial port %s: %s", port_name, strerror(errno));
+        return -1;
+    }
 
-   memset(raw_log, '\0', LOG_ROWS * LOG_LINE_LENGTH);
+    LOG_INFO("Serial port %s opened successfully.", port_name);
 
-   /* Read from serial input. */
-   if (strcmp(usb_port, "") == 0) {
-      sfd = fileno(stdin);
-      LOG_INFO("Using stdin for commands instead of serial port");
-   } else {
-      /* Open the serial port. */
-      sfd = open(usb_port, O_RDWR | O_NOCTTY);
-      if (sfd == -1) {
-         LOG_ERROR("Unable to open serial port %s: %s", usb_port, strerror(errno));
-         return NULL;
-      } else {
-         LOG_INFO("Serial port %s opened successfully.", usb_port);
-      }
+    // Clear all settings
+    memset(&SerialPortSettings, 0, sizeof(SerialPortSettings));
 
-      /* Setup serial port */
-      tcgetattr(sfd, &SerialPortSettings);
-      cfsetispeed(&SerialPortSettings, B115200);        /* Set Read Speed as 115200 */
-      cfsetospeed(&SerialPortSettings, B115200);        /* Set Write Speed as 115200 */
+    // Get current settings
+    if (tcgetattr(*fd, &SerialPortSettings) != 0) {
+        LOG_ERROR("Failed to get port attributes: %s", strerror(errno));
+        LOG_ERROR("Closing port.");
+        close(*fd);
+        return -1;
+    }
 
-      /* 8N1 Mode */
-      SerialPortSettings.c_cflag &= ~PARENB;    /* Disables Parity */
-      SerialPortSettings.c_cflag &= ~CSTOPB;    /* 1 Stop bit */
-      SerialPortSettings.c_cflag &= ~CSIZE;     /* Clear size bits */
-      SerialPortSettings.c_cflag |= CS8;        /* 8 data bits */
+    // Set input/output baud rate
+    cfsetispeed(&SerialPortSettings, baud_rate);
+    cfsetospeed(&SerialPortSettings, baud_rate);
 
-      /* Flow control and modem settings */
-      SerialPortSettings.c_cflag |= CRTSCTS;    /* Enable hardware flow Control */
-      SerialPortSettings.c_cflag |= CREAD | CLOCAL; /* Enable receiver, Ignore modem control lines */
-      SerialPortSettings.c_cflag &= ~HUPCL;     /* Disable hangup (drop DTR) on close */
+    // 8N1 Mode
+    SerialPortSettings.c_cflag &= ~PARENB;    // Disable parity
+    SerialPortSettings.c_cflag &= ~CSTOPB;    // 1 stop bit
+    SerialPortSettings.c_cflag &= ~CSIZE;     // Clear size bits
+    SerialPortSettings.c_cflag |= CS8;        // 8 data bits
 
-      /* Input settings */
-      SerialPortSettings.c_lflag &= ~(ISIG | ICANON | IEXTEN | ECHO | ECHOE | ECHOK); /* Set raw mode */
-      SerialPortSettings.c_iflag = IGNBRK;  /* Only enable ignore break, disable everything else */
+    // Flow control and modem settings
+    SerialPortSettings.c_cflag |= CRTSCTS;    // Enable hardware flow Control
+    SerialPortSettings.c_cflag |= CREAD | CLOCAL; // Enable receiver, ignore modem control lines
+    SerialPortSettings.c_cflag &= ~HUPCL;     // Disable hangup on close
 
-      /* Output settings */
-      SerialPortSettings.c_oflag &= ~(OPOST | ONLCR);  /* Disable all output processing */
+    // Raw input mode
+    SerialPortSettings.c_lflag &= ~(ISIG | ICANON | IEXTEN | ECHO | ECHOE | ECHOK);
+    SerialPortSettings.c_iflag = IGNBRK;
 
-      /* Setting read timeouts - match minicom */
-      SerialPortSettings.c_cc[VMIN] = 1;        /* Wait for at least 1 character */
-      SerialPortSettings.c_cc[VTIME] = 5;       /* Wait up to 0.5 seconds */
+    // Raw output mode
+    SerialPortSettings.c_oflag &= ~(OPOST | ONLCR);
 
-      if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
-         LOG_ERROR("ERROR in setting attributes: %s", strerror(errno));
-         close(sfd);
-         return NULL;
-      }
+    // Read timeouts
+    SerialPortSettings.c_cc[VMIN] = 0;       // Return immediately with what's available
+    SerialPortSettings.c_cc[VTIME] = 1;       // 0.1 seconds timeout between bytes
 
-      tcflush(sfd, TCIOFLUSH);  /* Flush both input and output buffers */
+    // Apply settings
+    if (tcsetattr(*fd, TCSANOW, &SerialPortSettings) != 0) {
+        LOG_ERROR("ERROR in setting attributes: %s", strerror(errno));
+        LOG_ERROR("Closing port.");
+        close(*fd);
+        return -1;
+    }
 
-      /* Wait a moment for settings to take effect */
-      usleep(100000);  /* 100ms delay */
+    tcflush(*fd, TCIOFLUSH);
 
-#if 0
-      /* Explicitly control DTR/RTS lines to prevent ESP32 reset */
-      int flags;
-      flags = TIOCM_DTR;
-      ioctl(sfd, TIOCMBIC, &flags);  /* Clear DTR */
-      flags = TIOCM_RTS;
-      ioctl(sfd, TIOCMBIC, &flags);  /* Clear RTS */
-      sleep(1);  /* Give device time to stabilize */
-#endif
-   }
+    // Short delay to let settings take effect
+    usleep(100000);
 
-   while (!checkShutdown()) {
-      int retval = 0;
-      int max_socket = 0;
-      int bytes_available = 0;
+    return 0;
+}
 
-      timeout.tv_sec = 1;
-      timeout.tv_usec = 0;
-      FD_ZERO(&set);
-      FD_SET(sfd, &set);
+/**
+ * Main thread function for processing serial communication
+ * Uses non-blocking I/O with select() timeouts for reliable operation
+ *
+ * @param arg Pointer to USB port name string
+ * @return NULL on thread completion
+ */
+void *serial_command_processing_thread(void *arg) {
+    int sfd = -1;
+    fd_set read_fds;
+    struct timeval timeout, read_timeout;
+    char sread_buf[MAX_SERIAL_BUFFER_LENGTH];
+    char *usb_port = (char *)arg;
 
-      if (sfd > max_socket)
-         max_socket = sfd;
+    /* Command buffering */
+    char command_buffer[MAX_SERIAL_BUFFER_LENGTH];
+    int command_length = 0;
 
-      retval = select(max_socket + 1, &set, NULL, NULL, &timeout);
-      if (retval < 0) {
-         if (errno == EBADF) {
-            LOG_ERROR("Select error: FD closed (%s), attempting to reopen", strerror(errno));
-            close(sfd);
+    /* Watchdog and reconnection settings */
+    time_t last_successful_read = 0;
+    int watchdog_timeout_sec = 10; // Consider device dead after 10 sec without data
+    int reconnect_attempts = 0;
+    int max_reconnect_delay = 30; // Max seconds between reconnection attempts
+    speed_t serial_speed = B115200;
 
-            /* Wait a moment before reopening */
-            sleep(1);
+    /* Initialize command buffer */
+    command_buffer[0] = '\0';
+    memset(raw_log, '\0', LOG_ROWS * LOG_LINE_LENGTH);
 
-            /* Only try to reopen if we're using a real serial port, not stdin */
+    /* Initial connection */
+    if (serial_port_connect(usb_port, serial_speed, &sfd) != 0) {
+        if (strcmp(usb_port, "") != 0) {
+            LOG_ERROR("Initial connection to serial port %s failed, will retry", usb_port);
+            // Continue anyway - main loop will handle reconnection
+        } else {
+            LOG_ERROR("Failed to open stdin, exiting thread");
+            return NULL;
+        }
+    } else {
+        last_successful_read = time(NULL);
+    }
+
+    while (!checkShutdown()) {
+        int select_result, bytes_available = 0;
+        int read_result = 0;
+        int flags;
+
+        /* Check if we have a valid file descriptor */
+        if (sfd < 0) {
+            /* If we don't have a valid file descriptor, try to reconnect */
             if (strcmp(usb_port, "") != 0) {
-               sfd = open(usb_port, O_RDWR | O_NOCTTY);
-               if (sfd == -1) {
-                  LOG_ERROR("Failed to reopen serial port: %s", strerror(errno));
-                  sleep(5);  /* Longer delay before retry */
-                  continue;
-               }
+                /* Calculate backoff delay - increases with failed attempts but caps at maximum */
+                int backoff_delay = (reconnect_attempts > max_reconnect_delay) ?
+                                    max_reconnect_delay : reconnect_attempts;
 
-               /* Re-configure the port after reopening */
-               if ((tcsetattr(sfd, TCSANOW, &SerialPortSettings)) != 0) {
-                  LOG_ERROR("ERROR in setting attributes after reopen: %s", strerror(errno));
-                  close(sfd);
-                  sleep(5);
-                  continue;
-               }
-               tcflush(sfd, TCIOFLUSH);
+                LOG_INFO("Attempting to reconnect to %s (attempt %d, delay %d sec)",
+                        usb_port, reconnect_attempts + 1, backoff_delay);
+
+                sleep(backoff_delay); // Delay before reconnection attempt
+
+                if (serial_port_connect(usb_port, serial_speed, &sfd) == 0) {
+                    LOG_INFO("Successfully reconnected to %s", usb_port);
+                    reconnect_attempts = 0;
+                    last_successful_read = time(NULL);
+                } else {
+                    LOG_WARNING("Failed to reconnect to %s", usb_port);
+                    reconnect_attempts++;
+                    continue;
+                }
             } else {
-               /* If using stdin, we're in trouble if it closes */
-               LOG_ERROR("stdin closed, exiting thread");
-               break;
+                LOG_ERROR("Invalid file descriptor and not using serial port, exiting thread");
+                break;
+            }
+        }
+
+        /* Check watchdog timer */
+        time_t current_time = time(NULL);
+        if (strcmp(usb_port, "") != 0 && last_successful_read > 0 &&
+            (current_time - last_successful_read) > watchdog_timeout_sec) {
+            LOG_WARNING("No data received for %ld seconds, attempting reconnection",
+                        current_time - last_successful_read);
+
+            /* Close and invalidate the file descriptor */
+            close(sfd);
+            sfd = -1;
+            continue; // Will trigger reconnection on next iteration
+        }
+
+        /* Wait for data with timeout using select() */
+        FD_ZERO(&read_fds);
+        FD_SET(sfd, &read_fds);
+        timeout.tv_sec = 1;  // 1 second timeout for main loop
+        timeout.tv_usec = 0;
+
+        select_result = select(sfd + 1, &read_fds, NULL, NULL, &timeout);
+
+        if (select_result < 0) {
+            if (errno == EINTR) {
+                /* Interrupted by signal, not an error */
+                continue;
+            }
+
+            LOG_ERROR("Select error: %s", strerror(errno));
+
+            /* Handle serious errors by reconnecting */
+            if (strcmp(usb_port, "") != 0) {
+                close(sfd);
+                sfd = -1;
+                continue; // Will trigger reconnection on next iteration
+            } else {
+                LOG_ERROR("Select error on stdin, exiting thread");
+                break;
+            }
+        } else if (select_result == 0) {
+            /* Timeout, no data available - this is normal */
+            continue;
+        }
+
+        /* At this point, data should be available */
+        if (!FD_ISSET(sfd, &read_fds)) {
+            /* This shouldn't happen but check anyway */
+            continue;
+        }
+
+        /* Check bytes available */
+        if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
+            LOG_ERROR("ioctl error: %s", strerror(errno));
+            if (strcmp(usb_port, "") != 0) {
+                close(sfd);
+                sfd = -1;
+                continue; // Will trigger reconnection on next iteration
+            } else {
+                LOG_ERROR("ioctl error on stdin, exiting thread");
+                break;
+            }
+        }
+
+        if (bytes_available == 0) {
+            if (strcmp(usb_port, "") != 0) {
+                LOG_WARNING("Zero bytes available but select indicated ready - possible device issue");
+                /* Test the connection by doing a non-blocking zero-length write */
+                flags = fcntl(sfd, F_GETFL, 0);
+                fcntl(sfd, F_SETFL, flags | O_NONBLOCK);
+
+                if (write(sfd, NULL, 0) < 0 && errno != EAGAIN && errno != EWOULDBLOCK) {
+                    LOG_WARNING("Connection test failed: %s", strerror(errno));
+                    close(sfd);
+                    sfd = -1;
+                    continue; // Will trigger reconnection on next iteration
+                }
+
+                /* Restore original flags */
+                fcntl(sfd, F_SETFL, flags);
             }
             continue;
-         }
-         LOG_ERROR("Select error: %s", strerror(errno));
-         continue;
-      } else if (retval == 0) {
-         /* This is normal, just a timeout */
-         continue;
-      }
+        }
 
-      if (!FD_ISSET(sfd, &set)) {
-         continue;  /* No data available on our file descriptor */
-      }
+        /* Set non-blocking mode for read */
+        flags = fcntl(sfd, F_GETFL, 0);
+        fcntl(sfd, F_SETFL, flags | O_NONBLOCK);
 
-      /* Check bytes available */
-      if (ioctl(sfd, FIONREAD, &bytes_available) == -1) {
-         LOG_ERROR("ioctl error: %s", strerror(errno));
-         /* Reset on ioctl error rather than trying to continue */
-         close(sfd);
-         sleep(1);
+        /* Read with select() timeout */
+        FD_ZERO(&read_fds);
+        FD_SET(sfd, &read_fds);
+        read_timeout.tv_sec = 2;  // 2 second timeout for read operation
+        read_timeout.tv_usec = 0;
 
-         if (strcmp(usb_port, "") != 0) {
-            sfd = open(usb_port, O_RDWR | O_NOCTTY);
-            if (sfd != -1) {
-               tcsetattr(sfd, TCSANOW, &SerialPortSettings);
-               tcflush(sfd, TCIOFLUSH);
-            }
-         } else {
-            LOG_ERROR("Cannot recover from ioctl error on stdin");
-            break;
-         }
-         continue;
-      }
+        select_result = select(sfd + 1, &read_fds, NULL, NULL, &read_timeout);
 
-      if (bytes_available == 0) {
-         LOG_WARNING("Device reports 0 bytes available but select indicates ready - possible hangup");
-         continue;
-      }
-
-      /* Read available data, limiting to buffer size */
-      retval = read(sfd, sread_buf, bytes_available < (MAX_SERIAL_BUFFER_LENGTH - 1) ?
-                           bytes_available : (MAX_SERIAL_BUFFER_LENGTH - 1));
-
-      if (retval < 0) {
-         LOG_ERROR("Read error: %s", strerror(errno));
-
-         /* On serious errors, try to recover the port */
-         if (errno == EIO || errno == ENXIO || errno == ENODEV) {
-            LOG_WARNING("Serious I/O error, trying to reset connection");
-            close(sfd);
-            sleep(2);
-
-            if (strcmp(usb_port, "") != 0) {
-               sfd = open(usb_port, O_RDWR | O_NOCTTY);
-               if (sfd != -1) {
-                  tcsetattr(sfd, TCSANOW, &SerialPortSettings);
-                  tcflush(sfd, TCIOFLUSH);
-               }
+        if (select_result <= 0) {
+            if (select_result < 0) {
+                LOG_ERROR("Read select error: %s", strerror(errno));
             } else {
-               LOG_ERROR("Cannot recover from read error on stdin");
-               break;
+                LOG_WARNING("Read operation timed out after 2 seconds");
             }
-         }
-         continue;
-      } else if (retval == 0) {
-         LOG_WARNING("Zero bytes read despite having bytes available - possible disconnection");
-         continue;
-      }
 
-      sread_buf[retval] = '\0';
-
-      /* Process each received character */
-      for (int j = 0; j < retval; j++) {
-         if (sread_buf[j] == '\n') {
-            command_buffer[command_length] = '\0';  /* Ensure null termination */
-            if (command_length > 0) {  /* Only process non-empty commands */
-               //LOG_INFO("Received command: %s", command_buffer);
-               log_command(command_buffer);
-               registerArmor("helmet");
-               parse_json_command(command_buffer, "helmet");
+            /* Handle timeout or error */
+            if (strcmp(usb_port, "") != 0) {
+                LOG_WARNING("Possible device hang, attempting to recover connection");
+                /* Restore original flags before closing */
+                fcntl(sfd, F_SETFL, flags);
+                close(sfd);
+                sfd = -1;
+                continue; // Will trigger reconnection on next iteration
             }
-            command_buffer[0] = '\0';
-            command_length = 0;
-         } else if (sread_buf[j] == '\r') {
-            /* Ignore carriage returns */
-         } else if (command_length < MAX_SERIAL_BUFFER_LENGTH - 2) {  /* Leave room for null terminator */
-            command_buffer[command_length++] = sread_buf[j];
-         } else {
-            LOG_WARNING("Command buffer overflow, discarding data");
-            command_buffer[0] = '\0';
-            command_length = 0;
-         }
-      }
-   }
 
-#ifdef DEBUG_SHUTDOWN
-   LOG_INFO("Closing serial input.");
-#endif
-   close(sfd);
-#ifdef DEBUG_SHUTDOWN
-   LOG_INFO("Done.");
-#endif
+            /* Restore original flags */
+            fcntl(sfd, F_SETFL, flags);
+            continue;
+        }
 
-   return NULL;
+        /* Actually read the data */
+        read_result = read(sfd, sread_buf,
+                          bytes_available < (MAX_SERIAL_BUFFER_LENGTH - 1) ?
+                          bytes_available : (MAX_SERIAL_BUFFER_LENGTH - 1));
+
+        /* Restore original flags */
+        fcntl(sfd, F_SETFL, flags);
+
+        if (read_result < 0) {
+            LOG_ERROR("Read error: %s", strerror(errno));
+
+            /* Handle serious I/O errors */
+            if (errno == EIO || errno == ENXIO || errno == ENODEV || errno == EBADF) {
+                LOG_WARNING("Serious I/O error, reconnecting");
+                if (strcmp(usb_port, "") != 0) {
+                    close(sfd);
+                    sfd = -1;
+                    continue; // Will trigger reconnection on next iteration
+                } else {
+                    LOG_ERROR("Cannot recover from read error on stdin");
+                    break;
+                }
+            }
+            continue;
+        } else if (read_result == 0) {
+            LOG_WARNING("Zero bytes read despite having bytes available - possible disconnection");
+            if (strcmp(usb_port, "") != 0) {
+                close(sfd);
+                sfd = -1;
+                continue; // Will trigger reconnection on next iteration
+            }
+            continue;
+        }
+
+        /* Update watchdog timer and reset reconnection attempts on successful read */
+        last_successful_read = time(NULL);
+        reconnect_attempts = 0;
+
+        /* Process the received data */
+        sread_buf[read_result] = '\0';
+
+        for (int j = 0; j < read_result; j++) {
+            if (sread_buf[j] == '\n') {
+                command_buffer[command_length] = '\0';
+                if (command_length > 0) {
+                    log_command(command_buffer);
+                    registerArmor("helmet");
+                    parse_json_command(command_buffer, "helmet");
+                }
+                command_buffer[0] = '\0';
+                command_length = 0;
+            } else if (sread_buf[j] == '\r') {
+                /* Ignore carriage returns */
+            } else if (command_length < MAX_SERIAL_BUFFER_LENGTH - 2) {
+                command_buffer[command_length++] = sread_buf[j];
+            } else {
+                LOG_WARNING("Command buffer overflow, discarding data");
+                command_buffer[0] = '\0';
+                command_length = 0;
+            }
+        }
+    }
+
+    /* Clean up on thread exit */
+    if (sfd >= 0) {
+        close(sfd);
+    }
+
+    LOG_INFO("Serial command processing thread exiting");
+    return NULL;
 }
 
 void *socket_command_processing_thread(void *arg)
