@@ -47,15 +47,30 @@ void on_connect(struct mosquitto *mosq, void *obj, int reason_code)
       return;
    }
 
-   LOG_INFO("Moquitto successfully connected. Subscribing to...");
+   LOG_INFO("Mosquitto successfully connected. Subscribing to...");
+
+   // Subscribe to the main hud service
+   rc = mosquitto_subscribe(mosq, NULL, "hud", 1);
+   if(rc != MOSQ_ERR_SUCCESS){
+      LOG_ERROR("Error subscribing to hud: %s", mosquitto_strerror(rc));
+      mosquitto_disconnect(mosq);
+   }
+
+   // Subscribe to the helmet topic for faceplate control
+   rc = mosquitto_subscribe(mosq, NULL, "helmet", 1);
+   if(rc != MOSQ_ERR_SUCCESS){
+      LOG_ERROR("Error subscribing to helmet: %s", mosquitto_strerror(rc));
+      mosquitto_disconnect(mosq);
+   }
+
    /* This works. I think I like the idea of a registration service better but... */
    while (this_element != NULL) {
       LOG_INFO(" %s\n", this_element->mqtt_device);
-	   rc = mosquitto_subscribe(mosq, NULL, this_element->mqtt_device, 1);
-	   if(rc != MOSQ_ERR_SUCCESS){
-		   LOG_ERROR("Error subscribing: %s", mosquitto_strerror(rc));
-		   mosquitto_disconnect(mosq);
-	   }
+      rc = mosquitto_subscribe(mosq, NULL, this_element->mqtt_device, 1);
+      if(rc != MOSQ_ERR_SUCCESS){
+         LOG_ERROR("Error subscribing: %s", mosquitto_strerror(rc));
+         mosquitto_disconnect(mosq);
+      }
 
       this_element = this_element->next;
    }
@@ -82,6 +97,13 @@ void on_subscribe(struct mosquitto *mosq, void *obj, int mid, int qos_count, con
 void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *msg)
 {
    LOG_INFO("%s %d %s", msg->topic, msg->qos, (char *)msg->payload);
+
+   // Check if this is a helmet command that needs to be forwarded to serial
+   if (strcmp(msg->topic, "helmet") == 0) {
+      // Forward the message to serial if connected
+      LOG_INFO("Received 'helmet' message to forward.");
+      forward_helmet_command_to_serial((char *)msg->payload);
+   }
 
    if (strcmp(msg->topic, "hud") != 0) {
       /* FIXME: Right now if it's not for "hud," I'm assuming it's from an armor component.

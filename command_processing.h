@@ -29,4 +29,14 @@ int parse_json_command(char *command_string, char *topic);
 void *serial_command_processing_thread(void *arg);
 void *socket_command_processing_thread(void *arg);
 
+// Serial state management
+int serial_is_enabled(void);
+int serial_get_fd(void);
+void serial_set_state(int enabled, const char *port, int fd);
+void serial_get_port(char *buffer, size_t size);
+
+// Serial command operations
+int serial_port_send(const char *command);
+int forward_helmet_command_to_serial(char *command_string);
+
 #endif // COMMAND_PROCESSING_H

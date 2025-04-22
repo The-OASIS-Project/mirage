@@ -1907,9 +1907,11 @@ int main(int argc, char **argv)
          break;
       case 'u':
          usb_enable = 1;
+         serial_set_state(1, NULL, -1);
          break;
       case 'd':
          strncpy(usb_port, optarg, 24);
+         serial_set_state(-1, usb_port, -1);
          break;
       default:
          display_help(argc, argv);
@@ -2136,12 +2138,6 @@ int main(int argc, char **argv)
       mosquitto_destroy(mosq);
       LOG_ERROR("Error: %s", mosquitto_strerror(rc));
       return EXIT_FAILURE;
-   }
-
-   /* This is the main hud service. I have others based on external devices. */
-   rc = mosquitto_subscribe(mosq, NULL, "hud", 1);
-   if(rc != MOSQ_ERR_SUCCESS){
-      LOG_ERROR("Error subscribing to \"hud\": %s", mosquitto_strerror(rc));
    }
 
    /* Start processing MQTT events. */

@@ -20,6 +20,7 @@
  */
 
 #include <errno.h>
+#include <pthread.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -49,6 +50,83 @@ static int next_log_row = 0;
 
 char (*get_raw_log(void))[LOG_LINE_LENGTH] {
    return raw_log;
+}
+
+// Serial port state management structure
+typedef struct {
+   int fd;                  // File descriptor for the serial port
+   int enabled;             // Whether serial is enabled
+   char port[24];           // Port name
+   pthread_mutex_t mutex;   // Mutex for thread-safe access
+} serial_state_t;
+
+// Global instance with proper initialization
+static serial_state_t serial_state = {
+   .fd = -1,
+   .enabled = 0,
+   .port = "",
+   .mutex = PTHREAD_MUTEX_INITIALIZER
+};
+
+/**
+ * Checks if serial communication is enabled
+ * @return 1 if enabled, 0 otherwise
+ */
+int serial_is_enabled(void) {
+   int enabled = 0;
+   pthread_mutex_lock(&serial_state.mutex);
+   enabled = serial_state.enabled;
+   pthread_mutex_unlock(&serial_state.mutex);
+   return enabled;
+}
+
+/**
+ * Gets the current serial file descriptor
+ * @return File descriptor or -1 if not available
+ */
+int serial_get_fd(void) {
+   int fd;
+   pthread_mutex_lock(&serial_state.mutex);
+   fd = serial_state.fd;
+   pthread_mutex_unlock(&serial_state.mutex);
+   return fd;
+}
+
+/**
+ * Sets the serial state
+ * @param enabled Whether serial is enabled (or -1 to leave unchanged)
+ * @param port Port name (or NULL to leave unchanged)
+ * @param fd File descriptor (or -1 to leave unchanged)
+ */
+void serial_set_state(int enabled, const char *port, int fd) {
+   pthread_mutex_lock(&serial_state.mutex);
+
+   if (enabled >= 0) {
+       serial_state.enabled = enabled;
+   }
+
+   if (port != NULL) {
+       strncpy(serial_state.port, port, sizeof(serial_state.port) - 1);
+       serial_state.port[sizeof(serial_state.port) - 1] = '\0';
+   }
+
+   if (fd >= 0 || fd == -1) {  // Allow setting to -1 to indicate invalid
+       serial_state.fd = fd;
+   }
+
+   pthread_mutex_unlock(&serial_state.mutex);
+}
+
+/**
+ * Gets a copy of the current serial port name
+ * @param buffer Buffer to store the port name
+ * @param size Size of the buffer
+ */
+void serial_get_port(char *buffer, size_t size) {
+   pthread_mutex_lock(&serial_state.mutex);
+   strncpy(buffer, serial_state.port, size - 1);
+   buffer[size - 1] = '\0';
+   pthread_mutex_unlock(&serial_state.mutex);
 }
 
 /* Parse the JSON "commands" that come over serial/USB or MQTT. */
@@ -467,6 +545,7 @@ void *serial_command_processing_thread(void *arg) {
         }
     } else {
         last_successful_read = time(NULL);
+        serial_set_state(-1, NULL, sfd); // Update just the file descriptor
     }
 
     while (!checkShutdown()) {
@@ -491,6 +570,7 @@ void *serial_command_processing_thread(void *arg) {
                     LOG_INFO("Successfully reconnected to %s", usb_port);
                     reconnect_attempts = 0;
                     last_successful_read = time(NULL);
+                    serial_set_state(-1, NULL, sfd); // Update just the file descriptor
                 } else {
                     LOG_WARNING("Failed to reconnect to %s", usb_port);
                     reconnect_attempts++;
@@ -684,10 +764,73 @@ void *serial_command_processing_thread(void *arg) {
     /* Clean up on thread exit */
     if (sfd >= 0) {
         close(sfd);
+        serial_set_state(-1, NULL, -1); // Mark the fd as invalid
     }
 
     LOG_INFO("Serial command processing thread exiting");
     return NULL;
+}
+
+/**
+ * Sends a command string to the connected serial device
+ *
+ * @param command The JSON command string to send
+ * @return 0 on success, -1 on failure
+ */
+int serial_port_send(const char *command) {
+   int fd;
+
+   // Check if serial is enabled
+   if (!serial_is_enabled()) {
+      return -1;
+   }
+
+   // Get the file descriptor
+   fd = serial_get_fd();
+   if (fd < 0) {
+      return -1;
+   }
+
+   // Send the command
+   size_t cmd_len = strlen(command);
+   char buffer[MAX_SERIAL_BUFFER_LENGTH];
+
+   strncpy(buffer, command, MAX_SERIAL_BUFFER_LENGTH - 2);
+   buffer[MAX_SERIAL_BUFFER_LENGTH - 2] = '\0'; // Ensure null termination with space for newline
+
+   // Make sure the command ends with a newline
+   cmd_len = strlen(buffer);
+   if (cmd_len > 0 && buffer[cmd_len - 1] != '\n') {
+      buffer[cmd_len] = '\n';
+      buffer[cmd_len + 1] = '\0';
+      cmd_len++; // Update length to include newline
+   }
+
+   // Send the command
+   ssize_t bytes_written = write(fd, buffer, cmd_len);
+   if (bytes_written < 0) {
+      LOG_ERROR("Failed to send command to serial port: %s", strerror(errno));
+      return -1;
+   }
+
+   return 0;
+}
+
+/**
+ * Forwards helmet faceplate commands from MQTT to the serial port
+ *
+ * @param command_string The JSON command string
+ * @return 0 on success, -1 on failure
+ */
+int forward_helmet_command_to_serial(char *command_string) {
+   // Only forward if serial is enabled
+   if (!serial_is_enabled()) {
+      LOG_WARNING("Serial not enabled. Not forwarding helmet message.");
+      return -1;
+   }
+
+   LOG_INFO("Forwarding helmet command to serial: %s", command_string);
+   return serial_port_send(command_string);
 }
 
 void *socket_command_processing_thread(void *arg)
