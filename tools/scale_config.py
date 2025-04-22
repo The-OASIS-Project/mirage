@@ -20,7 +20,7 @@ def scale_destinations(obj, scale=0.5):
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: python scale_destinations.py input.json output.json")
+        print("Usage: python scale_config.py input.json output.json")
         sys.exit(1)
     
     input_file = sys.argv[1]
