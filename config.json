@@ -12,16 +12,7 @@
       "Stream Width": 800,
       "Stream Height": 400,
       "Stream Dest IP": "192.168.10.170",
-      "Snapshot Overlay": false,
-      "Armor dest_x": 70,
-      "Armor dest_y": 900,
-      "Armor dest_w": 450,
-      "Armor dest_h": 450,
-      "Armor notice dest_x": 220,
-      "Armor notice dest_y": 220,
-      "Armor notice dest_w": 1000,
-      "Armor notice dest_h": 1000,
-      "Armor notice timeout": 5
+      "Snapshot Overlay": false
    },
    "HUDs": [
       {
@@ -33,6 +24,11 @@
          "name": "environmental",
          "hotkey": "2",
          "transition": "zoom"
+      },
+      {
+         "name": "armor_status",
+         "hotkey": "3",
+         "transition": "fade"
       }
    ],
    "Transitions": {
@@ -299,6 +295,23 @@
          "angle": 0,
          "fixed": 0,
          "layer": 1,
+         "huds": ["default", "environmental"]
+      },
+      {
+         "type": "special",
+         "name": "armor_display",
+         "dest_x": 70,
+         "dest_y": 900,
+         "width": 450,
+         "height": 450,
+         "notice_x": 220,
+         "notice_y": 220,
+         "notice_width": 1000,
+         "notice_height": 1000,
+         "notice_timeout": 5,
+         "show_metrics": false,
+         "angle": 0,
+         "layer": 5,
          "huds": ["default", "environmental"]
       },
       {
@@ -630,6 +643,20 @@
          "angle": 0,
          "layer": 1,
          "huds": ["environmental"]
+      },
+      {
+         "type": "special",
+         "name": "armor_display",
+         "dest_x": 720,
+         "dest_y": 600,
+         "width": 800,
+         "height": 800,
+         "show_metrics": true,
+         "metrics_font": "Aldrich-Regular.ttf",
+         "metrics_font_size": 24,
+         "angle": 0,
+         "layer": 5,
+         "huds": ["armor_status"]
       }
    ],
    "Components": [

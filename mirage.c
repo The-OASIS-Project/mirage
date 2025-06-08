@@ -273,6 +273,19 @@ element default_element =
    .last_temp = -1.0,
    .last_voltage = -1.0,
 
+   .notice_x = 0,
+   .notice_y = 0,
+   .notice_width = 0,
+   .notice_height = 0,
+   .notice_timeout = DEFAULT_ARMOR_NOTICE_TIMEOUT,
+   .show_metrics = 0,
+   .metrics_font = "",
+   .metrics_font_size = 20,
+
+   .metrics_textures = NULL,
+   .last_metrics_text = NULL,
+   .metrics_texture_count = 0,
+
    .warn_state = WARN_NORMAL,
 
    .transition_alpha = 0.0f,
@@ -544,6 +557,32 @@ void free_elements(element *start_element)
          LOG_INFO("Freeing texture (offline).");
 #endif
          SDL_DestroyTexture(this_element->texture_offline);
+      }
+
+      if (this_element->metrics_textures != NULL) {
+         for (int i = 0; i < this_element->metrics_texture_count; i++) {
+            if (this_element->metrics_textures[i] != NULL) {
+#ifdef DEBUG_SHUTDOWN
+               LOG_INFO("Freeing texture (metrics_textures).");
+#endif
+               SDL_DestroyTexture(this_element->metrics_textures[i]);
+            }
+         }
+         free(this_element->metrics_textures);
+         this_element->metrics_textures = NULL;
+      }
+
+      if (this_element->last_metrics_text != NULL) {
+         for (int i = 0; i < this_element->metrics_texture_count; i++) {
+            if (this_element->last_metrics_text[i] != NULL) {
+#ifdef DEBUG_SHUTDOWN
+               LOG_INFO("Freeing text (last_metrics_text).");
+#endif
+               free(this_element->last_metrics_text[i]);
+            }
+         }
+         free(this_element->last_metrics_text);
+         this_element->last_metrics_text = NULL;
       }
 
       for (int i = 0; i < this_element->this_anim.frame_count; i++) {
@@ -2069,8 +2108,6 @@ int main(int argc, char **argv)
          play_intro(1, 0, &intro_finished);
       } else {
          render_hud_elements();
-
-         renderArmor();
 
 #ifdef DISPLAY_TIMING
          clock_gettime(CLOCK_REALTIME, &display_time);

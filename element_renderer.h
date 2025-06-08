@@ -38,6 +38,7 @@ void render_heading_element(element *curr_element);
 void render_altitude_element(element *curr_element);
 void render_wifi_element(element *curr_element);
 void render_detect_element(element *curr_element);
+void render_armor_display_element(element *curr_element);
 
 /* Element rendering with effects */
 void render_element(element *curr_element);

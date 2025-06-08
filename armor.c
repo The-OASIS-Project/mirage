@@ -39,126 +39,43 @@ void setArmorEnabled(int enabled) {
 }
 
 /* Render the armor overlays into the given texture in the given rectangle. */
-void renderArmor(void)
-{
-   armor_settings *this_as = get_armor_settings();
-   element *this_element = this_as->armor_elements;
-   SDL_Rect dest_rect_l, dest_rect_r;
-   time_t curr_time;
-   char text[2048] = "";
-
-   hud_display_settings *this_hds = get_hud_display_settings();
-
-   if (this_as->armor_elements == NULL)
-   {
-      return;
-   }
-
-   dest_rect_l.x = this_as->armor_dest.x - this_hds->stereo_offset;
-   dest_rect_r.x = this_as->armor_dest.x + this_hds->stereo_offset;
-   dest_rect_l.y = dest_rect_r.y = this_as->armor_dest.y;
-   dest_rect_l.w = dest_rect_r.w = this_as->armor_dest.w;
-   dest_rect_l.h = dest_rect_r.h = this_as->armor_dest.h;
-
-   while (this_element != NULL) {
-      time(&curr_time);
-
-      if ((armor_timeout > 0) && (curr_time > armor_timeout)) {
-         armor_timeout = 0;
-      } else if (armor_timeout > 0) {
-         dest_rect_l.x = this_as->armor_notice_dest.x - this_hds->stereo_offset;
-         dest_rect_r.x = this_as->armor_notice_dest.x + this_hds->stereo_offset;
-         dest_rect_l.y = dest_rect_r.y = this_as->armor_notice_dest.y;
-         dest_rect_l.w = dest_rect_r.w = this_as->armor_notice_dest.w;
-         dest_rect_l.h = dest_rect_r.h = this_as->armor_notice_dest.h;
-      }
-
-      /* Warning states for armor components. */
-      if ((this_element->warning_temp >= 0) && (this_element->last_temp >= 0)) {
-         if (!(this_element->warn_state & WARN_OVER_TEMP) &&
-             (this_element->last_temp > this_element->warning_temp)) {
-            this_element->texture = this_element->texture_warning;
-            this_element->warn_state |= WARN_OVER_TEMP;
-            time(&armor_timeout);
-            armor_timeout += this_as->armor_notice_timeout;
-         } else if (this_element->warn_state & WARN_OVER_TEMP) {
-            if (this_element->last_temp < (this_element->warning_temp * 0.97)) {
-               this_element->warn_state &= ~WARN_OVER_TEMP;
-               if (!this_element->warn_state) {
-                  this_element->texture = this_element->texture_online;
-               }
-            }
-         }
-      }
-
-      if ((this_element->warning_voltage >= 0) && (this_element->last_voltage >= 0)) {
-         if (!(this_element->warn_state & WARN_OVER_VOLT) &&
-             (this_element->last_voltage < this_element->warning_voltage)) {
-            this_element->texture = this_element->texture_warning;
-            this_element->warn_state |= WARN_OVER_VOLT;
-            time(&armor_timeout);
-            armor_timeout += this_as->armor_notice_timeout;
-         } else if (this_element->warn_state & WARN_OVER_VOLT) {
-            if (this_element->last_voltage > (this_element->warning_voltage * 1.03)) {
-               this_element->warn_state &= ~WARN_OVER_VOLT;
-               if (!this_element->warn_state) {
-                  this_element->texture = this_element->texture_online;
-               }
-            }
-         }
-      }
-
-      /* Deregister armor component on timeout. */
-      if (this_element->mqtt_registered && ((curr_time - this_as->armor_deregister) > this_element->mqtt_last_time))
-      {
-         this_element->mqtt_registered = 0;
-         this_element->last_temp = this_element->last_voltage = -1.0;
-         this_element->warn_state = WARN_NORMAL;
-         this_element->texture = this_element->texture_offline;
-
-         time(&armor_timeout);
-         armor_timeout += this_as->armor_notice_timeout;
-
-         snprintf(text, 2048, "%s disconnected.", this_element->name);
-         mqttTextToSpeech(text);
-      }
-
-      if (armor_enabled) {
-         renderStereo(this_element->texture, NULL, &dest_rect_l, &dest_rect_r, 0.0);
-      }
-
-      this_element = this_element->next;
-   }
-}
-
-/* Render the armor overlays into the given texture in the given rectangle. */
 void registerArmor(char *mqtt_device_in)
 {
-   char text[2048] = "";
    armor_settings *this_as = get_armor_settings();
    element *this_element = this_as->armor_elements;
+   element *armor_display = NULL;
+   element *curr_element = get_first_element();
+   time_t current_time = time(NULL);
+   time_t armor_timeout = 0;
 
-   if (this_as->armor_elements == NULL)
-   {
-      return;
+   /* Find the current armor_display element */
+   while (curr_element != NULL) {
+      if (curr_element->type == SPECIAL && strcmp(curr_element->name, "armor_display") == 0) {
+         /* Use the first armor_display element we find */
+         armor_display = curr_element;
+         break;
+      }
+      curr_element = curr_element->next;
    }
 
+   /* If no armor_display element found, use a default timeout */
+   int notice_timeout = (armor_display != NULL) ?
+                        armor_display->notice_timeout : DEFAULT_ARMOR_NOTICE_TIMEOUT;
+
+   /* Find the armor component by mqtt_device */
    while (this_element != NULL) {
-      if (strcmp(this_element->mqtt_device, mqtt_device_in) == 0)
-      {
-         if (!this_element->mqtt_registered)
-         {
+      if (strcmp(this_element->mqtt_device, mqtt_device_in) == 0) {
+         this_element->mqtt_last_time = current_time;
+
+         if (this_element->mqtt_registered == 0) {
             this_element->mqtt_registered = 1;
-            time(&this_element->mqtt_last_time);
-            armor_timeout = this_element->mqtt_last_time + this_as->armor_notice_timeout;
-            this_element->texture = this_element->texture_online;
-            snprintf(text, 2048, "%s connected.", this_element->name);
-            mqttTextToSpeech(text);
-         } else {
-            time(&this_element->mqtt_last_time);
+
+            /* Set the timeout for showing the notification */
+            armor_timeout = this_element->mqtt_last_time + notice_timeout;
+            LOG_INFO("Adding armor element: %s", this_element->mqtt_device);
          }
 
-         break;
+         return;
       }
 
       this_element = this_element->next;

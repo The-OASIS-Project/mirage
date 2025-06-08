@@ -61,8 +61,6 @@ static stream_settings this_ss = {
 
 static armor_settings this_as = {
    .armor_elements = NULL,
-
-   .armor_notice_timeout = DEFAULT_ARMOR_NOTICE_TIMEOUT,
    .armor_deregister = DEFAULT_ARMOR_DEREGISTER_TIMEOUT
 };
 

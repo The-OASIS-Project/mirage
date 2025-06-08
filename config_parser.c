@@ -479,24 +479,6 @@ int parse_json_config(char *filename)
                           16);
                } else if (strcmp(json_object_iter_peek_name(&itSub), "Snapshot Overlay") == 0) {
                   this_hds->snapshot_overlay = json_object_get_boolean(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor dest_x") == 0) {
-                  this_as->armor_dest.x = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor dest_y") == 0) {
-                  this_as->armor_dest.y = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor dest_w") == 0) {
-                  this_as->armor_dest.w = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor dest_h") == 0) {
-                  this_as->armor_dest.h = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor notice dest_x") == 0) {
-                  this_as->armor_notice_dest.x = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor notice dest_y") == 0) {
-                  this_as->armor_notice_dest.y = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor notice dest_w") == 0) {
-                  this_as->armor_notice_dest.w = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor notice dest_h") == 0) {
-                  this_as->armor_notice_dest.h = json_object_get_int(json_object_iter_peek_value(&itSub));
-               } else if (strcmp(json_object_iter_peek_name(&itSub), "Armor notice timeout") == 0) {
-                  this_as->armor_notice_timeout = json_object_get_int(json_object_iter_peek_value(&itSub));
                } else {
                   printf("%s\n", json_object_iter_peek_name(&itSub));
                }
@@ -950,6 +932,51 @@ int parse_json_config(char *filename)
                                  free(config_string);
                                  return FAILURE;
                               }
+                           }
+                        }
+
+                        /* Check if this is an armor display element */
+                        if (strcmp("armor_display", curr_element->name) == 0) {
+                           /* Parse armor display properties */
+                           json_object_object_get_ex(tmpobj2, "notice_x", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->notice_x = json_object_get_int(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "notice_y", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->notice_y = json_object_get_int(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "notice_width", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->notice_width = json_object_get_int(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "notice_height", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->notice_height = json_object_get_int(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "notice_timeout", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->notice_timeout = json_object_get_int(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "show_metrics", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->show_metrics = json_object_get_boolean(tmpobj3);
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "metrics_font", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              snprintf(curr_element->metrics_font, MAX_FILENAME_LENGTH * 2,
+                                       "%s/%s", get_font_path(), json_object_get_string(tmpobj3));
+                           }
+
+                           json_object_object_get_ex(tmpobj2, "metrics_font_size", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->metrics_font_size = json_object_get_int(tmpobj3);
                            }
                         }
                      }

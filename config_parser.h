@@ -170,6 +170,21 @@ typedef struct _element {
    double last_temp;
    double last_voltage;
 
+   /* Armor display properties */
+   int notice_x;
+   int notice_y;
+   int notice_width;
+   int notice_height;
+   int notice_timeout;
+   int show_metrics;
+   char metrics_font[MAX_FILENAME_LENGTH * 2];
+   int metrics_font_size;
+
+   /* Metrics texture caching */
+   SDL_Texture **metrics_textures;  /* Array of metrics textures for each component */
+   char **last_metrics_text;        /* Array of last metrics text strings */
+   int metrics_texture_count;       /* Number of components with metrics */
+
    armor_warning_t warn_state;
 
    /* Transition state - used for fade/zoom effects */

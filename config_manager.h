@@ -58,10 +58,6 @@ stream_settings *get_stream_settings(void);
 /* Variables for the armor components */
 typedef struct _armor_settings {
    element *armor_elements;      /* A special element list for armor components. */
-
-   SDL_Rect armor_dest;          /* Where do we draw the armor on the screen */
-   SDL_Rect armor_notice_dest;   /* Where do we draw the armor when we get a notification */
-   int armor_notice_timeout;     /* This is the configurable value, how long does the notice stay up. */
    time_t armor_deregister;      /* How long can we go without seeing an MQTT message from an armor
                                   * element before we say it's missing? */
 } armor_settings;
