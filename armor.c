@@ -24,10 +24,10 @@
 #include "defines.h"
 #include "armor.h"
 #include "config_manager.h"
+#include "element_renderer.h"
 #include "logging.h"
 #include "mirage.h"
 
-static time_t armor_timeout = 0; /* This is the variable tracking when the timeout occurs. */
 static int armor_enabled = 1;    /* Variable to turn on/off displaying armor. */
 
 void setArmorEnabled(int enabled) {
@@ -38,41 +38,51 @@ void setArmorEnabled(int enabled) {
    }
 }
 
-/* Render the armor overlays into the given texture in the given rectangle. */
+/* Register armor component when MQTT message received */
 void registerArmor(char *mqtt_device_in)
 {
+   char text[2048] = "";
    armor_settings *this_as = get_armor_settings();
    element *this_element = this_as->armor_elements;
    element *armor_display = NULL;
    element *curr_element = get_first_element();
    time_t current_time = time(NULL);
-   time_t armor_timeout = 0;
 
-   /* Find the current armor_display element */
+   if (this_as->armor_elements == NULL) {
+      return;
+   }
+
+   /* Find the armor_display element to get timeout value */
    while (curr_element != NULL) {
       if (curr_element->type == SPECIAL && strcmp(curr_element->name, "armor_display") == 0) {
-         /* Use the first armor_display element we find */
          armor_display = curr_element;
          break;
       }
       curr_element = curr_element->next;
    }
 
-   /* If no armor_display element found, use a default timeout */
-   int notice_timeout = (armor_display != NULL) ?
-                        armor_display->notice_timeout : DEFAULT_ARMOR_NOTICE_TIMEOUT;
-
    /* Find the armor component by mqtt_device */
    while (this_element != NULL) {
       if (strcmp(this_element->mqtt_device, mqtt_device_in) == 0) {
-         this_element->mqtt_last_time = current_time;
-
-         if (this_element->mqtt_registered == 0) {
+         if (!this_element->mqtt_registered) {
+            /* New registration */
             this_element->mqtt_registered = 1;
+            this_element->mqtt_last_time = current_time;
+            this_element->texture = this_element->texture_online;
 
-            /* Set the timeout for showing the notification */
-            armor_timeout = this_element->mqtt_last_time + notice_timeout;
-            LOG_INFO("Adding armor element: %s", this_element->mqtt_device);
+            /* Trigger notification timeout */
+            int notice_timeout = (armor_display != NULL && armor_display->notice_timeout > 0) ?
+                                 armor_display->notice_timeout : 5;
+            trigger_armor_notification_timeout(notice_timeout);
+
+            /* TTS for connection */
+            snprintf(text, 2048, "%s connected.", this_element->name);
+            mqttTextToSpeech(text);
+
+            LOG_INFO("Armor element connected: %s", this_element->name);
+         } else {
+            /* Update existing registration timestamp */
+            this_element->mqtt_last_time = current_time;
          }
 
          return;
