@@ -26,7 +26,7 @@
          "transition": "zoom"
       },
       {
-         "name": "armor_status",
+         "name": "armor",
          "hotkey": "3",
          "transition": "fade"
       }
@@ -96,7 +96,7 @@
          "halign": "right",
          "angle": 0,
          "layer": 2,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "special",
@@ -255,7 +255,7 @@
          "angle": 0,
          "fixed": 0,
          "layer": 0,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "text",
@@ -268,7 +268,7 @@
          "halign": "right",
          "angle": 0,
          "layer": 2,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "ai-ui",
@@ -281,7 +281,7 @@
          "angle": 0,
          "fixed": 0,
          "layer": 0,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "text",
@@ -295,7 +295,7 @@
          "angle": 0,
          "fixed": 0,
          "layer": 1,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "special",
@@ -390,7 +390,7 @@
          "halign": "left",
          "angle": 0,
          "layer": 2,
-         "huds": ["default", "environmental"]
+         "huds": ["default", "environmental", "armor"]
       },
       {
          "type": "static",
@@ -647,166 +647,213 @@
       {
          "type": "special",
          "name": "armor_display",
-         "dest_x": 720,
-         "dest_y": 600,
-         "width": 800,
-         "height": 800,
+         "dest_x": 220,
+         "dest_y": 220,
+         "width": 1000,
+         "height": 1000,
          "show_metrics": true,
          "metrics_font": "Aldrich-Regular.ttf",
-         "metrics_font_size": 24,
+         "metrics_font_size": 28,
          "angle": 0,
          "layer": 5,
-         "huds": ["armor_status"]
+         "huds": ["armor"]
+      },
+      {
+         "name": "armor_large",
+         "type": "animated",
+         "file": "IronMan-UI-Pedestal-Animated-V2.json",
+         "dest_x": 464,
+         "dest_y": 698,
+         "width": 511,
+         "angle": 0,
+         "layer": 0,
+         "huds": ["armor"]
       }
    ],
    "Components": [
-      {
-         "name": "Helmet",
-         "device": "helmet",
-         "base file": "FullBodyBlue/FullBody1.png",
-         "online file": "FullBodyGreen/FullBody1Green.png",
-         "warning file": "FullBodyYellow/FullBody1Yellow.png",
-         "offline file": "FullBodyRed/FullBody1Red.png"
-      },
-      {
-         "name": "Thigh (Left)",
-         "device": "thigh/left",
-         "base file": "FullBodyBlue/FullBody2.png",
-         "online file": "FullBodyGreen/FullBody2Green.png",
-         "warning file": "FullBodyYellow/FullBody2Yellow.png",
-         "offline file": "FullBodyRed/FullBody2Red.png"
-      },
-      {
-         "name": "Boot (Left)",
-         "device": "boot/left",
-         "base file": "FullBodyBlue/FullBody3.png",
-         "online file": "FullBodyGreen/FullBody3Green.png",
-         "warning file": "FullBodyYellow/FullBody3Yellow.png",
-         "offline file": "FullBodyRed/FullBody3Red.png"
-      },
-      {
-         "name": "Calf (Left)",
-         "device": "calf/left",
-         "base file": "FullBodyBlue/FullBody4.png",
-         "online file": "FullBodyGreen/FullBody4Green.png",
-         "warning file": "FullBodyYellow/FullBody4Yellow.png",
-         "offline file": "FullBodyRed/FullBody4Red.png"
-      },
-      {
-         "name": "Repulsor (Left)",
-         "device": "repulsor/left",
-         "base file": "FullBodyBlue/FullBody5.png",
-         "online file": "FullBodyGreen/FullBody5Green.png",
-         "warning file": "FullBodyYellow/FullBody5Yellow.png",
-         "offline file": "FullBodyRed/FullBody5Red.png",
-         "warning temp": 35.0,
-         "warning voltage": 3.2
-      },
-      {
-         "name": "Forearm (Left)",
-         "device": "forearm/left",
-         "base file": "FullBodyBlue/FullBody6.png",
-         "online file": "FullBodyGreen/FullBody6Green.png",
-         "warning file": "FullBodyYellow/FullBody6Yellow.png",
-         "offline file": "FullBodyRed/FullBody6Red.png"
-      },
-      {
-         "name": "Shoulder (Left)",
-         "device": "shoulder/left",
-         "base file": "FullBodyBlue/FullBody7.png",
-         "online file": "FullBodyGreen/FullBody7Green.png",
-         "warning file": "FullBodyYellow/FullBody7Yellow.png",
-         "offline file": "FullBodyRed/FullBody7Red.png"
-      },
-      {
-         "name": "Bicept (Left)",
-         "device": "bicept/left",
-         "base file": "FullBodyBlue/FullBody8.png",
-         "online file": "FullBodyGreen/FullBody8Green.png",
-         "warning file": "FullBodyYellow/FullBody8Yellow.png",
-         "offline file": "FullBodyRed/FullBody8Red.png"
-      },
-      {
-         "name": "Thigh (Right)",
-         "device": "thigh/right",
-         "base file": "FullBodyBlue/FullBody9.png",
-         "online file": "FullBodyGreen/FullBody9Green.png",
-         "warning file": "FullBodyYellow/FullBody9Yellow.png",
-         "offline file": "FullBodyRed/FullBody9Red.png"
-      },
-      {
-         "name": "Boot (Right)",
-         "device": "boot/right",
-         "base file": "FullBodyBlue/FullBody10.png",
-         "online file": "FullBodyGreen/FullBody10Green.png",
-         "warning file": "FullBodyYellow/FullBody10Yellow.png",
-         "offline file": "FullBodyRed/FullBody10Red.png"
-      },
-      {
-         "name": "Calf (Right)",
-         "device": "calf/right",
-         "base file": "FullBodyBlue/FullBody11.png",
-         "online file": "FullBodyGreen/FullBody11Green.png",
-         "warning file": "FullBodyYellow/FullBody11Yellow.png",
-         "offline file": "FullBodyRed/FullBody11Red.png"
-      },
-      {
-         "name": "Repulsor (Right)",
-         "device": "repulsor/right",
-         "base file": "FullBodyBlue/FullBody12.png",
-         "online file": "FullBodyGreen/FullBody12Green.png",
-         "warning file": "FullBodyYellow/FullBody12Yellow.png",
-         "offline file": "FullBodyRed/FullBody12Red.png",
-         "warning temp": 35.0,
-         "warning voltage": 3.2
-      },
-      {
-         "name": "Forearm (Right)",
-         "device": "forearm/right",
-         "base file": "FullBodyBlue/FullBody13.png",
-         "online file": "FullBodyGreen/FullBody13Green.png",
-         "warning file": "FullBodyYellow/FullBody13Yellow.png",
-         "offline file": "FullBodyRed/FullBody13Red.png"
-      },
-      {
-         "name": "Shoulder (Right)",
-         "device": "shoulder/right",
-         "base file": "FullBodyBlue/FullBody14.png",
-         "online file": "FullBodyGreen/FullBody14Green.png",
-         "warning file": "FullBodyYellow/FullBody14Yellow.png",
-         "offline file": "FullBodyRed/FullBody14Red.png"
-      },
-      {
-         "name": "Bicept (Right)",
-         "device": "bicept/right",
-         "base file": "FullBodyBlue/FullBody15.png",
-         "online file": "FullBodyGreen/FullBody15Green.png",
-         "warning file": "FullBodyYellow/FullBody15Yellow.png",
-         "offline file": "FullBodyRed/FullBody15Red.png"
-      },
-      {
-         "name": "Chest",
-         "device": "chest",
-         "base file": "FullBodyBlue/FullBody16.png",
-         "online file": "FullBodyGreen/FullBody16Green.png",
-         "warning file": "FullBodyYellow/FullBody16Yellow.png",
-         "offline file": "FullBodyRed/FullBody16Red.png"
-      },
-      {
-         "name": "Abs",
-         "device": "abs",
-         "base file": "FullBodyBlue/FullBody17.png",
-         "online file": "FullBodyGreen/FullBody17Green.png",
-         "warning file": "FullBodyYellow/FullBody17Yellow.png",
-         "offline file": "FullBodyRed/FullBody17Red.png"
-      },
-      {
-         "name": "Cod Piece",
-         "device": "codpiece",
-         "base file": "FullBodyBlue/FullBody18.png",
-         "online file": "FullBodyGreen/FullBody18Green.png",
-         "warning file": "FullBodyYellow/FullBody18Yellow.png",
-         "offline file": "FullBodyRed/FullBody18Red.png"
-      }
+     {
+       "name": "Helmet",
+       "device": "helmet",
+       "base file": "FullBodyBlue/FullBody1.png",
+       "online file": "FullBodyGreen/FullBody1Green.png",
+       "warning file": "FullBodyYellow/FullBody1Yellow.png",
+       "offline file": "FullBodyRed/FullBody1Red.png",
+       "metrics_x_offset": 0.5,
+       "metrics_y_offset": 0.1
+     },
+     {
+       "name": "Shoulder (Left)",
+       "device": "shoulder/left",
+       "base file": "FullBodyBlue/FullBody7.png",
+       "online file": "FullBodyGreen/FullBody7Green.png",
+       "warning file": "FullBodyYellow/FullBody7Yellow.png",
+       "offline file": "FullBodyRed/FullBody7Red.png",
+       "metrics_x_offset": 0.7,
+       "metrics_y_offset": 0.2
+     },
+     {
+       "name": "Shoulder (Right)",
+       "device": "shoulder/right",
+       "base file": "FullBodyBlue/FullBody14.png",
+       "online file": "FullBodyGreen/FullBody14Green.png",
+       "warning file": "FullBodyYellow/FullBody14Yellow.png",
+       "offline file": "FullBodyRed/FullBody14Red.png",
+       "metrics_x_offset": 0.3,
+       "metrics_y_offset": 0.2
+     },
+     {
+       "name": "Chest",
+       "device": "chest",
+       "base file": "FullBodyBlue/FullBody16.png",
+       "online file": "FullBodyGreen/FullBody16Green.png",
+       "warning file": "FullBodyYellow/FullBody16Yellow.png",
+       "offline file": "FullBodyRed/FullBody16Red.png",
+       "metrics_x_offset": 0.5,
+       "metrics_y_offset": 0.25
+     },
+     {
+       "name": "Bicept (Left)",
+       "device": "bicept/left",
+       "base file": "FullBodyBlue/FullBody8.png",
+       "online file": "FullBodyGreen/FullBody8Green.png",
+       "warning file": "FullBodyYellow/FullBody8Yellow.png",
+       "offline file": "FullBodyRed/FullBody8Red.png",
+       "metrics_x_offset": 0.7,
+       "metrics_y_offset": 0.3
+     },
+     {
+       "name": "Bicept (Right)",
+       "device": "bicept/right",
+       "base file": "FullBodyBlue/FullBody15.png",
+       "online file": "FullBodyGreen/FullBody15Green.png",
+       "warning file": "FullBodyYellow/FullBody15Yellow.png",
+       "offline file": "FullBodyRed/FullBody15Red.png",
+       "metrics_x_offset": 0.3,
+       "metrics_y_offset": 0.3
+     },
+     {
+       "name": "Abs",
+       "device": "abs",
+       "base file": "FullBodyBlue/FullBody17.png",
+       "online file": "FullBodyGreen/FullBody17Green.png",
+       "warning file": "FullBodyYellow/FullBody17Yellow.png",
+       "offline file": "FullBodyRed/FullBody17Red.png",
+       "metrics_x_offset": 0.5,
+       "metrics_y_offset": 0.35
+     },
+     {
+       "name": "Forearm (Left)",
+       "device": "forearm/left",
+       "base file": "FullBodyBlue/FullBody6.png",
+       "online file": "FullBodyGreen/FullBody6Green.png",
+       "warning file": "FullBodyYellow/FullBody6Yellow.png",
+       "offline file": "FullBodyRed/FullBody6Red.png",
+       "metrics_x_offset": 0.7,
+       "metrics_y_offset": 0.4
+     },
+     {
+       "name": "Forearm (Right)",
+       "device": "forearm/right",
+       "base file": "FullBodyBlue/FullBody13.png",
+       "online file": "FullBodyGreen/FullBody13Green.png",
+       "warning file": "FullBodyYellow/FullBody13Yellow.png",
+       "offline file": "FullBodyRed/FullBody13Red.png",
+       "metrics_x_offset": 0.3,
+       "metrics_y_offset": 0.4
+     },
+     {
+       "name": "Cod Piece",
+       "device": "codpiece",
+       "base file": "FullBodyBlue/FullBody18.png",
+       "online file": "FullBodyGreen/FullBody18Green.png",
+       "warning file": "FullBodyYellow/FullBody18Yellow.png",
+       "offline file": "FullBodyRed/FullBody18Red.png",
+       "metrics_x_offset": 0.5,
+       "metrics_y_offset": 0.45
+     },
+     {
+       "name": "Repulsor (Left)",
+       "device": "repulsor/left",
+       "base file": "FullBodyBlue/FullBody5.png",
+       "online file": "FullBodyGreen/FullBody5Green.png",
+       "warning file": "FullBodyYellow/FullBody5Yellow.png",
+       "offline file": "FullBodyRed/FullBody5Red.png",
+       "warning temp": 35.0,
+       "warning voltage": 3.2,
+       "metrics_x_offset": 0.7,
+       "metrics_y_offset": 0.5
+     },
+     {
+       "name": "Repulsor (Right)",
+       "device": "repulsor/right",
+       "base file": "FullBodyBlue/FullBody12.png",
+       "online file": "FullBodyGreen/FullBody12Green.png",
+       "warning file": "FullBodyYellow/FullBody12Yellow.png",
+       "offline file": "FullBodyRed/FullBody12Red.png",
+       "warning temp": 35.0,
+       "warning voltage": 3.2,
+       "metrics_x_offset": 0.3,
+       "metrics_y_offset": 0.5
+     },
+     {
+       "name": "Thigh (Left)",
+       "device": "thigh/left",
+       "base file": "FullBodyBlue/FullBody2.png",
+       "online file": "FullBodyGreen/FullBody2Green.png",
+       "warning file": "FullBodyYellow/FullBody2Yellow.png",
+       "offline file": "FullBodyRed/FullBody2Red.png",
+       "metrics_x_offset": 0.65,
+       "metrics_y_offset": 0.60
+     },
+     {
+       "name": "Thigh (Right)",
+       "device": "thigh/right",
+       "base file": "FullBodyBlue/FullBody9.png",
+       "online file": "FullBodyGreen/FullBody9Green.png",
+       "warning file": "FullBodyYellow/FullBody9Yellow.png",
+       "offline file": "FullBodyRed/FullBody9Red.png",
+       "metrics_x_offset": 0.35,
+       "metrics_y_offset": 0.60
+     },
+     {
+       "name": "Calf (Left)",
+       "device": "calf/left",
+       "base file": "FullBodyBlue/FullBody4.png",
+       "online file": "FullBodyGreen/FullBody4Green.png",
+       "warning file": "FullBodyYellow/FullBody4Yellow.png",
+       "offline file": "FullBodyRed/FullBody4Red.png",
+       "metrics_x_offset": 0.65,
+       "metrics_y_offset": 0.8
+     },
+     {
+       "name": "Calf (Right)",
+       "device": "calf/right",
+       "base file": "FullBodyBlue/FullBody11.png",
+       "online file": "FullBodyGreen/FullBody11Green.png",
+       "warning file": "FullBodyYellow/FullBody11Yellow.png",
+       "offline file": "FullBodyRed/FullBody11Red.png",
+       "metrics_x_offset": 0.35,
+       "metrics_y_offset": 0.8
+     },
+     {
+       "name": "Boot (Left)",
+       "device": "boot/left",
+       "base file": "FullBodyBlue/FullBody3.png",
+       "online file": "FullBodyGreen/FullBody3Green.png",
+       "warning file": "FullBodyYellow/FullBody3Yellow.png",
+       "offline file": "FullBodyRed/FullBody3Red.png",
+       "metrics_x_offset": 0.65,
+       "metrics_y_offset": 0.95
+     },
+     {
+       "name": "Boot (Right)",
+       "device": "boot/right",
+       "base file": "FullBodyBlue/FullBody10.png",
+       "online file": "FullBodyGreen/FullBody10Green.png",
+       "warning file": "FullBodyYellow/FullBody10Yellow.png",
+       "offline file": "FullBodyRed/FullBody10Red.png",
+       "metrics_x_offset": 0.35,
+       "metrics_y_offset": 0.95
+     }
    ]
 }

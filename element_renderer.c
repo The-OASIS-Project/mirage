@@ -943,7 +943,7 @@ void render_armor_display_element(element *curr_element) {
       armor_timeout_trigger = 0;  /* Clear the trigger */
    }
 
-   /* MISSING: Timeout checking and reset logic */
+   /* Timeout checking and reset logic */
    if ((armor_timeout > 0) && (current_time > armor_timeout)) {
       armor_timeout = 0;
    }
@@ -957,11 +957,10 @@ void render_armor_display_element(element *curr_element) {
    armor_dest_l.w = armor_dest_r.w = curr_element->width;
    armor_dest_l.h = armor_dest_r.h = curr_element->height;
 
-   /* MISSING: Original notification logic with proper stereo offset */
+   /* Use notification position/size when timeout is active */
    if (armor_timeout > 0) {
-      /* Use notification position/size when timeout is active */
-      if (curr_element->notice_width > 0 && curr_element->notice_height > 0 &&
-          curr_element->notice_x > 0 && curr_element->notice_y > 0) {
+      if (curr_element->notice_x > 0 && curr_element->notice_y > 0 &&
+          curr_element->notice_width > 0 && curr_element->notice_height > 0) {
          armor_dest_l.x = armor_dest_r.x = curr_element->notice_x;
          armor_dest_l.y = armor_dest_r.y = curr_element->notice_y;
          armor_dest_l.w = armor_dest_r.w = curr_element->notice_width;
@@ -975,7 +974,7 @@ void render_armor_display_element(element *curr_element) {
       armor_dest_r.x += this_hds->stereo_offset;
    }
 
-   /* MISSING: Apply scale for zoom transitions like other elements */
+   /* Apply scale for zoom transitions */
    calculate_zoom_rect(&armor_dest_l, &armor_dest_r, curr_element->scale);
 
    /* Initialize metrics texture caching if needed */
@@ -1011,7 +1010,7 @@ void render_armor_display_element(element *curr_element) {
    while (armor_element != NULL) {
       SDL_Texture *texture_to_use = armor_element->texture_base;
 
-      /* MISSING: Complete warning state management from original */
+      /* Warning state management */
       if ((armor_element->warning_temp >= 0) && (armor_element->last_temp >= 0)) {
          if (!(armor_element->warn_state & WARN_OVER_TEMP) &&
              (armor_element->last_temp > armor_element->warning_temp)) {
@@ -1046,7 +1045,7 @@ void render_armor_display_element(element *curr_element) {
          }
       }
 
-      /* MISSING: Complete deregistration logic with TTS - but only for previously registered components */
+      /* Complete deregistration logic with TTS */
       if (armor_element->mqtt_registered && armor_element->mqtt_last_time > 0 &&
           ((current_time - this_as->armor_deregister) > armor_element->mqtt_last_time)) {
          armor_element->mqtt_registered = 0;
@@ -1058,10 +1057,10 @@ void render_armor_display_element(element *curr_element) {
          armor_timeout += curr_element->notice_timeout > 0 ? curr_element->notice_timeout : 5;
 
          snprintf(text, 2048, "%s disconnected.", armor_element->name);
-         mqttTextToSpeech(text);  // <-- This TTS call was missing!
+         mqttTextToSpeech(text);
       }
 
-      /* Select texture based on component status - FIXED LOGIC */
+      /* Select texture based on component status */
       if (armor_element->mqtt_last_time == 0) {
          /* Never been registered - use base texture (blue) */
          texture_to_use = armor_element->texture_base;
@@ -1087,7 +1086,7 @@ void render_armor_display_element(element *curr_element) {
 
       /* Render the component with proper alpha support */
       if (texture_to_use != NULL) {
-         /* MISSING: Apply alpha for transitions like other elements */
+         /* Apply alpha for transitions */
          if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {
             SDL_SetTextureAlphaMod(texture_to_use, (Uint8)(curr_element->transition_alpha * 255));
          }
@@ -1104,13 +1103,29 @@ void render_armor_display_element(element *curr_element) {
       if (curr_element->show_metrics &&
           armor_element->mqtt_registered &&
           (current_time - armor_element->mqtt_last_time) < this_as->armor_deregister &&
-          armor_element->last_temp > -1.0 &&
-          armor_element->last_voltage > -1.0 &&
           component_index < curr_element->metrics_texture_count) {
 
-         char metrics_text[64];
-         snprintf(metrics_text, sizeof(metrics_text), "%.1f°C\n%.2fV",
-                 armor_element->last_temp, armor_element->last_voltage);
+         char metrics_text[64] = "";
+
+         // Check if temperature is valid
+         if (armor_element->last_temp > -1.0) {
+            snprintf(metrics_text, sizeof(metrics_text), "%.1f C", armor_element->last_temp);
+         }
+
+         // Check if voltage is valid
+         if (armor_element->last_voltage > -1.0) {
+            // If temperature was added, add a separator
+            if (metrics_text[0] != '\0') {
+               strncat(metrics_text, " | ", sizeof(metrics_text) - strlen(metrics_text) - 1);
+            }
+
+            // Buffer for voltage text
+            char voltage_text[16];
+            snprintf(voltage_text, sizeof(voltage_text), "%.2f V", armor_element->last_voltage);
+
+            // Append voltage to metrics text
+            strncat(metrics_text, voltage_text, sizeof(metrics_text) - strlen(metrics_text) - 1);
+         }
 
          /* Check if we need to update the texture */
          if (curr_element->last_metrics_text[component_index] == NULL ||
@@ -1155,14 +1170,29 @@ void render_armor_display_element(element *curr_element) {
             SDL_QueryTexture(curr_element->metrics_textures[component_index],
                            NULL, NULL, &tex_w, &tex_h);
 
-            /* Center in component - use left eye position as base */
+            /* Use the component's metrics positioning offsets (with defaults) */
+            float x_offset = 0.5f;  /* Default to center */
+            float y_offset = 0.5f;  /* Default to center */
+
+            /* Use the component's configured offsets if they're valid */
+            if (armor_element->metrics_x_offset >= 0.0f && armor_element->metrics_x_offset <= 1.0f) {
+               x_offset = armor_element->metrics_x_offset;
+            }
+
+            if (armor_element->metrics_y_offset >= 0.0f && armor_element->metrics_y_offset <= 1.0f) {
+               y_offset = armor_element->metrics_y_offset;
+            }
+
+            /* Calculate the position based on the armor display area and offsets */
             SDL_Rect metrics_rect_l, metrics_rect_r;
             metrics_rect_l.w = metrics_rect_r.w = tex_w;
             metrics_rect_l.h = metrics_rect_r.h = tex_h;
-            metrics_rect_l.x = armor_dest_l.x + (armor_dest_l.w / 2) - (tex_w / 2);
-            metrics_rect_l.y = armor_dest_l.y + (armor_dest_l.h / 2) - (tex_h / 2);
-            metrics_rect_r.x = armor_dest_r.x + (armor_dest_r.w / 2) - (tex_w / 2);
-            metrics_rect_r.y = armor_dest_r.y + (armor_dest_r.h / 2) - (tex_h / 2);
+
+            /* Position the metrics text according to the offsets */
+            metrics_rect_l.x = (int)(armor_dest_l.x + (armor_dest_l.w * x_offset) - (tex_w / 2));
+            metrics_rect_l.y = (int)(armor_dest_l.y + (armor_dest_l.h * y_offset) - (tex_h / 2));
+            metrics_rect_r.x = (int)(armor_dest_r.x + (armor_dest_r.w * x_offset) - (tex_w / 2));
+            metrics_rect_r.y = (int)(armor_dest_r.y + (armor_dest_r.h * y_offset) - (tex_h / 2));
 
             /* Apply alpha for transitions */
             if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {

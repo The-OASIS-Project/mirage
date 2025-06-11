@@ -170,6 +170,10 @@ typedef struct _element {
    double last_temp;
    double last_voltage;
 
+   /* Armor metrics positioning */
+   float metrics_x_offset;   /* Horizontal position within component (0.0 - 1.0) */
+   float metrics_y_offset;   /* Vertical position within component (0.0 - 1.0) */
+
    /* Armor display properties */
    int notice_x;
    int notice_y;

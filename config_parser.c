@@ -936,8 +936,7 @@ int parse_json_config(char *filename)
                         }
 
                         /* Check if this is an armor display element */
-                        if (strcmp("armor_display", curr_element->name) == 0) {
-                           /* Parse armor display properties */
+                        if (strcmp("armor_display", curr_element->special_name) == 0) {
                            json_object_object_get_ex(tmpobj2, "notice_x", &tmpobj3);
                            if (tmpobj3 != NULL) {
                               curr_element->notice_x = json_object_get_int(tmpobj3);
@@ -1044,6 +1043,40 @@ int parse_json_config(char *filename)
 
                   if (json_object_object_get_ex(tmpobj2, "warning voltage", &tmpobj3)) {
                      curr_element->warning_voltage = json_object_get_double(tmpobj3);
+                  }
+
+                  /* Parse armor display properties */
+                  json_object *metrics_x_offset_obj;
+                  json_object *metrics_y_offset_obj;
+
+                  /* Default values if not specified */
+                  curr_element->metrics_x_offset = 0.5f;
+                  curr_element->metrics_y_offset = 0.5f;
+
+                  /* Check if metrics_x_offset is specified */
+                  if (json_object_object_get_ex(tmpobj2, "metrics_x_offset", &metrics_x_offset_obj)) {
+                     curr_element->metrics_x_offset = (float)json_object_get_double(metrics_x_offset_obj);
+
+                     /* Clamp to valid range */
+                     if (curr_element->metrics_x_offset < 0.0f) {
+                        curr_element->metrics_x_offset = 0.0f;
+                     }
+                     if (curr_element->metrics_x_offset > 1.0f) {
+                        curr_element->metrics_x_offset = 1.0f;
+                     }
+                  }
+
+                  /* Check if metrics_y_offset is specified */
+                  if (json_object_object_get_ex(tmpobj2, "metrics_y_offset", &metrics_y_offset_obj)) {
+                      curr_element->metrics_y_offset = (float)json_object_get_double(metrics_y_offset_obj);
+
+                     /* Clamp to valid range */
+                     if (curr_element->metrics_y_offset < 0.0f) {
+                        curr_element->metrics_y_offset = 0.0f;
+                     }
+                     if (curr_element->metrics_y_offset > 1.0f) {
+                        curr_element->metrics_y_offset = 1.0f;
+                     }
                   }
 
                   curr_element->texture_base = IMG_LoadTexture(renderer, curr_element->filename);
