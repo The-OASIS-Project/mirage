@@ -70,6 +70,7 @@ set(SOURCE_FILES
     devices.c
     element_renderer.c
     frame_rate_tracker.c
+    gauge_renderer.c
     hud_manager.c
     image_utils.c
     logging.c

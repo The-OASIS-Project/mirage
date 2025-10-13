@@ -208,6 +208,23 @@ typedef struct _element {
 
    armor_warning_t warn_state;
 
+   /* Gauge-specific properties */
+   char gauge_type[MAX_TEXT_LENGTH];            /* "linear", "arc", "ring" */
+   float gauge_min_value;                       /* Minimum value on scale */
+   float gauge_max_value;                       /* Maximum value on scale */
+   char gauge_value_source[MAX_TEXT_LENGTH];    /* "*BATTERY*", "*SPEED*", etc. or static value */
+   float gauge_current_value;                   /* Current numeric value (computed) */
+   float gauge_warning_threshold;               /* Value at which to change color */
+   SDL_Color gauge_primary_color;               /* Normal operation color */
+   SDL_Color gauge_warning_color;               /* Warning/critical color */
+   int gauge_orientation;                       /* 0=horizontal, 1=vertical (linear only) */
+   float gauge_arc_start;                       /* Start angle in degrees (arc/ring) */
+   float gauge_arc_sweep;                       /* Sweep angle in degrees (arc/ring) */
+   int gauge_thickness;                         /* Line thickness for ring gauges */
+   int gauge_ticks;                             /* Number of tick marks (arc gauges) */
+   int gauge_smooth;                            /* Enable smooth interpolation */
+   int gauge_glow;                              /* Enable glow effect */
+
    /* Transition state - used for fade/zoom effects */
    float transition_alpha;
    int in_transition;

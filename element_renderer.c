@@ -41,6 +41,7 @@
 #include "defines.h"
 #include "devices.h"
 #include "element_renderer.h"
+#include "gauge_renderer.h"
 #include "hud_manager.h"
 #include "logging.h"
 #include "mirage.h"
@@ -854,6 +855,8 @@ void render_special_element(element *curr_element) {
      if (detect_enabled) {
         render_detect_element(curr_element);
      }
+   } else if (strcmp("gauge", curr_element->special_name) == 0) {
+      render_gauge_element(curr_element);
    } else if (strcmp("armor_display", curr_element->name) == 0) {
       render_armor_display_element(curr_element);
    } else {

@@ -305,6 +305,23 @@ element default_element =
 
    .warn_state = WARN_NORMAL,
 
+   /* Gauge-specific property defaults */
+   .gauge_type = "",
+   .gauge_min_value = 0.0f,
+   .gauge_max_value = 100.0f,
+   .gauge_value_source = "",
+   .gauge_current_value = 0.0f,
+   .gauge_warning_threshold = -1.0f,  /* -1 means no warning threshold */
+   .gauge_primary_color = {0x00, 0xF5, 0xFC, 0xFF},  /* Cyan by default */
+   .gauge_warning_color = {0xFF, 0x00, 0x00, 0xFF},  /* Red by default */
+   .gauge_orientation = 0,  /* 0 = horizontal */
+   .gauge_arc_start = 0.0f,
+   .gauge_arc_sweep = 360.0f,
+   .gauge_thickness = 10,
+   .gauge_ticks = 0,
+   .gauge_smooth = 0,
+   .gauge_glow = 0,
+
    .transition_alpha = 0.0f,
    .in_transition = 0,
    .scale = 1.0f,
