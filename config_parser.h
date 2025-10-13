@@ -225,6 +225,10 @@ typedef struct _element {
    int gauge_smooth;                            /* Enable smooth interpolation */
    int gauge_glow;                              /* Enable glow effect */
 
+   /* Gauge cache for performance optimization */
+   SDL_Texture *gauge_cache_texture;            /* Pre-rendered static background */
+   int gauge_cache_dirty;                       /* 1 = needs regeneration, 0 = valid */
+
    /* Transition state - used for fade/zoom effects */
    float transition_alpha;
    int in_transition;

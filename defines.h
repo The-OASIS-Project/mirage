@@ -28,7 +28,7 @@
 //#define DISPLAY_TIMING
 //#define OD_PROPER_WAIT
 //#define FPS_STATS
-#define REFRESH_SYNC
+//#define REFRESH_SYNC
 //#define ORIGINAL_RATIO
 
 /* This is per eye/display. */

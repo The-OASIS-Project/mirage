@@ -322,6 +322,9 @@ element default_element =
    .gauge_smooth = 0,
    .gauge_glow = 0,
 
+   .gauge_cache_texture = NULL,
+   .gauge_cache_dirty = 1,
+
    .transition_alpha = 0.0f,
    .in_transition = 0,
    .scale = 1.0f,
@@ -539,6 +542,14 @@ void free_elements(element *start_element)
          }
          free(this_element->metrics_textures);
          this_element->metrics_textures = NULL;
+      }
+
+      if (this_element->gauge_cache_texture != NULL) {
+#ifdef DEBUG_SHUTDOWN
+         LOG_INFO("Freeing gauge cache texture.");
+#endif
+         SDL_DestroyTexture(this_element->gauge_cache_texture);
+         this_element->gauge_cache_texture = NULL;
       }
 
       if (this_element->last_metrics_text != NULL) {

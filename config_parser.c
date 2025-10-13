@@ -1225,7 +1225,7 @@ int parse_json_config(const char *filename)
                                             &curr_element->dst_rect.w, &curr_element->dst_rect.h);
                         }
 
-			/* Gauge elements - parse gauge-specific properties */
+                        /* Gauge elements - parse gauge-specific properties */
                         if (strcmp("gauge", curr_element->special_name) == 0) {
                            /* Parse gauge type */
                            json_object_object_get_ex(tmpobj2, "gauge_type", &tmpobj3);
