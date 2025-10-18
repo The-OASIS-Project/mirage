@@ -1021,15 +1021,21 @@ int parse_json_config(const char *filename)
                         /* Parse special-specific properties */
                         json_object_object_get_ex(tmpobj2, "name", &tmpobj3);
                         if (tmpobj3 != NULL) {
-                           strncpy(curr_element->special_name, json_object_get_string(tmpobj3),
-                                   MAX_TEXT_LENGTH - 1);
-                           curr_element->special_name[MAX_TEXT_LENGTH - 1] = '\0';
                            strncpy(curr_element->name, json_object_get_string(tmpobj3), MAX_TEXT_LENGTH - 1);
                            curr_element->name[MAX_TEXT_LENGTH - 1] = '\0';
 
-                           if (strncmp(curr_element->special_name, "detect", 6) == 0) {
-                              set_detect_enabled(1);
-                           }
+                           /* Default special_name to same as name for backward compatibility */
+                           strncpy(curr_element->special_name, json_object_get_string(tmpobj3),
+                                   MAX_TEXT_LENGTH - 1);
+                           curr_element->special_name[MAX_TEXT_LENGTH - 1] = '\0';
+                        }
+
+                        /* ADD THIS: Check for explicit special_name field */
+                        json_object_object_get_ex(tmpobj2, "special_name", &tmpobj3);
+                        if (tmpobj3 != NULL) {
+                           strncpy(curr_element->special_name, json_object_get_string(tmpobj3),
+                                   MAX_TEXT_LENGTH - 1);
+                           curr_element->special_name[MAX_TEXT_LENGTH - 1] = '\0';
                         }
 
                         json_object_object_get_ex(tmpobj2, "file", &tmpobj3);
@@ -1320,6 +1326,37 @@ int parse_json_config(const char *filename)
                            json_object_object_get_ex(tmpobj2, "gauge_glow", &tmpobj3);
                            if (tmpobj3 != NULL) {
                               curr_element->gauge_glow = json_object_get_int(tmpobj3);
+                           }
+
+                           /* Parse value label display */
+                           json_object_object_get_ex(tmpobj2, "gauge_show_value", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->gauge_show_value = json_object_get_int(tmpobj3);
+                           }
+
+                           /* Parse value label format */
+                           json_object_object_get_ex(tmpobj2, "gauge_value_format", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              strncpy(curr_element->gauge_value_format,
+                                      json_object_get_string(tmpobj3),
+                                      sizeof(curr_element->gauge_value_format) - 1);
+                              curr_element->gauge_value_format[sizeof(curr_element->gauge_value_format) - 1] = '\0';
+                           }
+
+                           /* Parse value label color */
+                           json_object_object_get_ex(tmpobj2, "gauge_value_color", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              strncpy(tmpstr, json_object_get_string(tmpobj3), 1024);
+                              parse_color(tmpstr, &curr_element->gauge_value_color.r,
+                                          &curr_element->gauge_value_color.g,
+                                          &curr_element->gauge_value_color.b,
+                                          &curr_element->gauge_value_color.a);
+                           }
+
+                           /* Parse value label size */
+                           json_object_object_get_ex(tmpobj2, "gauge_value_size", &tmpobj3);
+                           if (tmpobj3 != NULL) {
+                              curr_element->gauge_value_size = json_object_get_int(tmpobj3);
                            }
 
                            LOG_INFO("Parsed gauge element: type=%s, min=%.1f, max=%.1f",

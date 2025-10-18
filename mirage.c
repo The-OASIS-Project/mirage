@@ -321,6 +321,11 @@ element default_element =
    .gauge_ticks = 0,
    .gauge_smooth = 0,
    .gauge_glow = 0,
+   .gauge_display_value = 0.0f,
+   .gauge_show_value = 0,
+   .gauge_value_format[0] = '\0',
+   .gauge_value_color = (SDL_Color){255, 255, 255, 255},
+   .gauge_value_size = 24,
 
    .gauge_cache_texture = NULL,
    .gauge_cache_dirty = 1,
@@ -1817,6 +1822,8 @@ int main(int argc, char **argv)
 
    init_hud_manager();
 
+   init_sim_data();
+
    intro_element.enabled = 0;
 
    if (check_and_reload_config(config_file) == FAILURE) {
@@ -2165,6 +2172,8 @@ int main(int argc, char **argv)
       printf("FPS Stats: %03d, avg: %03.0f, min: %03.0f, max: %03.0f\n",
              curr_fps, averageFrameRate, tracker.minFrameRate, tracker.maxFrameRate);
 #endif
+
+      update_sim_data();
 
       /* Video Processing */
       if (!no_camera_mode) {

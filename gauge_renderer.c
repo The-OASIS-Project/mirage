@@ -29,6 +29,7 @@
 #include <SDL2/SDL2_gfxPrimitives.h>
 
 /* Local Headers */
+#include "data_sources.h"
 #include "gauge_renderer.h"
 #include "config_parser.h"
 #include "config_manager.h"
@@ -56,6 +57,155 @@ static SDL_Color interpolate_color(SDL_Color c1, SDL_Color c2, float t) {
    result.a = (Uint8)(c1.a + (c2.a - c1.a) * t);
    
    return result;
+}
+
+/**
+ * @brief Smooth interpolation for gauge values
+ *
+ * @param current Current displayed value
+ * @param target Target value to reach
+ * @param smooth_factor Interpolation speed (0.0-1.0, higher = faster)
+ * @return Interpolated value
+ */
+static float smooth_gauge_value(float current, float target, float smooth_factor) {
+   /* Simple lerp: current + (target - current) * factor */
+   /* Higher factor = faster response (0.3 = smooth, 0.1 = very smooth) */
+   return current + (target - current) * smooth_factor;
+}
+
+/**
+ * @brief Render glow effect around gauge elements
+ *
+ * Renders multiple passes with decreasing alpha and increasing size
+ * to create a soft glow effect.
+ *
+ * @param renderer SDL renderer
+ * @param x Center X position
+ * @param y Center Y position
+ * @param width Width of element
+ * @param height Height of element
+ * @param color Base glow color
+ * @param intensity Glow intensity (0.0-1.0)
+ */
+static void render_glow_effect(SDL_Renderer *renderer, int x, int y,
+                                int width, int height, SDL_Color color,
+                                float intensity) {
+   /* Render 3 passes for soft glow */
+   for (int pass = 0; pass < 3; pass++) {
+      float expansion = (pass + 1) * 4.0f;  /* Expand by 4, 8, 12 pixels */
+      float alpha_mult = (3 - pass) / 3.0f;  /* Fade outer passes */
+
+      SDL_Color glow_color = color;
+      glow_color.a = (Uint8)(color.a * intensity * alpha_mult * 0.5f);
+
+      /* Expanded rectangle for glow */
+      SDL_Rect glow_rect = {
+         x - (int)expansion,
+         y - (int)expansion,
+         width + (int)(expansion * 2),
+         height + (int)(expansion * 2)
+      };
+
+      SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_ADD);
+      SDL_SetRenderDrawColor(renderer, glow_color.r, glow_color.g,
+                            glow_color.b, glow_color.a);
+      SDL_RenderFillRect(renderer, &glow_rect);
+   }
+
+   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+}
+
+/**
+ * @brief Render circular glow effect (for arc/ring gauges)
+ *
+ * @param renderer SDL renderer
+ * @param cx Center X
+ * @param cy Center Y
+ * @param radius Base radius
+ * @param color Glow color
+ * @param intensity Glow intensity (0.0-1.0)
+ */
+static void render_circular_glow(SDL_Renderer *renderer, int cx, int cy,
+                                  int radius, SDL_Color color, float intensity) {
+   /* Use SDL2_gfx for circular glows */
+   for (int pass = 0; pass < 3; pass++) {
+      int glow_radius = radius + (pass + 1) * 6;
+      float alpha_mult = (3 - pass) / 3.0f;
+
+      SDL_Color glow_color = color;
+      glow_color.a = (Uint8)(color.a * intensity * alpha_mult * 0.4f);
+
+      /* Render with additive blending */
+      filledCircleRGBA(renderer, cx, cy, glow_radius,
+                      glow_color.r, glow_color.g, glow_color.b, glow_color.a);
+   }
+}
+
+/**
+ * @brief Render value label on gauge
+ *
+ * @param curr_element Gauge element
+ * @param value Value to display
+ * @param x Center X position
+ * @param y Center Y position
+ * @param alpha Transparency
+ */
+static void render_gauge_value_label(element *curr_element, float value,
+                                     int x, int y, Uint8 alpha) {
+   if (!curr_element->gauge_show_value) {
+      return;
+   }
+
+   SDL_Renderer *renderer = get_sdl_renderer();
+   if (!renderer) return;
+
+   /* Format the value */
+   char value_text[64];
+   if (strlen(curr_element->gauge_value_format) > 0) {
+      snprintf(value_text, sizeof(value_text),
+              curr_element->gauge_value_format, value);
+   } else {
+      /* Default format */
+      snprintf(value_text, sizeof(value_text), "%.0f", value);
+   }
+
+   /* Load font if needed */
+   TTF_Font *font = TTF_OpenFont("ui_assets/fonts/Aldrich-Regular.ttf",
+                                  curr_element->gauge_value_size);
+   if (!font) {
+      LOG_WARNING("Failed to load font for gauge value label");
+      return;
+   }
+
+   /* Create text surface */
+   SDL_Color text_color = curr_element->gauge_value_color;
+   text_color.a = alpha;
+
+   SDL_Surface *surface = TTF_RenderText_Blended(font, value_text, text_color);
+   if (!surface) {
+      TTF_CloseFont(font);
+      return;
+   }
+
+   /* Create texture */
+   SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+   if (texture) {
+      SDL_SetTextureAlphaMod(texture, alpha);
+
+      /* Center the text */
+      SDL_Rect dst_rect = {
+         x - surface->w / 2,
+         y - surface->h / 2,
+         surface->w,
+         surface->h
+      };
+
+      SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
+      SDL_DestroyTexture(texture);
+   }
+
+   SDL_FreeSurface(surface);
+   TTF_CloseFont(font);
 }
 
 /**
@@ -274,6 +424,37 @@ static void generate_arc_cache(element *curr_element) {
       }
    }
 
+   /* Draw permanent warning zone arc ===== */
+   if (curr_element->gauge_warning_threshold > 0.0f) {
+      float range = curr_element->gauge_max_value - curr_element->gauge_min_value;
+      if (range > 0.0f) {
+         /* Calculate warning zone percentage */
+         float warn_percentage = (curr_element->gauge_warning_threshold - curr_element->gauge_min_value) / range;
+
+         /* Calculate angles for warning zone */
+         float warn_start_angle = curr_element->gauge_arc_start + (curr_element->gauge_arc_sweep * warn_percentage);
+         float warn_end_angle = curr_element->gauge_arc_start + curr_element->gauge_arc_sweep;
+
+         /* Only draw if there's a valid warning zone */
+         if (warn_start_angle < warn_end_angle) {
+            SDL_Color warn_color = curr_element->gauge_warning_color;
+
+            /* Draw multi-pass warning arc for thickness */
+            for (int t = 0; t < thickness; t++) {
+               int arc_radius = radius - t;
+               arcRGBA(renderer, cx, cy, arc_radius,
+                       (Sint16)warn_start_angle, (Sint16)warn_end_angle,
+                       warn_color.r, warn_color.g, warn_color.b, 160);
+            }
+
+            /* Add inner warning arc edge for definition */
+            arcRGBA(renderer, cx, cy, radius - thickness,
+                    (Sint16)warn_start_angle, (Sint16)warn_end_angle,
+                    warn_color.r, warn_color.g, warn_color.b, 200);
+         }
+      }
+   }
+
    /* Draw center hub */
    int hub_radius = 10;
    SDL_Color hub_color = {80, 80, 80, alpha};
@@ -335,8 +516,25 @@ static void render_linear_gauge(element *curr_element) {
       generate_linear_cache(curr_element);
    }
 
-   /* Get current value */
-   curr_element->gauge_current_value = atof(curr_element->gauge_value_source);
+   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   float target_value = resolve_data_source_float(curr_element->gauge_value_source);
+
+   /* Apply smooth interpolation if enabled */
+   if (curr_element->gauge_smooth) {
+      /* First frame: initialize display value */
+      if (curr_element->gauge_display_value == 0.0f && target_value != 0.0f) {
+         curr_element->gauge_display_value = target_value;
+      } else {
+         /* Smooth interpolation (0.2 = nice smooth speed) */
+         curr_element->gauge_display_value = smooth_gauge_value(
+            curr_element->gauge_display_value, target_value, 0.2f);
+      }
+      curr_element->gauge_current_value = curr_element->gauge_display_value;
+   } else {
+      /* Instant update */
+      curr_element->gauge_current_value = target_value;
+      curr_element->gauge_display_value = target_value;
+   }
 
    /* Calculate fill percentage */
    float range = curr_element->gauge_max_value - curr_element->gauge_min_value;
@@ -349,7 +547,7 @@ static void render_linear_gauge(element *curr_element) {
    if (percentage < 0.0f) percentage = 0.0f;
    if (percentage > 1.0f) percentage = 1.0f;
 
-   /* Determine color */
+   /* Determine color based on warning threshold */
    SDL_Color bar_color = curr_element->gauge_primary_color;
    if (curr_element->gauge_warning_threshold > 0.0f &&
        curr_element->gauge_current_value >= curr_element->gauge_warning_threshold) {
@@ -365,58 +563,64 @@ static void render_linear_gauge(element *curr_element) {
    }
    bar_color.a = alpha;
 
-   /* Calculate base positions */
-   int x_left = curr_element->dest_x;
-   int x_right = curr_element->dest_x;
-   int y = curr_element->dest_y;
-   int width = curr_element->width;
-   int height = curr_element->height;
+   /* Calculate scaled destination rectangle */
+   SDL_Rect dst_rect;
+   calculate_gauge_zoom_rect(curr_element->dest_x, curr_element->dest_y,
+                             curr_element->width, curr_element->height,
+                             scale, &dst_rect);
 
-   if (!curr_element->fixed) {
-      x_left -= this_hds->stereo_offset;
-      x_right += this_hds->stereo_offset;
-   }
-
-   /* Render for both eyes */
-   int eye_offsets[2] = {x_left, x_right + this_hds->eye_output_width};
-   
+   /* Render for both eyes (stereo) */
    for (int eye = 0; eye < 2; eye++) {
-      int x = eye_offsets[eye];
+      int stereo_offset = curr_element->fixed ? 0 : this_hds->stereo_offset;
+      int x_offset = (eye == 0) ? -stereo_offset :
+                     (this_hds->eye_output_width + stereo_offset);
       
-      /* Calculate zoom rect for background */
-      SDL_Rect dst_rect;
-      calculate_gauge_zoom_rect(x, y, width, height, scale, &dst_rect);
+      SDL_Rect eye_rect = dst_rect;
+      eye_rect.x += x_offset;
 
-      /* Apply transition alpha to cached background */
+      /* ===== PHASE 7: RENDER GLOW EFFECT ===== */
+      if (curr_element->gauge_glow) {
+         render_glow_effect(renderer, eye_rect.x, eye_rect.y,
+                           eye_rect.w, eye_rect.h, bar_color, 0.6f);
+      }
+
+      /* Render cached background */
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, alpha);
-
-      /* Blit cached background with zoom */
-      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &dst_rect);
-
-      /* Restore texture alpha */
+      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &eye_rect);
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, 255);
-      
-      /* Draw dynamic filled portion with zoom */
-      if (curr_element->gauge_orientation == 0) {
-         /* Horizontal */
-         int fill_width = (int)((float)width * percentage * scale);
-         if (fill_width > 0) {
-            roundedBoxRGBA(renderer, dst_rect.x, dst_rect.y,
-                           dst_rect.x + fill_width, dst_rect.y + dst_rect.h, 3,
-                           bar_color.r, bar_color.g, bar_color.b, bar_color.a);
+
+      /* Render dynamic fill bar */
+      if (percentage > 0.0f) {
+         if (curr_element->gauge_orientation == 0) {
+            /* Horizontal fill */
+            int fill_width = (int)((float)eye_rect.w * percentage * scale);
+            if (fill_width > 0) {
+               roundedBoxRGBA(renderer, eye_rect.x, eye_rect.y,
+                             eye_rect.x + fill_width, eye_rect.y + eye_rect.h, 3,
+                             bar_color.r, bar_color.g, bar_color.b, bar_color.a);
+            }
+         } else {
+            /* Vertical fill (bottom to top) */
+            int fill_height = (int)((float)eye_rect.h * percentage * scale);
+            if (fill_height > 0) {
+               int fill_y = eye_rect.y + eye_rect.h - fill_height;
+               roundedBoxRGBA(renderer, eye_rect.x, fill_y,
+                             eye_rect.x + eye_rect.w, eye_rect.y + eye_rect.h, 3,
+                             bar_color.r, bar_color.g, bar_color.b, bar_color.a);
+            }
          }
-      } else {
-         /* Vertical */
-         int fill_height = (int)((float)height * percentage * scale);
-         if (fill_height > 0) {
-            int fill_y = dst_rect.y + dst_rect.h - fill_height;
-            roundedBoxRGBA(renderer, dst_rect.x, fill_y,
-                           dst_rect.x + dst_rect.w, dst_rect.y + dst_rect.h, 3,
-                           bar_color.r, bar_color.g, bar_color.b, bar_color.a);
-         }
+      }
+
+      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      if (curr_element->gauge_show_value) {
+         int center_x = eye_rect.x + eye_rect.w / 2;
+         int center_y = eye_rect.y + eye_rect.h / 2;
+         render_gauge_value_label(curr_element, curr_element->gauge_current_value,
+                                 center_x, center_y, bar_color.a);
       }
    }
 }
+
 
 /**
  * @brief Render a ring gauge with caching and zoom transitions
@@ -436,8 +640,25 @@ static void render_ring_gauge(element *curr_element) {
       generate_ring_cache(curr_element);
    }
 
-   /* Get current value */
-   curr_element->gauge_current_value = atof(curr_element->gauge_value_source);
+   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   float target_value = resolve_data_source_float(curr_element->gauge_value_source);
+
+   /* Apply smooth interpolation if enabled */
+   if (curr_element->gauge_smooth) {
+      /* First frame: initialize display value */
+      if (curr_element->gauge_display_value == 0.0f && target_value != 0.0f) {
+         curr_element->gauge_display_value = target_value;
+      } else {
+         /* Smooth interpolation (0.2 = nice smooth speed) */
+         curr_element->gauge_display_value = smooth_gauge_value(
+            curr_element->gauge_display_value, target_value, 0.2f);
+      }
+      curr_element->gauge_current_value = curr_element->gauge_display_value;
+   } else {
+      /* Instant update */
+      curr_element->gauge_current_value = target_value;
+      curr_element->gauge_display_value = target_value;
+   }
 
    /* Calculate fill percentage */
    float range = curr_element->gauge_max_value - curr_element->gauge_min_value;
@@ -469,69 +690,64 @@ static void render_ring_gauge(element *curr_element) {
    /* Calculate geometry */
    int diameter = (curr_element->width < curr_element->height) ?
                   curr_element->width : curr_element->height;
-   int outer_radius = (int)((float)(diameter / 2) * scale);
-   int thickness = curr_element->gauge_thickness;
-   if (thickness <= 0) thickness = 10;
-   thickness = (int)((float)thickness * scale);
-   if (thickness >= outer_radius) thickness = outer_radius - 2;
-   int inner_radius = outer_radius - thickness;
-
-   int center_x_base = curr_element->dest_x + (curr_element->width / 2);
-   int center_y = curr_element->dest_y + (curr_element->height / 2);
+   int outer_radius = (int)((diameter / 2) * scale);
+   int inner_radius = outer_radius - (int)(curr_element->gauge_thickness * scale);
+   if (inner_radius < 1) inner_radius = 1;
 
    /* Calculate angles */
    float start_angle = curr_element->gauge_arc_start;
    float sweep_angle = curr_element->gauge_arc_sweep;
-   if (sweep_angle <= 0.0f) sweep_angle = 360.0f;
-   float progress_end_angle = start_angle + (sweep_angle * percentage);
+   float progress_angle = percentage * sweep_angle;
+   float progress_end_angle = start_angle + progress_angle;
 
-   /* Calculate stereo positions */
-   int center_x_left = center_x_base;
-   int center_x_right = center_x_base;
-   if (!curr_element->fixed) {
-      center_x_left -= this_hds->stereo_offset;
-      center_x_right += this_hds->stereo_offset;
-   }
+   /* Calculate scaled destination rectangle */
+   SDL_Rect dst_rect;
+   calculate_gauge_zoom_rect(curr_element->dest_x, curr_element->dest_y,
+                             curr_element->width, curr_element->height,
+                             scale, &dst_rect);
+
+   /* Center coordinates */
+   int center_y = dst_rect.y + dst_rect.h / 2;
 
    /* Render for both eyes */
-   int center_x_offsets[2] = {center_x_left, center_x_right + this_hds->eye_output_width};
-
    for (int eye = 0; eye < 2; eye++) {
-      int base_x = eye == 0 ? curr_element->dest_x - this_hds->stereo_offset :
-                              curr_element->dest_x + this_hds->stereo_offset + this_hds->eye_output_width;
-      if (curr_element->fixed) {
-         base_x = curr_element->dest_x + (eye == 1 ? this_hds->eye_output_width : 0);
+      int stereo_offset = curr_element->fixed ? 0 : this_hds->stereo_offset;
+      int x_offset = (eye == 0) ? -stereo_offset :
+                     (this_hds->eye_output_width + stereo_offset);
+
+      int cx = dst_rect.x + dst_rect.w / 2 + x_offset;
+
+      /* ===== PHASE 7: RENDER CIRCULAR GLOW ===== */
+      if (curr_element->gauge_glow) {
+         render_circular_glow(renderer, cx, center_y, outer_radius,
+                             ring_color, 0.5f);
       }
 
-      /* Calculate zoom rect for background */
-      SDL_Rect dst_rect;
-      calculate_gauge_zoom_rect(base_x, curr_element->dest_y,
-                                 curr_element->width, curr_element->height,
-                                 scale, &dst_rect);
-
-      /* Apply transition alpha to cached background */
+      /* Render cached background */
+      SDL_Rect eye_rect = dst_rect;
+      eye_rect.x += x_offset;
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, alpha);
-
-      /* Blit cached background with zoom */
-      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &dst_rect);
-
-      /* Restore texture alpha */
+      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &eye_rect);
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, 255);
 
-      /* Draw dynamic progress arc with scaled radius */
-      int cx = center_x_offsets[eye];
-
-      if (percentage >= 0.999f) {
-         /* 100% - draw full ring */
+      /* Render dynamic progress arc */
+      if (sweep_angle >= 360.0f) {
+         /* Full circle - render as filled circle with hole */
          filledCircleRGBA(renderer, cx, center_y, outer_radius,
-                          ring_color.r, ring_color.g, ring_color.b, ring_color.a);
+                         ring_color.r, ring_color.g, ring_color.b, ring_color.a);
          filledCircleRGBA(renderer, cx, center_y, inner_radius, 0, 0, 0, 255);
       } else if (percentage > 0.0f) {
-         /* Draw progress arc */
+         /* Partial arc - draw progress */
          filledPieRGBA(renderer, cx, center_y, outer_radius,
-                       (Sint16)start_angle, (Sint16)progress_end_angle,
-                       ring_color.r, ring_color.g, ring_color.b, ring_color.a);
+                      (Sint16)start_angle, (Sint16)progress_end_angle,
+                      ring_color.r, ring_color.g, ring_color.b, ring_color.a);
          filledCircleRGBA(renderer, cx, center_y, inner_radius, 0, 0, 0, 255);
+      }
+
+      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      if (curr_element->gauge_show_value) {
+         render_gauge_value_label(curr_element, curr_element->gauge_current_value,
+                                 cx, center_y, ring_color.a);
       }
    }
 }
@@ -554,8 +770,25 @@ static void render_arc_gauge(element *curr_element) {
       generate_arc_cache(curr_element);
    }
 
-   /* Get current value */
-   curr_element->gauge_current_value = atof(curr_element->gauge_value_source);
+   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   float target_value = resolve_data_source_float(curr_element->gauge_value_source);
+
+   /* Apply smooth interpolation if enabled */
+   if (curr_element->gauge_smooth) {
+      /* First frame: initialize display value */
+      if (curr_element->gauge_display_value == 0.0f && target_value != 0.0f) {
+         curr_element->gauge_display_value = target_value;
+      } else {
+         /* Smooth interpolation (0.2 = nice smooth speed) */
+         curr_element->gauge_display_value = smooth_gauge_value(
+            curr_element->gauge_display_value, target_value, 0.2f);
+      }
+      curr_element->gauge_current_value = curr_element->gauge_display_value;
+   } else {
+      /* Instant update */
+      curr_element->gauge_current_value = target_value;
+      curr_element->gauge_display_value = target_value;
+   }
 
    /* Calculate fill percentage */
    float range = curr_element->gauge_max_value - curr_element->gauge_min_value;
@@ -583,76 +816,49 @@ static void render_arc_gauge(element *curr_element) {
    /* Calculate geometry with scale */
    int diameter = (curr_element->width < curr_element->height) ?
                   curr_element->width : curr_element->height;
-   int radius = (int)((float)(diameter / 2) * scale);
-   int thickness = curr_element->gauge_thickness;
-   if (thickness <= 0) thickness = 8;
-   thickness = (int)((float)thickness * scale);
+   int radius = (int)((diameter / 2) * scale);
 
-   int center_x_base = curr_element->dest_x + (curr_element->width / 2);
-   int center_y = curr_element->dest_y + (curr_element->height / 2);
-
-   /* Get arc parameters */
-   float start_angle = curr_element->gauge_arc_start;
+   /* Calculate needle angle */
    float sweep_angle = curr_element->gauge_arc_sweep;
-   if (sweep_angle <= 0.0f) sweep_angle = 180.0f;
-   float needle_angle = start_angle + (sweep_angle * percentage);
+   float needle_angle = curr_element->gauge_arc_start + (percentage * sweep_angle);
 
-   /* Calculate stereo positions */
-   int center_x_left = center_x_base;
-   int center_x_right = center_x_base;
-   if (!curr_element->fixed) {
-      center_x_left -= this_hds->stereo_offset;
-      center_x_right += this_hds->stereo_offset;
-   }
+   /* Determine needle color */
+   SDL_Color needle_color = in_warning ?
+                           curr_element->gauge_warning_color :
+                           curr_element->gauge_primary_color;
+   needle_color.a = alpha;
+
+   /* Calculate scaled destination rectangle */
+   SDL_Rect dst_rect;
+   calculate_gauge_zoom_rect(curr_element->dest_x, curr_element->dest_y,
+                             curr_element->width, curr_element->height,
+                             scale, &dst_rect);
+
+   /* Center coordinates */
+   int center_y = dst_rect.y + dst_rect.h / 2;
 
    /* Render for both eyes */
-   int center_x_offsets[2] = {center_x_left, center_x_right + this_hds->eye_output_width};
-
    for (int eye = 0; eye < 2; eye++) {
-      int base_x = eye == 0 ? curr_element->dest_x - this_hds->stereo_offset :
-                              curr_element->dest_x + this_hds->stereo_offset + this_hds->eye_output_width;
-      if (curr_element->fixed) {
-         base_x = curr_element->dest_x + (eye == 1 ? this_hds->eye_output_width : 0);
+      int stereo_offset = curr_element->fixed ? 0 : this_hds->stereo_offset;
+      int x_offset = (eye == 0) ? -stereo_offset :
+                     (this_hds->eye_output_width + stereo_offset);
+
+      int cx = dst_rect.x + dst_rect.w / 2 + x_offset;
+
+      /* ===== PHASE 7: RENDER CIRCULAR GLOW ===== */
+      if (curr_element->gauge_glow) {
+         render_circular_glow(renderer, cx, center_y, radius,
+                             needle_color, 0.5f);
       }
 
-      /* Calculate zoom rect for background */
-      SDL_Rect dst_rect;
-      calculate_gauge_zoom_rect(base_x, curr_element->dest_y,
-                                 curr_element->width, curr_element->height,
-                                 scale, &dst_rect);
-
-      /* Apply transition alpha to cached background */
+      /* Render cached background */
+      SDL_Rect eye_rect = dst_rect;
+      eye_rect.x += x_offset;
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, alpha);
-
-      /* Blit cached background with zoom */
-      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &dst_rect);
-
-      /* Restore texture alpha */
+      SDL_RenderCopy(renderer, curr_element->gauge_cache_texture, NULL, &eye_rect);
       SDL_SetTextureAlphaMod(curr_element->gauge_cache_texture, 255);
 
-      /* Draw dynamic warning arc if needed (with scaled radius) */
-      int cx = center_x_offsets[eye];
-
-      if (in_warning) {
-         SDL_Color warn_color = curr_element->gauge_warning_color;
-         warn_color.a = alpha;
-
-         float warn_percentage = (curr_element->gauge_warning_threshold - curr_element->gauge_min_value) / range;
-         float warn_start_angle = start_angle + (sweep_angle * warn_percentage);
-         float end_angle = start_angle + sweep_angle;
-
-         for (int t = 0; t < thickness; t++) {
-            int arc_radius = radius - t;
-            arcRGBA(renderer, cx, center_y, arc_radius,
-                    (Sint16)warn_start_angle, (Sint16)end_angle,
-                    warn_color.r, warn_color.g, warn_color.b, warn_color.a);
-         }
-      }
-
-      /* Draw dynamic needle with scale */
-      SDL_Color needle_color = in_warning ? curr_element->gauge_warning_color : curr_element->gauge_primary_color;
-      needle_color.a = alpha;
-
+      /* Render dynamic needle */
       int needle_length = radius - (int)(15.0f * scale);
       float needle_rad = needle_angle * M_PI / 180.0f;
 
@@ -668,17 +874,27 @@ static void render_arc_gauge(element *curr_element) {
       int base_right_x = cx + (int)(cos(perp_angle_right) * base_width / 2);
       int base_right_y = center_y + (int)(sin(perp_angle_right) * base_width / 2);
 
+      /* Draw filled triangle */
       filledTrigonRGBA(renderer,
                        tip_x, tip_y,
                        base_left_x, base_left_y,
                        base_right_x, base_right_y,
                        needle_color.r, needle_color.g, needle_color.b, needle_color.a);
 
+      /* Draw anti-aliased outline */
       aatrigonRGBA(renderer,
                    tip_x, tip_y,
                    base_left_x, base_left_y,
                    base_right_x, base_right_y,
                    needle_color.r, needle_color.g, needle_color.b, needle_color.a);
+
+      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      if (curr_element->gauge_show_value) {
+         /* Position label below needle pivot point */
+         int label_y = center_y + radius / 2;
+         render_gauge_value_label(curr_element, curr_element->gauge_current_value,
+                                 cx, label_y, needle_color.a);
+      }
    }
 }
 

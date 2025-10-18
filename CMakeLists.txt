@@ -66,6 +66,7 @@ set(SOURCE_FILES
     config_parser.c
     config_manager.c
     curl_download.c
+    data_sources.c
     detect.cpp
     devices.c
     element_renderer.c
@@ -78,6 +79,7 @@ set(SOURCE_FILES
     mosquitto_comms.c
     recording.c
     screenshot.c
+    sim_data.c
     system_metrics.c
     utils.c)
 

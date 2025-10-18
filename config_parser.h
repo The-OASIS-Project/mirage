@@ -224,6 +224,11 @@ typedef struct _element {
    int gauge_ticks;                             /* Number of tick marks (arc gauges) */
    int gauge_smooth;                            /* Enable smooth interpolation */
    int gauge_glow;                              /* Enable glow effect */
+   float gauge_display_value;                   /* Smoothed value for rendering */
+   int gauge_show_value;                        /* Show numeric value label (0/1) */
+   char gauge_value_format[32];                 /* Format string for value label (e.g., "%.1f%%") */
+   SDL_Color gauge_value_color;                 /* Color for value label text */
+   int gauge_value_size;                        /* Font size for value label */
 
    /* Gauge cache for performance optimization */
    SDL_Texture *gauge_cache_texture;            /* Pre-rendered static background */
