@@ -233,6 +233,10 @@ typedef struct _element {
    /* Gauge cache for performance optimization */
    SDL_Texture *gauge_cache_texture;            /* Pre-rendered static background */
    int gauge_cache_dirty;                       /* 1 = needs regeneration, 0 = valid */
+   float gauge_last_rendered_value;             /* Last value we rendered label for */
+   SDL_Texture *gauge_value_label_texture;      /* Cached value label texture */
+   int gauge_value_label_width;                 /* Cached label dimensions */
+   int gauge_value_label_height;
 
    /* Transition state - used for fade/zoom effects */
    float transition_alpha;

@@ -37,29 +37,6 @@
 #include "mirage.h"
 
 /**
- * @brief Interpolate between two colors
- *
- * @param c1 Starting color
- * @param c2 Ending color
- * @param t Interpolation factor (0.0 to 1.0)
- * @return Interpolated SDL_Color
- */
-static SDL_Color interpolate_color(SDL_Color c1, SDL_Color c2, float t) {
-   SDL_Color result;
-   
-   /* Clamp t to valid range */
-   if (t < 0.0f) t = 0.0f;
-   if (t > 1.0f) t = 1.0f;
-   
-   result.r = (Uint8)(c1.r + (c2.r - c1.r) * t);
-   result.g = (Uint8)(c1.g + (c2.g - c1.g) * t);
-   result.b = (Uint8)(c1.b + (c2.b - c1.b) * t);
-   result.a = (Uint8)(c1.a + (c2.a - c1.a) * t);
-   
-   return result;
-}
-
-/**
  * @brief Smooth interpolation for gauge values
  *
  * @param current Current displayed value
@@ -159,66 +136,75 @@ static void render_gauge_value_label(element *curr_element, float value,
    SDL_Renderer *renderer = get_sdl_renderer();
    if (!renderer) return;
 
-   /* Format the value */
-   char value_text[64];
-   if (strlen(curr_element->gauge_value_format) > 0) {
-      snprintf(value_text, sizeof(value_text),
-              curr_element->gauge_value_format, value);
-   } else {
-      /* Default format */
-      snprintf(value_text, sizeof(value_text), "%.0f", value);
+   /* Determine if we need to regenerate the label */
+   float value_change = fabsf(value - curr_element->gauge_last_rendered_value);
+   float change_threshold = 0.5f;  /* Don't redraw unless value changed by 0.5+ */
+
+   int need_regenerate = 0;
+
+   if (curr_element->gauge_value_label_texture == NULL) {
+      need_regenerate = 1;  /* First time */
+   } else if (value_change >= change_threshold) {
+      need_regenerate = 1;  /* Value changed significantly */
    }
 
-   /* Load font if needed */
-   TTF_Font *font = TTF_OpenFont("ui_assets/fonts/Aldrich-Regular.ttf",
-                                  curr_element->gauge_value_size);
-   if (!font) {
-      LOG_WARNING("Failed to load font for gauge value label");
-      return;
+   /* Regenerate texture if needed */
+   if (need_regenerate) {
+      /* Format the value */
+      char value_text[64];
+      if (strlen(curr_element->gauge_value_format) > 0) {
+         snprintf(value_text, sizeof(value_text),
+                 curr_element->gauge_value_format, value);
+      } else {
+         snprintf(value_text, sizeof(value_text), "%.0f", value);
+      }
+
+      /* Get cached font */
+      TTF_Font *font = get_local_font("ui_assets/fonts/Aldrich-Regular.ttf",
+                                       curr_element->gauge_value_size);
+      if (!font) {
+         return;
+      }
+
+      /* Create text surface */
+      SDL_Color text_color = curr_element->gauge_value_color;
+      text_color.a = 255;  /* Always render at full opacity to texture */
+
+      SDL_Surface *surface = TTF_RenderUTF8_Blended(font, value_text, text_color);
+      if (!surface) {
+         return;
+      }
+
+      /* Destroy old texture if exists */
+      if (curr_element->gauge_value_label_texture) {
+         SDL_DestroyTexture(curr_element->gauge_value_label_texture);
+      }
+
+      /* Create new texture */
+      curr_element->gauge_value_label_texture = SDL_CreateTextureFromSurface(renderer, surface);
+      if (curr_element->gauge_value_label_texture) {
+         SDL_SetTextureBlendMode(curr_element->gauge_value_label_texture, SDL_BLENDMODE_BLEND);
+         curr_element->gauge_value_label_width = surface->w;
+         curr_element->gauge_value_label_height = surface->h;
+      }
+
+      SDL_FreeSurface(surface);
+      curr_element->gauge_last_rendered_value = value;
    }
 
-   /* Create text surface */
-   SDL_Color text_color = curr_element->gauge_value_color;
-   text_color.a = alpha;
+   /* Render cached texture with current alpha */
+   if (curr_element->gauge_value_label_texture) {
+      SDL_SetTextureAlphaMod(curr_element->gauge_value_label_texture, alpha);
 
-   SDL_Surface *surface = TTF_RenderText_Blended(font, value_text, text_color);
-   if (!surface) {
-      TTF_CloseFont(font);
-      return;
-   }
-
-   /* Create texture */
-   SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-   if (texture) {
-      SDL_SetTextureAlphaMod(texture, alpha);
-
-      /* Center the text */
       SDL_Rect dst_rect = {
-         x - surface->w / 2,
-         y - surface->h / 2,
-         surface->w,
-         surface->h
+         x - curr_element->gauge_value_label_width / 2,
+         y - curr_element->gauge_value_label_height / 2,
+         curr_element->gauge_value_label_width,
+         curr_element->gauge_value_label_height
       };
 
-      SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
-      SDL_DestroyTexture(texture);
+      SDL_RenderCopy(renderer, curr_element->gauge_value_label_texture, NULL, &dst_rect);
    }
-
-   SDL_FreeSurface(surface);
-   TTF_CloseFont(font);
-}
-
-/**
- * @brief Invalidate and destroy gauge cache texture
- *
- * @param curr_element Pointer to the gauge element
- */
-static void invalidate_gauge_cache(element *curr_element) {
-   if (curr_element->gauge_cache_texture) {
-      SDL_DestroyTexture(curr_element->gauge_cache_texture);
-      curr_element->gauge_cache_texture = NULL;
-   }
-   curr_element->gauge_cache_dirty = 1;
 }
 
 /**

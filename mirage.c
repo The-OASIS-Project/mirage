@@ -117,6 +117,7 @@
 #include "recording.h"
 #include "screenshot.h"
 #include "secrets.h"
+#include "sim_data.h"
 #include "system_metrics.h"
 #include "utils.h"
 #include "version.h"
@@ -329,6 +330,10 @@ element default_element =
 
    .gauge_cache_texture = NULL,
    .gauge_cache_dirty = 1,
+   .gauge_last_rendered_value = -999999.0f,  /* Force initial render */
+   .gauge_value_label_texture = NULL,
+   .gauge_value_label_width = 0,
+   .gauge_value_label_height = 0,
 
    .transition_alpha = 0.0f,
    .in_transition = 0,

@@ -1358,11 +1358,6 @@ int parse_json_config(const char *filename)
                            if (tmpobj3 != NULL) {
                               curr_element->gauge_value_size = json_object_get_int(tmpobj3);
                            }
-
-                           LOG_INFO("Parsed gauge element: type=%s, min=%.1f, max=%.1f",
-                                    curr_element->gauge_type,
-                                    curr_element->gauge_min_value,
-                                    curr_element->gauge_max_value);
                         }
 
                         /* Check if this is an armor display element */

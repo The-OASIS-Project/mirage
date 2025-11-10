@@ -330,23 +330,23 @@ void render_text_element(element *curr_element) {
       snprintf(render_text, MAX_TEXT_LENGTH, "%03.0Lf%%", get_loadavg());
    } else if (strcmp("*SYSTEM_TEMP*", curr_element->text) == 0) {
       if (system_metrics.system_temp_available) {
-         snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f C", system_metrics.system_temperature);
+         snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f°C", system_metrics.system_temperature);
       } else {
-         snprintf(render_text, MAX_TEXT_LENGTH, "--.- C");
+         snprintf(render_text, MAX_TEXT_LENGTH, "--.-°C");
       }
    } else if (strcmp("*SYSTEM_TEMP_F*", curr_element->text) == 0) {
       if (system_metrics.system_temp_available) {
-         snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f F",
+         snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f°F",
                  system_metrics.system_temperature * 9/5 + 32.0);
       } else {
-         snprintf(render_text, MAX_TEXT_LENGTH, "--.- F");
+         snprintf(render_text, MAX_TEXT_LENGTH, "--.-°F");
       }
    } else if (strcmp("*MEM*", curr_element->text) == 0) {
       snprintf(render_text, MAX_TEXT_LENGTH, "%03.0Lf%%", get_mem_usage());
    } else if (strcmp("*HELMTEMP*", curr_element->text) == 0) {
-      snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f C", this_enviro->temp);
+      snprintf(render_text, MAX_TEXT_LENGTH, "%0.0f°C", this_enviro->temp);
    } else if (strcmp("*HELMTEMP_F*", curr_element->text) == 0) {
-      snprintf(render_text, MAX_TEXT_LENGTH, "%03.0f F", this_enviro->temp * 9/5 + 32.0);
+      snprintf(render_text, MAX_TEXT_LENGTH, "%03.0f°F", this_enviro->temp * 9/5 + 32.0);
    } else if (strcmp("*HELMHUM*", curr_element->text) == 0) {
       snprintf(render_text, MAX_TEXT_LENGTH, "%02.0f%%", this_enviro->humidity);
 
@@ -572,9 +572,9 @@ void render_text_element(element *curr_element) {
       }
    } else if (strcmp("*BATTERY_TEMP*", curr_element->text) == 0) {
       if (system_metrics.power_available) {
-         snprintf(render_text, MAX_TEXT_LENGTH, "%0.1f C", system_metrics.battery_temperature);
+         snprintf(render_text, MAX_TEXT_LENGTH, "%0.1f°C", system_metrics.battery_temperature);
       } else {
-         snprintf(render_text, MAX_TEXT_LENGTH, "--.- C");
+         snprintf(render_text, MAX_TEXT_LENGTH, "--.-°C");
       }
    } else if (strcmp("*BATTERY_CHEMISTRY*", curr_element->text) == 0) {
       if (system_metrics.power_available) {
@@ -659,8 +659,8 @@ void render_text_element(element *curr_element) {
                SDL_Surface *tmpsfc = NULL;
                SDL_Rect tmprect;
 
-               tmpsfc = TTF_RenderText_Blended(curr_element->ttf_font, raw_log[idx],
-                                              curr_element->font_color);
+               tmpsfc = TTF_RenderUTF8_Blended(curr_element->ttf_font, raw_log[idx],
+                                               curr_element->font_color);
                if (tmpsfc != NULL) {
                   tmprect.x = 0;
                   tmprect.y = ii * curr_element->font_size;
@@ -736,7 +736,7 @@ void render_text_element(element *curr_element) {
       /* Check if text contains line break delimiters */
       if (strchr(render_text, LINE_BREAK_DELIMITER) != NULL) {
          /* Create wrapped text surface using newline handling */
-         curr_element->surface = TTF_RenderText_Blended_Wrapped(
+         curr_element->surface = TTF_RenderUTF8_Blended_Wrapped(
             curr_element->ttf_font, render_text, curr_element->font_color, 0);
 
          /* Note: wrapLength=0 means only wrap on explicit newlines */
@@ -753,7 +753,7 @@ void render_text_element(element *curr_element) {
 #endif
       } else {
          /* Standard single-line text rendering */
-         curr_element->surface = TTF_RenderText_Blended(
+         curr_element->surface = TTF_RenderUTF8_Blended(
             curr_element->ttf_font, render_text, curr_element->font_color);
       }
 
@@ -1588,7 +1588,7 @@ void render_armor_display_element(element *curr_element) {
             );
 
             if (metrics_font) {
-               SDL_Surface *metrics_surface = TTF_RenderText_Blended(
+               SDL_Surface *metrics_surface = TTF_RenderUTF8_Blended(
                   metrics_font, metrics_text, text_color);
 
                if (metrics_surface) {
@@ -1804,7 +1804,7 @@ void render_detect_element(element *curr_element) {
 
             /* Render text labels for detections */
             curr_element->surface =
-                TTF_RenderText_Blended(curr_element->ttf_font,
+                TTF_RenderUTF8_Blended(curr_element->ttf_font,
                                        this_detect_sorted[0][j].description,
                                        curr_element->font_color);
             if (curr_element->surface != NULL) {
