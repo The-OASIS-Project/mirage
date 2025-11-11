@@ -817,7 +817,6 @@
          "layer": 0,
          "huds": ["armor"]
       },
-
       {
          "type": "text",
          "string": "*BATTERY_STATUS*",
@@ -905,7 +904,6 @@
          "layer": 0,
          "huds": ["armor"]
       },
-
       {
          "type": "text",
          "string": "BATTERY FAULTS",
@@ -957,7 +955,7 @@
          "layer": 0,
          "huds": ["armor"]
       },
-            {
+      {
          "comment": "Title text",
          "type": "text",
          "string": "GAUGE TEST HUD - Press 9",
@@ -970,7 +968,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Horizontal gauges section label",
          "type": "text",
@@ -984,7 +981,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Horizontal - BATTERY",
          "type": "special",
@@ -1015,7 +1011,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Horizontal - 50%",
          "type": "special",
@@ -1045,7 +1040,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Horizontal - 75%",
          "type": "special",
@@ -1075,7 +1069,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Horizontal - 100%",
          "type": "special",
@@ -1105,7 +1098,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Warning threshold test",
          "type": "text",
@@ -1119,7 +1111,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Below threshold (green)",
          "type": "special",
@@ -1151,7 +1142,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Above threshold (red)",
          "type": "special",
@@ -1183,7 +1173,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Vertical gauges section",
          "type": "text",
@@ -1197,7 +1186,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Vertical - 25%",
          "type": "special",
@@ -1227,7 +1215,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Vertical - 50%",
          "type": "special",
@@ -1257,7 +1244,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Vertical - 75%",
          "type": "special",
@@ -1287,7 +1273,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Vertical - 100%",
          "type": "special",
@@ -1317,7 +1302,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "=== RING GAUGES - Repositioned for 1440x1440 canvas ===",
          "comment": "First row at y=480, second row at y=640",
@@ -1354,7 +1338,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Ring - 50% (Green, medium)",
          "type": "special",
@@ -1386,7 +1369,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Ring - 75% (Orange, thick)",
          "type": "special",
@@ -1418,7 +1400,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Ring - 100% (Magenta)",
          "type": "special",
@@ -1450,7 +1431,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "=== SECOND ROW - Special features ===",
 
@@ -1484,7 +1464,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Ring - Warning threshold test (85%, threshold at 80%)",
          "type": "special",
@@ -1518,7 +1497,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Ring - Nested example (outer ring, 80%)",
          "type": "special",
@@ -1606,7 +1584,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Arc - 50% (Tachometer 270°, green, with ticks)",
          "type": "special",
@@ -1639,7 +1616,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Arc - 75% (Orange, 180°)",
          "type": "special",
@@ -1672,7 +1648,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Arc - 100% (Full sweep, magenta)",
          "type": "special",
@@ -1705,7 +1680,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "=== FOURTH ROW - Special arc features ===",
 
@@ -1740,7 +1714,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Arc - Warning threshold (85%, threshold at 70%, turns red)",
          "type": "special",
@@ -1775,7 +1748,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "comment": "Arc - Top arc (270° starting at 12 o'clock, yellow)",
          "type": "special",
@@ -1808,7 +1780,6 @@
          "layer": 10,
          "huds": ["gauge_test"]
       },
-
       {
          "_comment": "=== AUTOMOTIVE HUD - BLACK & RED THEME ===",
          "_comment": "=== TOP ROW: Auxiliary Gauges ===",
@@ -1851,7 +1822,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "Engine Temperature - White with red warning",
          "type": "special",
@@ -1892,7 +1862,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "Boost Pressure - Red accent",
          "type": "special",
@@ -1933,7 +1902,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "Battery Voltage",
          "type": "special",
@@ -1974,7 +1942,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "=== CENTER: TACHOMETER (Left) - White with RED redline ===",
          "type": "special",
@@ -2029,7 +1996,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "=== CENTER: SPEEDOMETER (Right) - White ===",
          "type": "special",
@@ -2083,7 +2049,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "=== BOTTOM: LINEAR BARS ===",
          "_comment2": "Throttle Position - Red accent",
@@ -2121,7 +2086,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "System Temperature - White with red warning",
          "type": "special",
@@ -2160,7 +2124,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "=== HEADER ===",
          "type": "text",
@@ -2174,7 +2137,6 @@
          "layer": 6,
          "huds": ["automotive"]
       },
-
       {
          "_comment": "Demo mode indicator",
          "type": "text",

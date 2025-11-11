@@ -502,7 +502,7 @@ static void render_linear_gauge(element *curr_element) {
       generate_linear_cache(curr_element);
    }
 
-   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   /* Smooth value interpolation */
    float target_value = resolve_data_source_float(curr_element->gauge_value_source);
 
    /* Apply smooth interpolation if enabled */
@@ -564,7 +564,7 @@ static void render_linear_gauge(element *curr_element) {
       SDL_Rect eye_rect = dst_rect;
       eye_rect.x += x_offset;
 
-      /* ===== PHASE 7: RENDER GLOW EFFECT ===== */
+      /* Render glow effect */
       if (curr_element->gauge_glow) {
          render_glow_effect(renderer, eye_rect.x, eye_rect.y,
                            eye_rect.w, eye_rect.h, bar_color, 0.6f);
@@ -597,7 +597,7 @@ static void render_linear_gauge(element *curr_element) {
          }
       }
 
-      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      /* Render value label */
       if (curr_element->gauge_show_value) {
          int center_x = eye_rect.x + eye_rect.w / 2;
          int center_y = eye_rect.y + eye_rect.h / 2;
@@ -626,7 +626,7 @@ static void render_ring_gauge(element *curr_element) {
       generate_ring_cache(curr_element);
    }
 
-   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   /* Smooth value interpolation */
    float target_value = resolve_data_source_float(curr_element->gauge_value_source);
 
    /* Apply smooth interpolation if enabled */
@@ -703,7 +703,7 @@ static void render_ring_gauge(element *curr_element) {
 
       int cx = dst_rect.x + dst_rect.w / 2 + x_offset;
 
-      /* ===== PHASE 7: RENDER CIRCULAR GLOW ===== */
+      /* Render circular glow */
       if (curr_element->gauge_glow) {
          render_circular_glow(renderer, cx, center_y, outer_radius,
                              ring_color, 0.5f);
@@ -730,7 +730,7 @@ static void render_ring_gauge(element *curr_element) {
          filledCircleRGBA(renderer, cx, center_y, inner_radius, 0, 0, 0, 255);
       }
 
-      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      /* Render value label */
       if (curr_element->gauge_show_value) {
          render_gauge_value_label(curr_element, curr_element->gauge_current_value,
                                  cx, center_y, ring_color.a);
@@ -756,7 +756,7 @@ static void render_arc_gauge(element *curr_element) {
       generate_arc_cache(curr_element);
    }
 
-   /* ===== PHASE 7: SMOOTH VALUE INTERPOLATION ===== */
+   /* Smooth value interpolation */
    float target_value = resolve_data_source_float(curr_element->gauge_value_source);
 
    /* Apply smooth interpolation if enabled */
@@ -831,7 +831,7 @@ static void render_arc_gauge(element *curr_element) {
 
       int cx = dst_rect.x + dst_rect.w / 2 + x_offset;
 
-      /* ===== PHASE 7: RENDER CIRCULAR GLOW ===== */
+      /* Render circular glow */
       if (curr_element->gauge_glow) {
          render_circular_glow(renderer, cx, center_y, radius,
                              needle_color, 0.5f);
@@ -874,7 +874,7 @@ static void render_arc_gauge(element *curr_element) {
                    base_right_x, base_right_y,
                    needle_color.r, needle_color.g, needle_color.b, needle_color.a);
 
-      /* ===== PHASE 7: RENDER VALUE LABEL ===== */
+      /* Render value label */
       if (curr_element->gauge_show_value) {
          /* Position label below needle pivot point */
          int label_y = center_y + radius / 2;
