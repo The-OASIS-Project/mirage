@@ -141,6 +141,13 @@ typedef enum {
    TEXT_SOURCE_COMPASS,
    TEXT_SOURCE_LOG,
    TEXT_SOURCE_ALERT,
+   /* Notification text sources */
+   TEXT_SOURCE_CALLER_NAME,
+   TEXT_SOURCE_CALLER_NUMBER,
+   TEXT_SOURCE_CALL_STATUS,
+   TEXT_SOURCE_SMS_PREVIEW,
+   TEXT_SOURCE_NOTIFICATION_TITLE,
+   TEXT_SOURCE_NOTIFICATION_SOURCE,
    TEXT_SOURCE_COUNT /* Always last */
 } text_source_t;
 
@@ -304,6 +311,9 @@ typedef struct _element {
    SDL_Texture *gauge_value_label_texture; /* Cached value label texture */
    int gauge_value_label_width;            /* Cached label dimensions */
    int gauge_value_label_height;
+
+   /* Notification group — links element to a notification slot (resolved at parse time) */
+   int notification_group; /* notif_group_t enum from notification.h */
 
    /* Transition state - used for fade/zoom effects */
    float transition_alpha;

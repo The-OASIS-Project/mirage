@@ -30,6 +30,7 @@
 #include "config/config_manager.h"
 #include "core/mirage.h"
 #include "ui/hud_manager.h"
+#include "ui/notification.h"
 #include "util/logging.h"
 
 /* Map type string representations */
@@ -90,6 +91,13 @@ static const struct {
    { "*COMPASS*", TEXT_SOURCE_COMPASS },
    { "*LOG*", TEXT_SOURCE_LOG },
    { "*ALERT*", TEXT_SOURCE_ALERT },
+   /* Notification text sources */
+   { "*CALLER_NAME*", TEXT_SOURCE_CALLER_NAME },
+   { "*CALLER_NUMBER*", TEXT_SOURCE_CALLER_NUMBER },
+   { "*CALL_STATUS*", TEXT_SOURCE_CALL_STATUS },
+   { "*SMS_PREVIEW*", TEXT_SOURCE_SMS_PREVIEW },
+   { "*NOTIFICATION_TITLE*", TEXT_SOURCE_NOTIFICATION_TITLE },
+   { "*NOTIFICATION_SOURCE*", TEXT_SOURCE_NOTIFICATION_SOURCE },
 };
 
 text_source_t resolve_text_source(const char *text) {
@@ -557,6 +565,14 @@ static int parse_common_element_properties(struct json_object *element_obj, elem
       tmpstr_ptr = json_object_get_string(tmpobj);
       if (tmpstr_ptr != NULL) {
          strncpy(curr_element->hotkey, tmpstr_ptr, 2);
+      }
+   }
+
+   /* Parse notification group (resolved to enum for O(1) render dispatch) */
+   if (json_object_object_get_ex(element_obj, "notification_group", &tmpobj)) {
+      tmpstr_ptr = json_object_get_string(tmpobj);
+      if (tmpstr_ptr != NULL) {
+         curr_element->notification_group = (int)notif_group_resolve(tmpstr_ptr);
       }
    }
 

@@ -47,6 +47,7 @@
 #include "rendering/element_renderer.h"
 #include "rendering/gauge_renderer.h"
 #include "ui/hud_manager.h"
+#include "ui/notification.h"
 #include "util/curl_download.h"
 #include "util/logging.h"
 
@@ -94,6 +95,15 @@ static void calculate_zoom_rect(SDL_Rect *dst_rect_l, SDL_Rect *dst_rect_r, floa
  */
 
 /* Render a static element */
+/* Apply notification group fade alpha to a base alpha value */
+static Uint8 apply_notification_alpha(element *curr_element, Uint8 base_alpha) {
+   if (curr_element->notification_group) {
+      float notif_alpha = notification_get_alpha(curr_element->notification_group);
+      return (Uint8)((float)base_alpha * notif_alpha);
+   }
+   return base_alpha;
+}
+
 void render_static_element(element *curr_element) {
    SDL_Rect dst_rect_l, dst_rect_r;
    SDL_Texture *this_texture = NULL;
@@ -145,6 +155,7 @@ void render_static_element(element *curr_element) {
    if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {
       render_alpha = (Uint8)(curr_element->transition_alpha * 255);
    }
+   render_alpha = apply_notification_alpha(curr_element, render_alpha);
 
    /* Set alpha on renderer (affects next render call only) */
    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -251,6 +262,7 @@ void render_animated_element(element *curr_element) {
    if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {
       render_alpha = (Uint8)(curr_element->transition_alpha * 255);
    }
+   render_alpha = apply_notification_alpha(curr_element, render_alpha);
 
    /* Set alpha on renderer (affects next render call only) */
    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -732,6 +744,14 @@ void render_text_element(element *curr_element) {
          snprintf(render_text, MAX_TEXT_LENGTH, "%s", alert_text);
          break;
       }
+      case TEXT_SOURCE_CALLER_NAME:
+      case TEXT_SOURCE_CALLER_NUMBER:
+      case TEXT_SOURCE_CALL_STATUS:
+      case TEXT_SOURCE_SMS_PREVIEW:
+      case TEXT_SOURCE_NOTIFICATION_TITLE:
+      case TEXT_SOURCE_NOTIFICATION_SOURCE:
+         notification_get_text(curr_element->text_source_id, render_text, MAX_TEXT_LENGTH);
+         break;
       default:
          /* TEXT_SOURCE_STATIC or unknown -- render text as-is */
          strncpy(render_text, curr_element->text, MAX_TEXT_LENGTH - 1);
@@ -835,6 +855,7 @@ void render_text_element(element *curr_element) {
    if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {
       render_alpha = (Uint8)(curr_element->transition_alpha * 255);
    }
+   render_alpha = apply_notification_alpha(curr_element, render_alpha);
 
    /* Set alpha on renderer (affects next render call only) */
    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -854,6 +875,47 @@ void render_text_element(element *curr_element) {
 
       SDL_SetTextureAlphaMod(curr_element->texture, 255);
    }
+}
+
+/* Render a notification contact photo (special element type "notification_photo") */
+void render_notification_photo_element(element *curr_element) {
+   SDL_Renderer *renderer = get_sdl_renderer();
+   SDL_Texture *photo_tex = notification_get_photo_texture(renderer);
+
+   /* Lazy-load placeholder texture from filename if not yet created */
+   if (!curr_element->texture && curr_element->filename[0]) {
+      curr_element->texture = get_cached_texture(curr_element->filename);
+   }
+
+   /* Use placeholder texture if no photo available */
+   SDL_Texture *tex = photo_tex ? photo_tex : curr_element->texture;
+   if (!tex) {
+      return;
+   }
+
+   hud_display_settings *this_hds = get_hud_display_settings();
+   SDL_Rect dst_rect_l, dst_rect_r;
+   dst_rect_l.x = dst_rect_r.x = curr_element->dest_x;
+   dst_rect_l.y = dst_rect_r.y = curr_element->dest_y;
+   dst_rect_l.w = dst_rect_r.w = curr_element->width > 0 ? curr_element->width : 128;
+   dst_rect_l.h = dst_rect_r.h = curr_element->height > 0 ? curr_element->height : 128;
+
+   if (!curr_element->fixed) {
+      dst_rect_l.x -= this_hds->stereo_offset;
+      dst_rect_r.x += this_hds->stereo_offset;
+   }
+
+   /* Apply notification alpha */
+   float notif_alpha = notification_get_alpha(curr_element->notification_group);
+   Uint8 alpha = (Uint8)(notif_alpha * 255);
+   if (alpha == 0) {
+      return;
+   }
+
+   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+   SDL_SetTextureAlphaMod(tex, alpha);
+   renderStereo(tex, NULL, &dst_rect_l, &dst_rect_r, 0.0);
+   SDL_SetTextureAlphaMod(tex, 255);
 }
 
 /* Forward declarations for special element types */
@@ -886,6 +948,8 @@ void render_special_element(element *curr_element) {
       render_gauge_element(curr_element);
    } else if (strcmp("armor_display", curr_element->name) == 0) {
       render_armor_display_element(curr_element);
+   } else if (strcmp("notification_photo", curr_element->special_name) == 0) {
+      render_notification_photo_element(curr_element);
    } else {
       LOG_ERROR("Unknown special element type: %s", curr_element->special_name);
    }
@@ -1370,6 +1434,7 @@ void render_battery_element(element *curr_element) {
    if (curr_element->in_transition && curr_element->transition_alpha > 0.0f) {
       render_alpha = (Uint8)(curr_element->transition_alpha * 255);
    }
+   render_alpha = apply_notification_alpha(curr_element, render_alpha);
 
    /* Set alpha on renderer (affects next render call only) */
    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -1921,6 +1986,12 @@ void render_element(element *curr_element) {
       return;
    }
 
+   /* Skip notification elements when their group is not active */
+   if (curr_element->notification_group &&
+       !notification_is_active(curr_element->notification_group)) {
+      return;
+   }
+
    switch (curr_element->type) {
       case STATIC:
          render_static_element(curr_element);
@@ -2044,6 +2115,9 @@ void render_hud_elements(void) {
    hud_manager *hud_mgr = get_hud_manager();
    hud_display_settings *this_hds = get_hud_display_settings();
    element *first_element = get_first_element();
+
+   /* Update notification timers and state transitions */
+   notification_update();
 
    if (hud_mgr->transition_from != NULL) {
       /* We need to reset text elements on the beginning of the transition. */

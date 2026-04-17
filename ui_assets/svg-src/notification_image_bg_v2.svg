@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500">
+<defs><style>:root {
+  --color-bg-primary: #121417;
+  --color-bg-secondary: #1b1f24;
+  --color-bg-tertiary: #242a31;
+  --color-text-primary: #e6e6e6;
+  --color-text-secondary: #7b8794;
+  --color-text-tertiary: #6b7280;
+  --color-border: #2a323a;
+  --color-border-light: #2a323a;
+  --color-accent: #2dd4bf;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: transparent;
+  margin: 0; padding: 0;
+}
+.t { font-family: var(--font-sans); font-size: 14px; fill: var(--color-text-primary); }
+.ts { font-family: var(--font-sans); font-size: 12px; fill: var(--color-text-secondary); }
+.th { font-family: var(--font-sans); font-size: 14px; font-weight: 500; fill: var(--color-text-primary); }
+.box { fill: var(--color-bg-secondary); stroke: var(--color-border); stroke-width: 0.5; }
+.arr { stroke: var(--color-text-secondary); stroke-width: 1.5; fill: none; }
+.node { cursor: pointer; }
+.node:hover { opacity: 0.85; }
+.c-purple rect, .c-purple ellipse, .c-purple circle, .c-purple polygon, .c-purple path:not([fill="none"]) { fill: #3C3489; stroke: #AFA9EC; }
+.c-purple text, .c-purple .th, .c-purple .t { fill: #f0f0f0; }
+.c-purple .ts { fill: #ccc; }
+.c-teal rect, .c-teal ellipse, .c-teal circle, .c-teal polygon, .c-teal path:not([fill="none"]) { fill: #085041; stroke: #5DCAA5; }
+.c-teal text, .c-teal .th, .c-teal .t { fill: #f0f0f0; }
+.c-teal .ts { fill: #ccc; }
+.c-coral rect, .c-coral ellipse, .c-coral circle, .c-coral polygon, .c-coral path:not([fill="none"]) { fill: #712B13; stroke: #F0997B; }
+.c-coral text, .c-coral .th, .c-coral .t { fill: #f0f0f0; }
+.c-coral .ts { fill: #ccc; }
+.c-pink rect, .c-pink ellipse, .c-pink circle, .c-pink polygon, .c-pink path:not([fill="none"]) { fill: #72243E; stroke: #ED93B1; }
+.c-pink text, .c-pink .th, .c-pink .t { fill: #f0f0f0; }
+.c-pink .ts { fill: #ccc; }
+.c-gray rect, .c-gray ellipse, .c-gray circle, .c-gray polygon, .c-gray path:not([fill="none"]) { fill: #444441; stroke: #B4B2A9; }
+.c-gray text, .c-gray .th, .c-gray .t { fill: #f0f0f0; }
+.c-gray .ts { fill: #ccc; }
+.c-blue rect, .c-blue ellipse, .c-blue circle, .c-blue polygon, .c-blue path:not([fill="none"]) { fill: #0C447C; stroke: #85B7EB; }
+.c-blue text, .c-blue .th, .c-blue .t { fill: #f0f0f0; }
+.c-blue .ts { fill: #ccc; }
+.c-green rect, .c-green ellipse, .c-green circle, .c-green polygon, .c-green path:not([fill="none"]) { fill: #27500A; stroke: #97C459; }
+.c-green text, .c-green .th, .c-green .t { fill: #f0f0f0; }
+.c-green .ts { fill: #ccc; }
+.c-amber rect, .c-amber ellipse, .c-amber circle, .c-amber polygon, .c-amber path:not([fill="none"]) { fill: #633806; stroke: #EF9F27; }
+.c-amber text, .c-amber .th, .c-amber .t { fill: #f0f0f0; }
+.c-amber .ts { fill: #ccc; }
+.c-red rect, .c-red ellipse, .c-red circle, .c-red polygon, .c-red path:not([fill="none"]) { fill: #791F1F; stroke: #F09595; }
+.c-red text, .c-red .th, .c-red .t { fill: #f0f0f0; }
+.c-red .ts { fill: #ccc; }
+</style></defs>
+<defs><clipPath id="ic"><path d="M24,0 L576,0 L600,24 L600,476 L576,500 L24,500 L0,476 L0,24 Z"/></clipPath></defs><g clip-path="url(#ic)"><path d="M24,0 L576,0 L600,24 L600,476 L576,500 L24,500 L0,476 L0,24 Z" fill="rgba(0,0,0,0.82)"/><path d="M24,0 L576,0 L600,24 L600,476 L576,500 L24,500 L0,476 L0,24 Z" fill="none" stroke="#0A1A1F" stroke-width="12"/><path d="M24,0 L576,0 L600,24 L600,476 L576,500 L24,500 L0,476 L0,24 Z" fill="none" stroke="#02DFF1" stroke-width="1.5"/><path d="M591,35 L591,472.3 L572.3,491 L27.7,491 L9,472.3 L9,45" fill="none" stroke="#E8872A" stroke-width="1.5" opacity="0.85"/><path d="M588,35 L588,471 L571,488 L29,488 L12,471 L12,45" fill="none" stroke="#02DFF1" stroke-width="0.5" opacity="0.12"/><path d="M0,24 L24,0 L576,0 L600,24 L600,36 L200,36 L190,46 L0,46 Z" fill="#02DFF1" opacity="0.85"/><line x1="190" y1="46" x2="10" y2="46" stroke="#019BAA" stroke-width="0.5" opacity="0.5"/><line x1="200" y1="36" x2="590" y2="36" stroke="#019BAA" stroke-width="0.5" opacity="0.35"/><line x1="190" y1="46" x2="200" y2="36" stroke="#E8872A" stroke-width="1" opacity="0.6"/><path d="M556,8 L566,18 L556,28" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M566,8 L576,18 L566,28" fill="none" stroke="rgba(0,0,0,0.2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M576,8 L586,18 L576,28" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="20" y="52" width="560" height="400" fill="rgba(2,223,241,0.02)" stroke="#02DFF1" stroke-width="0.5" stroke-opacity="0.1"/><path d="M20,68 L20,52 L36,52" fill="none" stroke="#02DFF1" stroke-width="2" stroke-linecap="square" opacity="0.6"/><path d="M564,52 L580,52 L580,68" fill="none" stroke="#02DFF1" stroke-width="2" stroke-linecap="square" opacity="0.6"/><path d="M20,436 L20,452 L36,452" fill="none" stroke="#02DFF1" stroke-width="2" stroke-linecap="square" opacity="0.6"/><path d="M564,452 L580,452 L580,436" fill="none" stroke="#02DFF1" stroke-width="2" stroke-linecap="square" opacity="0.6"/></g></svg>

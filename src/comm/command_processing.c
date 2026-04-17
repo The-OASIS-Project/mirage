@@ -44,6 +44,7 @@
 #include "hardware/system_metrics.h"
 #include "media/screenshot.h"
 #include "ui/hud_manager.h"
+#include "ui/notification.h"
 #include "util/logging.h"
 #include "util/string_utils.h"
 
@@ -907,6 +908,16 @@ int parse_json_command(char *command_string, char *topic) {
             }
          }
       }
+   }
+
+   /* Phone notification events (from DAWN phone_service via HUD topic) */
+   if (tmpstr != NULL && strcmp(tmpstr, "phone") == 0) {
+      notification_handle_phone_event(parsed_json);
+   }
+
+   /* Image display requests (from DAWN image_search_tool via HUD topic) */
+   if (tmpstr != NULL && strcmp(tmpstr, "image") == 0) {
+      notification_handle_image_request(parsed_json);
    }
 
    /* Check for armor device match in topic */

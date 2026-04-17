@@ -115,6 +115,7 @@
 #include "media/screenshot.h"
 #include "rendering/element_renderer.h"
 #include "ui/hud_manager.h"
+#include "ui/notification.h"
 #include "util/curl_download.h"
 #include "util/image_utils.h"
 #include "util/logging.h"
@@ -1793,6 +1794,9 @@ int main(int argc, char **argv) {
    /* Load secrets (API keys) from secrets.json -- non-fatal if missing */
    secrets_load("secrets.json");
 
+   /* Initialize notification system (phone/SMS/image HUD popups) */
+   notification_init();
+
    last_file_check = currTime;
 
 #ifndef ORIGINAL_RATIO
@@ -2454,6 +2458,7 @@ int main(int argc, char **argv) {
 #endif
 
    cleanup_hud_manager();
+   notification_shutdown();
 
    /* MQTT already stopped before free_elements above */
 

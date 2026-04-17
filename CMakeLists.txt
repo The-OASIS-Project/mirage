@@ -96,6 +96,7 @@ set(SOURCE_FILES
 
     # ui
     src/ui/hud_manager.c
+    src/ui/notification.c
 
     # comm
     src/comm/command_processing.c
