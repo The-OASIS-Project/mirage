@@ -75,6 +75,12 @@ static unsigned char *base64_decode(const char *input, size_t *out_size) {
       return NULL;
    }
 
+   /* Cap at 512KB base64 (~384KB decoded) to prevent OOM from rogue MQTT payloads */
+   if (input_len > 512 * 1024) {
+      LOG_WARNING("notification: base64 input too large (%zu bytes), rejecting", input_len);
+      return NULL;
+   }
+
    /* Output is at most 3/4 of input length */
    size_t max_out = (input_len * 3) / 4 + 4;
    unsigned char *output = malloc(max_out);
@@ -86,10 +92,12 @@ static unsigned char *base64_decode(const char *input, size_t *out_size) {
    BIO *mem = BIO_new_mem_buf(input, (int)input_len);
    if (!b64 || !mem) {
       free(output);
-      if (b64)
+      if (b64) {
          BIO_free(b64);
-      if (mem)
+      }
+      if (mem) {
          BIO_free(mem);
+      }
       return NULL;
    }
 
@@ -336,6 +344,8 @@ void notification_handle_image_request(struct json_object *root) {
    if (json_object_object_get_ex(root, "title", &j_tmp)) {
       title = json_object_get_string(j_tmp);
    }
+   pthread_mutex_lock(&s_image.image_mutex);
+
    snprintf(s_image.title, sizeof(s_image.title), "%s", title ? title : "");
 
    const char *source = "";
@@ -359,6 +369,8 @@ void notification_handle_image_request(struct json_object *root) {
    }
 
    image_set_state(NOTIF_STATE_SHOWING, NOTIF_FADE_IN_IMAGE_MS);
+
+   pthread_mutex_unlock(&s_image.image_mutex);
 
    /* TODO: Kick off async HTTP fetch for image_url using service token */
 }
@@ -433,6 +445,7 @@ void notification_update(void) {
    pthread_mutex_unlock(&s_phone.mutex);
 
    /* --- Image slot state machine --- */
+   pthread_mutex_lock(&s_image.image_mutex);
    switch (s_image.state) {
       case NOTIF_STATE_SHOWING: {
          uint32_t elapsed = t - s_image.fade_start_ms;
@@ -465,6 +478,7 @@ void notification_update(void) {
       default:
          break;
    }
+   pthread_mutex_unlock(&s_image.image_mutex);
 }
 
 /* =============================================================================
@@ -519,10 +533,14 @@ void notification_get_text(int source_id, char *out, size_t out_size) {
          pthread_mutex_unlock(&s_phone.mutex);
          break;
       case TEXT_SOURCE_NOTIFICATION_TITLE:
+         pthread_mutex_lock(&s_image.image_mutex);
          snprintf(out, out_size, "%s", s_image.title);
+         pthread_mutex_unlock(&s_image.image_mutex);
          break;
       case TEXT_SOURCE_NOTIFICATION_SOURCE:
+         pthread_mutex_lock(&s_image.image_mutex);
          snprintf(out, out_size, "%s", s_image.source);
+         pthread_mutex_unlock(&s_image.image_mutex);
          break;
       default:
          break;

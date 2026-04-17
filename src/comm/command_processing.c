@@ -453,12 +453,14 @@ int parse_json_command(char *command_string, char *topic) {
       return FAILURE;
    }
 
-   /* Check for "device" key */
+   /* Check for "device" key — save for later dispatch (tmpstr gets reused) */
+   const char *device_str = NULL;
    if (!json_object_object_get_ex(parsed_json, "device", &tmpobj)) {
       /* No "device" field found, this might be valid for some commands */
       LOG_INFO("No device field found in JSON command");
    } else if (tmpobj != NULL) {
       tmpstr = json_object_get_string(tmpobj);
+      device_str = tmpstr; /* Preserved — tmpstr may be reassigned below */
       if (tmpstr == NULL) {
          LOG_WARNING("Device field exists but is not a string");
       } else {
@@ -911,12 +913,12 @@ int parse_json_command(char *command_string, char *topic) {
    }
 
    /* Phone notification events (from DAWN phone_service via HUD topic) */
-   if (tmpstr != NULL && strcmp(tmpstr, "phone") == 0) {
+   if (device_str != NULL && strcmp(device_str, "phone") == 0) {
       notification_handle_phone_event(parsed_json);
    }
 
    /* Image display requests (from DAWN image_search_tool via HUD topic) */
-   if (tmpstr != NULL && strcmp(tmpstr, "image") == 0) {
+   if (device_str != NULL && strcmp(device_str, "image") == 0) {
       notification_handle_image_request(parsed_json);
    }
 
