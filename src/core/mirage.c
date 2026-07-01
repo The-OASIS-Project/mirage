@@ -1752,6 +1752,11 @@ int main(int argc, char **argv) {
       return EXIT_FAILURE;
    }
 
+   // Use linear filtering for the logical-size scale and texture scaling.
+   // Must be set before creating the renderer/textures so they pick it up.
+   // "1" = linear/bilinear; "0" (default) is nearest-neighbor point sampling.
+   SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+
 #ifdef REFRESH_SYNC
    if ((renderer = SDL_CreateRenderer(
             window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED)) == NULL) {
