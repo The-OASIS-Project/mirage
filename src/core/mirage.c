@@ -1426,6 +1426,21 @@ void mqttSendMessage(const char *topic, const char *text) {
    }
 }
 
+/*
+ * Quiet publish for high-cadence feeds (e.g. suit telemetry): no per-message
+ * INFO log (which would flood at streaming rates) and silent when MQTT is not
+ * yet up (the serial parse path can run before on_connect).  Errors still log.
+ */
+void mqttSendMessageQuiet(const char *topic, const char *text) {
+   if (mosq == NULL) {
+      return;
+   }
+   int rc = mosquitto_publish(mosq, NULL, topic, strlen(text), text, 0, false);
+   if (rc != MOSQ_ERR_SUCCESS) {
+      OLOG_ERROR("Error publishing to %s: %s", topic, mosquitto_strerror(rc));
+   }
+}
+
 void display_help(int argc, char *argv[]) {
    if (argc > 0) {
       printf("Usage: %s [options]\n", argv[0]);
@@ -1482,7 +1497,14 @@ int main(int argc, char **argv) {
 
    /* Serial Port */
    char usb_enable = 0;
-   char usb_port[24] = USB_PORT;
+   char usb_port[MAX_SERIAL_PORT_LENGTH] = USB_PORT;
+   int usb_port_from_cli = 0;   /* -d given on the command line: overrides config */
+   int usb_enable_from_cli = 0; /* -u given on the command line: overrides config */
+   /* Config serial values captured at startup, to detect a later live edit that the
+    * periodic reload re-parses but the already-running serial thread won't apply. */
+   char serial_port_startup[MAX_SERIAL_PORT_LENGTH] = "";
+   int serial_enable_startup = -1;
+   int serial_reload_warned = 0;
 
    /* Helmet TCP Server (disabled by default) */
    int helmet_tcp_enable = 0;
@@ -1674,10 +1696,12 @@ int main(int argc, char **argv) {
             break;
          case 'u':
             usb_enable = 1;
+            usb_enable_from_cli = 1;
             serial_set_state(1, NULL, -1);
             break;
          case 'd':
-            strncpy(usb_port, optarg, 24);
+            snprintf(usb_port, sizeof(usb_port), "%s", optarg);
+            usb_port_from_cli = 1;
             serial_set_state(-1, usb_port, -1);
             break;
          default:
@@ -1701,10 +1725,8 @@ int main(int argc, char **argv) {
 
    curl_global_init(CURL_GLOBAL_DEFAULT);
 
-   /* If we don't get an argument, read from stdin. */
-   if (!usb_enable) {
-      OLOG_WARNING("No serial port reading from stdin.");
-   }
+   /* Serial enable/port is resolved after config load (below), since it can be set
+    * via config.json as well as the -u/-d flags. */
 
    if (IMG_Init(IMG_INIT_PNG) < 0) {
       OLOG_ERROR("Error initializing SDL_image: %s\n", IMG_GetError());
@@ -1795,6 +1817,31 @@ int main(int argc, char **argv) {
    }
 
    OLOG_INFO("Initial configuration loaded successfully");
+
+   /* Serial-port precedence: CLI (-d/-u) overrides config.json ("Serial Port" /
+    * "Serial Enable"), which overrides the compile-time USB_PORT default.  Applied
+    * after config load and before the serial thread starts (below), so usb_port is
+    * final by the time that thread reads it.  A stable /dev/serial/by-id/... path
+    * here survives a helmet re-enumeration that would otherwise shift the ttyACMn
+    * number out from under the reconnect loop. */
+   if (!usb_port_from_cli && get_serial_port()[0] != '\0') {
+      snprintf(usb_port, sizeof(usb_port), "%s", get_serial_port());
+      serial_set_state(-1, usb_port, -1);
+   }
+   if (!usb_enable_from_cli && get_serial_enable() >= 0) {
+      usb_enable = (char)get_serial_enable();
+      serial_set_state(usb_enable, NULL, -1);
+   }
+   if (usb_enable) {
+      OLOG_INFO("Serial helmet link enabled on %s", usb_port);
+   } else {
+      OLOG_WARNING("Serial helmet link disabled; reading from stdin.");
+   }
+
+   /* Snapshot the config's serial values so a later live edit is surfaced (below)
+    * rather than silently ignored -- serial port/enable are startup-only. */
+   snprintf(serial_port_startup, sizeof(serial_port_startup), "%s", get_serial_port());
+   serial_enable_startup = get_serial_enable();
 
    /* Load secrets (API keys) from secrets.json -- non-fatal if missing */
    secrets_load("secrets.json");
@@ -2023,6 +2070,15 @@ int main(int argc, char **argv) {
       if (currTime - last_file_check > config_check_interval) {
          check_and_reload_config(config_file);
          last_file_check = currTime;
+         /* Serial Port/Enable are applied once at startup (device re-enumeration is
+          * handled live by the reconnect loop), so a live edit to those keys needs a
+          * restart.  Warn once instead of silently ignoring it. */
+         if (!serial_reload_warned && (strcmp(get_serial_port(), serial_port_startup) != 0 ||
+                                       get_serial_enable() != serial_enable_startup)) {
+            OLOG_WARNING("Serial Port/Enable changed in config; restart to apply "
+                         "(device re-enumeration is already handled automatically).");
+            serial_reload_warned = 1;
+         }
       }
 
       while (SDL_PollEvent(&event)) {

@@ -224,6 +224,9 @@ enum {
 
 
 #define USB_PORT "/dev/ttyACM0" /* Default USB port. */
+/* Max serial device path length.  Sized for /dev/serial/by-id/... names, which
+ * are far longer than /dev/ttyACMn (an Adafruit by-id path is ~80 chars). */
+#define MAX_SERIAL_PORT_LENGTH 256
 
 #define FAN_RPM_FILE "/sys/class/hwmon/hwmon3/rpm"
 #define FAN_MAX_RPM 6000

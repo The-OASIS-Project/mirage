@@ -105,6 +105,7 @@ set(SOURCE_FILES
     src/comm/component_status.c
     src/comm/hud_discovery.c
     src/comm/mosquitto_comms.c
+    src/comm/suit_telemetry.c
 )
 
 # Set C compiler and flags

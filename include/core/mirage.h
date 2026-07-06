@@ -304,6 +304,18 @@ void mqttSoundEffect(const char *action, const char *filename);
 void mqttSendMessage(const char *topic, const char *text);
 
 /**
+ * @brief Publish a string to a topic without the per-message INFO log.
+ *
+ * Like mqttSendMessage() but intended for high-cadence feeds (suit telemetry):
+ * suppresses the success log and is silent when MQTT is not yet connected.
+ * Publish errors are still logged.
+ *
+ * @param topic The topic to publish to.
+ * @param text  The already-JSON-formatted payload.
+ */
+void mqttSendMessageQuiet(const char *topic, const char *text);
+
+/**
  * @brief Frees all elements in a UI element linked list and their associated resources.
  *
  * This function recursively traverses a linked list of UI elements, freeing all

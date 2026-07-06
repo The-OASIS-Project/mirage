@@ -9,6 +9,8 @@
       "Pitch Offset": 0,
       "Wifi": "wlP1p1s0",
       "Invert Compass": true,
+      "Serial Enable": true,
+      "Serial Port": "/dev/serial/by-id/usb-Adafruit_Feather_ESP32-S3_Reverse_TFT_*-if00",
       "Stream Width": 800,
       "Stream Height": 400,
       "Stream Dest IP": "192.168.10.170",

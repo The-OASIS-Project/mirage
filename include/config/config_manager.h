@@ -89,6 +89,13 @@ int get_mqtt_port(void);
 void set_mqtt_host(const char *host);
 void set_mqtt_port(int port);
 
+/* Serial (helmet) connection settings (from config.json "Serial Port" /
+ * "Serial Enable").  Empty port / -1 enable mean "unset" (see config_manager.c). */
+const char *get_serial_port(void);
+int get_serial_enable(void);
+void set_serial_port(const char *port);
+void set_serial_enable(int enable);
+
 /* MQTT TLS settings */
 int get_mqtt_tls(void);
 void set_mqtt_tls(int enabled);

@@ -218,6 +218,31 @@ void set_mqtt_port(int port) {
    mqtt_port = port;
 }
 
+/* Serial (helmet) connection settings.  serial_port empty => fall back to the
+ * compile-time USB_PORT default; serial_enable -1 => unset in config (CLI/default
+ * decides).  Prefer a stable /dev/serial/by-id/... path so a helmet re-enumeration
+ * can't shift the ttyACM number out from under the reconnect loop. */
+static char serial_port_cfg[MAX_SERIAL_PORT_LENGTH] = "";
+static int serial_enable_cfg = -1;
+
+const char *get_serial_port(void) {
+   return serial_port_cfg;
+}
+
+int get_serial_enable(void) {
+   return serial_enable_cfg;
+}
+
+void set_serial_port(const char *port) {
+   if (port != NULL) {
+      safe_strncpy(serial_port_cfg, port, sizeof(serial_port_cfg));
+   }
+}
+
+void set_serial_enable(int enable) {
+   serial_enable_cfg = enable ? 1 : 0;
+}
+
 int get_mqtt_tls(void) {
    return mqtt_tls;
 }

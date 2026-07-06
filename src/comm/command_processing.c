@@ -21,6 +21,7 @@
 
 #include <arpa/inet.h>
 #include <errno.h>
+#include <glob.h>
 #include <json-c/json.h>
 #include <pthread.h>
 #include <stdint.h>
@@ -37,6 +38,7 @@
 #include <termios.h>
 
 #include "comm/command_processing.h"
+#include "comm/suit_telemetry.h"
 #include "config/config_manager.h"
 #include "config/defines.h"
 #include "core/mirage.h"
@@ -68,10 +70,10 @@ unsigned int get_log_generation(void) {
 
 // Serial port state management structure
 typedef struct {
-   int fd;                 // File descriptor for the serial port
-   int enabled;            // Whether serial is enabled
-   char port[24];          // Port name
-   pthread_mutex_t mutex;  // Mutex for thread-safe access
+   int fd;                             // File descriptor for the serial port
+   int enabled;                        // Whether serial is enabled
+   char port[MAX_SERIAL_PORT_LENGTH];  // Port name (fits /dev/serial/by-id/... paths)
+   pthread_mutex_t mutex;              // Mutex for thread-safe access
 } serial_state_t;
 
 // Global instance with proper initialization
@@ -922,22 +924,52 @@ int parse_json_command(char *command_string, char *topic) {
       notification_handle_image_request(parsed_json);
    }
 
+   /* Republish the just-parsed AURA helmet sensor data to MQTT so DAWN's
+    * suit_service (SAGE proactive-attention PRE) can consume it.  Rate-limited
+    * per type inside suit_telemetry; device_str still points into parsed_json. */
+   if (device_str != NULL) {
+      if (strcmp(device_str, "Motion") == 0) {
+         suit_telemetry_publish_motion(this_motion);
+      } else if (strcmp(device_str, "Enviro") == 0) {
+         suit_telemetry_publish_enviro(this_enviro);
+      } else if (strcmp(device_str, "GPS") == 0) {
+         suit_telemetry_publish_gps(this_gps);
+      }
+   }
+
    /* Check for armor device match in topic */
    if (topic != NULL) {
       element *current_armor_element = armor_element;
       while (current_armor_element != NULL) {
          if (!strcmp(current_armor_element->mqtt_device, topic)) {
             /* Found matching armor element, process temp and voltage if available */
+            double armor_temp = 0.0, armor_voltage = 0.0;
+            bool have_temp = false, have_voltage = false;
             if (json_object_object_get_ex(parsed_json, "temp", &tmpobj)) {
                if (tmpobj != NULL) {
-                  current_armor_element->last_temp = json_object_get_double(tmpobj);
+                  armor_temp = json_object_get_double(tmpobj);
+                  current_armor_element->last_temp = armor_temp;
+                  have_temp = true;
                }
             }
 
             if (json_object_object_get_ex(parsed_json, "voltage", &tmpobj)) {
                if (tmpobj != NULL) {
-                  current_armor_element->last_voltage = json_object_get_double(tmpobj);
+                  armor_voltage = json_object_get_double(tmpobj);
+                  current_armor_element->last_voltage = armor_voltage;
+                  have_voltage = true;
                }
+            }
+
+            /* Republish only when the message actually carries armor telemetry
+             * (temp/voltage) for DAWN's suit_service SPARK roster.  Elements such
+             * as the helmet are registered here for HUD presence but stream
+             * Motion/Enviro/GPS with no temp/voltage -- publishing those would flood
+             * armor/telemetry with content-free messages and add a bogus non-armor
+             * "piece" to the roster. */
+            if (have_temp || have_voltage) {
+               suit_telemetry_publish_armor(current_armor_element->name, armor_temp, armor_voltage,
+                                            have_temp, have_voltage);
             }
             break;
          }
@@ -971,6 +1003,52 @@ void log_command(char *command) {
  * @param fd Pointer to store the resulting file descriptor
  * @return 0 on success, -1 on failure
  */
+/*
+ * Resolve a possibly-wildcard serial path to a concrete device.  This lets the
+ * config ship a model-wide mask -- e.g.
+ *   /dev/serial/by-id/usb-Adafruit_Feather_ESP32-S3_Reverse_TFT_*-if00
+ * -- so any board of a given type works without anyone having to look up its
+ * unique serial number.  Called on every (re)connect so a re-enumeration is
+ * picked up.  A pattern with no glob metacharacters is passed through unchanged
+ * (literal paths behave exactly as before).  Returns SUCCESS with the concrete
+ * path in @p resolved, or FAILURE when a wildcard matched nothing (device not
+ * present yet -- the caller's reconnect loop then retries).
+ */
+static int resolve_serial_path(const char *pattern, char *resolved, size_t size) {
+   if (pattern == NULL) {
+      return FAILURE;
+   }
+
+   /* Literal path (no glob metacharacters): pass through unchanged. */
+   if (strpbrk(pattern, "*?[") == NULL) {
+      if (strlen(pattern) >= size) {
+         OLOG_WARNING("Serial path exceeds %zu bytes and will be truncated: %s", size, pattern);
+      }
+      snprintf(resolved, size, "%s", pattern);
+      return SUCCESS;
+   }
+
+   /* Wildcard mask: resolve to the first matching device. */
+   glob_t g;
+   memset(&g, 0, sizeof(g));
+   int rc = glob(pattern, GLOB_NOSORT, NULL, &g);
+   if (rc != 0 || g.gl_pathc == 0) {
+      globfree(&g); /* safe: zero-initialized above, freed regardless of match */
+      return FAILURE;
+   }
+   if (g.gl_pathc > 1) {
+      OLOG_WARNING("Serial pattern '%s' matched %zu devices; using '%s'", pattern,
+                   (size_t)g.gl_pathc, g.gl_pathv[0]);
+   }
+   if (strlen(g.gl_pathv[0]) >= size) {
+      OLOG_WARNING("Resolved serial path exceeds %zu bytes and will be truncated: %s", size,
+                   g.gl_pathv[0]);
+   }
+   snprintf(resolved, size, "%s", g.gl_pathv[0]);
+   globfree(&g);
+   return SUCCESS;
+}
+
 int serial_port_connect(const char *port_name, speed_t baud_rate, int *fd) {
    struct termios SerialPortSettings;
 
@@ -980,14 +1058,23 @@ int serial_port_connect(const char *port_name, speed_t baud_rate, int *fd) {
       return 0;
    }
 
-   // Open the serial port
-   *fd = open(port_name, O_RDWR | O_NOCTTY);
-   if (*fd == -1) {
-      OLOG_ERROR("Unable to open serial port %s: %s", port_name, strerror(errno));
+   /* Resolve a wildcard mask (or pass a literal path through) to a real device. */
+   char resolved[MAX_SERIAL_PORT_LENGTH];
+   if (resolve_serial_path(port_name, resolved, sizeof(resolved)) != SUCCESS) {
+      OLOG_WARNING("No serial device matches '%s' yet", port_name);
       return -1;
    }
 
-   OLOG_INFO("Serial port %s opened successfully.", port_name);
+   // Open the serial port.  NOTE: no O_NOFOLLOW -- /dev/serial/by-id/... entries
+   // are symlinks to /dev/ttyACMn, and following them is the whole point of using
+   // a stable by-id path.  /dev is root-owned, so this is not a trust boundary.
+   *fd = open(resolved, O_RDWR | O_NOCTTY);
+   if (*fd == -1) {
+      OLOG_ERROR("Unable to open serial port %s: %s", resolved, strerror(errno));
+      return -1;
+   }
+
+   OLOG_INFO("Serial port %s opened successfully.", resolved);
 
    // Clear all settings
    memset(&SerialPortSettings, 0, sizeof(SerialPortSettings));
