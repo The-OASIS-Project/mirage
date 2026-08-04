@@ -216,6 +216,12 @@ sequenceDiagram
 
 ---
 
+## Related
+
+- **[bigscreen-beyond-linux](https://github.com/KerseyFabrications/bigscreen-beyond-linux)** — tools and findings for driving MIRAGE's DisplayPort output into a **Bigscreen Beyond** DSC VR headset: zero-dependency USB-HID control (LED/fan/brightness), EDID capture, and the NVIDIA Jetson/Tegra DSC bring-up. Research, not a shipped MIRAGE feature — on Jetson the closed Tegra driver currently mis-transmits DSC to the panel, so the headset doesn't display correctly (that repo has the full characterization).
+
+---
+
 ## Contributing
 
 Contributions are welcome! MIRAGE is part of The OASIS Project and is licensed under GPLv3.
